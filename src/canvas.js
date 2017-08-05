@@ -182,6 +182,18 @@ class CanvasConstructor {
     }
 
     /**
+     * Register a new font.
+     * @param {string} path The path for the font.
+     * @param {string} family The font's family name.
+     * @returns {CanvasConstructor}
+     * @chainable
+     */
+    addTextFont(path, family) {
+        this.context.addFont(new Canvas.Font(family, path));
+        return this;
+    }
+
+    /**
      * Set a colour for the canvas' context.
      * @param {string} color A canvas' colour resolvable.
      * @returns {CanvasConstructor}
