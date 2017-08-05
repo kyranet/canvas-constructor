@@ -1,4 +1,7 @@
 # canvasConstructor
+
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/d673cda285b34ce4b8b6601458b29527)](https://www.codacy.com/app/kyranet/canvasConstructor?utm_source=github.com&utm_medium=referral&utm_content=kyranet/canvasConstructor&utm_campaign=badger)
+
 A ES6 function for node-canvas with built-in functions and chained methods.
 
 How to use it:
