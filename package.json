@@ -1,0 +1,27 @@
+{
+    "name": "canvas-constructor",
+    "version": "0.0.1",
+    "description": "A ES6 function for node-canvas with built-in functions and chained methods.",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/kyranet/canvasConstructor.git"
+    },
+    "dependencies": {
+        "canvas": "1.6.6"
+    },
+    "keywords": [
+        "node-canvas",
+        "es6",
+        "constructor"
+    ],
+    "author": "kyranet",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/kyranet/canvasConstructor/issues"
+    },
+    "homepage": "https://github.com/kyranet/canvasConstructor#readme"
+}
