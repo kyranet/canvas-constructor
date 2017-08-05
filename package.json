@@ -1,6 +1,6 @@
 {
     "name": "canvas-constructor",
-    "version": "0.1.2",
+    "version": "0.1.3",
     "description": "A ES6 class for node-canvas with built-in functions and chained methods.",
     "main": "index.js",
     "scripts": {

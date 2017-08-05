@@ -82,7 +82,7 @@ class CanvasConstructor {
      * @chainable
      */
     addImage(buffer, x, y, width, height, options = {}) {
-        if ('type' in options) {
+        if (options.type) {
             if (options.type === 'round') return this.addRoundImage(buffer, x, y, width, height, options.radius);
             if (options.type === 'bevel') return this.addBevelImage(buffer, x, y, width, height, options.radius);
         }
