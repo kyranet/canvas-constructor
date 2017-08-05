@@ -89,7 +89,7 @@ class CanvasConstructor {
         const image = new Canvas.Image();
         image.onload = () => this.context.drawImage(image, x, y, width, height);
         image.src = buffer;
-        return this.restore();
+        return this;
     }
 
     /**
