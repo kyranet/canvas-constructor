@@ -1,13 +1,10 @@
 # canvasConstructor
-
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/d673cda285b34ce4b8b6601458b29527)](https://www.codacy.com/app/kyranet/canvasConstructor?utm_source=github.com&utm_medium=referral&utm_content=kyranet/canvasConstructor&utm_campaign=badger)
-
 A ES6 function for node-canvas with built-in functions and chained methods.
 
 How to use it:
 
 ```js
-const Canvas = require('canvasConstructor');
+const { Canvas } = require('canvasConstructor');
 
 new Canvas(300, 300)
     .setColor('#AEFD54')
@@ -29,7 +26,7 @@ new Canvas(300, 300)
 Now, let's suppose we want to add images. I'd recommend [fs-nextra](https://github.com/bdistin/fs-nextra), by BDISTIN, it requires Node.js 8.1.0 to work (it promisifies the async fs methods with `Util.promisify()`), it's a dependency-free and lightweight package that provides support for **atomic operations**.
 
 ```js
-const Canvas = require('canvasConstructor');
+const { Canvas } = require('canvasConstructor');
 const fsn = require('fs-nextra');
 
 async function createCanvas() {
