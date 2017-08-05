@@ -1,7 +1,7 @@
 {
     "name": "canvas-constructor",
-    "version": "0.1.0",
-    "description": "A ES6 function for node-canvas with built-in functions and chained methods.",
+    "version": "0.1.1",
+    "description": "A ES6 Class for node-canvas with built-in functions and chained methods.",
     "main": "index.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1"
