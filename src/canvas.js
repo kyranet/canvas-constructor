@@ -11,13 +11,76 @@ class CanvasConstructor {
     }
 
     /**
-     * Restore the context changes.
+     * Save the entire state of the canvas by pushing the current state onto a stack.
+     * @returns {CanvasConstructor}
+     * @chainable
+     * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/save
+     */
+    save() {
+        this.context.save();
+        return this;
+    }
+
+    /**
+     * Restores the most recently saved canvas by popping the top entry in the drawing state stack. If there is no saved state, this method does nothing.
      * @returns {CanvasConstructor}
      * @chainable
      * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/restore
      */
     restore() {
         this.context.restore();
+        return this;
+    }
+
+    /**
+     * Adds a rotation to the transformation matrix. The angle argument represents a clockwise rotation angle and is expressed in radians.
+     * @param {number} angle The angle to rotate clockwise in radians.
+     * @returns {CanvasConstructor}
+     * @chainable
+     * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/rotate
+     */
+    rotate(angle) {
+        this.context.rotate(angle);
+        return this;
+    }
+
+    /**
+     * Adds a scaling transformation to the canvas units by x horizontally and by y vertically.
+     * @param {number} x Scaling factor in the horizontal direction.
+     * @param {number} y Scaling factor in the vertical direction.
+     * @returns {CanvasConstructor}
+     * @chainable
+     * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/scale
+     */
+    scale(x, y) {
+        this.context.scale(x, y);
+        return this;
+    }
+
+    /**
+     * Adds a translation transformation by moving the canvas and its origin x horizontally and y vertically on the grid.
+     * @param {number} x Distance to move in the horizontal direction.
+     * @param {number} y Distance to move in the vertical direction.
+     * @returns {CanvasConstructor}
+     * @chainable
+     * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/translate
+     */
+    traslate(x, y) {
+        this.context.traslate(x, y);
+        return this;
+    }
+
+    /**
+     * Fills the current or given path with the current fill style using the non-zero or even-odd winding rule.
+     * @param {any} path A Path2D path to fill.
+     * @param {('nonzero'|'evenodd')} fillRule The algorithm by which to determine if a point is inside a path or
+     * outside a path.
+     * @returns {CanvasConstructor}
+     * @chainable
+     * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/fill
+     */
+    fill(path, fillRule) {
+        this.context.fill(path, fillRule);
         return this;
     }
 
@@ -31,7 +94,7 @@ class CanvasConstructor {
      * @chainable
      * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/fillRect
      */
-    fillRect(x, y, width, height) {
+    addRect(x, y, width, height) {
         this.context.fillRect(x, y, width, height);
         return this;
     }
@@ -41,12 +104,42 @@ class CanvasConstructor {
      * @param {string} text The text to write.
      * @param {number} x    The position x to start drawing the element.
      * @param {number} y    The position y to start drawing the element.
+     * @param {number} maxWidth The maximum width to draw. If specified, and the string is computed to be wider than
+     * this width, the font is adjusted to use a more horizontally condensed font.
      * @returns {CanvasConstructor}
      * @chainable
      * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/fillText
      */
-    addText(text, x, y) {
-        this.context.fillText(text, x, y);
+    addText(text, x, y, maxWidth) {
+        this.context.fillText(text, x, y, maxWidth);
+        return this;
+    }
+
+    /**
+     * Strokes the current or given path with the current stroke style using the non-zero winding rule.
+     * @param {any} path A Path2D path to stroke.
+     * @returns {CanvasConstructor}
+     * @chainable
+     * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/stroke
+     */
+    stroke(path) {
+        this.context.stroke(path);
+        return this;
+    }
+
+    /**
+     * Paints a rectangle which has a starting point at (x, y) and has a w width and an h height onto the canvas, using
+     * the current stroke style.
+     * @param {number} x      The x axis of the coordinate for the rectangle starting point.
+     * @param {number} y      The y axis of the coordinate for the rectangle starting point.
+     * @param {number} width  The rectangle's width.
+     * @param {number} height The rectangle's height.
+     * @returns {CanvasConstructor}
+     * @chainable
+     * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/strokeRect
+     */
+    addStrokeRect(x, y, width, height) {
+        this.context.strokeRect(x, y, width, height);
         return this;
     }
 
@@ -62,6 +155,42 @@ class CanvasConstructor {
     addStrokeText(text, x, y) {
         this.context.strokeText(text, x, y);
         return this;
+    }
+
+    /**
+     * Measure a text's width given a string.
+     * If a callback is not passed, this method will not be chainable, and it will return an integer instead.
+     * @param {string}   text     The text to measure.
+     * @param {Function} callback The callback, if not specified, this method won't be chainable as it will return a
+     * number.
+     * @returns {(CanvasConstructor|number)}
+     * @chainable
+     * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/measureText
+     * @example
+     * new Canvas(500, 400)
+     *     .setTextFont('40px Tahoma')
+     *     .measureText('Hello World!', function(size) {
+     *         this.setTextFont(`${size}px`);
+     *     })
+     *     .addText('Hello World!', 30, 50)
+     *     .toBuffer(); // Returns a Buffer
+     * @example
+     * const size = new Canvas(500, 400)
+     *     .setTextFont('40px Tahoma')
+     *     .measureText('Hello World!'); // Returns a number
+     *
+     * new Canvas(500, 400)
+     *     .setTextFont(`${size}px Tahoma`)
+     *     .addText('Hello World!', 30, 50)
+     *     .toBuffer(); // Returns a Buffer
+     */
+    measureText(text, callback) {
+        if (callback) {
+            if (typeof callback !== 'function') throw new TypeError('Callback must be a function.');
+            callback(this.context.measureText(text));
+            return this;
+        }
+        return this.context.measureText(text);
     }
 
     /**
@@ -94,10 +223,11 @@ class CanvasConstructor {
             if (options.type === 'round') return this.addRoundImage(buffer, x, y, width, height, options.radius);
             if (options.type === 'bevel') return this.addBevelImage(buffer, x, y, width, height, options.radius);
         }
+        this.save();
         const image = new Canvas.Image();
         image.onload = () => this.context.drawImage(image, x, y, width, height);
         image.src = buffer;
-        return this;
+        return this.restore();
     }
 
     /**
@@ -113,7 +243,7 @@ class CanvasConstructor {
      */
     addRoundImage(buffer, x, y, width, height, radius) {
         this.createRoundClip(x + radius, y + radius, radius);
-        return this.addImage(buffer, x, y, width, height, radius, { type: null });
+        return this.addImage(buffer, x, y, width, height, {});
     }
 
     /**
@@ -129,7 +259,7 @@ class CanvasConstructor {
      */
     addBevelImage(buffer, x, y, width, height, radius) {
         this.createBeveledClip(x, y, width, height, radius);
-        return this.addImage(buffer, x, y, width, height, radius, { type: null });
+        return this.addImage(buffer, x, y, width, height, {});
     }
 
     /**
