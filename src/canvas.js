@@ -65,8 +65,8 @@ class CanvasConstructor {
     }
 
     /**
-     * Set a colour for the canvas' context.
-     * @param {string} color A canvas' colour resolvable.
+     * Set a color for the canvas' context.
+     * @param {string} color A canvas' color resolvable.
      * @returns {CanvasConstructor}
      * @chainable
      * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/strokeStyle
@@ -204,8 +204,8 @@ class CanvasConstructor {
     }
 
     /**
-     * Set a colour for the canvas' context.
-     * @param {string} color A canvas' colour resolvable.
+     * Set a color for the canvas' context.
+     * @param {string} color A canvas' color resolvable.
      * @returns {CanvasConstructor}
      * @chainable
      * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/fillStyle
@@ -264,14 +264,14 @@ class CanvasConstructor {
     }
 
     /**
-     * Set the shadow's colour.
-     * @param {string} colour A canvas' colour resolvable to set as shadow's colour.
+     * Set the shadow's color.
+     * @param {string} color A canvas' color resolvable to set as shadow's color.
      * @returns {CanvasConstructor}
      * @chainable
      * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/shadowColor
      */
-    setShadowColour(colour) {
-        this.context.shadowColor = colour;
+    setShadowColor(color) {
+        this.context.shadowColor = color;
         return this;
     }
 
@@ -319,7 +319,7 @@ class CanvasConstructor {
     resetShadows() {
         return this
             .setShadowBlur(0)
-            .setShadowColour('#000000');
+            .setShadowColor('#000000');
     }
 
     /**
