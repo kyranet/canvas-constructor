@@ -1,6 +1,6 @@
 # canvas-constructor
-[![npm](https://img.shields.io/npm/v/canvas-constructor.svg?maxAge=3600)](https://www.npmjs.com/package/komada)
-[![npm](https://img.shields.io/npm/dt/canvas-constructor.svg?maxAge=3600)](https://www.npmjs.com/package/komada)
+[![npm](https://img.shields.io/npm/v/canvas-constructor.svg?maxAge=3600)](https://www.npmjs.com/package/canvas-constructor)
+[![npm](https://img.shields.io/npm/dt/canvas-constructor.svg?maxAge=3600)](https://www.npmjs.com/package/canvas-constructor)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/d673cda285b34ce4b8b6601458b29527)](https://www.codacy.com/app/kyranet/canvasConstructor?utm_source=github.com&utm_medium=referral&utm_content=kyranet/canvasConstructor&utm_campaign=badger)
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/kyranet/canvasConstructor/master/LICENSE)
 
