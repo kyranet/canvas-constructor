@@ -1,4 +1,4 @@
-# canvasConstructor
+# canvas-constructor
 [![npm](https://img.shields.io/npm/v/canvas-constructor.svg?maxAge=3600)](https://www.npmjs.com/package/komada)
 [![npm](https://img.shields.io/npm/dt/canvas-constructor.svg?maxAge=3600)](https://www.npmjs.com/package/komada)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/d673cda285b34ce4b8b6601458b29527)](https://www.codacy.com/app/kyranet/canvasConstructor?utm_source=github.com&utm_medium=referral&utm_content=kyranet/canvasConstructor&utm_campaign=badger)
@@ -56,3 +56,5 @@ async function createCanvas() {
 - Return a buffer.
 
 And now, you have created an image with a kitten in the background and some centered text in the bottom of it.
+
+If you experience issues with **Canvas** or want to install it, please refer to the [canvas](https://www.npmjs.com/package/canvas) repository, if you feel you found an issue in this package, feel free to file an issue [here](https://github.com/kyranet/canvasConstructor/issues), or make a [Pull Request](https://help.github.com/articles/about-pull-requests/) if you have the fix.
