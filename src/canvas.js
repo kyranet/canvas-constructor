@@ -307,7 +307,7 @@ class CanvasConstructor {
      * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/globalAlpha
      */
     setGlobalAlpha(value) {
-        this.context.globalAlpha(value);
+        this.context.globalAlpha = value;
         return this;
     }
 
