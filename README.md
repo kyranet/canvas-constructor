@@ -1,4 +1,10 @@
 # canvasConstructor
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/kyranet/canvasConstructor/master/LICENSE)
+[![GitHub issues](https://img.shields.io/github/issues/kyranet/canvasConstructor.svg)](https://github.com/kyranet/canvasConstructor/issues)
+[![npm](https://img.shields.io/npm/v/canvas-constructor.svg?maxAge=3600)](https://www.npmjs.com/package/komada)
+[![npm](https://img.shields.io/npm/dt/canvas-constructor.svg?maxAge=3600)](https://www.npmjs.com/package/komada)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/d673cda285b34ce4b8b6601458b29527)](https://www.codacy.com/app/kyranet/canvasConstructor?utm_source=github.com&utm_medium=referral&utm_content=kyranet/canvasConstructor&utm_campaign=badger)
+
 A ES6 function for node-canvas with built-in functions and chained methods.
 
 How to use it:
