@@ -219,11 +219,12 @@ class CanvasConstructor {
      * @chainable
      */
     addImage(buffer, x, y, width, height, options = {}) {
-        if (options.type) {
-            if (options.type === 'round') return this.addRoundImage(buffer, x, y, width, height, options.radius);
-            if (options.type === 'bevel') return this.addBevelImage(buffer, x, y, width, height, options.radius);
-        }
         this.save();
+        if (options.type) {
+            if (isNaN(options.radius)) options.radius = 10;
+            if (options.type === 'round') this.createRoundClip(x + options.radius, y + options.radius, options.radius);
+            if (options.type === 'bevel') this.createBeveledClip(x, y, width, height, options.radius);
+        }
         const image = new Canvas.Image();
         image.onload = () => this.context.drawImage(image, x, y, width, height);
         image.src = buffer;
@@ -242,8 +243,7 @@ class CanvasConstructor {
      * @chainable
      */
     addRoundImage(buffer, x, y, width, height, radius) {
-        this.createRoundClip(x + radius, y + radius, radius);
-        return this.addImage(buffer, x, y, width, height, {});
+        return this.addImage(buffer, x, y, width, height, { type: 'round', radius });
     }
 
     /**
@@ -258,8 +258,7 @@ class CanvasConstructor {
      * @chainable
      */
     addBevelImage(buffer, x, y, width, height, radius) {
-        this.createBeveledClip(x, y, width, height, radius);
-        return this.addImage(buffer, x, y, width, height, {});
+        return this.addImage(buffer, x, y, width, height, { type: 'bevel', radius });
     }
 
     /**
