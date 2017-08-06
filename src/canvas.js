@@ -242,7 +242,7 @@ class CanvasConstructor {
      * @returns {CanvasConstructor}
      * @chainable
      */
-    addRoundImage(buffer, x, y, width, height, radius) {
+    addRoundImage(buffer, x, y, width, height, radius = 10) {
         return this.addImage(buffer, x, y, width, height, { type: 'round', radius });
     }
 
@@ -257,7 +257,7 @@ class CanvasConstructor {
      * @returns {CanvasConstructor}
      * @chainable
      */
-    addBevelImage(buffer, x, y, width, height, radius) {
+    addBevelImage(buffer, x, y, width, height, radius = 10) {
         return this.addImage(buffer, x, y, width, height, { type: 'bevel', radius });
     }
 

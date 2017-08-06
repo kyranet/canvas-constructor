@@ -13,7 +13,7 @@ const { Canvas } = require('canvas-constructor');
 
 new Canvas(300, 300)
     .setColor('#AEFD54')
-    .fillRect(5, 5, 290, 290)
+    .addRect(5, 5, 290, 290)
     .setColor('#FFAE23')
     .setTextFont('28px Impact')
     .addText('Hello World!', 130, 150)
