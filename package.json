@@ -4,7 +4,8 @@
     "description": "A ES6 class for node-canvas with built-in functions and chained methods.",
     "main": "index.js",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "test": "eslint src",
+        "lint": "npm run test -- --fix"
     },
     "repository": {
         "type": "git",
