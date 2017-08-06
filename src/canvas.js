@@ -162,7 +162,8 @@ class CanvasConstructor {
      * If a callback is not passed, this method will not be chainable, and it will return an integer instead.
      * @param {string}   text     The text to measure.
      * @param {Function} callback The callback, if not specified, this method won't be chainable as it will return a
-     * number.
+     * number. If you use an arrow function, you might want to use the second argument which is the instance of the
+     * class. Otherwise, the keyword this is binded to the class instance itself, so you can use it safely.
      * @returns {(CanvasConstructor|number)}
      * @chainable
      * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/measureText
@@ -171,6 +172,14 @@ class CanvasConstructor {
      *     .setTextFont('40px Tahoma')
      *     .measureText('Hello World!', function(size) {
      *         this.setTextFont(`${size}px`);
+     *     })
+     *     .addText('Hello World!', 30, 50)
+     *     .toBuffer(); // Returns a Buffer
+     * @example
+     * new Canvas(500, 400)
+     *     .setTextFont('40px Tahoma')
+     *     .measureText('Hello World!', (size, inst) => {
+     *         inst.setTextFont(`${size}px`);
      *     })
      *     .addText('Hello World!', 30, 50)
      *     .toBuffer(); // Returns a Buffer
@@ -187,7 +196,7 @@ class CanvasConstructor {
     measureText(text, callback) {
         if (callback) {
             if (typeof callback !== 'function') throw new TypeError('Callback must be a function.');
-            callback(this.context.measureText(text));
+            callback.bind(this)(this.context.measureText(text), this);
             return this;
         }
         return this.context.measureText(text);
