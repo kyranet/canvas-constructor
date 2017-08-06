@@ -4,8 +4,7 @@
     "description": "A ES6 class for node-canvas with built-in functions and chained methods.",
     "main": "index.js",
     "scripts": {
-        "test": "eslint src",
-        "lint": "npm run test -- --fix"
+        "test": "eslint --fix ./"
     },
     "repository": {
         "type": "git",
@@ -13,6 +12,9 @@
     },
     "dependencies": {
         "canvas": "1.6.6"
+    },
+    "devDependencies": {
+        "eslint": "^3.19.0"
     },
     "keywords": [
         "node-canvas",
