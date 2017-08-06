@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## 0.1.6
+### Changed
+- `addImage()` removed `this.save()` and `this.restore()` so users can use their own paths.
+
 ## 0.1.5
 ### Added
 - `save()` To save the current state onto a stack.
