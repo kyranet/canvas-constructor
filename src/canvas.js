@@ -171,7 +171,8 @@ class CanvasConstructor {
      * new Canvas(500, 400)
      *     .setTextFont('40px Tahoma')
      *     .measureText('Hello World!', function(size) {
-     *         this.setTextFont(`${size}px`);
+     *         const newSize = size.width < 500 ? 40 : (500 / size.width) * 40;
+     *         this.setTextFont(`${newSize}px Tahoma`);
      *     })
      *     .addText('Hello World!', 30, 50)
      *     .toBuffer(); // Returns a Buffer
@@ -179,7 +180,8 @@ class CanvasConstructor {
      * new Canvas(500, 400)
      *     .setTextFont('40px Tahoma')
      *     .measureText('Hello World!', (size, inst) => {
-     *         inst.setTextFont(`${size}px`);
+     *         const newSize = size.width < 500 ? 40 : (500 / size.width) * 40;
+     *         inst.setTextFont(`${newSize}px`);
      *     })
      *     .addText('Hello World!', 30, 50)
      *     .toBuffer(); // Returns a Buffer
@@ -188,8 +190,10 @@ class CanvasConstructor {
      *     .setTextFont('40px Tahoma')
      *     .measureText('Hello World!'); // Returns a number
      *
+     * const newSize = size.width < 500 ? 40 : (500 / size.width) * 40;
+     *
      * new Canvas(500, 400)
-     *     .setTextFont(`${size}px Tahoma`)
+     *     .setTextFont(`${newSize}px Tahoma`)
      *     .addText('Hello World!', 30, 50)
      *     .toBuffer(); // Returns a Buffer
      */
@@ -203,14 +207,26 @@ class CanvasConstructor {
     }
 
     /**
-     * Set a color for the canvas' context.
-     * @param {string} color A canvas' color resolvable.
+     * Specifies the color or style to use for the lines around shapes. The default is #000000 (black).
+     * @param {string} [color='#000000'] A canvas' color resolvable.
      * @returns {CanvasConstructor}
      * @chainable
      * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/strokeStyle
      */
-    setStroke(color) {
+    setStroke(color = '#000000') {
         this.context.strokeStyle = color;
+        return this;
+    }
+
+    /**
+     * Sets the thickness of lines in space units.
+     * @param {number} [width=1] A number specifying the line width in space units.
+     * @returns {CanvasConstructor}
+     * @chainable
+     * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/lineWidth
+     */
+    setStrokeWidth(width = 1) {
+        this.context.lineWidth = width;
         return this;
     }
 
@@ -385,6 +401,161 @@ class CanvasConstructor {
      */
     setTextBaseline(baseline) {
         this.context.textBaseline = baseline;
+        return this;
+    }
+
+    /**
+     * Starts a new path by emptying the list of sub-paths.
+     * @returns {CanvasConstructor}
+     * @chainable
+     * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/beginPath
+     */
+    beginPath() {
+        this.context.beginPath();
+        return this;
+    }
+
+    /**
+     * Causes the point of the pen to move back to the start of the current sub-path.
+     * If the shape has already been closed or has only one point, this function does nothing.
+     * @returns {CanvasConstructor}
+     * @chainable
+     * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/closePath
+     */
+    closePath() {
+        this.context.closePath();
+        return this;
+    }
+
+    /**
+     * Creates a gradient along the line given by the coordinates represented by the parameters.
+     * The coordinates are global, the second point does not rely on the position of the first and vice versa.
+     * @param {number} x0 The x axis of the coordinate of the start point.
+     * @param {number} y0 The y axis of the coordinate of the start point.
+     * @param {number} x1 The x axis of the coordinate of the end point.
+     * @param {number} y1 The y axis of the coordinate of the end point.
+     * @returns {CanvasConstructor}
+     * @chainable
+     * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/createLinearGradient
+     */
+    createLinearGradient(x0, y0, x1, y1) {
+        this.context.createLinearGradient(x0, y0, x1, y1);
+        return this;
+    }
+
+    /**
+     * Creates a radial gradient given by the coordinates of the two circles represented by the parameters.
+     * @param {number} x0 The x axis of the coordinate of the start circle.
+     * @param {number} y0 The y axis of the coordinate of the start circle.
+     * @param {number} r0 The radius of the start circle.
+     * @param {number} x1 The x axis of the coordinate of the end circle.
+     * @param {number} y1 The y axis of the coordinate of the end circle.
+     * @param {number} r1 The radius of the end circle.
+     * @returns {CanvasConstructor}
+     * @chainable
+     * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/createRadialGradient
+     */
+    createRadialGradient(x0, y0, r0, x1, y1, r1) {
+        this.context.createRadialGradient(x0, y0, r0, x1, y1, r1);
+        return this;
+    }
+
+    /**
+     * adds an arc to the path which is centered at (x, y) position with radius r starting at startAngle and ending at
+     * endAngle going in the given direction by anticlockwise (defaulting to clockwise).
+     * @param {number} x          The x coordinate of the arc's center.
+     * @param {number} y          The y coordinate of the arc's center.
+     * @param {number} radius     The arc's radius.
+     * @param {number} startAngle The angle at which the arc starts, measured clockwise from the positive x axis and
+     * expressed in radians.
+     * @param {number} endAngle   The angle at which the arc ends, measured clockwise from the positive x axis and
+     * expressed in radians.
+     * @param {boolean} [anticlockwise=false] An optional Boolean which, if true, causes the arc to be drawn
+     * counter-clockwise between the two angles. By default it is drawn clockwise.
+     * @returns {CanvasConstructor}
+     * @chainable
+     * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/arc
+     */
+    arc(x, y, radius, startAngle, endAngle, anticlockwise = false) {
+        this.context.arc(x, y, radius, startAngle, endAngle, anticlockwise);
+        return this;
+    }
+
+    /**
+     * Adds an arc to the path with the given control points and radius, connected to the previous point by a straight line.
+     * @param {number} x1     The x axis of the coordinate for the first control point.
+     * @param {number} y1     The y axis of the coordinate for the first control point.
+     * @param {number} x2     The x axis of the coordinate for the second control point.
+     * @param {number} y2     The y axis of the coordinate for the second control point.
+     * @param {number} radius The arc's radius.
+     * @returns {CanvasConstructor}
+     * @chainable
+     * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/arcTo
+     */
+    arcTo(x1, y1, x2, y2, radius) {
+        this.context.arcTo(x1, y1, x2, y2, radius);
+        return this;
+    }
+
+    /**
+     * Adds a quadratic Bézier curve to the path. It requires two points. The first point is a control point and the
+     * second one is the end point. The starting point is the last point in the current path, which can be changed using
+     * moveTo() before creating the quadratic Bézier curve.
+     * @param {number} cpx The x axis of the coordinate for the control point.
+     * @param {number} cpy The y axis of the coordinate for the control point.
+     * @param {number} x   The x axis of the coordinate for the end point.
+     * @param {number} y   The y axis of the coordinate for the end point.
+     * @returns {CanvasConstructor}
+     * @chainable
+     * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/quadraticCurveTo
+     */
+    quadraticCurveTo(cpx, cpy, x, y) {
+        this.context.quadraticCurveTo(cpx, cpy, x, y);
+        return this;
+    }
+
+    /**
+     * Adds a cubic Bézier curve to the path. It requires three points. The first two points are control points and the
+     * third one is the end point. The starting point is the last point in the current path, which can be changed using
+     * moveTo() before creating the Bézier curve.
+     * @param {number} cp1x The x axis of the coordinate for the first control point.
+     * @param {number} cp1y The y axis of the coordinate for first control point.
+     * @param {number} cp2x The x axis of the coordinate for the second control point.
+     * @param {number} cp2y The y axis of the coordinate for the second control point.
+     * @param {number} x    The x axis of the coordinate for the end point.
+     * @param {number} y    The y axis of the coordinate for the end point.
+     * @returns {CanvasConstructor}
+     * @chainable
+     * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/bezierCurveTo
+     */
+    bezierCurveTo(cp1x, cp1y, cp2x, cp2y, x, y) {
+        this.context.bezierCurveTo(cp1x, cp1y, cp2x, cp2y, x, y);
+        return this;
+    }
+
+    /**
+     * Connects the last point in the sub-path to the x, y coordinates with a straight line
+     * @param {number} x The x axis of the coordinate for the end of the line.
+     * @param {number} y The y axis of the coordinate for the end of the line.
+     * @returns {CanvasConstructor}
+     * @chainable
+     * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/lineTo
+     */
+    lineTo(x, y) {
+        this.context.lineTo(x, y);
+        return this;
+    }
+
+    /**
+     * Moves the starting point of a new sub-path to the (x, y) coordinates.
+     * @param {number} x The x axis of the point.
+     * @param {number} y The y axis of the point.
+     * @returns {CanvasConstructor}
+     * @chainable
+     * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/moveTo
+     */
+    moveTo(x, y) {
+        this.context.moveTo(x, y);
         return this;
     }
 

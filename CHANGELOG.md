@@ -5,8 +5,24 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## 0.1.6
+### Added
+- `setStrokeWidth()` to change stroke/line's width.
+- `beginPath()` to start making paths.
+- `closePath()` to start closing paths.
+- `createLinearGradient()` to create linear gradients.
+- `createRadialGradient()` to create radial gradients.
+- `arc()` and `arcTo()`, to create arcs.
+- `quadraticCurveTo()` to create quadratic Bèzier curves.
+- `bezierCurveTo()` to create cubic Bèzier curves.
+- `lineTo()` to connect lines.
+- `moveTo()` to move the starting point of a path to any (x, y) coordinates.
+
 ### Changed
+- Added default `'#000000'` for the `setStroke()` method.
 - `addImage()` removed `this.save()` and `this.restore()` so users can use their own paths.
+
+### Fixed
+- Examples for `measureText()`.
 
 ## 0.1.5
 ### Added
@@ -33,7 +49,7 @@ identical to `addRect()`).
 - `addText()` now accepts a third argument: `maxWidth`.
 - `addImage()` now saves and restores the context.
 
-### Fix
+### Fixed
 - `addRoundImage()` now points to `addImage()` with the correct arguments.
 - `addBevelImage()` now points to `addImage()` with the correct arguments.
 
