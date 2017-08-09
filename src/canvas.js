@@ -11,6 +11,47 @@ class CanvasConstructor {
     }
 
     /**
+     * Change the current canvas' size.
+     * @param {number} width  The new width for the canvas.
+     * @param {number} height The new heigth for the canvas.
+     * @returns {CanvasConstructor}
+     * @chainable
+     */
+    changeCanvasSize(width, height) {
+        if (width && isNaN(width) === false) {
+            this.canvas.width = width;
+            this.width = width;
+        }
+
+        if (height && isNaN(height) === false) {
+            this.canvas.height = height;
+            this.height = height;
+        }
+
+        return this;
+    }
+
+    /**
+     * Change the current canvas' width.
+     * @param {number} width The new width for the canvas.
+     * @returns {CanvasConstructor}
+     * @chainable
+     */
+    changeCanvasWidth(width) {
+        return this.changeCanvasSize(width, undefined);
+    }
+
+    /**
+     * Change the current canvas' height.
+     * @param {number} height The new height for the canvas.
+     * @returns {CanvasConstructor}
+     * @chainable
+     */
+    changeCanvasHeigth(height) {
+        return this.changeCanvasSize(undefined, height);
+    }
+
+    /**
      * Save the entire state of the canvas by pushing the current state onto a stack.
      * @returns {CanvasConstructor}
      * @chainable
@@ -329,18 +370,6 @@ class CanvasConstructor {
             this.context.closePath();
             this.context.clip();
         }
-        return this;
-    }
-
-    /**
-     * Register a new font.
-     * @param {string} path   The path for the font.
-     * @param {string} family The font's family name.
-     * @returns {CanvasConstructor}
-     * @chainable
-     */
-    registerTextFont(path, family) {
-        Canvas.registerFont(path, { family });
         return this;
     }
 

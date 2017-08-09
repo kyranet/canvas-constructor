@@ -4,6 +4,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## 0.1.7
+### Added
+- `changeCanvasSize()` to change the canvas' width/height.
+- `changeCanvasWidth()` to change the canvas' width.
+- `changeCanvasHeigth()` to change the canvas' heigth.
+
+### Removed
+- `registerTextFont()` as canvas-constructor relies on Canvas 1.6.6, this method is useless.
+
 ## 0.1.6
 ### Added
 - `setStrokeWidth()` to change stroke/line's width.
