@@ -2,8 +2,8 @@ const Canvas = require('canvas');
 
 class CanvasConstructor {
 
-    constructor(width, height) {
-        this.canvas = new Canvas(width, height);
+    constructor(width, height, type) {
+        this.canvas = Canvas.createCanvas(width, height, type);
         this.context = this.canvas.getContext('2d');
 
         this.width = width;
@@ -374,18 +374,6 @@ class CanvasConstructor {
     }
 
     /**
-     * Register a new font.
-     * @param {string} path   The path for the font.
-     * @param {string} family The font's family name.
-     * @returns {CanvasConstructor}
-     * @chainable
-     */
-    addTextFont(path, family) {
-        this.context.addFont(new Canvas.Font(family, path));
-        return this;
-    }
-
-    /**
      * Set a color for the canvas' context.
      * @param {string} color A canvas' color resolvable.
      * @returns {CanvasConstructor}
@@ -697,6 +685,17 @@ class CanvasConstructor {
      */
     toBuffer(options) {
         return this.canvas.toBuffer(options);
+    }
+
+    /**
+     * Register a new font.
+     * @param {string} path   The path for the font.
+     * @param {string} family The font's family name.
+     * @returns {CanvasConstructor}
+     */
+    static registerFont(path, family) {
+        Canvas.registerFont(path, { family });
+        return this;
     }
 
 }
