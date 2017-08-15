@@ -8,6 +8,12 @@ class CanvasConstructor {
 
         this.width = width;
         this.height = height;
+
+        this.font = {
+            style: '',
+            size: 21.33,
+            font: ''
+        };
     }
 
     /**
@@ -184,19 +190,11 @@ class CanvasConstructor {
     }
 
     /**
-     * @typedef  {Object} FontStyle
-     * @property {string} [prefix=''] The styles for the font, such as 'italic bold'.
-     * @property {number} size        The size of the current font.
-     * @property {string} font        The font which is being used.
-     */
-
-    /**
      * Add responsive text
-     * @param {string}    text     The text to write.
-     * @param {number}    x        The position x to start drawing the element.
-     * @param {number}    y        The position y to start drawing the element.
-     * @param {number}    maxWidth The max length in pixels for the text.
-     * @param {FontStyle} options  The current font's options.
+     * @param {string} text     The text to write.
+     * @param {number} x        The position x to start drawing the element.
+     * @param {number} y        The position y to start drawing the element.
+     * @param {number} maxWidth The max length in pixels for the text.
      * @returns {CanvasConstructor}
      * @chainable
      * @example
@@ -205,14 +203,14 @@ class CanvasConstructor {
      *     .addResponsiveText('Hello World', 30, 30, 50, { size:40, font:'Tahoma' })
      *     .toBuffer();
      */
-    addResponsiveText(text, x, y, maxWidth, options = {}) {
-        const { prefix = '', size, font } = options;
+    addResponsiveText(text, x, y, maxWidth) {
+        const { style = '', size, font } = this.font;
         if (!size || !font) throw new TypeError('The parameters \'size\' and \'font\' are required.');
         if (isNaN(size)) throw new TypeError('The parameter size must be a valid number.');
         const length = this.measureText(text);
         const newLength = maxWidth > length ? maxWidth : (maxWidth / length) * size;
         return this
-            .setTextFont(`${prefix}${newLength}px ${font}`)
+            .setTextFont(`${style}${newLength}px ${font}`)
             .addText(text, x, y);
     }
 
@@ -453,6 +451,7 @@ class CanvasConstructor {
      * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/font
      */
     setTextFont(font) {
+        this._parseFontString(font);
         this.context.font = font;
         return this;
     }
@@ -771,6 +770,45 @@ class CanvasConstructor {
     static registerFont(path, family) {
         Canvas.registerFont(path, { family });
         return this;
+    }
+
+    /**
+     * Parses the font.
+     * @param {string} string A string.
+     * @returns {void}
+     * @private
+     */
+    _parseFontString(string) {
+        const data = /([^\d]+)?([\d\w]+) (.+)?/.exec(string);
+        if (data === null) return;
+        this.font.style = data[1] || '';
+        this.font.size = this._parseFontSize(data[2]);
+        this.font.font = data[3] || '';
+    }
+
+    /**
+     * Parses the font's size
+     * @param {string} string The string with a number and a unit.
+     * @returns {number}
+     * @private
+     */
+    _parseFontSize(string) {
+        const data = /(\d+)(\w+)/.exec(string);
+        if (data === null) return 21.33;
+        let size = parseFloat(data[1]);
+        const unit = data[2];
+        switch (unit) {
+            case 'pt': size /= 0.75; break;
+            case 'pc': size *= 16; break;
+            case 'in': size *= 96; break;
+            case 'cm': size *= 96.0 / 2.54; break;
+            case 'mm': size *= 96.0 / 25.4; break;
+            case 'em': size /= 0.75; break;
+            case 'rem': size *= 21.33 / 0.75; break;
+            case 'q': size *= 96 / 25.4 / 4; break;
+        }
+
+        return size;
     }
 
 }
