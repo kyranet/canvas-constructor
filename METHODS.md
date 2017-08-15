@@ -5,6 +5,8 @@
 | changeCanvasSize     | `width`, `height`
 | changeCanvasWidth    | `width`
 | changeCanvasHeigth   | `height`
+| setTransform         | `a`, `b`, `c`, `d`, `e`, `f`
+| resetTransformation  |
 | save                 | 
 | restore              | 
 | rotate               | `angle`
@@ -24,7 +26,6 @@
 | addBevelImage        | `buffer`, `x`, `y`, `width`, `height`, `radius = 10`
 | createRoundClip      | `x`, `y`, `radius`, `start = 0`, `angle = Math.PI * 2`
 | createBeveledClip    | `x`, `y`, `width`, `height`, `radius`
-| addTextFont          | `path`, `family`
 | setColor             | `color`
 | setTextFont          | `font`
 | setTextAlign         | `align`
@@ -48,3 +49,10 @@
 | clearCircle          | `x`, `y`, `radius`, `start = 0`, `angle = Math.PI * 2`
 | clearPixels          | `x = 0`, `y = 0`, `width = this.width`, `height = this.height`
 | toBuffer             | `options`
+
+## Static
+
+|       Method | Parameters
+|-------------:|-----------
+| getCanvas    |
+| registerFont | `path`, `family`
