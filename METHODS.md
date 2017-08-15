@@ -15,6 +15,7 @@
 | fill                 | `path`, `fillRule`
 | addRect              | `x`, `y`, `width`, `height`
 | addText              | `text`, `x`, `y`, `maxWidth`
+| addResponsiveText    | `text`, `x`, `y`, `maxWidth`, `options`
 | stroke               | `path`
 | addStrokeRect        | `x`, `y`, `width`, `height`
 | addStrokeText        | `text`, `x`, `y`
@@ -49,6 +50,7 @@
 | clearCircle          | `x`, `y`, `radius`, `start = 0`, `angle = Math.PI * 2`
 | clearPixels          | `x = 0`, `y = 0`, `width = this.width`, `height = this.height`
 | toBuffer             | `options`
+| toBufferAsync        |
 
 ## Static
 

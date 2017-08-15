@@ -184,6 +184,39 @@ class CanvasConstructor {
     }
 
     /**
+     * @typedef  {Object} FontStyle
+     * @property {string} [prefix=''] The styles for the font, such as 'italic bold'.
+     * @property {number} size        The size of the current font.
+     * @property {string} font        The font which is being used.
+     */
+
+    /**
+     * Add responsive text
+     * @param {string}    text     The text to write.
+     * @param {number}    x        The position x to start drawing the element.
+     * @param {number}    y        The position y to start drawing the element.
+     * @param {number}    maxWidth The max length in pixels for the text.
+     * @param {FontStyle} options  The current font's options.
+     * @returns {CanvasConstructor}
+     * @chainable
+     * @example
+     * new Canvas(400, 300)
+     *     .setTextFont('40px Tahoma')
+     *     .addResponsiveText('Hello World', 30, 30, 50, { size:40, font:'Tahoma' })
+     *     .toBuffer();
+     */
+    addResponsiveText(text, x, y, maxWidth, options = {}) {
+        const { prefix = '', size, font } = options;
+        if (!size || !font) throw new TypeError('The parameters \'size\' and \'font\' are required.');
+        if (isNaN(size)) throw new TypeError('The parameter size must be a valid number.');
+        const length = this.measureText(text);
+        const newLength = maxWidth > length ? maxWidth : (maxWidth / length) * size;
+        return this
+            .setTextFont(`${prefix}${newLength}px ${font}`)
+            .addText(text, x, y);
+    }
+
+    /**
      * Strokes the current or given path with the current stroke style using the non-zero winding rule.
      * @param {any} path A Path2D path to stroke.
      * @returns {CanvasConstructor}
@@ -712,6 +745,17 @@ class CanvasConstructor {
      */
     toBuffer(options) {
         return this.canvas.toBuffer(options);
+    }
+
+    /**
+     * Render the canvas into a buffer using a Promise.
+     * @returns {Promise<Buffer>}
+     */
+    toBufferAsync() {
+        return new Promise((resolve, reject) => this.canvas.toBuffer((err, res) => {
+            if (err) reject(err);
+            else resolve(res);
+        }));
     }
 
     static getCanvas() {
