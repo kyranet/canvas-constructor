@@ -112,6 +112,33 @@ class CanvasConstructor {
     }
 
     /**
+     * Resets (overrides) the current transformation to the identity matrix and then invokes a transformation described
+     * by the arguments of this method.
+     * @param {number} a Horizontal scaling.
+     * @param {number} b Horizontal skewing.
+     * @param {number} c Vertical skewing.
+     * @param {number} d Vertical scaling.
+     * @param {number} e Horizontal moving.
+     * @param {number} f Vertical moving.
+     * @returns {CanvasConstructor}
+     * @chainable
+     * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/setTransform
+     */
+    setTransform(a, b, c, d, e, f) {
+        this.context.setTransform(a, b, c, d, e, f);
+        return this;
+    }
+
+    /**
+     * Reset the transformation.
+     * @returns {CanvasConstructor}
+     * @chainable
+     */
+    resetTransformation() {
+        return this.setTransform(1, 0, 0, 1, 0, 0);
+    }
+
+    /**
      * Fills the current or given path with the current fill style using the non-zero or even-odd winding rule.
      * @param {any} path A Path2D path to fill.
      * @param {('nonzero'|'evenodd')} fillRule The algorithm by which to determine if a point is inside a path or
@@ -685,6 +712,10 @@ class CanvasConstructor {
      */
     toBuffer(options) {
         return this.canvas.toBuffer(options);
+    }
+
+    static getCanvas() {
+        return Canvas;
     }
 
     /**

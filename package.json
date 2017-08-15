@@ -11,7 +11,7 @@
         "url": "git+https://github.com/kyranet/canvasConstructor.git"
     },
     "dependencies": {
-        "canvas": "github:Automattic/node-canvas"
+        "canvas": "github:automattic/node-canvas"
     },
     "devDependencies": {
         "eslint": "^3.19.0"
