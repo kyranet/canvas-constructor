@@ -10,11 +10,8 @@
         "type": "git",
         "url": "git+https://github.com/kyranet/canvasConstructor.git"
     },
-    "dependencies": {
-        "canvas": "github:automattic/node-canvas"
-    },
     "devDependencies": {
-        "eslint": "^3.19.0"
+        "eslint": "^4.4.1"
     },
     "keywords": [
         "node-canvas",
@@ -26,5 +23,8 @@
     "bugs": {
         "url": "https://github.com/kyranet/canvasConstructor/issues"
     },
-    "homepage": "https://github.com/kyranet/canvasConstructor#readme"
+    "homepage": "https://github.com/kyranet/canvasConstructor#readme",
+    "dependencies": {
+        "canvas": "github:automattic/node-canvas#98b7591df5260bda4c1ef36e1d22525705ec8ba1"
+    }
 }
