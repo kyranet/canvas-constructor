@@ -200,15 +200,14 @@ class CanvasConstructor {
      * @example
      * new Canvas(400, 300)
      *     .setTextFont('40px Tahoma')
-     *     .addResponsiveText('Hello World', 30, 30, 50, { size:40, font:'Tahoma' })
+     *     .addResponsiveText('Hello World', 30, 30, 50)
      *     .toBuffer();
      */
     addResponsiveText(text, x, y, maxWidth) {
         const { style = '', size, font } = this.font;
-        if (!size || !font) throw new TypeError('The parameters \'size\' and \'font\' are required.');
         if (isNaN(size)) throw new TypeError('The parameter size must be a valid number.');
-        const length = this.measureText(text);
-        const newLength = maxWidth > length ? maxWidth : (maxWidth / length) * size;
+        const { width } = this.measureText(text);
+        const newLength = maxWidth > width ? maxWidth : (maxWidth / width) * size;
         return this
             .setTextFont(`${style}${newLength}px ${font}`)
             .addText(text, x, y);
