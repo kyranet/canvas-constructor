@@ -2,8 +2,8 @@ const Canvas = require('canvas');
 
 class CanvasConstructor {
 
-    constructor(width, height, type) {
-        this.canvas = Canvas.createCanvas(width, height, type);
+    constructor(width, height) {
+        this.canvas = new Canvas(width, height);
         this.context = this.canvas.getContext('2d');
 
         this.width = width;
