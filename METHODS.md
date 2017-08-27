@@ -15,6 +15,7 @@
 | fill                 | `path`, `fillRule`
 | addRect              | `x`, `y`, `width`, `height`
 | addText              | `text`, `x`, `y`, `maxWidth`
+| addCircle            | `x`, `y`, `radius`
 | addResponsiveText    | `text`, `x`, `y`, `maxWidth`, `options`
 | stroke               | `path`
 | addStrokeRect        | `x`, `y`, `width`, `height`
