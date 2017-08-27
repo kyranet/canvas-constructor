@@ -5,14 +5,17 @@
 | changeCanvasSize     | `width`, `height`
 | changeCanvasWidth    | `width`
 | changeCanvasHeigth   | `height`
-| save                 | 
-| restore              | 
+| setTransform         | `a`, `b`, `c`, `d`, `e`, `f`
+| resetTransformation  |
+| save                 |
+| restore              |
 | rotate               | `angle`
 | scale                | `x`, `y`
 | traslate             | `x`, `y`
 | fill                 | `path`, `fillRule`
 | addRect              | `x`, `y`, `width`, `height`
 | addText              | `text`, `x`, `y`, `maxWidth`
+| addResponsiveText    | `text`, `x`, `y`, `maxWidth`, `options`
 | addCircle            | `x`, `y`, `radius`
 | stroke               | `path`
 | addStrokeRect        | `x`, `y`, `width`, `height`
@@ -30,8 +33,8 @@
 | setTextFont          | `font`
 | setTextAlign         | `align`
 | setTextBaseline      | `baseline`
-| beginPath            | 
-| closePath            | 
+| beginPath            |
+| closePath            |
 | createLinearGradient | `x0`, `y0`, `x1`, `y1`
 | createRadialGradient | `x0`, `y0`, `r0`, `x1`, `y1`, `r1`
 | arc                  | `x`, `y`, `radius`, `startAngle`, `endAngle`, `anticlockwise = false`
@@ -45,7 +48,14 @@
 | setShadowOffsetX     | `value`
 | setShadowOffsetY     | `value`
 | setGlobalAlpha       | `value`
-| resetShadows         | 
+| resetShadows         |
 | clearCircle          | `x`, `y`, `radius`, `start = 0`, `angle = Math.PI * 2`
 | clearPixels          | `x = 0`, `y = 0`, `width = this.width`, `height = this.height`
 | toBuffer             | `options`
+| toBufferAsync        |
+
+## Static
+
+|       Method | Parameters
+|-------------:|-----------
+| getCanvas    |

@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## 0.1.7
 ### Added
+- (STATIC) `getCanvas()` to get the Canvas class from canvas-constructor.
+- `toBufferAsync()` to render the canvas asynchronously.
+- `addResponsiveText()` to add responsive text.
+- `setTransform()` to change the current transformation matrix.
+- `resetTransformation()` to revert the transformation matrix.
+- `addCircle()` to draw circles.
 - `changeCanvasSize()` to change the canvas' width/height.
 - `changeCanvasWidth()` to change the canvas' width.
 - `changeCanvasHeigth()` to change the canvas' heigth.
