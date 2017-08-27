@@ -8,12 +8,6 @@ class CanvasConstructor {
 
         this.width = width;
         this.height = height;
-
-        this.font = {
-            style: '',
-            size: 21.33,
-            font: ''
-        };
     }
 
     /**
@@ -204,12 +198,12 @@ class CanvasConstructor {
      *     .toBuffer();
      */
     addResponsiveText(text, x, y, maxWidth) {
-        const { style = '', size, font } = this.font;
-        if (isNaN(size)) throw new TypeError('The parameter size must be a valid number.');
+        const [, style = '', size, font] = /(\w+ )?(\d+)(.+)/.exec(this.context.font);
+        const currentSize = parseInt(size);
         const { width } = this.measureText(text);
-        const newLength = maxWidth > width ? size : (maxWidth / width) * size;
+        const newLength = maxWidth > width ? currentSize : (maxWidth / width) * currentSize;
         return this
-            .setTextFont(`${style}${newLength}px ${font}`)
+            .setTextFont(style + newLength + font)
             .addText(text, x, y);
     }
 
@@ -769,45 +763,6 @@ class CanvasConstructor {
     static registerFont(path, family) {
         Canvas.registerFont(path, { family });
         return this;
-    }
-
-    /**
-     * Parses the font.
-     * @param {string} string A string.
-     * @returns {void}
-     * @private
-     */
-    _parseFontString(string) {
-        const data = /([^\d]+)?([\d\w]+) (.+)?/.exec(string);
-        if (data === null) return;
-        this.font.style = data[1] || '';
-        this.font.size = this._parseFontSize(data[2]);
-        this.font.font = data[3] || '';
-    }
-
-    /**
-     * Parses the font's size
-     * @param {string} string The string with a number and a unit.
-     * @returns {number}
-     * @private
-     */
-    _parseFontSize(string) {
-        const data = /(\d+)(\w+)/.exec(string);
-        if (data === null) return 21.33;
-        let size = parseFloat(data[1]);
-        const unit = data[2];
-        switch (unit) {
-            case 'pt': size /= 0.75; break;
-            case 'pc': size *= 16; break;
-            case 'in': size *= 96; break;
-            case 'cm': size *= 96.0 / 2.54; break;
-            case 'mm': size *= 96.0 / 25.4; break;
-            case 'em': size /= 0.75; break;
-            case 'rem': size *= 21.33 / 0.75; break;
-            case 'q': size *= 96 / 25.4 / 4; break;
-        }
-
-        return size;
     }
 
 }
