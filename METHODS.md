@@ -13,6 +13,7 @@
 | fill                 | `path`, `fillRule`
 | addRect              | `x`, `y`, `width`, `height`
 | addText              | `text`, `x`, `y`, `maxWidth`
+| addCircle            | `x`, `y`, `radius`
 | stroke               | `path`
 | addStrokeRect        | `x`, `y`, `width`, `height`
 | addStrokeText        | `text`, `x`, `y`
