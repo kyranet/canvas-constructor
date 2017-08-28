@@ -2,6 +2,12 @@ const Canvas = require('canvas');
 
 class CanvasConstructor {
 
+    /**
+     * Initialize canvas-constructor
+     * @param {number} width       The canvas' width in pixels.
+     * @param {number} height      The canvas' height in pixels.
+     * @param {('pdf'|'svg')} type The canvas type.
+     */
     constructor(width, height, type) {
         this.canvas = Canvas.createCanvas(width, height, type);
         this.context = this.canvas.getContext('2d');
@@ -333,8 +339,67 @@ class CanvasConstructor {
      * @chainable
      * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/lineWidth
      */
-    setStrokeWidth(width = 1) {
+    setLineWidth(width = 1) {
         this.context.lineWidth = width;
+        return this;
+    }
+
+    setStrokeWidth(width) {
+        return this.setLineWidth(width);
+    }
+
+    /**
+     * Sets the line dash pattern offset or "phase" to achieve a "marching ants" effect
+     * @param {number} value A float specifying the amount of the offset. Initially 0.0.
+     * @returns {CanvasConstructor}
+     * @chainable
+     * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/lineDashOffset
+     */
+    setLineDashOffset(value) {
+        this.context.lineDashOffset = value;
+        return this;
+    }
+
+    /**
+     * Determines how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined
+     * together (degenerate segments with zero lengths, whose specified endpoints and control points are exactly at the
+     * same position, are skipped).
+     * @param {('bevel'|'round'|'miter')} value The line join type.
+     * @returns {CanvasConstructor}
+     * @chainable
+     * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/lineJoin
+     */
+    setLineJoin(value) {
+        this.context.lineJoin = value;
+        return this;
+    }
+
+    /**
+     * Determines how the end points of every line are drawn. There are three possible values for this property and
+     * those are: butt, round and square. By default this property is set to butt.
+     * @param {('butt'|'round'|'square')} value The line join type.
+     * @returns {CanvasConstructor}
+     * @chainable
+     * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/lineCap
+     */
+    setLineCap(value) {
+        this.context.lineCap = value;
+        return this;
+    }
+
+    /**
+     * Sets the line dash pattern used when stroking lines, using an array of values which specify alternating lengths
+     * of lines and gaps which describe the pattern.
+     * @param {number[]} segments An Array of numbers which specify distances to alternately draw a line and a gap (in
+     * coordinate space units). If the number of elements in the array is odd, the elements of the array get copied and
+     * concatenated. For example, [5, 15, 25] will become [5, 15, 25, 5, 15, 25]. If the array is empty, the line dash
+     * list is cleared and line strokes return to being solid.
+     * @returns {CanvasConstructor}
+     * @chainable
+     * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/setLineDash
+     */
+    setLineDash(segments) {
+        this.context.setLineDash(segments);
         return this;
     }
 
@@ -513,6 +578,20 @@ class CanvasConstructor {
     }
 
     /**
+     * Creates a pattern using the specified image. It repeats the source in the directions specified by the repetition
+     * argument.
+     * @param {Image} image A Canvas Image to be used as the image to repeat.
+     * @param {('repeat'|'repeat-x'|'repeat-y'|'no-repeat')} repetition The repeat mode.
+     * @returns {CanvasConstructor}
+     * @chainable
+     * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/createPattern
+     */
+    createPattern(image, repetition) {
+        this.context.createPattern(image, repetition);
+        return this;
+    }
+
+    /**
      * Creates a gradient along the line given by the coordinates represented by the parameters.
      * The coordinates are global, the second point does not rely on the position of the first and vice versa.
      * @param {number} x0 The x axis of the coordinate of the start point.
@@ -546,7 +625,29 @@ class CanvasConstructor {
     }
 
     /**
-     * adds an arc to the path which is centered at (x, y) position with radius r starting at startAngle and ending at
+     * Adds an ellipse to the path which is centered at (x, y) position with the radii radiusX and radiusY starting at
+     * startAngle and ending at endAngle going in the given direction by anticlockwise (defaulting to clockwise).
+     * @param {number} x          The x axis of the coordinate for the ellipse's center.
+     * @param {number} y          The y axis of the coordinate for the ellipse's center.
+     * @param {number} radiusX    The ellipse's major-axis radius.
+     * @param {number} radiusY    The ellipse's minor-axis radius.
+     * @param {number} rotation   The rotation for this ellipse, expressed in radians.
+     * @param {number} startAngle The starting point, measured from the x axis, from which it will be drawn, expressed
+     * in radians.
+     * @param {number} endAngle   The end ellipse's angle to which it will be drawn, expressed in radians.
+     * @param {boolean} [anticlockwise=false] An optional Boolean which, if true, draws the ellipse anticlockwise
+     * (counter-clockwise), otherwise in a clockwise direction.
+     * @returns {CanvasConstructor}
+     * @chainable
+     * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/ellipse
+     */
+    createEllipse(x, y, radiusX, radiusY, rotation, startAngle, endAngle, anticlockwise) {
+        this.context.ellipse(x, y, radiusX, radiusY, rotation, startAngle, endAngle, anticlockwise);
+        return this;
+    }
+
+    /**
+     * Adds an arc to the path which is centered at (x, y) position with radius r starting at startAngle and ending at
      * endAngle going in the given direction by anticlockwise (defaulting to clockwise).
      * @param {number} x          The x coordinate of the arc's center.
      * @param {number} y          The y coordinate of the arc's center.
@@ -693,6 +794,69 @@ class CanvasConstructor {
     }
 
     /**
+     * Sets the miter limit ratio in space units. When getting, it returns the current value (10.0 by default). When
+     * setting, zero, negative, Infinity and NaN values are ignored; otherwise the current value is set to the new value.
+     * @param {number} value A number specifying the miter limit ratio in space units. Zero, negative, Infinity and NaN
+     * values are ignored.
+     * @returns {CanvasConstructor}
+     * @chainable
+     * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/miterLimit
+     */
+    setMiterLimit(value) {
+        this.context.miterLimit = value;
+        return this;
+    }
+
+    /**
+     * Change the pattern quality
+     * @param {('fast'|'good'|'best'|'nearest'|'bilinear')} pattern The pattern quality.
+     * @returns {CanvasConstructor}
+     * @chainable
+     */
+    setPatternQuality(pattern) {
+        this.context.patternQuality = pattern;
+        return this;
+    }
+
+    /**
+     * Set the text drawing mode. Using glyph is much faster than path for drawing, and when using a PDF context will
+     * embed the text natively, so will be selectable and lower filesize. The downside is that cairo does not have any
+     * subpixel precision for glyph, so this will be noticeably lower quality for text positioning in cases such as
+     * rotated text. Also, strokeText in glyph will act the same as fillText, except using the stroke style for the fill.
+     * @param {('path'|'glyph')} mode The drawing mode.
+     * @returns {CanvasConstructor}
+     * @chainable
+     */
+    setTextDrawingMode(mode) {
+        this.context.textDrawingMode = mode;
+        return this;
+    }
+
+    /**
+     * Set anti-aliasing mode.
+     * @param {('default'|'none'|'gray'|'subpixel')} antialias The antialias mode.
+     * @returns {CanvasConstructor}
+     * @chainable
+     */
+    setAntialiasing(antialias) {
+        this.context.antialias = antialias;
+        return this;
+    }
+
+    /**
+     * Sets the type of compositing operation to apply when drawing new shapes, where type is a string identifying which
+     * of the compositing or blending mode operations to use.
+     * @param {('source-over'|'source-in'|'source-out'|'source-atop'|'destination-over'|'destination-in'|'destination-out'|'destination-atop'|'lighter'|'copy'|'xor'|'darken'|'lighten'|'color-dodge'|'color-burn'|'difference'|'exclusion'|'hue'|'saturation'|'color'|'luminosity'|'multiply'|'screen'|'overlay'|'hard-light'|'soft-light'|'hsl-hue'|'hsl-saturation'|'hsl-color'|'hsl-luminosity')} type The global composite operation mode.
+     * @returns {CanvasConstructor}
+     * @chainable
+     * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/globalCompositeOperation
+     */
+    setGlobalCompositeOperation(type) {
+        this.context.globalCompositeOperation = type;
+        return this;
+    }
+
+    /**
      * Modify the alpha value that is applied to shapes and images before they are drawn into the canvas.
      * @param {number} value The alpha value, from 0.0 (fully transparent) to 1.0 (fully opaque)
      * @returns {CanvasConstructor}
@@ -744,6 +908,58 @@ class CanvasConstructor {
     clearPixels(x = 0, y = 0, width = this.width, height = this.height) {
         this.context.clearRect(x, y, width, height);
         return this;
+    }
+
+    /**
+     * @returns {number[]} An Array. A list of numbers that specifies distances to alternately draw a line and a gap (in
+     * coordinate space units). If the number, when setting the elements, was odd, the elements of the array get copied
+     * and concatenated. For example, setting the line dash to [5, 15, 25] will result in getting back [5, 15, 25, 5, 15,
+     * 25].
+     * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/getLineDash
+     * @example
+     * new Canvas(400, 300)
+     *     .beginPath()
+     *     .setLineDash([5, 15])
+     *     .moveTo(0, 50)
+     *     .lineTo(400, 50)
+     *     .stroke()
+     *     .toBuffer();
+     */
+    getLineDash() {
+        return this.context.getLineDash();
+    }
+
+    /**
+     * @returns {number[]}
+     * @readonly
+     * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/getLineDash
+     */
+    get lineDash() {
+        return this.getLineDash();
+    }
+
+    /**
+     * Reports whether or not the specified point is contained in the current path.
+     * @param {number} x The X coordinate of the point to check.
+     * @param {number} y The Y coordinate of the point to check.
+     * @param {('nonzero'|'evenodd')} fillRule The algorithm by which to determine if a point is inside a path or
+     * outside a path.
+     * @returns {boolean}
+     * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/isPointInPath
+     */
+    isPointInPath(x, y, fillRule) {
+        return this.context.isPointInPath(x, y, fillRule);
+    }
+
+    /**
+     * Reports whether or not the specified point is inside the area contained by the stroking of a path.
+     * @param {number} x The X coordinate of the point to check.
+     * @param {number} y The Y coordinate of the point to check.
+     * @returns {boolean}
+     * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/isPointInStroke
+     */
+    isPointInStroke(x, y) {
+        return this.context.isPointInStroke(x, y);
     }
 
     /**
