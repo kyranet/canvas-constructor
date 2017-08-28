@@ -25,6 +25,6 @@
     },
     "homepage": "https://github.com/kyranet/canvasConstructor#readme",
     "dependencies": {
-        "canvas": "github:zbjornson/node-canvas#ctor2"
+        "canvas": "github:Automattic/node-canvas"
     }
 }
