@@ -525,7 +525,6 @@ class CanvasConstructor {
      * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/font
      */
     setTextFont(font) {
-        this._parseFontString(font);
         this.context.font = font;
         return this;
     }
