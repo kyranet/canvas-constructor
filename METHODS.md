@@ -43,8 +43,10 @@
 | beginPath                   |
 | closePath                   |
 | createPattern               | `image`, `repetition`
-| createLinearGradient        | `x0`, `y0`, `x1`, `y1`
-| createRadialGradient        | `x0`, `y0`, `r0`, `x1`, `y1`, `r1`
+| createLinearGradient        | `x0`, `y0`, `x1`, `y1`, `steps`
+| printLinearGradient         | `x0`, `y0`, `x1`, `y1`, `steps`
+| createRadialGradient        | `x0`, `y0`, `r0`, `x1`, `y1`, `r1`, `steps`
+| printRadialGradient         | `x0`, `y0`, `r0`, `x1`, `y1`, `r1`, `steps`
 | createEllipse               | `x`, `y`, `radiusX`, `radiusY`, `rotation`, `startAngle`, `endAngle`, `anticlockwise = false`
 | arc                         | `x`, `y`, `radius`, `startAngle`, `endAngle`, `anticlockwise = false`
 | arcTo                       | `x1`, `y1`, `x2`, `y2`, `radius`
