@@ -13,6 +13,8 @@ declare module 'canvas-constructor' {
         public rotate(angle: number): this;
         public scale(x: number, y: number): this;
         public traslate(x: number, y: number): this;
+        public clip(path?: any, fillRule?: fillRuleType): this;
+        public clip(fillRule?: fillRuleType): this;
         public setTransform(a: number, b: number, c: number, d: number, e: number, f: number): this;
         public resetTransformation(): this;
         public fill(path: any, fillRule?: fillRuleType): this;
@@ -20,6 +22,7 @@ declare module 'canvas-constructor' {
         public addResponsiveText(text: string, x: number, y: number, maxWidth: number): this;
         public stroke(path?: any): this;
         public addStrokeRect(x: number, y: number, width: number, height: number): this;
+        public addStrokeText(text: string, x: number, y: number): this;
         public measureText(text: string, callback?: Function): this|number;
         public setStroke(color: string): this;
         public setLineWidth(width?: number): this;

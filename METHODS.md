@@ -12,6 +12,7 @@
 | rotate                      | `angle`
 | scale                       | `x`, `y`
 | traslate                    | `x`, `y`
+| clip                        | `path`, `fillRule`
 | fill                        | `path`, `fillRule`
 | addRect                     | `x`, `y`, `width`, `height`
 | addText                     | `text`, `x`, `y`, `maxWidth`

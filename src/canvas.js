@@ -118,6 +118,20 @@ class CanvasConstructor {
     }
 
     /**
+     * Turns the path currently being built into the current clipping path.
+     * @param {any} path A Path2D path to fill.
+     * @param {('nonzero'|'evenodd')} fillRule The algorithm by which to determine if a point is inside a path or
+     * outside a path.
+     * @returns {CanvasConstructor}
+     * @chainable
+     * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/clip
+     */
+    clip(path, fillRule) {
+        this.context.clip(fillRule);
+        return this;
+    }
+
+    /**
      * Resets (overrides) the current transformation to the identity matrix and then invokes a transformation described
      * by the arguments of this method.
      * @param {number} a Horizontal scaling.

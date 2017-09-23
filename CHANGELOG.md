@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - **Typings**. This package will also work in TypeScript.
 - `createBeveledPath()` same usage as `createBeveledClip()`, but does not create clips (so you can use shadows and fill to colourize it).
 - `createRoundPath()` same usage as `createRoundClip()`, but does not create clips (so you can use shadows and fill to colourize it).
+- `clip()` (how come this was not implemented?).
 
 ### Changed
 - **Canvas** has been moved from dependency to **peer dependency**.
