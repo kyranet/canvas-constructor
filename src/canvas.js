@@ -159,37 +159,6 @@ class CanvasConstructor {
     }
 
     /**
-     * Add a circle or semi circle.
-     * @param {number} x                   The position x in the center of the circle.
-     * @param {number} y                   The position y in the center of the ircle.
-     * @param {number} radius              The radius for the clip.
-     * @returns {CanvasConstructor}
-     * @chainable
-     */
-    addCircle(x, y, radius) {
-        this.context.beginPath();
-        this.context.arc(x, y, radius, 0, Math.PI * 2, false);
-        this.context.closePath();
-        this.context.fill();
-        return this;
-    }
-
-    /**
-     * Add a rectangle.
-     * @param {number} x      The position x to start drawing the element.
-     * @param {number} y      The position y to start drawing the element.
-     * @param {number} width  The width of the element.
-     * @param {number} height The heigth of the element.
-     * @returns {CanvasConstructor}
-     * @chainable
-     * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/fillRect
-     */
-    addRect(x, y, width, height) {
-        this.context.fillRect(x, y, width, height);
-        return this;
-    }
-
-    /**
      * Add a text.
      * @param {string} text The text to write.
      * @param {number} x    The position x to start drawing the element.
@@ -459,6 +428,35 @@ class CanvasConstructor {
     }
 
     /**
+     * Add a circle or semi circle.
+     * @param {number} x                   The position x in the center of the circle.
+     * @param {number} y                   The position y in the center of the ircle.
+     * @param {number} radius              The radius for the clip.
+     * @returns {CanvasConstructor}
+     * @chainable
+     */
+    addCircle(x, y, radius) {
+        return this.createRoundPath(x, y, radius).fill();
+    }
+
+    /**
+     * Create a round path.
+     * @param {number} x                   The position x in the center of the clip's circle.
+     * @param {number} y                   The position y in the center of the clip's circle.
+     * @param {number} radius              The radius for the clip.
+     * @param {number} [start=0]           The degree in radians to start drawing the circle.
+     * @param {number} [angle=Math.PI * 2] The degree in radians to finish drawing the circle, defaults to a full circle.
+     * @returns {CanvasConstructor}
+     * @chainable
+     */
+    createRoundPath(x, y, radius, start = 0, angle = Math.PI * 2) {
+        this.context.save();
+        this.context.beginPath();
+        this.context.arc(x, y, radius, start, angle, false);
+        return this;
+    }
+
+    /**
      * Create a round clip.
      * @param {number} x                   The position x in the center of the clip's circle.
      * @param {number} y                   The position y in the center of the clip's circle.
@@ -469,15 +467,11 @@ class CanvasConstructor {
      * @chainable
      */
     createRoundClip(x, y, radius, start = 0, angle = Math.PI * 2) {
-        this.context.save();
-        this.context.beginPath();
-        this.context.arc(x, y, radius, start, angle, false);
-        this.context.clip();
-        return this;
+        return this.createRoundPath(x, y, radius, start, angle).clip();
     }
 
     /**
-     * Create a round clip.
+     * Create a round path.
      * @param {number} x      The position x to start drawing clip.
      * @param {number} y      The position y to start drawing clip.
      * @param {number} width  The width of clip.
@@ -486,7 +480,7 @@ class CanvasConstructor {
      * @returns {CanvasConstructor}
      * @chainable
      */
-    createBeveledClip(x, y, width, height, radius) {
+    createBeveledPath(x, y, width, height, radius) {
         if (width > 0 && height > 0) {
             radius = Math.min(radius, width / 2, height / 2);
             this.context.beginPath();
@@ -502,6 +496,35 @@ class CanvasConstructor {
             this.context.closePath();
             this.context.clip();
         }
+        return this;
+    }
+
+    /**
+     * Create a round clip.
+     * @param {number} x      The position x to start drawing clip.
+     * @param {number} y      The position y to start drawing clip.
+     * @param {number} width  The width of clip.
+     * @param {number} height The heigth of clip.
+     * @param {number} radius The radius for clip's rounded borders.
+     * @returns {CanvasConstructor}
+     * @chainable
+     */
+    createBeveledClip(x, y, width, height, radius) {
+        return this.createBeveledPath(x, y, width, height, radius).clip();
+    }
+
+    /**
+     * Add a rectangle.
+     * @param {number} x      The position x to start drawing the element.
+     * @param {number} y      The position y to start drawing the element.
+     * @param {number} width  The width of the element.
+     * @param {number} height The heigth of the element.
+     * @returns {CanvasConstructor}
+     * @chainable
+     * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/fillRect
+     */
+    addRect(x, y, width, height) {
+        this.context.fillRect(x, y, width, height);
         return this;
     }
 
@@ -992,7 +1015,11 @@ class CanvasConstructor {
      * @returns {CanvasConstructor}
      */
     static registerFont(path, family) {
-        Canvas.registerFont(path, { family });
+        if (family && typeof family === 'object' && Array.isArray(family) === false && 'family' in family)
+            Canvas.registerFont(path, family);
+        else
+            Canvas.registerFont(path, { family });
+
         return this;
     }
 
