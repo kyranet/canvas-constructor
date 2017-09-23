@@ -42,15 +42,17 @@ declare module 'canvas-constructor' {
             public createBeveledClip(x: number, y: number, width: number, height: number, radius: number): this;
             public addRect(x: number, y: number, width: number, height: number): this;
             public addTextFont(path: string, family: string): this;
-            public setColor(color: string): this;
+            public setColor(color: string|CanvasGradient): this;
             public setTextFont(font: string): this;
             public setTextAlign(align: textAlignType): this;
             public setTextBaseline(baseline: textBaselineType): this;
             public beginPath(): this;
             public closePath(): this;
             public createPattern(image: Image, repetition: patternRepetition): this;
-            public createLinearGradient(x0: number, y0: number, x1: number, y1: number): this;
-            public createRadialGradient(x0: number, y0: number, r0: number, x1: number, y1: number, r1: number): this;
+            public createLinearGradient(x0: number, y0: number, x1: number, y1: number, steps?: GradientStep[]): CanvasGradient;
+            public printLinearGradient(x0: number, y0: number, x1: number, y1: number, steps?: GradientStep[]): this;
+            public createRadialGradient(x0: number, y0: number, r0: number, x1: number, y1: number, r1: number, steps?: GradientStep[]): CanvasGradient;
+            public printRadialGradient(x0: number, y0: number, r0: number, x1: number, y1: number, r1: number, steps?: GradientStep[]): this;
             public createEllipse(x: number, y: number, radiusX: number, radiusY: number, rotation: number, startAngle: number, endAngle: number, anticlockwise?: boolean): this;
             public arc(x: number, y: number, radius: number, startAngle: number, endAngle: number, anticlockwise?: boolean): this;
             public arcTo(x1: number, y1: number, x2: number, y2: number, radius: number): this;
@@ -104,6 +106,15 @@ declare module 'canvas-constructor' {
             style?: string;
         }
 
+        export type GradientStep = {
+            position: number;
+            color: string;
+        };
+
+        export type CanvasGradient = {
+            addColorStop: (offset: number, color: string) => void;
+        };
+
         // node-canvas related typings.
         export type Image = (width?: number, height?: number) => HTMLImageElement;
         export type NodeCanvas = {
@@ -111,7 +122,7 @@ declare module 'canvas-constructor' {
             cairoVersion: string;
             Canvas: NodeCanvas;
             Context2d: typeof CanvasRenderingContext2D;
-            createCanvas: (width: number, height: number, type: CanvasType) => any;
+            createCanvas: (width: number, height: number) => any;
             createImageData: (array: any[], width: number, heigth: number) => any;
             freetypeVersion: string;
             gifVersion: string;

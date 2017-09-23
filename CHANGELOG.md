@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## 0.3.1
+### Added
+- Both `printLinearGradient()` and `printRadialGradient()` to have chainable methods.
+- Added a new parameter for both `createLinearGradient()` and `createRadialGradient()`, steps, which is typeof `GradientStep[]`.
+
+### Changed
+- Both `createLinearGradient()` and `createRadialGradient()` are not longer chainable, they'll return `CanvasGradient` instead.
+
 ## 0.3.0
 ### Added
 - **Typings**. This package will also work in TypeScript.
