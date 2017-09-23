@@ -13,6 +13,7 @@
 | scale                       | `x`, `y`
 | traslate                    | `x`, `y`
 | fill                        | `path`, `fillRule`
+| clip                        | `path`, `fillRule`
 | addRect                     | `x`, `y`, `width`, `height`
 | addText                     | `text`, `x`, `y`, `maxWidth`
 | addResponsiveText           | `text`, `x`, `y`, `maxWidth`, `options`
@@ -31,7 +32,9 @@
 | addImage                    | `buffer`, `x`, `y`, `width`, `height`, `options = {}`
 | addRoundImage               | `buffer`, `x`, `y`, `width`, `height`, `radius = 10`
 | addBevelImage               | `buffer`, `x`, `y`, `width`, `height`, `radius = 10`
+| createRoundPath             | `x`, `y`, `radius`, `start = 0`, `angle = Math.PI * 2`
 | createRoundClip             | `x`, `y`, `radius`, `start = 0`, `angle = Math.PI * 2`
+| createBeveledPath           | `x`, `y`, `width`, `height`, `radius`
 | createBeveledClip           | `x`, `y`, `width`, `height`, `radius`
 | addTextFont                 | `path`, `family`
 | setColor                    | `color`

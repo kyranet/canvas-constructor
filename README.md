@@ -7,6 +7,12 @@
 
 A ES6 function for node-canvas with built-in functions and chained methods.
 
+## Installation
+
+Please check [node-canvas readme](https://github.com/Automattic/node-canvas/tree/v1.x#installation) for the installation. You **must** have Canvas installed and working before using this package.
+
+---
+
 How to use it:
 
 ```js

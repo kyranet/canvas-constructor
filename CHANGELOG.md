@@ -4,6 +4,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## 0.3.0
+### Added
+- **Typings**. This package will also work in TypeScript.
+- `createBeveledPath()` same usage as `createBeveledClip()`, but does not create clips (so you can use shadows and fill to colourize it).
+- `createRoundPath()` same usage as `createRoundClip()`, but does not create clips (so you can use shadows and fill to colourize it).
+
+### Changed
+- **Canvas** has been moved from dependency to **peer dependency**.
+
 ## 0.2.0
 ### Changed
 - `addResponsiveText()` changed the parser to be passive, faster, and more accurate.

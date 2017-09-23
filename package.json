@@ -1,20 +1,23 @@
 {
     "name": "canvas-constructor",
-    "version": "0.2.1",
+    "version": "0.3.0",
     "description": "A ES6 class for node-canvas with built-in functions and chained methods.",
     "main": "index.js",
+    "types": "typings/index.d.ts",
     "scripts": {
-        "test": "eslint --fix ./"
+        "test": "eslint --fix src test && tslint --fix 'typings/*.ts'"
     },
     "repository": {
         "type": "git",
         "url": "git+https://github.com/kyranet/canvasConstructor.git"
     },
-    "dependencies": {
-        "canvas": "1.6.6"
+    "peerDependencies": {
+        "canvas": "github:Automattic/node-canvas"
     },
     "devDependencies": {
-        "eslint": "^3.19.0"
+        "eslint": "^4.7.2",
+        "tslint": "^5.7.0",
+        "typescript": "^2.5.2"
     },
     "keywords": [
         "node-canvas",
