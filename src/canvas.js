@@ -112,8 +112,8 @@ class CanvasConstructor {
      * @chainable
      * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/translate
      */
-    traslate(x, y) {
-        this.context.traslate(x, y);
+    translate(x, y) {
+        this.context.translate(x, y);
         return this;
     }
 
