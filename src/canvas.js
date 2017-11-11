@@ -8,7 +8,7 @@ class CanvasConstructor {
      * @param {number} height The canvas' height in pixels.
      */
     constructor(width, height) {
-        this.canvas = new Canvas(width, height);
+        this.canvas = new Canvas.createCanvas(width, height);
         this.context = this.canvas.getContext('2d');
 
         this.width = width;
