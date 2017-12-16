@@ -80,7 +80,7 @@
         "consistent-this": "error",
         "func-names": "error",
         "func-style": ["error", "declaration", { "allowArrowFunctions": true }],
-        "id-length": ["error", { "exceptions": ["i", "j", "a", "b", "c", "d", "e", "f","x", "y", "$"] }],
+        "id-length": ["error", { "exceptions": ["i", "j", "a", "b", "c", "d", "e", "f","x", "y", "$", "n"] }],
         "indent": ["error", 4, { "SwitchCase": 1 }],
         "key-spacing": "error",
         "keyword-spacing": ["error", {

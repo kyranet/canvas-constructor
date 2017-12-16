@@ -213,6 +213,40 @@ class CanvasConstructor {
     }
 
     /**
+     * Add responsive text
+     * @param {string} text     The text to write.
+     * @param {number} x        The position x to start drawing the element.
+     * @param {number} y        The position y to start drawing the element.
+     * @param {number} maxWidth The max length in pixels for the text.
+     * @param {number} lineHeight The line's height.
+     * @returns {CanvasConstructor}
+     * @chainable
+     * @example
+     * new Canvas(400, 300)
+     *     .setTextFont('25px Tahoma')
+     *     .addMultilineText('This is a really long text!', 139, 360, 156, 28)
+     *     .toBuffer();
+     */
+    addMultilineText(text, x, y, maxWidth, lineHeight) {
+        const words = text.split(' ');
+        let line = '';
+
+        for (let n = 0; n < words.length; n++) {
+            const testLine = `${line + words[n]} `;
+            const metrics = this.measureText(testLine);
+            const testWidth = metrics.width;
+            if (testWidth > maxWidth && n > 0) {
+                this.addText(line, x, y);
+                line = `${words[n]} `;
+                y += lineHeight;
+            } else {
+                line = testLine;
+            }
+        }
+        return this.addText(line, x, y);
+    }
+
+    /**
      * Strokes the current or given path with the current stroke style using the non-zero winding rule.
      * @param {any} path A Path2D path to stroke.
      * @returns {CanvasConstructor}
@@ -396,18 +430,21 @@ class CanvasConstructor {
      * @param {Object} options Options.
      * @param {number} options.radius The radius for the new image.
      * @param {'round'|'bevel'} options.type   The type for the new image.
+     * @param {boolean} options.restore Whether this method should restore the drawing state. Use this when you use options.type
      * @returns {CanvasConstructor}
      * @chainable
      */
     addImage(buffer, x, y, width, height, options = {}) {
+        if (options.restore) this.save();
         if (options.type) {
             if (isNaN(options.radius)) options.radius = 10;
             if (options.type === 'round') this.createRoundClip(x + options.radius, y + options.radius, options.radius);
-            if (options.type === 'bevel') this.createBeveledClip(x, y, width, height, options.radius);
+            else if (options.type === 'bevel') this.createBeveledClip(x, y, width, height, options.radius);
         }
         const image = new Canvas.Image();
         image.onload = () => this.context.drawImage(image, x, y, width, height);
         image.src = buffer;
+        if (options.restore) this.restore();
         return this;
     }
 

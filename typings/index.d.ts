@@ -10,6 +10,7 @@ declare module 'canvas-constructor' {
         public changeCanvasWidth(width: number): this;
         public changeCanvasHeigth(heigth: number): this;
         public save(): this;
+        public restore(): this;
         public rotate(angle: number): this;
         public scale(x: number, y: number): this;
         public traslate(x: number, y: number): this;
@@ -20,6 +21,7 @@ declare module 'canvas-constructor' {
         public fill(path: any, fillRule?: fillRuleType): this;
         public addText(text: string, x: number, y: number, maxWidth?: number): this;
         public addResponsiveText(text: string, x: number, y: number, maxWidth: number): this;
+        public addMultilineText(text: string, x: number, y: number, maxWidth: number, lineHeight: number): this;
         public stroke(path?: any): this;
         public addStrokeRect(x: number, y: number, width: number, height: number): this;
         public addStrokeText(text: string, x: number, y: number): this;
@@ -80,32 +82,97 @@ declare module 'canvas-constructor' {
         public toBufferAsync(): Promise<Buffer>;
 
         public static getCanvas(): NodeCanvas;
-        public static registerFont(path: string, family: string);
-        public static registerFont(path: string, family: fontFaceType);
+        public static registerFont(path: string, family: string | fontFaceType);
 
     }
 
-    export type CanvasType = 'pdf'|'svg';
-    export type fillRuleType = 'nonzero'|'evenodd';
-    export type lineJoinValue = 'bevel'|'round'|'miter';
-    export type lineCapValue = 'butt'|'round'|'square';
+    export type CanvasType = 'pdf'
+        | 'svg';
+    export type fillRuleType = 'nonzero'
+        | 'evenodd';
+    export type lineCapValue = 'butt'
+        | 'round'
+        | 'square';
+    export type lineJoinValue = 'bevel'
+        | 'round'
+        | 'miter';
     export type addImageOptions = {
-        radius: number;
-        type: roundType;
+        radius?: number;
+        type?: roundType;
+        restore?: boolean;
     };
-    export type roundType = 'round'|'bevel';
-    export type textAlignType = 'left'|'center'|'right'|'start'|'end';
-    export type textBaselineType = 'top'|'hanging'|'middle'|'alphabetic'|'ideographic'|'bottom';
-    export type patternRepetition = 'repeat'|'repeat-x'|'repeat-y'|'no-repeat';
-    export type patternQuality = 'fast'|'good'|'best'|'nearest'|'bilinear';
-    export type textDrawingMode = 'path'|'glyph';
-    export type antialiasType = 'default'|'none'|'gray'|'subpixel';
-    export type globalCompositeOperation = 'source-over'|'source-in'|'source-out'|'source-atop'|'destination-over'|'destination-in'|'destination-out'|'destination-atop'|'lighter'|'copy'|'xor'|'darken'|'lighten'|'color-dodge'|'color-burn'|'difference'|'exclusion'|'hue'|'saturation'|'color'|'luminosity'|'multiply'|'screen'|'overlay'|'hard-light'|'soft-light'|'hsl-hue'|'hsl-saturation'|'hsl-color'|'hsl-luminosity';
+
+    export type antialiasType = 'default'
+        | 'none'
+        | 'gray'
+        | 'subpixel';
+
+    export type patternQuality = 'fast'
+        | 'good'
+        | 'best'
+        | 'nearest'
+        | 'bilinear';
+
+    export type patternRepetition = 'repeat'
+        | 'repeat-x'
+        | 'repeat-y'
+        | 'no-repeat';
+
+    export type roundType = 'round'
+        | 'bevel';
+
+    export type textAlignType = 'left'
+        | 'center'
+        | 'right'
+        | 'start'
+        | 'end';
+
+    export type textBaselineType = 'alphabetic'
+        | 'bottom'
+        | 'hanging'
+        | 'ideographic'
+        | 'middle'
+        | 'top';
+
+    export type textDrawingMode = 'path'
+        | 'glyph';
+
+    export type globalCompositeOperation = 'color-burn'
+        | 'color-dodge'
+        | 'color'
+        | 'copy'
+        | 'darken'
+        | 'destination-atop'
+        | 'destination-in'
+        | 'destination-out'
+        | 'destination-over'
+        | 'difference'
+        | 'exclusion'
+        | 'hard-light'
+        | 'hsl-color'
+        | 'hsl-hue'
+        | 'hsl-luminosity'
+        | 'hsl-saturation'
+        | 'hue'
+        | 'lighten'
+        | 'lighter'
+        | 'luminosity'
+        | 'multiply'
+        | 'overlay'
+        | 'saturation'
+        | 'screen'
+        | 'soft-light'
+        | 'source-atop'
+        | 'source-in'
+        | 'source-out'
+        | 'source-over'
+        | 'xor';
+
     export type fontFaceType = {
         family: string;
-        weight?: string;
         style?: string;
-    }
+        weight?: string;
+    };
 
     export type GradientStep = {
         position: number;

@@ -13,6 +13,10 @@ Please check [node-canvas readme](https://github.com/Automattic/node-canvas/blob
 
 ---
 
+> **IMPORTANT** If you use `canvas` 2.0, you must install the 2.0 version of Canvas Constructor: `npm i kyranet/canvasConstructor`. Otherwise install the NPM version: `npm i canvas-constructor`.
+
+---
+
 How to use it:
 
 ```js
