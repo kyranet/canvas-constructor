@@ -522,6 +522,33 @@ class CanvasConstructor {
     }
 
     /**
+     * Create a rectangle path.
+     * @param {number} x      The position x in the left corner.
+     * @param {number} y      The position y in the upper corner.
+     * @param {number} width  The width of the rectangle.
+     * @param {number} height The height of the rectangle.
+     * @returns {CanvasConstructor}
+     * @chainable
+     */
+    createRectPath(x, y, width, height) {
+        this.context.rect(x, y, width, height);
+        return this;
+    }
+
+    /**
+     * Create a rectangle clip.
+     * @param {number} x      The position x in the left corner.
+     * @param {number} y      The position y in the upper corner.
+     * @param {number} width  The width of the rectangle.
+     * @param {number} height The height of the rectangle.
+     * @returns {CanvasConstructor}
+     * @chainable
+     */
+    createRectClip(x, y, width, height) {
+        return this.createRectPath(x, y, width, height).clip();
+    }
+
+    /**
      * Create a round path.
      * @param {number} x      The position x to start drawing clip.
      * @param {number} y      The position y to start drawing clip.

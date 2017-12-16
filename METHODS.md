@@ -35,6 +35,8 @@
 | addBevelImage               | `buffer`, `x`, `y`, `width`, `height`, `radius = 10`
 | createRoundPath             | `x`, `y`, `radius`, `start = 0`, `angle = Math.PI * 2`
 | createRoundClip             | `x`, `y`, `radius`, `start = 0`, `angle = Math.PI * 2`
+| createRectPath              | `x`, `y`, `width`, `height`
+| createRectClip              | `x`, `y`, `width`, `height`
 | createBeveledPath           | `x`, `y`, `width`, `height`, `radius`
 | createBeveledClip           | `x`, `y`, `width`, `height`, `radius`
 | setColor                    | `color`

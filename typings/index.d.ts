@@ -39,6 +39,8 @@ declare module 'canvas-constructor' {
         public addCircle(x: number, y: number, radius: number): this;
         public createRoundPath(x: number, y: number, radius: number, start?: number, angle?: number): this;
         public createRoundClip(x: number, y: number, radius: number, start?: number, angle?: number): this;
+        public createRectPath(x: number, y: number, width: number, height: number): this;
+        public createRectClip(x: number, y: number, width: number, height: number): this;
         public createBeveledPath(x: number, y: number, width: number, height: number, radius: number): this;
         public createBeveledClip(x: number, y: number, width: number, height: number, radius: number): this;
         public addRect(x: number, y: number, width: number, height: number): this;
