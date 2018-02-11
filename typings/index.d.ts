@@ -18,6 +18,10 @@ declare module 'canvas-constructor' {
         public clip(fillRule?: fillRuleType): this;
         public setTransform(a: number, b: number, c: number, d: number, e: number, f: number): this;
         public resetTransformation(): this;
+        public getImageData(x?: number, y?: number, width?: number, height?: number): ImageData;
+        public getImageData(x?: number, y?: number, width?: number, height?: number, cb: (data: ImageData, canvas: this) => void): this;
+        public getImageData(cb: (data: ImageData, canvas: this) => void): this;
+        public putImageData(imageData: ImageData, dx: number, dy: number, dirtyX?: number, dirtyY?: number, dirtyWidth?: number, dirtyHeight?: number): this;
         public fill(path: any, fillRule?: fillRuleType): this;
         public addText(text: string, x: number, y: number, maxWidth?: number): this;
         public addResponsiveText(text: string, x: number, y: number, maxWidth: number): this;
@@ -79,6 +83,8 @@ declare module 'canvas-constructor' {
         public readonly lineDash: number[];
         public isPointInPath(x: number, y: number, fillRule: fillRuleType): boolean;
         public isPointInStroke(x: number, y: number): boolean;
+
+        public process(fn: (canvas: this) => void): this;
 
         public toBuffer(options?: Object): Buffer;
         public toBufferAsync(): Promise<Buffer>;

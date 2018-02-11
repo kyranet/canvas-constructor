@@ -17,7 +17,8 @@
     "devDependencies": {
         "eslint": "^4.13.1",
         "tslint": "^5.8.0",
-        "typescript": "^2.6.2"
+        "typescript": "^2.6.2",
+        "fs-nextra": "^0.3.2"
     },
     "keywords": [
         "node-canvas",
@@ -29,9 +30,5 @@
     "bugs": {
         "url": "https://github.com/kyranet/canvasConstructor/issues"
     },
-    "homepage": "https://github.com/kyranet/canvasConstructor#readme",
-    "dependencies": {
-        "canvas": "github:automattic/node-canvas",
-        "fs-nextra": "^0.3.2"
-    }
+    "homepage": "https://github.com/kyranet/canvasConstructor#readme"
 }

@@ -161,17 +161,16 @@ class CanvasConstructor {
     /**
      * Returns an ImageData object representing the underlying pixel data for the area of the canvas denoted by the rectangle which starts at (sx, sy)
      * and has an sw width and sh height. This method is not affected by the canvas transformation matrix.
-     * @param {(number|Function)} x The x coordinate of the upper left corner of the rectangle from which the ImageData will be extracted.
-     * @param {number} y The y coordinate of the upper left corner of the rectangle from which the ImageData will be extracted.
-     * @param {number} width The width of the rectangle from which the ImageData will be extracted.
-     * @param {number} height The height of the rectangle from which the ImageData will be extracted.
+     * @param {(number|Function)} [x] The x coordinate of the upper left corner of the rectangle from which the ImageData will be extracted.
+     * @param {number} [y] The y coordinate of the upper left corner of the rectangle from which the ImageData will be extracted.
+     * @param {number} [width] The width of the rectangle from which the ImageData will be extracted.
+     * @param {number} [height] The height of the rectangle from which the ImageData will be extracted.
      * @param {Function} callback The callback, if not specified, this method won't be chainable as it will return a
      * number. If you use an arrow function, you might want to use the second argument which is the instance of the
      * class. Otherwise, the keyword this is binded to the class instance itself, so you can use it safely.
      * @returns {CanvasConstructor}
      * @chainable
      * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/getImageData
-     *
      */
     getImageData(x = 0, y = 0, width = this.width, height = this.height, callback) {
         if (typeof x === 'function') {
@@ -201,8 +200,8 @@ class CanvasConstructor {
      * @chainable
      * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/putImageData
      */
-    putImageData(imagedata, dx, dy, dirtyX, dirtyY, dirtyWidth, dirtyHeight) {
-        this.context.putImageData(imagedata, dx, dy, dirtyX, dirtyY, dirtyWidth, dirtyHeight);
+    putImageData(...args) {
+        this.context.putImageData(...args);
         return this;
     }
 
@@ -1203,9 +1202,14 @@ class CanvasConstructor {
      * @property {Function} addColorStop Position of the step.
      */
 
-    process(fn, returnOutput) {
-        const output = fn.call(this);
-        return returnOutput ? output : this;
+    /**
+     * Process data with this as the context
+     * @param {Function} fn A callback function
+     * @returns {this}
+     */
+    process(fn) {
+        fn.call(this, this);
+        return this;
     }
 
 }
