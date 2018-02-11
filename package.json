@@ -29,5 +29,9 @@
     "bugs": {
         "url": "https://github.com/kyranet/canvasConstructor/issues"
     },
-    "homepage": "https://github.com/kyranet/canvasConstructor#readme"
+    "homepage": "https://github.com/kyranet/canvasConstructor#readme",
+    "dependencies": {
+        "canvas": "github:automattic/node-canvas",
+        "fs-nextra": "^0.3.2"
+    }
 }
