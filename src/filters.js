@@ -1,3 +1,8 @@
+/**
+ * Invert a image
+ * @param {Canvas} canvas The Canvas instance
+ * @returns {Canvas}
+ */
 exports.invert = (canvas) => canvas
     .save()
     .setGlobalCompositeOperation('difference')
@@ -5,6 +10,11 @@ exports.invert = (canvas) => canvas
     .addRect(0, 0, canvas.width, canvas.height)
     .restore();
 
+/**
+ * Turn a image into greyscale
+ * @param {Canvas} canvas The Canvas instance
+ * @returns {Canvas}
+ */
 exports.greyscale = (canvas) => canvas
     .save()
     .setGlobalCompositeOperation('hsl-saturation')
@@ -12,6 +22,11 @@ exports.greyscale = (canvas) => canvas
     .addRect(0, 0, canvas.width, canvas.height)
     .restore();
 
+/**
+ * Turn a image into sepia
+ * @param {Canvas} canvas The Canvas instance
+ * @returns {Canvas}
+ */
 exports.sepia = (canvas) => {
     const imageData = canvas.getImageData();
     const { data } = imageData;
@@ -26,6 +41,11 @@ exports.sepia = (canvas) => {
     return canvas.putImageData(imageData, 0, 0);
 };
 
+/**
+ * Turn a image into a silhouette
+ * @param {Canvas} canvas The Canvas instance
+ * @returns {Canvas}
+ */
 exports.silhouette = (canvas) => {
     const imageData = canvas.getImageData();
     const { data } = imageData;
@@ -37,6 +57,12 @@ exports.silhouette = (canvas) => {
     return canvas.putImageData(imageData, 0, 0);
 };
 
+/**
+ * Apply threshold to the image
+ * @param {Canvas} canvas The Canvas instance
+ * @param {number} threshold The threshold to apply in a range of 0 to 255
+ * @returns {Canvas}
+ */
 exports.threshold = (canvas, threshold) => {
     const imageData = canvas.getImageData();
     const { data } = imageData;
@@ -46,7 +72,13 @@ exports.threshold = (canvas, threshold) => {
     return canvas.putImageData(imageData, 0, 0);
 };
 
-exports.invertThreshold = (canvas, threshold) => {
+/**
+ * Apply inverted threshold to the image
+ * @param {Canvas} canvas The Canvas instance
+ * @param {number} threshold The threshold to apply in a range of 0 to 255
+ * @returns {Canvas}
+ */
+exports.invertedThreshold = (canvas, threshold) => {
     const imageData = canvas.getImageData();
     const { data } = imageData;
     for (let i = 0; i < data.length; i += 4) {
@@ -55,3 +87,59 @@ exports.invertThreshold = (canvas, threshold) => {
     return canvas.putImageData(imageData, 0, 0);
 };
 
+// The following filters need an improvement, as they're not working correctly.
+
+/**
+ * Sharpen a image
+ * @param {Canvas} canvas The Canvas instance
+ * @param {number[]} amounts The edge and the center
+ * @returns {Canvas}
+ */
+exports.sharpen = (canvas, [edge, center]) => exports.convolute(canvas, [0, edge, 0, edge, center, edge, 0, edge, 0]);
+
+/**
+ * Sharpen a image
+ * @param {Canvas} canvas The Canvas instance
+ * @param {number} amount The edge and the center
+ * @returns {Canvas}
+ */
+exports.blur = (canvas, amount) => exports.convolute(canvas, new Array(9).fill(1 / amount));
+
+/**
+ * Convolute a image. This filter needs a fix.
+ * @param {Canvas} canvas The Canvas instance
+ * @param {number[]} weights The weights
+ * @returns {Canvas}
+ * @see https://www.html5rocks.com/en/tutorials/canvas/imagefilters/
+ */
+exports.convolute = (canvas, weights) => {
+    const side = 3 | 0, halfSide = (3 / 2) | 0; // eslint-disable-line no-bitwise
+    const imageData = canvas.getImageData();
+    const { data } = imageData;
+    const { width, height } = canvas;
+
+    // go through the destination image pixels
+    for (let y = 0; y < height; y++) {
+        for (let x = 0; x < width; x++) {
+            const dstOff = ((y * width) + x) * 4;
+            // calculate the weighed sum of the source image pixels that
+            // fall under the convolution matrix
+            let r = 0, g = 0, b = 0; // eslint-disable-line
+            for (let cy = 0; cy < side; cy++) {
+                for (let cx = 0; cx < side; cx++) {
+                    const scy = y + cy - halfSide, scx = x + cx - halfSide;
+                    if (scy < 0 || scy >= height || scx < 0 || scx >= width) continue; // eslint-disable-line max-depth
+                    const srcOff = ((scy * width) + scx) * 4;
+                    const wt = weights[(cy * side) + cx];
+                    r += data[srcOff] * wt;
+                    g += data[srcOff + 1] * wt;
+                    b += data[srcOff + 2] * wt;
+                }
+            }
+            data[dstOff] = r;
+            data[dstOff + 1] = g;
+            data[dstOff + 2] = b;
+        }
+    }
+    return canvas.putImageData(imageData, 0, 0);
+};

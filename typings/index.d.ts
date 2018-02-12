@@ -1,5 +1,15 @@
 declare module 'canvas-constructor' {
 
+    export function invert(canvas: Canvas): Canvas;
+    export function greyscale(canvas: Canvas): Canvas;
+    export function sepia(canvas: Canvas): Canvas;
+    export function silhouette(canvas: Canvas): Canvas;
+    export function threshold(canvas: Canvas, threshold: number): Canvas;
+    export function invertedThreshold(canvas: Canvas, threshold: number): Canvas;
+    export function sharpen(canvas: Canvas, amounts: [number, number]): Canvas;
+    export function blur(canvas: Canvas, amount: number): Canvas;
+    export function convolute(canvas: Canvas, weights: number[]): Canvas;
+
     export class Canvas {
 
         public constructor(width: number, height: number, type?: CanvasType);
