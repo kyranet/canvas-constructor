@@ -102,6 +102,29 @@ exports.invertedThreshold = (canvas, threshold) => {
     return canvas.putImageData(imageData, 0, 0);
 };
 
+/**
+ * Brighten an image
+ * @param {Canvas} canvas The Canvas instance
+ * @param {number} brightness The brightness to apply in a range of 0 to 100
+ * @returns {Canvas}
+ */
+exports.brightness = (canvas, brightness) => canvas
+    .setColor(`rgba(255, 255, 255, ${brightness})`)
+    .addRect(0, 0, canvas.width, canvas.height);
+
+/**
+ * Darken an image
+ * @param {Canvas} canvas The Canvas instance
+ * @param {number} darkness The darkness to apply in a range of 0 to 100
+ * @returns {Canvas}
+ */
+exports.darken = (canvas, darkness) => canvas
+    .save()
+    .setGlobalAlpha(darkness / 100)
+    .setColor('black')
+    .addRect(0, 0, canvas.width, canvas.height)
+    .restore();
+
 // The following filters need an improvement, as they're not working correctly.
 
 /**
