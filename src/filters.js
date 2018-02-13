@@ -15,8 +15,8 @@ exports.invert = (canvas) => canvas
  * @param {Canvas} canvas The Canvas instance
  * @returns {Canvas}
  */
-exports.grayscale =
-exports.greyscale = (canvas) => canvas
+exports.greyscale =
+exports.grayscale = (canvas) => canvas
     .save()
     .setGlobalCompositeOperation('hsl-saturation')
     .setColor('white')
@@ -28,8 +28,8 @@ exports.greyscale = (canvas) => canvas
  * @param {Canvas} canvas The Canvas instance
  * @returns {Canvas}
  */
-exports.invertGrayscale =
-exports.invertGreyscale = (canvas) => canvas
+exports.invertGreyscale =
+exports.invertGrayscale = (canvas) => canvas
     .save()
     .setGlobalCompositeOperation('hsl-saturation')
     .setColor('white')
@@ -120,8 +120,8 @@ exports.brightness = (canvas, brightness) => canvas
  * @param {number} darkness The darkness to apply in a range of 0 to 100
  * @returns {Canvas}
  */
-exports.myOldFriend =
-exports.darkness = (canvas, darkness) => canvas
+exports.darkness =
+exports.myOldFriend = (canvas, darkness) => canvas
     .save()
     .setGlobalAlpha(darkness / 100)
     .setColor('black')
