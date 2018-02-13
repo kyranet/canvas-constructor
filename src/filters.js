@@ -1,5 +1,5 @@
 /**
- * Invert a image
+ * Invert an image
  * @param {Canvas} canvas The Canvas instance
  * @returns {Canvas}
  */
@@ -11,7 +11,7 @@ exports.invert = (canvas) => canvas
     .restore();
 
 /**
- * Turn a image into greyscale
+ * Greyscale an image
  * @param {Canvas} canvas The Canvas instance
  * @returns {Canvas}
  */
@@ -23,7 +23,22 @@ exports.greyscale = (canvas) => canvas
     .restore();
 
 /**
- * Turn a image into sepia
+ * Invert then greyscale an image
+ * @param {Canvas} canvas The Canvas instance
+ * @returns {Canvas}
+ */
+exports.invertGreyscale = (canvas) => canvas
+    .save()
+    .setGlobalCompositeOperation('hsl-saturation')
+    .setColor('white')
+    .addRect(0, 0, canvas.width, canvas.height)
+    .setGlobalCompositeOperation('difference')
+    .setColor('white')
+    .addRect(0, 0, canvas.width, canvas.height)
+    .restore();
+
+/**
+ * Give an image a sepia tone
  * @param {Canvas} canvas The Canvas instance
  * @returns {Canvas}
  */
@@ -42,7 +57,7 @@ exports.sepia = (canvas) => {
 };
 
 /**
- * Turn a image into a silhouette
+ * Turn an image into a silhouette
  * @param {Canvas} canvas The Canvas instance
  * @returns {Canvas}
  */
@@ -58,7 +73,7 @@ exports.silhouette = (canvas) => {
 };
 
 /**
- * Apply threshold to the image
+ * Apply a threshold to the image
  * @param {Canvas} canvas The Canvas instance
  * @param {number} threshold The threshold to apply in a range of 0 to 255
  * @returns {Canvas}
@@ -73,7 +88,7 @@ exports.threshold = (canvas, threshold) => {
 };
 
 /**
- * Apply inverted threshold to the image
+ * Apply an inverted threshold to the image
  * @param {Canvas} canvas The Canvas instance
  * @param {number} threshold The threshold to apply in a range of 0 to 255
  * @returns {Canvas}
@@ -90,7 +105,7 @@ exports.invertedThreshold = (canvas, threshold) => {
 // The following filters need an improvement, as they're not working correctly.
 
 /**
- * Sharpen a image
+ * Sharpen an image
  * @param {Canvas} canvas The Canvas instance
  * @param {number[]} amounts The edge and the center
  * @returns {Canvas}
@@ -98,7 +113,7 @@ exports.invertedThreshold = (canvas, threshold) => {
 exports.sharpen = (canvas, [edge, center]) => exports.convolute(canvas, [0, edge, 0, edge, center, edge, 0, edge, 0]);
 
 /**
- * Sharpen a image
+ * Blur an image
  * @param {Canvas} canvas The Canvas instance
  * @param {number} amount The edge and the center
  * @returns {Canvas}
