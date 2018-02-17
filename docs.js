@@ -24,7 +24,7 @@ Docma.create()
         src: [
             { readme: './README.md' },
             { methods: './METHODS.md' },
-            { canvasConstructor: './src/*/**/*.js' }
+            { canvasconstructor: './src/*/**/*.js' }
         ],
         dest: './docs',
         debug: true,
@@ -39,11 +39,11 @@ Docma.create()
                     },
                     {
                         label: 'Documentation',
-                        href: '?api=canvasConstructor',
+                        href: '?api=canvasconstructor',
                         iconClass: 'ico-book'
                     },
                     {
-                        lable: 'Methods',
+                        label: 'Methods',
                         href: '?content=methods'
                     },
                     {
