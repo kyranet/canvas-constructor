@@ -159,6 +159,53 @@ class CanvasConstructor {
     }
 
     /**
+     * Returns an ImageData object representing the underlying pixel data for the area of the canvas denoted by the rectangle which starts at (sx, sy)
+     * and has an sw width and sh height. This method is not affected by the canvas transformation matrix.
+     * @param {(number|Function)} [x] The x coordinate of the upper left corner of the rectangle from which the ImageData will be extracted.
+     * @param {number} [y] The y coordinate of the upper left corner of the rectangle from which the ImageData will be extracted.
+     * @param {number} [width] The width of the rectangle from which the ImageData will be extracted.
+     * @param {number} [height] The height of the rectangle from which the ImageData will be extracted.
+     * @param {Function} callback The callback, if not specified, this method won't be chainable as it will return a
+     * number. If you use an arrow function, you might want to use the second argument which is the instance of the
+     * class. Otherwise, the keyword this is binded to the class instance itself, so you can use it safely.
+     * @returns {CanvasConstructor}
+     * @chainable
+     * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/getImageData
+     */
+    getImageData(x = 0, y = 0, width = this.width, height = this.height, callback) {
+        if (typeof x === 'function') {
+            callback = x;
+            x = 0;
+        }
+        if (callback) {
+            if (typeof callback !== 'function') throw new TypeError('Callback must be a function');
+            callback.call(this, this.context.getImageData(x, y, width, height), this);
+            return this;
+        }
+        return this.context.getImageData(x, y, width, height);
+    }
+
+    /**
+     * The CanvasRenderingContext2D.putImageData() method of the Canvas 2D API paints data from the given ImageData object onto the bitmap.
+     * If a dirty rectangle is provided, only the pixels from that rectangle are painted.
+     * This method is not affected by the canvas transformation matrix.
+     * @param {ImageData} imagedata An ImageData object containing the array of pixel values.
+     * @param {number} dx Horizontal position (x-coordinate) at which to place the image data in the destination canvas.
+     * @param {number} dy Vertical position (y-coordinate) at which to place the image data in the destination canvas.
+     * @param {number} [dirtyX=0] Horizontal position (x-coordinate). The x coordinate of the top left hand corner of your Image data. Defaults to 0.
+     * @param {number} [dirtyY=0] Vertical position (y-coordinate). The y coordinate of the top left hand corner of your Image data. Defaults to 0.
+     * @param {number} [dirtyWidth] Width of the rectangle to be painted. Defaults to the width of the image data.
+     * @param {number} [dirtyHeight] Height of the rectangle to be painted. Defaults to the height of the image data.
+     * @returns {CanvasConstructor}
+     * @chainable
+     * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/putImageData
+     */
+    putImageData(...args) {
+        this.context.putImageData(...args);
+        return this;
+    }
+
+    /**
      * Fills the current or given path with the current fill style using the non-zero or even-odd winding rule.
      * @param {any} path A Path2D path to fill.
      * @param {('nonzero'|'evenodd')} fillRule The algorithm by which to determine if a point is inside a path or
@@ -1154,6 +1201,16 @@ class CanvasConstructor {
      * @typedef {object} CanvasGradient
      * @property {Function} addColorStop Position of the step.
      */
+
+    /**
+     * Process data with this as the context
+     * @param {Function} fn A callback function
+     * @returns {this}
+     */
+    process(fn) {
+        fn.call(this, this);
+        return this;
+    }
 
 }
 

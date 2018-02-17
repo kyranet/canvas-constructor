@@ -5,7 +5,8 @@
     "main": "index.js",
     "types": "typings/index.d.ts",
     "scripts": {
-        "test": "eslint --fix src test && tslint --fix 'typings/*.ts'"
+        "test": "eslint --fix src test && tslint --fix 'typings/*.ts'",
+        "docs": "node docs.js"
     },
     "repository": {
         "type": "git",
@@ -15,7 +16,9 @@
         "canvas": "github:Automattic/node-canvas"
     },
     "devDependencies": {
+        "docma": "^1.5.3",
         "eslint": "^4.13.1",
+        "fs-nextra": "^0.3.2",
         "tslint": "^5.8.0",
         "typescript": "^2.6.2"
     },
