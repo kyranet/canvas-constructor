@@ -24,7 +24,7 @@ Docma.create()
         src: [
             { readme: './README.md' },
             { methods: './METHODS.md' },
-            { canvasconstructor: './src/*/**/*.js' }
+            { canvasconstructor: './src/*.js' }
         ],
         dest: './docs',
         debug: true,
