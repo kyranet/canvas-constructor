@@ -111,8 +111,11 @@ exports.invertedThreshold = (canvas, threshold) => {
  * @returns {Canvas}
  */
 exports.brightness = (canvas, brightness) => canvas
-    .setColor(`rgba(255, 255, 255, ${brightness})`)
-    .addRect(0, 0, canvas.width, canvas.height);
+    .save()
+    .setGlobalAlpha(brightness / 100)
+    .setColor('white')
+    .addRect(0, 0, canvas.width, canvas.height)
+    .restore();
 
 /**
  * Darken an image
