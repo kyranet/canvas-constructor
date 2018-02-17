@@ -1,0 +1,59 @@
+const Docma = require('docma');
+const Package = require('./package');
+
+Docma.create()
+    .build({
+        app: {
+            title: 'canvasConstructor',
+            base: '/canvasConstructor',
+            entrance: 'content:readme',
+            routing: 'query',
+            server: Docma.ServerType.GITHUB
+        },
+        markdown: {
+            gfm: true,
+            tables: true,
+            breaks: true,
+            pedantic: true,
+            sanitize: true,
+            smartLists: true,
+            smartypants: true,
+            tasks: true,
+            emoji: true
+        },
+        src: [
+            { readme: './README.md' },
+            { methods: './METHODS.md' },
+            { canvasConstructor: './src/*/**/*.js' }
+        ],
+        dest: './docs',
+        debug: true,
+        jsdoc: { package: './package.json' },
+        template: {
+            options: {
+                title: Package.name,
+                navItems: [
+                    {
+                        label: 'Readme',
+                        href: '?content=readme'
+                    },
+                    {
+                        label: 'Documentation',
+                        href: '?api=canvasConstructor',
+                        iconClass: 'ico-book'
+                    },
+                    {
+                        lable: 'Methods',
+                        href: '?content=methods'
+                    },
+                    {
+                        label: 'GitHub',
+                        href: Package.homepage,
+                        target: '_blank',
+                        iconClass: 'ico-md ico-github'
+                    }
+                ]
+            }
+        }
+    })
+    .catch(console.error);
