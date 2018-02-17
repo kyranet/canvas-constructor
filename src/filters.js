@@ -67,9 +67,7 @@ exports.silhouette = (canvas) => {
     const imageData = canvas.getImageData();
     const { data } = imageData;
     for (let i = 0; i < data.length; i += 4) {
-        data[i] = 0;
-        data[i + 1] = 0;
-        data[i + 2] = 0;
+        data[i] = data[i + 1] = data[i + 2] = 0;
     }
     return canvas.putImageData(imageData, 0, 0);
 };
