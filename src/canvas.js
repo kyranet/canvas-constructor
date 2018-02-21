@@ -1205,10 +1205,11 @@ class CanvasConstructor {
     /**
      * Process data with this as the context
      * @param {Function} fn A callback function
+     * @param {...any} args The args to pass
      * @returns {this}
      */
-    process(fn) {
-        fn.call(this, this);
+    process(fn, ...args) {
+        fn.call(this, this, ...args);
         return this;
     }
 

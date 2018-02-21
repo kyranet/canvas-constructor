@@ -94,7 +94,7 @@ declare module 'canvas-constructor' {
         public isPointInPath(x: number, y: number, fillRule: fillRuleType): boolean;
         public isPointInStroke(x: number, y: number): boolean;
 
-        public process(fn: (canvas: this) => void): this;
+        public process(fn: (canvas: this, ...args: any[]) => void): this;
 
         public toBuffer(options?: Object): Buffer;
         public toBufferAsync(): Promise<Buffer>;
