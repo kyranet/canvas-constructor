@@ -665,6 +665,10 @@ class CanvasConstructor {
         return this;
     }
 
+    setColour(...args) {
+        return this.setColor(...args);
+    }
+
     /**
      * Change the font.
      * @param {string} font The font's name to set.
