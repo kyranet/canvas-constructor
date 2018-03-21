@@ -5,7 +5,7 @@ Docma.create()
     .build({
         app: {
             title: 'canvasConstructor',
-            base: '/canvasConstructor',
+            base: '',
             entrance: 'content:readme',
             routing: 'query',
             server: Docma.ServerType.GITHUB
