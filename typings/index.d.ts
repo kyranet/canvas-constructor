@@ -259,6 +259,6 @@ declare module 'canvas-constructor' {
         size: number;
         unit: string;
         family: string;
-    }
+    };
 
 }
