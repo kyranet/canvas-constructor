@@ -59,6 +59,7 @@ declare module 'canvas-constructor' {
         public createBeveledClip(x: number, y: number, width: number, height: number, radius: number): this;
         public addRect(x: number, y: number, width: number, height: number): this;
         public setColor(color: string|CanvasGradient): this;
+        public setColour(colour: string|CanvasGradient): this;
         public setTextFont(font: string): this;
         public setTextAlign(align: textAlignType): this;
         public setTextBaseline(baseline: textBaselineType): this;
