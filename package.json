@@ -5,7 +5,8 @@
     "main": "index.js",
     "types": "typings/index.d.ts",
     "scripts": {
-        "test": "eslint --fix src test && tslint --fix 'typings/*.ts'",
+        "lint": "npx eslint --fix src test && npx tslint --fix 'typings/*.ts'",
+        "test": "npx eslint src test && npx tslint 'typings/*.ts'",
         "docs": "node docs.js"
     },
     "repository": {
