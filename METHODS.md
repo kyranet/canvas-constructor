@@ -4,7 +4,7 @@
 |----------------------------:|-----------
 | changeCanvasSize            | `width`, `height`
 | changeCanvasWidth           | `width`
-| changeCanvasHeigth          | `height`
+| changeCanvasHeight          | `height`
 | setTransform                | `a`, `b`, `c`, `d`, `e`, `f`
 | resetTransformation         |
 | save                        |
