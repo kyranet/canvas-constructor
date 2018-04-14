@@ -5,19 +5,53 @@ try {
     Canvas = require('canvas');
 }
 
+/**
+ * This variable helps Canvas-Constructor to identify if the version
+ * of canvas is older than 2.0.0 (new Canvas()) or newer (Canvas.createCanvas).
+ */
+const isNotConstructor = typeof Canvas.createCanvas === 'function';
+
 class CanvasConstructor {
 
     /**
      * Initialize canvas-constructor
-     * @param {number} width       The canvas' width in pixels.
-     * @param {number} height      The canvas' height in pixels.
-     * @param {('pdf'|'svg')} type The canvas type.
+     * @param {number} width The canvas' width in pixels.
+     * @param {number} height The canvas' height in pixels.
+     * @param {('pdf'|'svg')} [type] The canvas type.
      */
     constructor(width, height, type) {
-        this.canvas = Canvas.createCanvas(width, height, type);
+        /**
+         * The constructed Canvas
+         * @since 0.0.1
+         * @type {Canvas}
+         * @private
+         */
+        this.canvas = isNotConstructor ?
+            // node-canvas >2.0.0
+            Canvas.createCanvas(width, height, type) :
+            // node-canvas <2.0.0
+            new Canvas(width, height);
+
+        /**
+         * The 2D context for this canvas
+         * @since 0.0.1
+         * @type {CanvasRenderingContext2D}
+         * @private
+         */
         this.context = this.canvas.getContext('2d');
 
+        /**
+         * The image width of this canvas
+         * @since 0.0.1
+         * @type {number}
+         */
         this.width = width;
+
+        /**
+         * The image height of this canvas
+         * @since 0.0.1
+         * @type {number}
+         */
         this.height = height;
     }
 
@@ -1182,7 +1216,20 @@ class CanvasConstructor {
     }
 
     /**
-     * Register a new font.
+     * Register a new font (Canvas 1.6.x).
+     * @param {string} path   The path for the font.
+     * @param {string} family The font's family name.
+     * @returns {CanvasConstructor}
+     * @chainable
+     */
+    addTextFont(path, family) {
+        if (isNotConstructor) CanvasConstructor.registerFont(path, family);
+        else this.context.addFont(new Canvas.Font(family, path));
+        return this;
+    }
+
+    /**
+     * Register a new font (Canvas 2.x).
      * @param {string} path   The path for the font.
      * @param {string} family The font's family name.
      * @returns {CanvasConstructor}
