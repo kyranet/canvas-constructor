@@ -1,4 +1,9 @@
-const Canvas = require('canvas');
+let Canvas;
+try {
+    Canvas = require('canvas-prebuilt');
+} catch (_) {
+    Canvas = require('canvas');
+}
 
 class CanvasConstructor {
 
