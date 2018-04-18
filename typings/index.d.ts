@@ -15,6 +15,9 @@ declare module 'canvas-constructor' {
         public constructor(width: number, height: number, type?: CanvasType);
         public canvas: HTMLCanvasElement;
         public context: CanvasRenderingContext2D;
+        public width: number;
+        public heigth: number;
+        public readonly lineDash: number[];
 
         public changeCanvasSize(width?: number, height?: number): this;
         public changeCanvasWidth(width: number): this;
@@ -90,9 +93,9 @@ declare module 'canvas-constructor' {
         public clearCircle(x: number, y: number, radius: number, start?: number, angle?: number): this;
         public clearPixels(x?: number, y?: number, width?: number, height?: number): this;
         public getLineDash(): number[];
-        public readonly lineDash: number[];
         public isPointInPath(x: number, y: number, fillRule: fillRuleType): boolean;
         public isPointInStroke(x: number, y: number): boolean;
+        public addTextFont(path: string, family: string | fontFaceType): this;
 
         public process(fn: (canvas: this) => void): this;
 
