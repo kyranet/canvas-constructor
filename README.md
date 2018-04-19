@@ -13,10 +13,6 @@ Please check [node-canvas readme](https://github.com/Automattic/node-canvas/blob
 
 ---
 
-> **IMPORTANT** If you use `canvas` 2.0, you must install the 2.0 version of Canvas Constructor: `npm i kyranet/canvasConstructor`. Otherwise install the NPM version: `npm i canvas-constructor`.
-
----
-
 How to use it:
 
 ```js
@@ -39,7 +35,7 @@ new Canvas(300, 300)
 - Write the text 'Hello World!' in the position (130, 150)
 - Return a buffer.
 
-Now, let's suppose we want to add images. I'd recommend [fs-nextra](https://github.com/bdistin/fs-nextra), by BDISTIN, it requires Node.js 8.1.0 to work (it promisifies the async fs methods with `Util.promisify()`), it's a dependency-free and lightweight package that provides support for **atomic operations**.
+Now, let's suppose we want to add images. I'd recommend [fs-nextra](https://github.com/bdistin/fs-nextra), by BDISTIN, it requires Node.js 8.5.0 to work (it promisifies the async fs methods with `Util.promisify()`), it's a dependency-free and lightweight package that provides support for **atomic operations**.
 
 ```js
 const { Canvas } = require('canvas-constructor');
@@ -48,13 +44,13 @@ const fsn = require('fs-nextra');
 async function createCanvas() {
     const image = await fsn.readFile('./images/kitten.png');
 
-    new Canvas(300, 400)
+    return new Canvas(300, 400)
         .addImage(image, 0, 0, 300, 400)
         .setColor('#FFAE23')
         .setTextFont('28px Impact')
         .setTextAlign('center')
         .addText('Kitten!', 150, 370)
-        .toBuffer();
+        .toBufferAsync();
 }
 ```
 
