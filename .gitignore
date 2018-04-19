@@ -56,3 +56,5 @@ jspm_packages/
 
 # Directories
 test/
+docs/
+package-lock.json

@@ -17,7 +17,7 @@
         "canvas": "github:Automattic/node-canvas"
     },
     "devDependencies": {
-        "docma": "^2.0.0",
+        "docma": "^1.5.3",
         "eslint": "^4.19.1",
         "fs-nextra": "^0.3.2",
         "tslint": "^5.9.1",
