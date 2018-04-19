@@ -11,7 +11,7 @@
 | restore                     |
 | rotate                      | `angle`
 | scale                       | `x`, `y`
-| traslate                    | `x`, `y`
+| translate                   | `x`, `y`
 | clip                        | `path`, `fillRule`
 | fill                        | `path`, `fillRule`
 | addRect                     | `x`, `y`, `width`, `height`
