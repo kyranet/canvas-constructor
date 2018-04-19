@@ -1,14 +1,14 @@
-const Docma = require('docma');
-const Package = require('./package');
+const docma = require('docma');
+const package = require('./package');
 
-Docma.create()
+docma.create()
     .build({
         app: {
             title: 'canvasConstructor',
             base: '',
             entrance: 'content:readme',
             routing: 'query',
-            server: Docma.ServerType.GITHUB
+            server: docma.ServerType.GITHUB
         },
         markdown: {
             gfm: true,
@@ -23,7 +23,6 @@ Docma.create()
         },
         src: [
             { readme: './README.md' },
-            { methods: './METHODS.md' },
             { canvasconstructor: './src/*.js' }
         ],
         dest: './docs',
@@ -31,7 +30,7 @@ Docma.create()
         jsdoc: { package: './package.json' },
         template: {
             options: {
-                title: Package.name,
+                title: package.name,
                 navItems: [
                     {
                         label: 'Readme',
@@ -43,12 +42,8 @@ Docma.create()
                         iconClass: 'ico-book'
                     },
                     {
-                        label: 'Methods',
-                        href: '?content=methods'
-                    },
-                    {
                         label: 'GitHub',
-                        href: Package.homepage,
+                        href: package.homepage,
                         target: '_blank',
                         iconClass: 'ico-md ico-github'
                     }

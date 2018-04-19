@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## 1.0.0
+### Added
+- Support for canvas 1.6.x and 2.x.
+- `addTextFont()` for canvas 1.6.x compatibility.
+
+### Removed
+- `METHODS.md` in favor of the new docs.
+
 ## 0.4.0
 ### Added
 - `addMultilineText()` to print texts that are too long to be displayed.
