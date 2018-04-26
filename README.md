@@ -65,5 +65,3 @@ async function createCanvas() {
 And now, you have created an image with a kitten in the background and some centered text in the bottom of it.
 
 If you experience issues with **Canvas** or want to install it, please refer to the [canvas](https://www.npmjs.com/package/canvas) repository, if you feel you found an issue in this package, feel free to file an issue [here](https://github.com/kyranet/canvasConstructor/issues), or make a [Pull Request](https://help.github.com/articles/about-pull-requests/) if you have the fix.
-
-Additionally, you can check all the methods this package has [here](https://github.com/kyranet/canvasConstructor/blob/master/METHODS.md).
