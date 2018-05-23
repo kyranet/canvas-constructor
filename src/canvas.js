@@ -573,7 +573,7 @@ class CanvasConstructor {
      * @chainable
      */
     addCircle(x, y, radius) {
-        return this.createRoundPath(x, y, radius).fill();
+        return this.save().createRoundPath(x, y, radius).fill().restore();
     }
 
     /**
@@ -587,7 +587,6 @@ class CanvasConstructor {
      * @chainable
      */
     createRoundPath(x, y, radius, start = 0, angle = Math.PI * 2) {
-        this.context.save();
         this.context.beginPath();
         this.context.arc(x, y, radius, start, angle, false);
         return this;
