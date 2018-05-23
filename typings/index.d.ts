@@ -101,6 +101,8 @@ declare module 'canvas-constructor' {
 
         public toBuffer(options?: Object): Buffer;
         public toBufferAsync(): Promise<Buffer>;
+        public toDataURL(type: string, ...args: any[]): string;
+        public toDataURLAsync(type: string): Promise<string>;
 
         public static getCanvas(): NodeCanvas;
         public static registerFont(path: string, family: string | fontFaceType);
