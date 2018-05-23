@@ -99,7 +99,7 @@ declare module 'canvas-constructor' {
 
         public process(fn: (canvas: this) => void): this;
 
-        public toBuffer(options?: Object): Buffer;
+        public toBuffer(...args?: any[]): Buffer;
         public toBufferAsync(): Promise<Buffer>;
 
         public static getCanvas(): NodeCanvas;
