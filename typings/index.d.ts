@@ -26,7 +26,7 @@ declare module 'canvas-constructor' {
         public restore(): this;
         public rotate(angle: number): this;
         public scale(x: number, y: number): this;
-        public traslate(x: number, y: number): this;
+        public translate(x: number, y: number): this;
         public clip(path?: any, fillRule?: fillRuleType): this;
         public clip(fillRule?: fillRuleType): this;
         public setTransform(a: number, b: number, c: number, d: number, e: number, f: number): this;
