@@ -1211,6 +1211,29 @@ class CanvasConstructor {
         }));
     }
 
+    /**
+     * Render the canvas into a Data URL.
+     * @param {string} type the standard MIME type for the image format to return. If you do not specify this parameter, the default value is PNG.
+     * @param {any[]} args Extra arguments
+     * @returns {string}
+     * @see https://github.com/Automattic/node-canvas#canvastodataurl-sync-and-async
+     */
+    toDataURL(type, ...args) {
+        return this.canvas.toDataURL(type, ...args);
+    }
+
+    /**
+     * Render the canvas into a Data URL using a Promise.
+     * @param {string} type the standard MIME type for the image format to return. If you do not specify this parameter, the default value is PNG.
+     * @returns {Promise<string>}
+     */
+    toDataURLAsync(type) {
+        return new Promise((resolve, reject) => this.canvas.toDataURL(type, (err, url) => {
+            if (err) reject(err);
+            else resolve(url);
+        }));
+    }
+
     static getCanvas() {
         return Canvas;
     }
