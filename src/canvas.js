@@ -59,7 +59,7 @@ class CanvasConstructor {
      * Change the current canvas' size.
      * @param {number} width  The new width for the canvas.
      * @param {number} height The new heigth for the canvas.
-     * @returns {CanvasConstructor}
+     * @returns {this}
      * @chainable
      */
     changeCanvasSize(width, height) {
@@ -79,7 +79,7 @@ class CanvasConstructor {
     /**
      * Change the current canvas' width.
      * @param {number} width The new width for the canvas.
-     * @returns {CanvasConstructor}
+     * @returns {this}
      * @chainable
      */
     changeCanvasWidth(width) {
@@ -89,7 +89,7 @@ class CanvasConstructor {
     /**
      * Change the current canvas' height.
      * @param {number} height The new height for the canvas.
-     * @returns {CanvasConstructor}
+     * @returns {this}
      * @chainable
      */
     changeCanvasHeigth(height) {
@@ -98,7 +98,7 @@ class CanvasConstructor {
 
     /**
      * Save the entire state of the canvas by pushing the current state onto a stack.
-     * @returns {CanvasConstructor}
+     * @returns {this}
      * @chainable
      * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/save
      */
@@ -109,7 +109,7 @@ class CanvasConstructor {
 
     /**
      * Restores the most recently saved canvas by popping the top entry in the drawing state stack. If there is no saved state, this method does nothing.
-     * @returns {CanvasConstructor}
+     * @returns {this}
      * @chainable
      * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/restore
      */
@@ -121,7 +121,7 @@ class CanvasConstructor {
     /**
      * Adds a rotation to the transformation matrix. The angle argument represents a clockwise rotation angle and is expressed in radians.
      * @param {number} angle The angle to rotate clockwise in radians.
-     * @returns {CanvasConstructor}
+     * @returns {this}
      * @chainable
      * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/rotate
      */
@@ -134,7 +134,7 @@ class CanvasConstructor {
      * Adds a scaling transformation to the canvas units by x horizontally and by y vertically.
      * @param {number} x Scaling factor in the horizontal direction.
      * @param {number} y Scaling factor in the vertical direction.
-     * @returns {CanvasConstructor}
+     * @returns {this}
      * @chainable
      * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/scale
      */
@@ -147,7 +147,7 @@ class CanvasConstructor {
      * Adds a translation transformation by moving the canvas and its origin x horizontally and y vertically on the grid.
      * @param {number} x Distance to move in the horizontal direction.
      * @param {number} y Distance to move in the vertical direction.
-     * @returns {CanvasConstructor}
+     * @returns {this}
      * @chainable
      * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/translate
      */
@@ -161,7 +161,7 @@ class CanvasConstructor {
      * @param {any} path A Path2D path to fill.
      * @param {('nonzero'|'evenodd')} fillRule The algorithm by which to determine if a point is inside a path or
      * outside a path.
-     * @returns {CanvasConstructor}
+     * @returns {this}
      * @chainable
      * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/clip
      */
@@ -179,7 +179,7 @@ class CanvasConstructor {
      * @param {number} d Vertical scaling.
      * @param {number} e Horizontal moving.
      * @param {number} f Vertical moving.
-     * @returns {CanvasConstructor}
+     * @returns {this}
      * @chainable
      * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/setTransform
      */
@@ -190,7 +190,7 @@ class CanvasConstructor {
 
     /**
      * Reset the transformation.
-     * @returns {CanvasConstructor}
+     * @returns {this}
      * @chainable
      */
     resetTransformation() {
@@ -207,7 +207,7 @@ class CanvasConstructor {
      * @param {Function} callback The callback, if not specified, this method won't be chainable as it will return a
      * number. If you use an arrow function, you might want to use the second argument which is the instance of the
      * class. Otherwise, the keyword this is binded to the class instance itself, so you can use it safely.
-     * @returns {CanvasConstructor}
+     * @returns {this}
      * @chainable
      * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/getImageData
      */
@@ -235,7 +235,7 @@ class CanvasConstructor {
      * @param {number} [dirtyY=0] Vertical position (y-coordinate). The y coordinate of the top left hand corner of your Image data. Defaults to 0.
      * @param {number} [dirtyWidth] Width of the rectangle to be painted. Defaults to the width of the image data.
      * @param {number} [dirtyHeight] Height of the rectangle to be painted. Defaults to the height of the image data.
-     * @returns {CanvasConstructor}
+     * @returns {this}
      * @chainable
      * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/putImageData
      */
@@ -249,7 +249,7 @@ class CanvasConstructor {
      * @param {any} path A Path2D path to fill.
      * @param {('nonzero'|'evenodd')} fillRule The algorithm by which to determine if a point is inside a path or
      * outside a path.
-     * @returns {CanvasConstructor}
+     * @returns {this}
      * @chainable
      * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/fill
      */
@@ -265,7 +265,7 @@ class CanvasConstructor {
      * @param {number} y    The position y to start drawing the element.
      * @param {number} [maxWidth] The maximum width to draw. If specified, and the string is computed to be wider than
      * this width, the font is adjusted to use a more horizontally condensed font.
-     * @returns {CanvasConstructor}
+     * @returns {this}
      * @chainable
      * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/fillText
      */
@@ -280,7 +280,7 @@ class CanvasConstructor {
      * @param {number} x        The position x to start drawing the element.
      * @param {number} y        The position y to start drawing the element.
      * @param {number} maxWidth The max length in pixels for the text.
-     * @returns {CanvasConstructor}
+     * @returns {this}
      * @chainable
      * @example
      * new Canvas(400, 300)
@@ -305,7 +305,7 @@ class CanvasConstructor {
      * @param {number} y        The position y to start drawing the element.
      * @param {number} maxWidth The max length in pixels for the text.
      * @param {number} lineHeight The line's height.
-     * @returns {CanvasConstructor}
+     * @returns {this}
      * @chainable
      * @example
      * new Canvas(400, 300)
@@ -335,7 +335,7 @@ class CanvasConstructor {
     /**
      * Strokes the current or given path with the current stroke style using the non-zero winding rule.
      * @param {any} path A Path2D path to stroke.
-     * @returns {CanvasConstructor}
+     * @returns {this}
      * @chainable
      * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/stroke
      */
@@ -351,7 +351,7 @@ class CanvasConstructor {
      * @param {number} y      The y axis of the coordinate for the rectangle starting point.
      * @param {number} width  The rectangle's width.
      * @param {number} height The rectangle's height.
-     * @returns {CanvasConstructor}
+     * @returns {this}
      * @chainable
      * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/strokeRect
      */
@@ -365,7 +365,7 @@ class CanvasConstructor {
      * @param {string} text The text to write.
      * @param {number} x    The position x to start drawing the element.
      * @param {number} y    The position y to start drawing the element.
-     * @returns {CanvasConstructor}
+     * @returns {this}
      * @chainable
      * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/strokeText
      */
@@ -426,7 +426,7 @@ class CanvasConstructor {
     /**
      * Specifies the color or style to use for the lines around shapes. The default is #000000 (black).
      * @param {string} [color='#000000'] A canvas' color resolvable.
-     * @returns {CanvasConstructor}
+     * @returns {this}
      * @chainable
      * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/strokeStyle
      */
@@ -438,7 +438,7 @@ class CanvasConstructor {
     /**
      * Sets the thickness of lines in space units.
      * @param {number} [width=1] A number specifying the line width in space units.
-     * @returns {CanvasConstructor}
+     * @returns {this}
      * @chainable
      * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/lineWidth
      */
@@ -454,7 +454,7 @@ class CanvasConstructor {
     /**
      * Sets the line dash pattern offset or "phase" to achieve a "marching ants" effect
      * @param {number} value A float specifying the amount of the offset. Initially 0.0.
-     * @returns {CanvasConstructor}
+     * @returns {this}
      * @chainable
      * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/lineDashOffset
      */
@@ -468,7 +468,7 @@ class CanvasConstructor {
      * together (degenerate segments with zero lengths, whose specified endpoints and control points are exactly at the
      * same position, are skipped).
      * @param {('bevel'|'round'|'miter')} value The line join type.
-     * @returns {CanvasConstructor}
+     * @returns {this}
      * @chainable
      * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/lineJoin
      */
@@ -481,7 +481,7 @@ class CanvasConstructor {
      * Determines how the end points of every line are drawn. There are three possible values for this property and
      * those are: butt, round and square. By default this property is set to butt.
      * @param {('butt'|'round'|'square')} value The line join type.
-     * @returns {CanvasConstructor}
+     * @returns {this}
      * @chainable
      * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/lineCap
      */
@@ -497,7 +497,7 @@ class CanvasConstructor {
      * coordinate space units). If the number of elements in the array is odd, the elements of the array get copied and
      * concatenated. For example, [5, 15, 25] will become [5, 15, 25, 5, 15, 25]. If the array is empty, the line dash
      * list is cleared and line strokes return to being solid.
-     * @returns {CanvasConstructor}
+     * @returns {this}
      * @chainable
      * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/setLineDash
      */
@@ -517,7 +517,7 @@ class CanvasConstructor {
      * @param {number} options.radius The radius for the new image.
      * @param {'round'|'bevel'} options.type   The type for the new image.
      * @param {boolean} options.restore Whether this method should restore the drawing state. Use this when you use options.type
-     * @returns {CanvasConstructor}
+     * @returns {this}
      * @chainable
      */
     addImage(buffer, x, y, width, height, options = {}) {
@@ -542,7 +542,7 @@ class CanvasConstructor {
      * @param {number} width  The width of the element.
      * @param {number} height The heigth of the element.
      * @param {number} radius The radius for the new image.
-     * @returns {CanvasConstructor}
+     * @returns {this}
      * @chainable
      */
     addRoundImage(buffer, x, y, width, height, radius = 10) {
@@ -557,7 +557,7 @@ class CanvasConstructor {
      * @param {number} width  The width of the element.
      * @param {number} height The heigth of the element.
      * @param {number} radius The radius for the new image.
-     * @returns {CanvasConstructor}
+     * @returns {this}
      * @chainable
      */
     addBevelImage(buffer, x, y, width, height, radius = 10) {
@@ -569,7 +569,7 @@ class CanvasConstructor {
      * @param {number} x                   The position x in the center of the circle.
      * @param {number} y                   The position y in the center of the ircle.
      * @param {number} radius              The radius for the clip.
-     * @returns {CanvasConstructor}
+     * @returns {this}
      * @chainable
      */
     addCircle(x, y, radius) {
@@ -583,7 +583,7 @@ class CanvasConstructor {
      * @param {number} radius              The radius for the clip.
      * @param {number} [start=0]           The degree in radians to start drawing the circle.
      * @param {number} [angle=Math.PI * 2] The degree in radians to finish drawing the circle, defaults to a full circle.
-     * @returns {CanvasConstructor}
+     * @returns {this}
      * @chainable
      */
     createRoundPath(x, y, radius, start = 0, angle = Math.PI * 2) {
@@ -599,7 +599,7 @@ class CanvasConstructor {
      * @param {number} radius              The radius for the clip.
      * @param {number} [start=0]           The degree in radians to start drawing the circle.
      * @param {number} [angle=Math.PI * 2] The degree in radians to finish drawing the circle, defaults to a full circle.
-     * @returns {CanvasConstructor}
+     * @returns {this}
      * @chainable
      */
     createRoundClip(x, y, radius, start = 0, angle = Math.PI * 2) {
@@ -612,7 +612,7 @@ class CanvasConstructor {
      * @param {number} y      The position y in the upper corner.
      * @param {number} width  The width of the rectangle.
      * @param {number} height The height of the rectangle.
-     * @returns {CanvasConstructor}
+     * @returns {this}
      * @chainable
      */
     createRectPath(x, y, width, height) {
@@ -626,7 +626,7 @@ class CanvasConstructor {
      * @param {number} y      The position y in the upper corner.
      * @param {number} width  The width of the rectangle.
      * @param {number} height The height of the rectangle.
-     * @returns {CanvasConstructor}
+     * @returns {this}
      * @chainable
      */
     createRectClip(x, y, width, height) {
@@ -634,13 +634,13 @@ class CanvasConstructor {
     }
 
     /**
-     * Create a round path.
+     * Create a beveled path.
      * @param {number} x      The position x to start drawing clip.
      * @param {number} y      The position y to start drawing clip.
      * @param {number} width  The width of clip.
      * @param {number} height The heigth of clip.
      * @param {number} radius The radius for clip's rounded borders.
-     * @returns {CanvasConstructor}
+     * @returns {this}
      * @chainable
      */
     createBeveledPath(x, y, width, height, radius) {
@@ -663,13 +663,13 @@ class CanvasConstructor {
     }
 
     /**
-     * Create a round clip.
+     * Create a beveled clip.
      * @param {number} x      The position x to start drawing clip.
      * @param {number} y      The position y to start drawing clip.
      * @param {number} width  The width of clip.
      * @param {number} height The heigth of clip.
      * @param {number} radius The radius for clip's rounded borders.
-     * @returns {CanvasConstructor}
+     * @returns {this}
      * @chainable
      */
     createBeveledClip(x, y, width, height, radius) {
@@ -682,7 +682,7 @@ class CanvasConstructor {
      * @param {number} y      The position y to start drawing the element.
      * @param {number} width  The width of the element.
      * @param {number} height The heigth of the element.
-     * @returns {CanvasConstructor}
+     * @returns {this}
      * @chainable
      * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/fillRect
      */
@@ -694,7 +694,7 @@ class CanvasConstructor {
     /**
      * Set a color for the canvas' context.
      * @param {string|CanvasGradient} color A canvas' color resolvable.
-     * @returns {CanvasConstructor}
+     * @returns {this}
      * @chainable
      * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/fillStyle
      */
@@ -706,7 +706,7 @@ class CanvasConstructor {
     /**
      * Change the font.
      * @param {string} font The font's name to set.
-     * @returns {CanvasConstructor}
+     * @returns {this}
      * @chainable
      * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/font
      */
@@ -718,7 +718,7 @@ class CanvasConstructor {
     /**
      * Change the font alignment.
      * @param {('left'|'center'|'right'|'start'|'end')} align The font's alignment to set.
-     * @returns {CanvasConstructor}
+     * @returns {this}
      * @chainable
      * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/textAlign
      */
@@ -730,7 +730,7 @@ class CanvasConstructor {
     /**
      * Change the font's baseline.
      * @param {('top'|'hanging'|'middle'|'alphabetic'|'ideographic'|'bottom')} baseline The font's baseline to set.
-     * @returns {CanvasConstructor}
+     * @returns {this}
      * @chainable
      * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/textBaseline
      */
@@ -741,7 +741,7 @@ class CanvasConstructor {
 
     /**
      * Starts a new path by emptying the list of sub-paths.
-     * @returns {CanvasConstructor}
+     * @returns {this}
      * @chainable
      * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/beginPath
      */
@@ -753,7 +753,7 @@ class CanvasConstructor {
     /**
      * Causes the point of the pen to move back to the start of the current sub-path.
      * If the shape has already been closed or has only one point, this function does nothing.
-     * @returns {CanvasConstructor}
+     * @returns {this}
      * @chainable
      * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/closePath
      */
@@ -767,7 +767,7 @@ class CanvasConstructor {
      * argument.
      * @param {Image} image A Canvas Image to be used as the image to repeat.
      * @param {('repeat'|'repeat-x'|'repeat-y'|'no-repeat')} repetition The repeat mode.
-     * @returns {CanvasConstructor}
+     * @returns {this}
      * @chainable
      * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/createPattern
      */
@@ -804,7 +804,7 @@ class CanvasConstructor {
      * @param {number} x1 The x axis of the coordinate of the end point.
      * @param {number} y1 The y axis of the coordinate of the end point.
      * @param {GradientStep[]} steps The steps.
-     * @returns {CanvasConstructor}
+     * @returns {this}
      * @chainable
      * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/createLinearGradient
      */
@@ -843,7 +843,7 @@ class CanvasConstructor {
      * @param {number} y1 The y axis of the coordinate of the end circle.
      * @param {number} r1 The radius of the end circle.
      * @param {GradientStep[]} steps The steps.
-     * @returns {CanvasConstructor}
+     * @returns {this}
      * @chainable
      * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/createRadialGradient
      */
@@ -865,7 +865,7 @@ class CanvasConstructor {
      * @param {number} endAngle   The end ellipse's angle to which it will be drawn, expressed in radians.
      * @param {boolean} [anticlockwise=false] An optional Boolean which, if true, draws the ellipse anticlockwise
      * (counter-clockwise), otherwise in a clockwise direction.
-     * @returns {CanvasConstructor}
+     * @returns {this}
      * @chainable
      * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/ellipse
      */
@@ -886,7 +886,7 @@ class CanvasConstructor {
      * expressed in radians.
      * @param {boolean} [anticlockwise=false] An optional Boolean which, if true, causes the arc to be drawn
      * counter-clockwise between the two angles. By default it is drawn clockwise.
-     * @returns {CanvasConstructor}
+     * @returns {this}
      * @chainable
      * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/arc
      */
@@ -902,7 +902,7 @@ class CanvasConstructor {
      * @param {number} x2     The x axis of the coordinate for the second control point.
      * @param {number} y2     The y axis of the coordinate for the second control point.
      * @param {number} radius The arc's radius.
-     * @returns {CanvasConstructor}
+     * @returns {this}
      * @chainable
      * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/arcTo
      */
@@ -919,7 +919,7 @@ class CanvasConstructor {
      * @param {number} cpy The y axis of the coordinate for the control point.
      * @param {number} x   The x axis of the coordinate for the end point.
      * @param {number} y   The y axis of the coordinate for the end point.
-     * @returns {CanvasConstructor}
+     * @returns {this}
      * @chainable
      * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/quadraticCurveTo
      */
@@ -938,7 +938,7 @@ class CanvasConstructor {
      * @param {number} cp2y The y axis of the coordinate for the second control point.
      * @param {number} x    The x axis of the coordinate for the end point.
      * @param {number} y    The y axis of the coordinate for the end point.
-     * @returns {CanvasConstructor}
+     * @returns {this}
      * @chainable
      * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/bezierCurveTo
      */
@@ -951,7 +951,7 @@ class CanvasConstructor {
      * Connects the last point in the sub-path to the x, y coordinates with a straight line
      * @param {number} x The x axis of the coordinate for the end of the line.
      * @param {number} y The y axis of the coordinate for the end of the line.
-     * @returns {CanvasConstructor}
+     * @returns {this}
      * @chainable
      * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/lineTo
      */
@@ -964,7 +964,7 @@ class CanvasConstructor {
      * Moves the starting point of a new sub-path to the (x, y) coordinates.
      * @param {number} x The x axis of the point.
      * @param {number} y The y axis of the point.
-     * @returns {CanvasConstructor}
+     * @returns {this}
      * @chainable
      * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/moveTo
      */
@@ -976,7 +976,7 @@ class CanvasConstructor {
     /**
      * Set the shadow's blur.
      * @param {number} radius The shadow's blur radius to set.
-     * @returns {CanvasConstructor}
+     * @returns {this}
      * @chainable
      * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/shadowBlur
      */
@@ -988,7 +988,7 @@ class CanvasConstructor {
     /**
      * Set the shadow's color.
      * @param {string} color A canvas' color resolvable to set as shadow's color.
-     * @returns {CanvasConstructor}
+     * @returns {this}
      * @chainable
      * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/shadowColor
      */
@@ -1000,7 +1000,7 @@ class CanvasConstructor {
     /**
      * Set the property that specifies the distance that the shadow will be offset in horizontal distance.
      * @param {number} value The value in pixels for the distance.
-     * @returns {CanvasConstructor}
+     * @returns {this}
      * @chainable
      * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/shadowOffsetX
      */
@@ -1012,7 +1012,7 @@ class CanvasConstructor {
     /**
      * Set the property that specifies the distance that the shadow will be offset in vertical distance.
      * @param {number} value The value in pixels for the distance.
-     * @returns {CanvasConstructor}
+     * @returns {this}
      * @chainable
      * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/shadowOffsetY
      */
@@ -1026,7 +1026,7 @@ class CanvasConstructor {
      * setting, zero, negative, Infinity and NaN values are ignored; otherwise the current value is set to the new value.
      * @param {number} value A number specifying the miter limit ratio in space units. Zero, negative, Infinity and NaN
      * values are ignored.
-     * @returns {CanvasConstructor}
+     * @returns {this}
      * @chainable
      * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/miterLimit
      */
@@ -1038,7 +1038,7 @@ class CanvasConstructor {
     /**
      * Change the pattern quality
      * @param {('fast'|'good'|'best'|'nearest'|'bilinear')} pattern The pattern quality.
-     * @returns {CanvasConstructor}
+     * @returns {this}
      * @chainable
      */
     setPatternQuality(pattern) {
@@ -1052,7 +1052,7 @@ class CanvasConstructor {
      * subpixel precision for glyph, so this will be noticeably lower quality for text positioning in cases such as
      * rotated text. Also, strokeText in glyph will act the same as fillText, except using the stroke style for the fill.
      * @param {('path'|'glyph')} mode The drawing mode.
-     * @returns {CanvasConstructor}
+     * @returns {this}
      * @chainable
      */
     setTextDrawingMode(mode) {
@@ -1063,7 +1063,7 @@ class CanvasConstructor {
     /**
      * Set anti-aliasing mode.
      * @param {('default'|'none'|'gray'|'subpixel')} antialias The antialias mode.
-     * @returns {CanvasConstructor}
+     * @returns {this}
      * @chainable
      */
     setAntialiasing(antialias) {
@@ -1075,7 +1075,7 @@ class CanvasConstructor {
      * Sets the type of compositing operation to apply when drawing new shapes, where type is a string identifying which
      * of the compositing or blending mode operations to use.
      * @param {('source-over'|'source-in'|'source-out'|'source-atop'|'destination-over'|'destination-in'|'destination-out'|'destination-atop'|'lighter'|'copy'|'xor'|'darken'|'lighten'|'color-dodge'|'color-burn'|'difference'|'exclusion'|'hue'|'saturation'|'color'|'luminosity'|'multiply'|'screen'|'overlay'|'hard-light'|'soft-light'|'hsl-hue'|'hsl-saturation'|'hsl-color'|'hsl-luminosity')} type The global composite operation mode.
-     * @returns {CanvasConstructor}
+     * @returns {this}
      * @chainable
      * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/globalCompositeOperation
      */
@@ -1087,7 +1087,7 @@ class CanvasConstructor {
     /**
      * Modify the alpha value that is applied to shapes and images before they are drawn into the canvas.
      * @param {number} value The alpha value, from 0.0 (fully transparent) to 1.0 (fully opaque)
-     * @returns {CanvasConstructor}
+     * @returns {this}
      * @chainable
      * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/globalAlpha
      */
@@ -1098,7 +1098,7 @@ class CanvasConstructor {
 
     /**
      * Reset the canvas' shadows.
-     * @returns {CanvasConstructor}
+     * @returns {this}
      * @chainable
      */
     resetShadows() {
@@ -1114,7 +1114,7 @@ class CanvasConstructor {
      * @param {number} radius              The radius for the clip.
      * @param {number} [start=0]           The degree in radians to start drawing the circle.
      * @param {number} [angle=Math.PI * 2] The degree in radians to finish drawing the circle, defaults to a full circle.
-     * @returns {CanvasConstructor}
+     * @returns {this}
      * @chainable
      */
     clearCircle(x, y, radius, start = 0, angle = Math.PI * 2) {
@@ -1129,7 +1129,7 @@ class CanvasConstructor {
      * @param {number} [y=0]                The position y to start drawing the element.
      * @param {number} [width=this.width]   The width of the element.
      * @param {number} [height=this.heigth] The heigth of the element.
-     * @returns {CanvasConstructor}
+     * @returns {this}
      * @chainable
      * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/clearRect
      */
@@ -1241,7 +1241,7 @@ class CanvasConstructor {
      * Register a new font (Canvas 1.6.x).
      * @param {string} path   The path for the font.
      * @param {string} family The font's family name.
-     * @returns {CanvasConstructor}
+     * @returns {this}
      * @chainable
      */
     addTextFont(path, family) {
@@ -1262,7 +1262,7 @@ class CanvasConstructor {
         else
             Canvas.registerFont(path, { family });
 
-        return this;
+        return CanvasConstructor;
     }
 
     /**
