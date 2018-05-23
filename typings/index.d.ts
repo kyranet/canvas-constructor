@@ -26,7 +26,7 @@ declare module 'canvas-constructor' {
         public restore(): this;
         public rotate(angle: number): this;
         public scale(x: number, y: number): this;
-        public traslate(x: number, y: number): this;
+        public translate(x: number, y: number): this;
         public clip(path?: any, fillRule?: fillRuleType): this;
         public clip(fillRule?: fillRuleType): this;
         public setTransform(a: number, b: number, c: number, d: number, e: number, f: number): this;
@@ -99,8 +99,10 @@ declare module 'canvas-constructor' {
 
         public process(fn: (canvas: this) => void): this;
 
-        public toBuffer(options?: Object): Buffer;
+        public toBuffer(...args?: any[]): Buffer;
         public toBufferAsync(): Promise<Buffer>;
+        public toDataURL(type: string, ...args: any[]): string;
+        public toDataURLAsync(type: string): Promise<string>;
 
         public static getCanvas(): NodeCanvas;
         public static registerFont(path: string, family: string | fontFaceType);
