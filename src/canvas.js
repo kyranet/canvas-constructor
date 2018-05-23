@@ -263,7 +263,7 @@ class CanvasConstructor {
      * @param {string} text The text to write.
      * @param {number} x    The position x to start drawing the element.
      * @param {number} y    The position y to start drawing the element.
-     * @param {number} maxWidth The maximum width to draw. If specified, and the string is computed to be wider than
+     * @param {number} [maxWidth] The maximum width to draw. If specified, and the string is computed to be wider than
      * this width, the font is adjusted to use a more horizontally condensed font.
      * @returns {CanvasConstructor}
      * @chainable
