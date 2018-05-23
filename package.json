@@ -2,7 +2,7 @@
     "name": "canvas-constructor",
     "version": "1.0.1",
     "description": "A ES6 class for node-canvas with built-in functions and chained methods.",
-    "main": "index.js",
+    "main": "index",
     "types": "typings/index.d.ts",
     "scripts": {
         "lint": "npx eslint --fix src test && npx tslint --fix 'typings/*.ts'",
