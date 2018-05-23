@@ -1193,11 +1193,11 @@ class CanvasConstructor {
 
     /**
      * Render the canvas into a buffer.
-     * @param {Object} options The render's options.
+     * @param {any[]} args The render's options.
      * @returns {Buffer}
      */
-    toBuffer(options) {
-        return this.canvas.toBuffer(options);
+    toBuffer(...args) {
+        return this.canvas.toBuffer(...args);
     }
 
     /**
