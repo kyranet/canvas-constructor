@@ -261,8 +261,8 @@ class CanvasConstructor {
     /**
      * Add a text.
      * @param {string} text The text to write.
-     * @param {number} x    The position x to start drawing the element.
-     * @param {number} y    The position y to start drawing the element.
+     * @param {number} x The position x to start drawing the element.
+     * @param {number} y The position y to start drawing the element.
      * @param {number} [maxWidth] The maximum width to draw. If specified, and the string is computed to be wider than
      * this width, the font is adjusted to use a more horizontally condensed font.
      * @returns {this}
@@ -276,9 +276,9 @@ class CanvasConstructor {
 
     /**
      * Add responsive text
-     * @param {string} text     The text to write.
-     * @param {number} x        The position x to start drawing the element.
-     * @param {number} y        The position y to start drawing the element.
+     * @param {string} text The text to write.
+     * @param {number} x The position x to start drawing the element.
+     * @param {number} y The position y to start drawing the element.
      * @param {number} maxWidth The max length in pixels for the text.
      * @returns {this}
      * @chainable
@@ -300,9 +300,9 @@ class CanvasConstructor {
 
     /**
      * Add responsive text
-     * @param {string} text     The text to write.
-     * @param {number} x        The position x to start drawing the element.
-     * @param {number} y        The position y to start drawing the element.
+     * @param {string} text The text to write.
+     * @param {number} x The position x to start drawing the element.
+     * @param {number} y The position y to start drawing the element.
      * @param {number} maxWidth The max length in pixels for the text.
      * @param {number} lineHeight The line's height.
      * @returns {this}
@@ -347,9 +347,9 @@ class CanvasConstructor {
     /**
      * Paints a rectangle which has a starting point at (x, y) and has a w width and an h height onto the canvas, using
      * the current stroke style.
-     * @param {number} x      The x axis of the coordinate for the rectangle starting point.
-     * @param {number} y      The y axis of the coordinate for the rectangle starting point.
-     * @param {number} width  The rectangle's width.
+     * @param {number} x The x axis of the coordinate for the rectangle starting point.
+     * @param {number} y The y axis of the coordinate for the rectangle starting point.
+     * @param {number} width The rectangle's width.
      * @param {number} height The rectangle's height.
      * @returns {this}
      * @chainable
@@ -363,8 +363,8 @@ class CanvasConstructor {
     /**
      * Add stroked text.
      * @param {string} text The text to write.
-     * @param {number} x    The position x to start drawing the element.
-     * @param {number} y    The position y to start drawing the element.
+     * @param {number} x The position x to start drawing the element.
+     * @param {number} y The position y to start drawing the element.
      * @returns {this}
      * @chainable
      * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/strokeText
@@ -377,7 +377,7 @@ class CanvasConstructor {
     /**
      * Measure a text's width given a string.
      * If a callback is not passed, this method will not be chainable, and it will return an integer instead.
-     * @param {string}   text     The text to measure.
+     * @param {string} text The text to measure.
      * @param {Function} callback The callback, if not specified, this method won't be chainable as it will return a
      * number. If you use an arrow function, you might want to use the second argument which is the instance of the
      * class. Otherwise, the keyword this is binded to the class instance itself, so you can use it safely.
@@ -508,14 +508,14 @@ class CanvasConstructor {
 
     /**
      * Add an image.
-     * @param {Buffer} buffer  The image's buffer.
-     * @param {number} x       The position x to start drawing the element.
-     * @param {number} y       The position y to start drawing the element.
-     * @param {number} width   The width of the element.
-     * @param {number} height  The heigth of the element.
+     * @param {Buffer} buffer The image's buffer.
+     * @param {number} x The position x to start drawing the element.
+     * @param {number} y The position y to start drawing the element.
+     * @param {number} width The width of the element.
+     * @param {number} height The heigth of the element.
      * @param {Object} options Options.
      * @param {number} options.radius The radius for the new image.
-     * @param {'round'|'bevel'} options.type   The type for the new image.
+     * @param {'round'|'bevel'} options.type The type for the new image.
      * @param {boolean} options.restore Whether this method should restore the drawing state. Use this when you use options.type
      * @returns {this}
      * @chainable
@@ -537,9 +537,9 @@ class CanvasConstructor {
     /**
      * Add a round image.
      * @param {Buffer} buffer The image's buffer.
-     * @param {number} x      The position x to start drawing the element.
-     * @param {number} y      The position y to start drawing the element.
-     * @param {number} width  The width of the element.
+     * @param {number} x The position x to start drawing the element.
+     * @param {number} y The position y to start drawing the element.
+     * @param {number} width The width of the element.
      * @param {number} height The heigth of the element.
      * @param {number} radius The radius for the new image.
      * @returns {this}
@@ -552,9 +552,9 @@ class CanvasConstructor {
     /**
      * Add a beveled image.
      * @param {Buffer} buffer The image's buffer.
-     * @param {number} x      The position x to start drawing the element.
-     * @param {number} y      The position y to start drawing the element.
-     * @param {number} width  The width of the element.
+     * @param {number} x The position x to start drawing the element.
+     * @param {number} y The position y to start drawing the element.
+     * @param {number} width The width of the element.
      * @param {number} height The heigth of the element.
      * @param {number} radius The radius for the new image.
      * @returns {this}
@@ -566,9 +566,9 @@ class CanvasConstructor {
 
     /**
      * Add a circle or semi circle.
-     * @param {number} x                   The position x in the center of the circle.
-     * @param {number} y                   The position y in the center of the ircle.
-     * @param {number} radius              The radius for the clip.
+     * @param {number} x The position x in the center of the circle.
+     * @param {number} y The position y in the center of the ircle.
+     * @param {number} radius The radius for the clip.
      * @returns {this}
      * @chainable
      */
@@ -578,10 +578,10 @@ class CanvasConstructor {
 
     /**
      * Create a round path.
-     * @param {number} x                   The position x in the center of the clip's circle.
-     * @param {number} y                   The position y in the center of the clip's circle.
-     * @param {number} radius              The radius for the clip.
-     * @param {number} [start=0]           The degree in radians to start drawing the circle.
+     * @param {number} x The position x in the center of the clip's circle.
+     * @param {number} y The position y in the center of the clip's circle.
+     * @param {number} radius The radius for the clip.
+     * @param {number} [start=0] The degree in radians to start drawing the circle.
      * @param {number} [angle=Math.PI * 2] The degree in radians to finish drawing the circle, defaults to a full circle.
      * @returns {this}
      * @chainable
@@ -594,10 +594,10 @@ class CanvasConstructor {
 
     /**
      * Create a round clip.
-     * @param {number} x                   The position x in the center of the clip's circle.
-     * @param {number} y                   The position y in the center of the clip's circle.
-     * @param {number} radius              The radius for the clip.
-     * @param {number} [start=0]           The degree in radians to start drawing the circle.
+     * @param {number} x The position x in the center of the clip's circle.
+     * @param {number} y The position y in the center of the clip's circle.
+     * @param {number} radius The radius for the clip.
+     * @param {number} [start=0] The degree in radians to start drawing the circle.
      * @param {number} [angle=Math.PI * 2] The degree in radians to finish drawing the circle, defaults to a full circle.
      * @returns {this}
      * @chainable
@@ -608,9 +608,9 @@ class CanvasConstructor {
 
     /**
      * Create a rectangle path.
-     * @param {number} x      The position x in the left corner.
-     * @param {number} y      The position y in the upper corner.
-     * @param {number} width  The width of the rectangle.
+     * @param {number} x The position x in the left corner.
+     * @param {number} y The position y in the upper corner.
+     * @param {number} width The width of the rectangle.
      * @param {number} height The height of the rectangle.
      * @returns {this}
      * @chainable
@@ -622,9 +622,9 @@ class CanvasConstructor {
 
     /**
      * Create a rectangle clip.
-     * @param {number} x      The position x in the left corner.
-     * @param {number} y      The position y in the upper corner.
-     * @param {number} width  The width of the rectangle.
+     * @param {number} x The position x in the left corner.
+     * @param {number} y The position y in the upper corner.
+     * @param {number} width The width of the rectangle.
      * @param {number} height The height of the rectangle.
      * @returns {this}
      * @chainable
@@ -635,9 +635,9 @@ class CanvasConstructor {
 
     /**
      * Create a beveled path.
-     * @param {number} x      The position x to start drawing clip.
-     * @param {number} y      The position y to start drawing clip.
-     * @param {number} width  The width of clip.
+     * @param {number} x The position x to start drawing clip.
+     * @param {number} y The position y to start drawing clip.
+     * @param {number} width The width of clip.
      * @param {number} height The heigth of clip.
      * @param {number} radius The radius for clip's rounded borders.
      * @returns {this}
@@ -664,9 +664,9 @@ class CanvasConstructor {
 
     /**
      * Create a beveled clip.
-     * @param {number} x      The position x to start drawing clip.
-     * @param {number} y      The position y to start drawing clip.
-     * @param {number} width  The width of clip.
+     * @param {number} x The position x to start drawing clip.
+     * @param {number} y The position y to start drawing clip.
+     * @param {number} width The width of clip.
      * @param {number} height The heigth of clip.
      * @param {number} radius The radius for clip's rounded borders.
      * @returns {this}
@@ -678,8 +678,8 @@ class CanvasConstructor {
 
     /**
      * Add a rectangle.
-     * @param {number} x      The position x to start drawing the element.
-     * @param {number} y      The position y to start drawing the element.
+     * @param {number} x The position x to start drawing the element.
+     * @param {number} y The position y to start drawing the element.
      * @param {number} width  The width of the element.
      * @param {number} height The heigth of the element.
      * @returns {this}
@@ -803,7 +803,7 @@ class CanvasConstructor {
      * @param {number} y0 The y axis of the coordinate of the start point.
      * @param {number} x1 The x axis of the coordinate of the end point.
      * @param {number} y1 The y axis of the coordinate of the end point.
-     * @param {GradientStep[]} steps The steps.
+     * @param {GradientStep[]} [steps=[]] The steps.
      * @returns {this}
      * @chainable
      * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/createLinearGradient
@@ -853,23 +853,23 @@ class CanvasConstructor {
     }
 
     /**
-     * Adds an ellipse to the path which is centered at (x, y) position with the radii radiusX and radiusY starting at
+     * Adds an ellipse to the path which is centered at (x, y) position with the radius radiusX and radiusY starting at
      * startAngle and ending at endAngle going in the given direction by anticlockwise (defaulting to clockwise).
-     * @param {number} x          The x axis of the coordinate for the ellipse's center.
-     * @param {number} y          The y axis of the coordinate for the ellipse's center.
-     * @param {number} radiusX    The ellipse's major-axis radius.
-     * @param {number} radiusY    The ellipse's minor-axis radius.
-     * @param {number} rotation   The rotation for this ellipse, expressed in radians.
-     * @param {number} startAngle The starting point, measured from the x axis, from which it will be drawn, expressed
+     * @param {number} x The x axis of the coordinate for the ellipse's center.
+     * @param {number} y The y axis of the coordinate for the ellipse's center.
+     * @param {number} radiusX The ellipse's major-axis radius.
+     * @param {number} radiusY The ellipse's minor-axis radius.
+     * @param {number} rotation The rotation for this ellipse, expressed in radians.
+     * @param {number} [startAngle=0] The starting point, measured from the x axis, from which it will be drawn, expressed
      * in radians.
-     * @param {number} endAngle   The end ellipse's angle to which it will be drawn, expressed in radians.
+     * @param {number} [endAngle=Math.PI * 2] The end ellipse's angle to which it will be drawn, expressed in radians.
      * @param {boolean} [anticlockwise=false] An optional Boolean which, if true, draws the ellipse anticlockwise
      * (counter-clockwise), otherwise in a clockwise direction.
      * @returns {this}
      * @chainable
      * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/ellipse
      */
-    createEllipse(x, y, radiusX, radiusY, rotation, startAngle, endAngle, anticlockwise) {
+    createEllipse(x, y, radiusX, radiusY, rotation, startAngle = 0, endAngle = Math.PI * 2, anticlockwise) {
         this.context.ellipse(x, y, radiusX, radiusY, rotation, startAngle, endAngle, anticlockwise);
         return this;
     }
@@ -877,12 +877,12 @@ class CanvasConstructor {
     /**
      * Adds an arc to the path which is centered at (x, y) position with radius r starting at startAngle and ending at
      * endAngle going in the given direction by anticlockwise (defaulting to clockwise).
-     * @param {number} x          The x coordinate of the arc's center.
-     * @param {number} y          The y coordinate of the arc's center.
-     * @param {number} radius     The arc's radius.
-     * @param {number} startAngle The angle at which the arc starts, measured clockwise from the positive x axis and
+     * @param {number} x The x coordinate of the arc's center.
+     * @param {number} y The y coordinate of the arc's center.
+     * @param {number} radius The arc's radius.
+     * @param {number} [startAngle=0] The angle at which the arc starts, measured clockwise from the positive x axis and
      * expressed in radians.
-     * @param {number} endAngle   The angle at which the arc ends, measured clockwise from the positive x axis and
+     * @param {number} [endAngle=Math.PI * 2] The angle at which the arc ends, measured clockwise from the positive x axis and
      * expressed in radians.
      * @param {boolean} [anticlockwise=false] An optional Boolean which, if true, causes the arc to be drawn
      * counter-clockwise between the two angles. By default it is drawn clockwise.
@@ -890,17 +890,17 @@ class CanvasConstructor {
      * @chainable
      * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/arc
      */
-    arc(x, y, radius, startAngle, endAngle, anticlockwise = false) {
+    arc(x, y, radius, startAngle = 0, endAngle = Math.PI * 2, anticlockwise = false) {
         this.context.arc(x, y, radius, startAngle, endAngle, anticlockwise);
         return this;
     }
 
     /**
      * Adds an arc to the path with the given control points and radius, connected to the previous point by a straight line.
-     * @param {number} x1     The x axis of the coordinate for the first control point.
-     * @param {number} y1     The y axis of the coordinate for the first control point.
-     * @param {number} x2     The x axis of the coordinate for the second control point.
-     * @param {number} y2     The y axis of the coordinate for the second control point.
+     * @param {number} x1 The x axis of the coordinate for the first control point.
+     * @param {number} y1 The y axis of the coordinate for the first control point.
+     * @param {number} x2 The x axis of the coordinate for the second control point.
+     * @param {number} y2 The y axis of the coordinate for the second control point.
      * @param {number} radius The arc's radius.
      * @returns {this}
      * @chainable
@@ -917,8 +917,8 @@ class CanvasConstructor {
      * moveTo() before creating the quadratic Bézier curve.
      * @param {number} cpx The x axis of the coordinate for the control point.
      * @param {number} cpy The y axis of the coordinate for the control point.
-     * @param {number} x   The x axis of the coordinate for the end point.
-     * @param {number} y   The y axis of the coordinate for the end point.
+     * @param {number} x The x axis of the coordinate for the end point.
+     * @param {number} y The y axis of the coordinate for the end point.
      * @returns {this}
      * @chainable
      * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/quadraticCurveTo
@@ -936,8 +936,8 @@ class CanvasConstructor {
      * @param {number} cp1y The y axis of the coordinate for first control point.
      * @param {number} cp2x The x axis of the coordinate for the second control point.
      * @param {number} cp2y The y axis of the coordinate for the second control point.
-     * @param {number} x    The x axis of the coordinate for the end point.
-     * @param {number} y    The y axis of the coordinate for the end point.
+     * @param {number} x The x axis of the coordinate for the end point.
+     * @param {number} y The y axis of the coordinate for the end point.
      * @returns {this}
      * @chainable
      * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/bezierCurveTo
@@ -1109,10 +1109,10 @@ class CanvasConstructor {
 
     /**
      * Clear a circle.
-     * @param {number} x                   The position x in the center of the clip's circle.
-     * @param {number} y                   The position y in the center of the clip's circle.
-     * @param {number} radius              The radius for the clip.
-     * @param {number} [start=0]           The degree in radians to start drawing the circle.
+     * @param {number} x The position x in the center of the clip's circle.
+     * @param {number} y The position y in the center of the clip's circle.
+     * @param {number} radius The radius for the clip.
+     * @param {number} [start=0] The degree in radians to start drawing the circle.
      * @param {number} [angle=Math.PI * 2] The degree in radians to finish drawing the circle, defaults to a full circle.
      * @returns {this}
      * @chainable
@@ -1125,9 +1125,9 @@ class CanvasConstructor {
 
     /**
      * Clear an area.
-     * @param {number} [x=0]                The position x to start drawing the element.
-     * @param {number} [y=0]                The position y to start drawing the element.
-     * @param {number} [width=this.width]   The width of the element.
+     * @param {number} [x=0] The position x to start drawing the element.
+     * @param {number} [y=0] The position y to start drawing the element.
+     * @param {number} [width=this.width] The width of the element.
      * @param {number} [height=this.heigth] The heigth of the element.
      * @returns {this}
      * @chainable
