@@ -821,9 +821,9 @@ class CanvasConstructor {
 	 * @example
 	 * new Canvas(200, 200)
 	 *     .printLinearGradient(0, 0, 200, 50, [
-	 *         { position: 0, color: "white" },
-	 *         { position: 0.25, color: "red" },
-	 *         { position:0.5, color: "blue" }
+	 *         { position: 0, color: 'white' },
+	 *         { position: 0.25, color: 'red' },
+	 *         { position: 0.5, color: 'blue' }
 	 *     ])
 	 *     .addRect(10, 10, 200, 100)
 	 */
