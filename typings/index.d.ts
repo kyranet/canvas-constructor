@@ -50,9 +50,11 @@ declare module 'canvas-constructor' {
         public setLineJoin(value: lineJoinValue): this;
         public setLineCap(value: lineCapValue): this;
         public setLineDash(segments: number[]): this;
-        public addImage(buffer: Buffer, x: number, y: number, width: number, height: number, options?: addImageOptions): this;
-        public addRoundImage(buffer: Buffer, x: number, y: number, width: number, height: number, radius?: number): this;
-        public addBevelImage(buffer: Buffer, x: number, y: number, width: number, height: number, radius?: number): this;
+        public addImage(buffer: Image | Buffer, x: number, y: number, width: number, height: number, options?: addImageOptions): this;
+        public addRoundImage(buffer: Image | Buffer, x: number, y: number, width: number, height: number, radius?: number): this;
+        public addBevelImage(buffer: Image | Buffer, x: number, y: number, width: number, height: number, radius?: number): this;
+        public addRect(x: number, y: number, width: number, height: number): this;
+        public addBeveledRect(x: number, y: number, width: number, height: number, radius?: number): this;
         public addCircle(x: number, y: number, radius: number): this;
         public createRoundPath(x: number, y: number, radius: number, start?: number, angle?: number): this;
         public createRoundClip(x: number, y: number, radius: number, start?: number, angle?: number): this;
@@ -60,7 +62,6 @@ declare module 'canvas-constructor' {
         public createRectClip(x: number, y: number, width: number, height: number): this;
         public createBeveledPath(x: number, y: number, width: number, height: number, radius: number): this;
         public createBeveledClip(x: number, y: number, width: number, height: number, radius: number): this;
-        public addRect(x: number, y: number, width: number, height: number): this;
         public setColor(color: string|CanvasGradient): this;
         public setTextFont(font: string): this;
         public setTextAlign(align: textAlignType): this;
@@ -103,6 +104,8 @@ declare module 'canvas-constructor' {
         public toBufferAsync(): Promise<Buffer>;
         public toDataURL(type: string, ...args: any[]): string;
         public toDataURLAsync(type: string): Promise<string>;
+
+        private _resolveImage(imageOrBuffer: Image | Buffer): Image;
 
         public static getCanvas(): NodeCanvas;
         public static registerFont(path: string, family: string | fontFaceType);
