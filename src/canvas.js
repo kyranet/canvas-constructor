@@ -538,11 +538,12 @@ class CanvasConstructor {
 	 * @param {number} width The width of the element.
 	 * @param {number} height The heigth of the element.
 	 * @param {number} [radius=10] The radius for the new image.
+	 * @param {boolean} [restore=false] Whether this method should restore the drawing state.
 	 * @returns {this}
 	 * @chainable
 	 */
-	addRoundImage(imageOrBuffer, x, y, width, height, radius = 10) {
-		return this.addImage(imageOrBuffer, x, y, width, height, { type: 'round', radius });
+	addRoundImage(imageOrBuffer, x, y, width, height, radius = 10, restore = false) {
+		return this.addImage(imageOrBuffer, x, y, width, height, { type: 'round', radius, restore });
 	}
 
 	/**
@@ -553,11 +554,12 @@ class CanvasConstructor {
 	 * @param {number} width The width of the element.
 	 * @param {number} height The heigth of the element.
 	 * @param {number} [radius=10] The radius for the new image.
+	 * @param {boolean} [restore=false] Whether this method should restore the drawing state.
 	 * @returns {this}
 	 * @chainable
 	 */
-	addBevelImage(imageOrBuffer, x, y, width, height, radius = 10) {
-		return this.addImage(imageOrBuffer, x, y, width, height, { type: 'bevel', radius });
+	addBevelImage(imageOrBuffer, x, y, width, height, radius = 10, restore = false) {
+		return this.addImage(imageOrBuffer, x, y, width, height, { type: 'bevel', radius, restore });
 	}
 
 	/**
@@ -1290,7 +1292,7 @@ class CanvasConstructor {
 		}
 
 		const image = new Canvas.Image();
-		image.onload = cb.bind(null, image);
+		image.onload = cb.bind(this, image);
 		image.src = imageOrBuffer;
 
 		return image;
@@ -1307,7 +1309,7 @@ class CanvasConstructor {
 	 * @returns {CanvasConstructor}
 	 */
 	static registerFont(path, family) {
-		if (family && typeof family === 'object' && Array.isArray(family) === false && 'family' in family)
+		if (family && family.constructor === Object)
 			Canvas.registerFont(path, family);
 		else
 			Canvas.registerFont(path, { family });

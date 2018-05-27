@@ -51,8 +51,8 @@ declare module 'canvas-constructor' {
         public setLineCap(value: lineCapValue): this;
         public setLineDash(segments: number[]): this;
         public addImage(buffer: Image | Buffer, x: number, y: number, width: number, height: number, options?: addImageOptions): this;
-        public addRoundImage(buffer: Image | Buffer, x: number, y: number, width: number, height: number, radius?: number): this;
-        public addBevelImage(buffer: Image | Buffer, x: number, y: number, width: number, height: number, radius?: number): this;
+        public addRoundImage(buffer: Image | Buffer, x: number, y: number, width: number, height: number, radius?: number, restore?: boolean): this;
+        public addBevelImage(buffer: Image | Buffer, x: number, y: number, width: number, height: number, radius?: number, restore?: boolean): this;
         public addRect(x: number, y: number, width: number, height: number): this;
         public addBeveledRect(x: number, y: number, width: number, height: number, radius?: number): this;
         public addCircle(x: number, y: number, radius: number): this;
