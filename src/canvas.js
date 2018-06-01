@@ -780,13 +780,27 @@ class CanvasConstructor {
 	 * argument.
 	 * @param {Image} imageOrBuffer A Canvas Image to be used as the image to repeat.
 	 * @param {('repeat'|'repeat-x'|'repeat-y'|'no-repeat')} repetition The repeat mode.
+	 * @param {Function} callback The callback to take the createPattern
 	 * @returns {this}
 	 * @chainable
 	 * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/createPattern
 	 */
-	createPattern(imageOrBuffer, repetition) {
-		this._resolveImage(imageOrBuffer, (image) => this.context.createPattern(image, repetition));
+	createPattern(imageOrBuffer, repetition, callback) {
+		this._resolveImage(imageOrBuffer, (image) => callback(this.context.createPattern(image, repetition)));
 		return this;
+	}
+
+	/**
+	 * Creates a pattern using the specified image. It repeats the source in the directions specified by the repetition
+	 * argument, and prints it.
+	 * @param {Image} imageOrBuffer A Canvas Image to be used as the image to repeat.
+	 * @param {('repeat'|'repeat-x'|'repeat-y'|'no-repeat')} repetition The repeat mode.
+	 * @returns {this}
+	 * @chainable
+	 * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/createPattern
+	 */
+	printPattern(imageOrBuffer, repetition) {
+		return this.createPattern(imageOrBuffer, repetition, pattern => this.setColor(pattern));
 	}
 
 	/**
