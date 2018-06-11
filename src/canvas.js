@@ -14,6 +14,14 @@ const isNotConstructor = typeof Canvas.createCanvas === 'function';
 class CanvasConstructor {
 
 	/**
+	 * @typedef {Object} BeveledRadiusOptions
+	 * @property {number} [tl] The top left radius
+	 * @property {number} [tr] The top right radius
+	 * @property {number} [br] The bottom right radius
+	 * @property {number} [bl] The buttom left radius
+	 */
+
+	/**
 	 * Initialize canvas-constructor
 	 * @param {number} width The canvas' width in pixels.
 	 * @param {number} height The canvas' height in pixels.
@@ -131,28 +139,28 @@ class CanvasConstructor {
 	}
 
 	/**
-	 * Adds a scaling transformation to the canvas units by x horizontally and by y vertically.
-	 * @param {number} x Scaling factor in the horizontal direction.
-	 * @param {number} y Scaling factor in the vertical direction.
+	 * Adds a scaling transformation to the canvas units by X horizontally and by y vertically.
+	 * @param {number} dx Scaling factor in the horizontal direction.
+	 * @param {number} dy Scaling factor in the vertical direction.
 	 * @returns {this}
 	 * @chainable
 	 * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/scale
 	 */
-	scale(x, y) {
-		this.context.scale(x, y);
+	scale(dx, dy) {
+		this.context.scale(dx, dy);
 		return this;
 	}
 
 	/**
-	 * Adds a translation transformation by moving the canvas and its origin x horizontally and y vertically on the grid.
-	 * @param {number} x Distance to move in the horizontal direction.
-	 * @param {number} y Distance to move in the vertical direction.
+	 * Adds a translation transformation by moving the canvas and its origin X horizontally and y vertically on the grid.
+	 * @param {number} dx Distance to move in the horizontal direction.
+	 * @param {number} dy Distance to move in the vertical direction.
 	 * @returns {this}
 	 * @chainable
 	 * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/translate
 	 */
-	translate(x, y) {
-		this.context.translate(x, y);
+	translate(dx, dy) {
+		this.context.translate(dx, dy);
 		return this;
 	}
 
@@ -200,8 +208,8 @@ class CanvasConstructor {
 	/**
 	 * Returns an ImageData object representing the underlying pixel data for the area of the canvas denoted by the rectangle which starts at (sx, sy)
 	 * and has an sw width and sh height. This method is not affected by the canvas transformation matrix.
-	 * @param {(number|Function)} [x] The x coordinate of the upper left corner of the rectangle from which the ImageData will be extracted.
-	 * @param {number} [y] The y coordinate of the upper left corner of the rectangle from which the ImageData will be extracted.
+	 * @param {(number|Function)} [dx] The X coordinate of the upper left corner of the rectangle from which the ImageData will be extracted.
+	 * @param {number} [dy] The Y coordinate of the upper left corner of the rectangle from which the ImageData will be extracted.
 	 * @param {number} [width] The width of the rectangle from which the ImageData will be extracted.
 	 * @param {number} [height] The height of the rectangle from which the ImageData will be extracted.
 	 * @param {Function} callback The callback, if not specified, this method won't be chainable as it will return a
@@ -211,17 +219,17 @@ class CanvasConstructor {
 	 * @chainable
 	 * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/getImageData
 	 */
-	getImageData(x = 0, y = 0, width = this.width, height = this.height, callback) {
+	getImageData(dx = 0, dy = 0, width = this.width, height = this.height, callback) {
 		if (typeof x === 'function') {
-			callback = x;
-			x = 0;
+			callback = dx;
+			dx = 0;
 		}
 		if (callback) {
 			if (typeof callback !== 'function') throw new TypeError('Callback must be a function');
-			callback.call(this, this.context.getImageData(x, y, width, height), this);
+			callback.call(this, this.context.getImageData(dx, dy, width, height), this);
 			return this;
 		}
-		return this.context.getImageData(x, y, width, height);
+		return this.context.getImageData(dx, dy, width, height);
 	}
 
 	/**
@@ -231,8 +239,8 @@ class CanvasConstructor {
 	 * @param {ImageData} imagedata An ImageData object containing the array of pixel values.
 	 * @param {number} dx Horizontal position (x-coordinate) at which to place the image data in the destination canvas.
 	 * @param {number} dy Vertical position (y-coordinate) at which to place the image data in the destination canvas.
-	 * @param {number} [dirtyX=0] Horizontal position (x-coordinate). The x coordinate of the top left hand corner of your Image data. Defaults to 0.
-	 * @param {number} [dirtyY=0] Vertical position (y-coordinate). The y coordinate of the top left hand corner of your Image data. Defaults to 0.
+	 * @param {number} [dirtyX=0] Horizontal position (x-coordinate). The X coordinate of the top left hand corner of your Image data. Defaults to 0.
+	 * @param {number} [dirtyY=0] Vertical position (y-coordinate). The Y coordinate of the top left hand corner of your Image data. Defaults to 0.
 	 * @param {number} [dirtyWidth] Width of the rectangle to be painted. Defaults to the width of the image data.
 	 * @param {number} [dirtyHeight] Height of the rectangle to be painted. Defaults to the height of the image data.
 	 * @returns {this}
@@ -261,24 +269,24 @@ class CanvasConstructor {
 	/**
 	 * Add a text.
 	 * @param {string} text The text to write.
-	 * @param {number} x The position x to start drawing the element.
-	 * @param {number} y The position y to start drawing the element.
+	 * @param {number} dx The position x to start drawing the element.
+	 * @param {number} dy The position y to start drawing the element.
 	 * @param {number} [maxWidth] The maximum width to draw. If specified, and the string is computed to be wider than
 	 * this width, the font is adjusted to use a more horizontally condensed font.
 	 * @returns {this}
 	 * @chainable
 	 * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/fillText
 	 */
-	addText(text, x, y, maxWidth) {
-		this.context.fillText(text, x, y, maxWidth);
+	addText(text, dx, dy, maxWidth) {
+		this.context.fillText(text, dx, dy, maxWidth);
 		return this;
 	}
 
 	/**
 	 * Add responsive text
 	 * @param {string} text The text to write.
-	 * @param {number} x The position x to start drawing the element.
-	 * @param {number} y The position y to start drawing the element.
+	 * @param {number} dx The position x to start drawing the element.
+	 * @param {number} dy The position y to start drawing the element.
 	 * @param {number} maxWidth The max length in pixels for the text.
 	 * @returns {this}
 	 * @chainable
@@ -288,21 +296,21 @@ class CanvasConstructor {
 	 *     .addResponsiveText('Hello World', 30, 30, 50)
 	 *     .toBuffer();
 	 */
-	addResponsiveText(text, x, y, maxWidth) {
+	addResponsiveText(text, dx, dy, maxWidth) {
 		const [, style = '', size, font] = /(\w+ )?(\d+)(.+)/.exec(this.context.font);
 		const currentSize = parseInt(size);
 		const { width } = this.measureText(text);
 		const newLength = maxWidth > width ? currentSize : (maxWidth / width) * currentSize;
 		return this
 			.setTextFont(style + newLength + font)
-			.addText(text, x, y);
+			.addText(text, dx, dy);
 	}
 
 	/**
 	 * Add responsive text
 	 * @param {string} text The text to write.
-	 * @param {number} x The position x to start drawing the element.
-	 * @param {number} y The position y to start drawing the element.
+	 * @param {number} dx The position x to start drawing the element.
+	 * @param {number} dy The position y to start drawing the element.
 	 * @param {number} maxWidth The max length in pixels for the text.
 	 * @param {number} lineHeight The line's height.
 	 * @returns {this}
@@ -313,21 +321,21 @@ class CanvasConstructor {
 	 *     .addMultilineText('This is a really long text!', 139, 360, 156, 28)
 	 *     .toBuffer();
 	 */
-	addMultilineText(text, x, y, maxWidth, lineHeight) {
+	addMultilineText(text, dx, dy, maxWidth, lineHeight) {
 		const words = text.split(' '), wordLength = words.length;
 		let line = words[0];
 
 		for (let n = 1; n < wordLength; n++) {
 			const testLine = `${line} ${words[n]}`;
 			if (this.measureText(testLine).width > maxWidth) {
-				this.addText(line, x, y);
+				this.addText(line, dx, dy);
 				line = `${words[n]} `;
-				y += lineHeight;
+				dy += lineHeight;
 			} else {
 				line = testLine;
 			}
 		}
-		return line.length ? this.addText(line, x, y) : this;
+		return line.length ? this.addText(line, dx, dy) : this;
 	}
 
 	/**
@@ -343,32 +351,32 @@ class CanvasConstructor {
 	}
 
 	/**
-	 * Paints a rectangle which has a starting point at (x, y) and has a w width and an h height onto the canvas, using
+	 * Paints a rectangle which has a starting point at (X, Y) and has a w width and an h height onto the canvas, using
 	 * the current stroke style.
-	 * @param {number} x The x axis of the coordinate for the rectangle starting point.
-	 * @param {number} y The y axis of the coordinate for the rectangle starting point.
+	 * @param {number} dx The x axis of the coordinate for the rectangle starting point.
+	 * @param {number} dy The y axis of the coordinate for the rectangle starting point.
 	 * @param {number} width The rectangle's width.
 	 * @param {number} height The rectangle's height.
 	 * @returns {this}
 	 * @chainable
 	 * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/strokeRect
 	 */
-	addStrokeRect(x, y, width, height) {
-		this.context.strokeRect(x, y, width, height);
+	addStrokeRect(dx, dy, width, height) {
+		this.context.strokeRect(dx, dy, width, height);
 		return this;
 	}
 
 	/**
 	 * Add stroked text.
 	 * @param {string} text The text to write.
-	 * @param {number} x The position x to start drawing the element.
-	 * @param {number} y The position y to start drawing the element.
+	 * @param {number} dx The position x to start drawing the element.
+	 * @param {number} dy The position y to start drawing the element.
 	 * @returns {this}
 	 * @chainable
 	 * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/strokeText
 	 */
-	addStrokeText(text, x, y) {
-		this.context.strokeText(text, x, y);
+	addStrokeText(text, dx, dy) {
+		this.context.strokeText(text, dx, dy);
 		return this;
 	}
 
@@ -419,6 +427,17 @@ class CanvasConstructor {
 			return this;
 		}
 		return this.context.measureText(text);
+	}
+
+	/**
+	 * Set the new font size, unlike setTextFont, this only requires the number.
+	 * @param {number} size The new size to set
+	 * @returns {this}
+	 * @chainable
+	 */
+	setTextSize(size) {
+		const [, style = '', font] = /(\w+ )?(?:\d+)(.+)/.exec(this.context.font);
+		return this.setTextFont(style + size + font);
 	}
 
 	/**
@@ -507,25 +526,33 @@ class CanvasConstructor {
 	/**
 	 * Add an image.
 	 * @param {Image|Buffer} imageOrBuffer The image's buffer.
-	 * @param {number} x The position x to start drawing the element.
-	 * @param {number} y The position y to start drawing the element.
-	 * @param {number} width The width of the element.
-	 * @param {number} height The heigth of the element.
-	 * @param {Object} options Options.
-	 * @param {number} options.radius The radius for the new image.
-	 * @param {'round'|'bevel'} options.type The type for the new image.
-	 * @param {boolean} options.restore Whether this method should restore the drawing state. Use this when you use options.type
+	 * @param {number} dx The X coordinate in the destination canvas at which to place the top-left corner of the source image.
+	 * @param {number} dy The Y coordinate in the destination canvas at which to place the top-left corner of the source image.
+	 * @param {number} [dWidth] The width to draw the image in the destination canvas. This allows scaling of the drawn image. If not specified, the image is not scaled in width when drawn.
+	 * @param {number} [dHeight] The height to draw the image in the destination canvas. This allows scaling of the drawn image. If not specified, the image is not scaled in height when drawn.
+	 * @param {number} [sx] The X coordinate of the top left corner of the sub-rectangle of the source image to draw into the destination context.
+	 * @param {number} [sy] The Y coordinate of the top left corner of the sub-rectangle of the source image to draw into the destination context.
+	 * @param {number} [sWidth] The width of the sub-rectangle of the source image to draw into the destination context. If not specified, the entire rectangle from the coordinates specified by sx and sy to the bottom-right corner of the image is used.
+	 * @param {number} [sHeight] The height of the sub-rectangle of the source image to draw into the destination context.
+	 * @param {Object} [options] Options.
+	 * @param {number} [options.radius] The radius for the new image.
+	 * @param {'round'|'bevel'} [options.type] The type for the new image.
+	 * @param {boolean} [options.restore] Whether this method should restore the drawing state. Use this when you use options.type
 	 * @returns {this}
 	 * @chainable
+	 * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/drawImage
 	 */
-	addImage(imageOrBuffer, x, y, width, height, options = {}) {
+	addImage(imageOrBuffer, ...args) {
+		const options = args.length % 2 ? args.pop() : {};
 		if (options.restore) this.save();
 		if (options.type) {
 			if (isNaN(options.radius)) options.radius = 10;
-			if (options.type === 'round') this.createRoundClip(x + options.radius, y + options.radius, options.radius);
-			else if (options.type === 'bevel') this.createBeveledClip(x, y, width, height, options.radius);
+
+			const [dx, dy, width, height] = args;
+			if (options.type === 'round') this.createRoundClip(dx + options.radius, dy + options.radius, options.radius);
+			else if (options.type === 'bevel') this.createBeveledClip(dx, dy, width, height, options.radius);
 		}
-		this._resolveImage(imageOrBuffer, (image) => this.context.drawImage(image, x, y, width, height));
+		this._resolveImage(imageOrBuffer, (image) => this.context.drawImage(image, ...args));
 		if (options.restore) this.restore();
 		return this;
 	}
@@ -533,24 +560,44 @@ class CanvasConstructor {
 	/**
 	 * Add a round image.
 	 * @param {Image|Buffer} imageOrBuffer The image's buffer.
-	 * @param {number} x The position x to start drawing the element.
-	 * @param {number} y The position y to start drawing the element.
-	 * @param {number} width The width of the element.
-	 * @param {number} height The heigth of the element.
-	 * @param {number} [radius=10] The radius for the new image.
+	 * @param {number} dx The X coordinate in the destination canvas at which to place the top-left corner of the source image.
+	 * @param {number} dy The Y coordinate in the destination canvas at which to place the top-left corner of the source image.
+	 * @param {number} dWidth The width to draw the image in the destination canvas. This allows scaling of the drawn image. If not specified, the image is not scaled in width when drawn.
+	 * @param {number} dHeight The height to draw the image in the destination canvas. This allows scaling of the drawn image. If not specified, the image is not scaled in height when drawn.
+	 * @param {number} [radius] The radius for the circle
 	 * @param {boolean} [restore=false] Whether this method should restore the drawing state.
 	 * @returns {this}
 	 * @chainable
 	 */
-	addRoundImage(imageOrBuffer, x, y, width, height, radius = 10, restore = false) {
-		return this.addImage(imageOrBuffer, x, y, width, height, { type: 'round', radius, restore });
+	addRoundImage(imageOrBuffer, dx, dy, dWidth, dHeight, radius, restore) {
+		if (typeof radius === 'boolean') [radius = Math.min(dWidth, dHeight) / 2, restore] = [restore, radius];
+		if (typeof restore === 'undefined') restore = false;
+		return this.addImage(imageOrBuffer, dx, dy, dWidth, dHeight, { type: 'round', radius, restore });
+	}
+
+	/**
+	 * Add a circular image, as opposed to addRoundImage, this method does not set dx and dy in the top left corner of the image. Instead, they're positioned in the center, works similarly to `addCircle`.
+	 * @param {Image|Buffer} imageOrBuffer The image's buffer.
+	 * @param {number} dx The X coordinate in the destination canvas at which to place the center of the image.
+	 * @param {number} dy The Y coordinate in the destination canvas at which to place the center of the image.
+	 * @param {number} radius The radius for the circle, it sets the image's width and heigth as the diameter (radius * 2).
+	 * @param {boolean} [restore=false] Whether this method should restore the drawing state.
+	 * @returns {this}
+	 * @chainable
+	 */
+	addCircularImage(imageOrBuffer, dx, dy, radius, restore = false) {
+		if (restore) this.save();
+		const diameter = radius * 2;
+		this._resolveImage(imageOrBuffer, (image) => this.context.drawImage(image, dx - radius, dy - radius, diameter, diameter));
+		if (restore) this.restore();
+		return this;
 	}
 
 	/**
 	 * Add a beveled image.
 	 * @param {Image|Buffer} imageOrBuffer The image's buffer.
-	 * @param {number} x The position x to start drawing the element.
-	 * @param {number} y The position y to start drawing the element.
+	 * @param {number} dx The position x to start drawing the element.
+	 * @param {number} dy The position y to start drawing the element.
 	 * @param {number} width The width of the element.
 	 * @param {number} height The heigth of the element.
 	 * @param {number} [radius=10] The radius for the new image.
@@ -558,41 +605,41 @@ class CanvasConstructor {
 	 * @returns {this}
 	 * @chainable
 	 */
-	addBevelImage(imageOrBuffer, x, y, width, height, radius = 10, restore = false) {
-		return this.addImage(imageOrBuffer, x, y, width, height, { type: 'bevel', radius, restore });
+	addBeveledImage(imageOrBuffer, dx, dy, width, height, radius = 10, restore = false) {
+		return this.addImage(imageOrBuffer, dx, dy, width, height, { type: 'bevel', radius, restore });
 	}
 
 	/**
 	 * Add a circle or semi circle.
-	 * @param {number} x The position x in the center of the circle.
-	 * @param {number} y The position y in the center of the ircle.
+	 * @param {number} dx The position x in the center of the circle.
+	 * @param {number} dy The position y in the center of the ircle.
 	 * @param {number} radius The radius for the clip.
 	 * @returns {this}
 	 * @chainable
 	 */
-	addCircle(x, y, radius) {
-		return this.save().createRoundPath(x, y, radius).fill().restore();
+	addCircle(dx, dy, radius) {
+		return this.save().createRoundPath(dx, dy, radius).fill().restore();
 	}
 
 	/**
 	 * Add a rectangle.
-	 * @param {number} x The position x to start drawing the element.
-	 * @param {number} y The position y to start drawing the element.
+	 * @param {number} dx The position x to start drawing the element.
+	 * @param {number} dy The position y to start drawing the element.
 	 * @param {number} width  The width of the element.
 	 * @param {number} height The heigth of the element.
 	 * @returns {this}
 	 * @chainable
 	 * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/fillRect
 	 */
-	addRect(x, y, width, height) {
-		this.context.fillRect(x, y, width, height);
+	addRect(dx, dy, width, height) {
+		this.context.fillRect(dx, dy, width, height);
 		return this;
 	}
 
 	/**
 	 * Add a beveled rectangle.
-	 * @param {number} x The position x to start drawing the element.
-	 * @param {number} y The position y to start drawing the element.
+	 * @param {number} dx The position x to start drawing the element.
+	 * @param {number} dy The position y to start drawing the element.
 	 * @param {number} width  The width of the element.
 	 * @param {number} height The heigth of the element.
 	 * @param {number} [radius=10] The radius for the bevels.
@@ -600,90 +647,97 @@ class CanvasConstructor {
 	 * @chainable
 	 * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/fillRect
 	 */
-	addBeveledRect(x, y, width, height, radius = 10) {
-		return this.save().createBeveledPath(x, y, width, height, radius).fill().restore();
+	addBeveledRect(dx, dy, width, height, radius = 10) {
+		return this.save().createBeveledPath(dx, dy, width, height, radius).fill().restore();
 	}
 
 	/**
 	 * Create a round path.
-	 * @param {number} x The position x in the center of the clip's circle.
-	 * @param {number} y The position y in the center of the clip's circle.
+	 * @param {number} dx The position x in the center of the clip's circle.
+	 * @param {number} dy The position y in the center of the clip's circle.
 	 * @param {number} radius The radius for the clip.
 	 * @param {number} [start=0] The degree in radians to start drawing the circle.
 	 * @param {number} [angle=Math.PI * 2] The degree in radians to finish drawing the circle, defaults to a full circle.
 	 * @returns {this}
 	 * @chainable
 	 */
-	createRoundPath(x, y, radius, start = 0, angle = Math.PI * 2) {
+	createRoundPath(dx, dy, radius, start = 0, angle = Math.PI * 2) {
 		this.context.beginPath();
-		this.context.arc(x, y, radius, start, angle, false);
+		this.context.arc(dx, dy, radius, start, angle, false);
 		return this;
 	}
 
 	/**
 	 * Create a round clip.
-	 * @param {number} x The position x in the center of the clip's circle.
-	 * @param {number} y The position y in the center of the clip's circle.
+	 * @param {number} dx The position x in the center of the clip's circle.
+	 * @param {number} dy The position y in the center of the clip's circle.
 	 * @param {number} radius The radius for the clip.
 	 * @param {number} [start=0] The degree in radians to start drawing the circle.
 	 * @param {number} [angle=Math.PI * 2] The degree in radians to finish drawing the circle, defaults to a full circle.
 	 * @returns {this}
 	 * @chainable
 	 */
-	createRoundClip(x, y, radius, start = 0, angle = Math.PI * 2) {
-		return this.createRoundPath(x, y, radius, start, angle).clip();
+	createRoundClip(dx, dy, radius, start = 0, angle = Math.PI * 2) {
+		return this.createRoundPath(dx, dy, radius, start, angle).clip();
 	}
 
 	/**
 	 * Create a rectangle path.
-	 * @param {number} x The position x in the left corner.
-	 * @param {number} y The position y in the upper corner.
+	 * @param {number} dx The position x in the left corner.
+	 * @param {number} dy The position y in the upper corner.
 	 * @param {number} width The width of the rectangle.
 	 * @param {number} height The height of the rectangle.
 	 * @returns {this}
 	 * @chainable
 	 */
-	createRectPath(x, y, width, height) {
-		this.context.rect(x, y, width, height);
+	createRectPath(dx, dy, width, height) {
+		this.context.rect(dx, dy, width, height);
 		return this;
 	}
 
 	/**
 	 * Create a rectangle clip.
-	 * @param {number} x The position x in the left corner.
-	 * @param {number} y The position y in the upper corner.
+	 * @param {number} dx The position x in the left corner.
+	 * @param {number} dy The position y in the upper corner.
 	 * @param {number} width The width of the rectangle.
 	 * @param {number} height The height of the rectangle.
 	 * @returns {this}
 	 * @chainable
 	 */
-	createRectClip(x, y, width, height) {
-		return this.createRectPath(x, y, width, height).clip();
+	createRectClip(dx, dy, width, height) {
+		return this.createRectPath(dx, dy, width, height).clip();
 	}
 
 	/**
 	 * Create a beveled path.
-	 * @param {number} x The position x to start drawing clip.
-	 * @param {number} y The position y to start drawing clip.
+	 * @param {number} dx The position x to start drawing clip.
+	 * @param {number} dy The position y to start drawing clip.
 	 * @param {number} width The width of clip.
 	 * @param {number} height The heigth of clip.
-	 * @param {number} radius The radius for clip's rounded borders.
+	 * @param {(BeveledRadiusOptions|number)} radius The radius for clip's rounded borders.
 	 * @returns {this}
 	 * @chainable
 	 */
-	createBeveledPath(x, y, width, height, radius) {
+	createBeveledPath(dx, dy, width, height, radius) {
 		if (width > 0 && height > 0) {
-			radius = Math.min(radius, width / 2, height / 2);
+			let radiusObject;
+			if (typeof radius === 'number') {
+				radius = Math.min(radius, width / 2, height / 2);
+				radiusObject = { tl: radius, tr: radius, br: radius, bl: radius };
+			} else {
+				radiusObject = radius;
+			}
+			const { tl = radius, tr = radius, br = radius, bl = radius } = radiusObject;
 			this.context.beginPath();
-			this.context.moveTo(x + radius, y);
-			this.context.lineTo(x + width - radius, y);
-			this.context.quadraticCurveTo(x + width, y, x + width, y + radius);
-			this.context.lineTo(x + width, y + height - radius);
-			this.context.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
-			this.context.lineTo(x + radius, y + height);
-			this.context.quadraticCurveTo(x, y + height, x, y + height - radius);
-			this.context.lineTo(x, y + radius);
-			this.context.quadraticCurveTo(x, y, x + radius, y);
+			this.context.moveTo(dx + tl, dy);
+			this.context.lineTo(dx + width - tr, dy);
+			this.context.quadraticCurveTo(dx + width, dy, dx + width, dy + tr);
+			this.context.lineTo(dx + width, dy + height - br);
+			this.context.quadraticCurveTo(dx + width, dy + height, dx + width - br, dy + height);
+			this.context.lineTo(dx + bl, dy + height);
+			this.context.quadraticCurveTo(dx, dy + height, dx, dy + height - bl);
+			this.context.lineTo(dx, dy + tl);
+			this.context.quadraticCurveTo(dx, dy, dx + tl, dy);
 			this.context.closePath();
 			this.context.clip();
 		}
@@ -692,16 +746,16 @@ class CanvasConstructor {
 
 	/**
 	 * Create a beveled clip.
-	 * @param {number} x The position x to start drawing clip.
-	 * @param {number} y The position y to start drawing clip.
+	 * @param {number} dx The position x to start drawing clip.
+	 * @param {number} dy The position y to start drawing clip.
 	 * @param {number} width The width of clip.
 	 * @param {number} height The heigth of clip.
 	 * @param {number} radius The radius for clip's rounded borders.
 	 * @returns {this}
 	 * @chainable
 	 */
-	createBeveledClip(x, y, width, height, radius) {
-		return this.createBeveledPath(x, y, width, height, radius).clip();
+	createBeveledClip(dx, dy, width, height, radius) {
+		return this.createBeveledPath(dx, dy, width, height, radius).clip();
 	}
 
 	/**
@@ -888,10 +942,10 @@ class CanvasConstructor {
 	}
 
 	/**
-	 * Adds an ellipse to the path which is centered at (x, y) position with the radius radiusX and radiusY starting at
+	 * Adds an ellipse to the path which is centered at (X, Y) position with the radius radiusX and radiusY starting at
 	 * startAngle and ending at endAngle going in the given direction by anticlockwise (defaulting to clockwise).
-	 * @param {number} x The x axis of the coordinate for the ellipse's center.
-	 * @param {number} y The y axis of the coordinate for the ellipse's center.
+	 * @param {number} dx The x axis of the coordinate for the ellipse's center.
+	 * @param {number} dy The y axis of the coordinate for the ellipse's center.
 	 * @param {number} radiusX The ellipse's major-axis radius.
 	 * @param {number} radiusY The ellipse's minor-axis radius.
 	 * @param {number} rotation The rotation for this ellipse, expressed in radians.
@@ -904,16 +958,16 @@ class CanvasConstructor {
 	 * @chainable
 	 * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/ellipse
 	 */
-	createEllipse(x, y, radiusX, radiusY, rotation, startAngle = 0, endAngle = Math.PI * 2, anticlockwise) {
-		this.context.ellipse(x, y, radiusX, radiusY, rotation, startAngle, endAngle, anticlockwise);
+	createEllipse(dx, dy, radiusX, radiusY, rotation, startAngle = 0, endAngle = Math.PI * 2, anticlockwise) {
+		this.context.ellipse(dx, dy, radiusX, radiusY, rotation, startAngle, endAngle, anticlockwise);
 		return this;
 	}
 
 	/**
-	 * Adds an arc to the path which is centered at (x, y) position with radius r starting at startAngle and ending at
+	 * Adds an arc to the path which is centered at (X, Y) position with radius r starting at startAngle and ending at
 	 * endAngle going in the given direction by anticlockwise (defaulting to clockwise).
-	 * @param {number} x The x coordinate of the arc's center.
-	 * @param {number} y The y coordinate of the arc's center.
+	 * @param {number} dx The X coordinate of the arc's center.
+	 * @param {number} dy The Y coordinate of the arc's center.
 	 * @param {number} radius The arc's radius.
 	 * @param {number} [startAngle=0] The angle at which the arc starts, measured clockwise from the positive x axis and
 	 * expressed in radians.
@@ -925,8 +979,8 @@ class CanvasConstructor {
 	 * @chainable
 	 * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/arc
 	 */
-	arc(x, y, radius, startAngle = 0, endAngle = Math.PI * 2, anticlockwise = false) {
-		this.context.arc(x, y, radius, startAngle, endAngle, anticlockwise);
+	arc(dx, dy, radius, startAngle = 0, endAngle = Math.PI * 2, anticlockwise = false) {
+		this.context.arc(dx, dy, radius, startAngle, endAngle, anticlockwise);
 		return this;
 	}
 
@@ -952,14 +1006,14 @@ class CanvasConstructor {
 	 * moveTo() before creating the quadratic Bézier curve.
 	 * @param {number} cpx The x axis of the coordinate for the control point.
 	 * @param {number} cpy The y axis of the coordinate for the control point.
-	 * @param {number} x The x axis of the coordinate for the end point.
-	 * @param {number} y The y axis of the coordinate for the end point.
+	 * @param {number} dx The x axis of the coordinate for the end point.
+	 * @param {number} dy The y axis of the coordinate for the end point.
 	 * @returns {this}
 	 * @chainable
 	 * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/quadraticCurveTo
 	 */
-	quadraticCurveTo(cpx, cpy, x, y) {
-		this.context.quadraticCurveTo(cpx, cpy, x, y);
+	quadraticCurveTo(cpx, cpy, dx, dy) {
+		this.context.quadraticCurveTo(cpx, cpy, dx, dy);
 		return this;
 	}
 
@@ -971,40 +1025,40 @@ class CanvasConstructor {
 	 * @param {number} cp1y The y axis of the coordinate for first control point.
 	 * @param {number} cp2x The x axis of the coordinate for the second control point.
 	 * @param {number} cp2y The y axis of the coordinate for the second control point.
-	 * @param {number} x The x axis of the coordinate for the end point.
-	 * @param {number} y The y axis of the coordinate for the end point.
+	 * @param {number} dx The x axis of the coordinate for the end point.
+	 * @param {number} dy The y axis of the coordinate for the end point.
 	 * @returns {this}
 	 * @chainable
 	 * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/bezierCurveTo
 	 */
-	bezierCurveTo(cp1x, cp1y, cp2x, cp2y, x, y) {
-		this.context.bezierCurveTo(cp1x, cp1y, cp2x, cp2y, x, y);
+	bezierCurveTo(cp1x, cp1y, cp2x, cp2y, dx, dy) {
+		this.context.bezierCurveTo(cp1x, cp1y, cp2x, cp2y, dx, dy);
 		return this;
 	}
 
 	/**
 	 * Connects the last point in the sub-path to the x, y coordinates with a straight line
-	 * @param {number} x The x axis of the coordinate for the end of the line.
-	 * @param {number} y The y axis of the coordinate for the end of the line.
+	 * @param {number} dx The x axis of the coordinate for the end of the line.
+	 * @param {number} dy The y axis of the coordinate for the end of the line.
 	 * @returns {this}
 	 * @chainable
 	 * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/lineTo
 	 */
-	lineTo(x, y) {
-		this.context.lineTo(x, y);
+	lineTo(dx, dy) {
+		this.context.lineTo(dx, dy);
 		return this;
 	}
 
 	/**
-	 * Moves the starting point of a new sub-path to the (x, y) coordinates.
-	 * @param {number} x The x axis of the point.
-	 * @param {number} y The y axis of the point.
+	 * Moves the starting point of a new sub-path to the (X, Y) coordinates.
+	 * @param {number} dx The x axis of the point.
+	 * @param {number} dy The y axis of the point.
 	 * @returns {this}
 	 * @chainable
 	 * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/moveTo
 	 */
-	moveTo(x, y) {
-		this.context.moveTo(x, y);
+	moveTo(dx, dy) {
+		this.context.moveTo(dx, dy);
 		return this;
 	}
 
@@ -1144,32 +1198,32 @@ class CanvasConstructor {
 
 	/**
 	 * Clear a circle.
-	 * @param {number} x The position x in the center of the clip's circle.
-	 * @param {number} y The position y in the center of the clip's circle.
+	 * @param {number} dx The position x in the center of the clip's circle.
+	 * @param {number} dy The position y in the center of the clip's circle.
 	 * @param {number} radius The radius for the clip.
 	 * @param {number} [start=0] The degree in radians to start drawing the circle.
 	 * @param {number} [angle=Math.PI * 2] The degree in radians to finish drawing the circle, defaults to a full circle.
 	 * @returns {this}
 	 * @chainable
 	 */
-	clearCircle(x, y, radius, start = 0, angle = Math.PI * 2) {
+	clearCircle(dx, dy, radius, start = 0, angle = Math.PI * 2) {
 		return this
-			.createRoundClip(x, y, radius, start, angle)
-			.clearPixels(x - radius, y - radius, radius * 2, radius * 2);
+			.createRoundClip(dx, dy, radius, start, angle)
+			.clearPixels(dx - radius, dy - radius, radius * 2, radius * 2);
 	}
 
 	/**
 	 * Clear an area.
-	 * @param {number} [x=0] The position x to start drawing the element.
-	 * @param {number} [y=0] The position y to start drawing the element.
+	 * @param {number} [dx=0] The position x to start drawing the element.
+	 * @param {number} [dy=0] The position y to start drawing the element.
 	 * @param {number} [width=this.width] The width of the element.
 	 * @param {number} [height=this.heigth] The heigth of the element.
 	 * @returns {this}
 	 * @chainable
 	 * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/clearRect
 	 */
-	clearPixels(x = 0, y = 0, width = this.width, height = this.height) {
-		this.context.clearRect(x, y, width, height);
+	clearPixels(dx = 0, dy = 0, width = this.width, height = this.height) {
+		this.context.clearRect(dx, dy, width, height);
 		return this;
 	}
 
@@ -1203,26 +1257,26 @@ class CanvasConstructor {
 
 	/**
 	 * Reports whether or not the specified point is contained in the current path.
-	 * @param {number} x The X coordinate of the point to check.
-	 * @param {number} y The Y coordinate of the point to check.
+	 * @param {number} dx The X coordinate of the point to check.
+	 * @param {number} dy The Y coordinate of the point to check.
 	 * @param {('nonzero'|'evenodd')} fillRule The algorithm by which to determine if a point is inside a path or
 	 * outside a path.
 	 * @returns {boolean}
 	 * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/isPointInPath
 	 */
-	isPointInPath(x, y, fillRule) {
-		return this.context.isPointInPath(x, y, fillRule);
+	isPointInPath(dx, dy, fillRule) {
+		return this.context.isPointInPath(dx, dy, fillRule);
 	}
 
 	/**
 	 * Reports whether or not the specified point is inside the area contained by the stroking of a path.
-	 * @param {number} x The X coordinate of the point to check.
-	 * @param {number} y The Y coordinate of the point to check.
+	 * @param {number} dx The X coordinate of the point to check.
+	 * @param {number} dy The Y coordinate of the point to check.
 	 * @returns {boolean}
 	 * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/isPointInStroke
 	 */
-	isPointInStroke(x, y) {
-		return this.context.isPointInStroke(x, y);
+	isPointInStroke(dx, dy) {
+		return this.context.isPointInStroke(dx, dy);
 	}
 
 	/**
@@ -1343,5 +1397,10 @@ class CanvasConstructor {
 	 */
 
 }
+
+CanvasConstructor.prototype.addBevelImage = require('util').deprecate(
+	CanvasConstructor.prototype.addBeveledImage,
+	'CanvasConstructor#addBevelImage() is deprecated. Use CanvasConstructor#addBeveledImage() instead.',
+	'DEP-CC-0001');
 
 module.exports = CanvasConstructor;

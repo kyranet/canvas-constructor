@@ -20,14 +20,18 @@
         "docma": "^1.5.3",
         "eslint": "^4.19.1",
         "eslint-config-klasa": "github:dirigeants/klasa-lint",
-        "fs-nextra": "^0.3.4",
+        "fs-nextra": "^0.3.5",
         "tslint": "^5.10.0",
-        "typescript": "^2.8.3"
+        "typescript": "^2.9.1"
     },
     "keywords": [
         "node-canvas",
         "es6",
         "constructor"
+    ],
+    "contributors": [
+    	"kyranet",
+    	"yorkaargh"
     ],
     "author": "kyranet",
     "license": "MIT",

@@ -4,6 +4,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## 1.1.0
+### Added
+- Added `addCircularImage()`, similar to `addCircle()`.
+- Added `setTextSize()`, similar to `setTextFont()` but changes the font size only (not the font itself).
+- Added all overloads for `addImage()`.
+- (Documentation) Added MDN link for `addImage()`.
+
+### Changed
+- `createBeveledPath()` now accepts an object type `BeveledRadiusOptions`.
+- Renamed `addBevelImage()` to `addBeveledImage()` to prevent confusions (naming inconsistency). The old method is still available but it's deprecated and will be removed in the next major update.
+
 ## 1.0.0
 ### Added
 - Support for canvas 1.6.x and 2.x.
