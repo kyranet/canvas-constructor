@@ -27,15 +27,15 @@ declare module 'canvas-constructor' {
         public rotate(angle: number): this;
         public scale(x: number, y: number): this;
         public translate(x: number, y: number): this;
-        public clip(path?: any, fillRule?: fillRuleType): this;
-        public clip(fillRule?: fillRuleType): this;
+        public clip(path?: any, fillRule?: FillRuleType): this;
+        public clip(fillRule?: FillRuleType): this;
         public setTransform(a: number, b: number, c: number, d: number, e: number, f: number): this;
         public resetTransformation(): this;
-        public getImageData(x?: number, y?: number, width?: number, height?: number): ImageData;
-        public getImageData(x?: number, y?: number, width?: number, height?: number, cb: (data: ImageData, canvas: this) => void): this;
         public getImageData(cb: (data: ImageData, canvas: this) => void): this;
+        public getImageData(x?: number, y?: number, width?: number, height?: number): ImageData;
+        public getImageData(x: number, y: number, width: number, height: number, cb: (data: ImageData, canvas: this) => void): this;
         public putImageData(imageData: ImageData, dx: number, dy: number, dirtyX?: number, dirtyY?: number, dirtyWidth?: number, dirtyHeight?: number): this;
-        public fill(path: any, fillRule?: fillRuleType): this;
+        public fill(path: any, fillRule?: FillRuleType): this;
         public addText(text: string, x: number, y: number, maxWidth?: number): this;
         public addResponsiveText(text: string, x: number, y: number, maxWidth: number): this;
         public addMultilineText(text: string, x: number, y: number, maxWidth: number, lineHeight: number): this;
@@ -47,10 +47,10 @@ declare module 'canvas-constructor' {
         public setLineWidth(width?: number): this;
         public setStrokeWidth(width: number): this;
         public setLineDashOffset(value: number): this;
-        public setLineJoin(value: lineJoinValue): this;
-        public setLineCap(value: lineCapValue): this;
+        public setLineJoin(value: LineJoinValue): this;
+        public setLineCap(value: LineCapValue): this;
         public setLineDash(segments: number[]): this;
-        public addImage(buffer: Image | Buffer, x: number, y: number, width: number, height: number, options?: addImageOptions): this;
+        public addImage(buffer: Image | Buffer, x: number, y: number, width: number, height: number, options?: AddImageOptions): this;
         public addRoundImage(buffer: Image | Buffer, x: number, y: number, width: number, height: number, radius?: number, restore?: boolean): this;
         public addBevelImage(buffer: Image | Buffer, x: number, y: number, width: number, height: number, radius?: number, restore?: boolean): this;
         public addRect(x: number, y: number, width: number, height: number): this;
@@ -64,11 +64,11 @@ declare module 'canvas-constructor' {
         public createBeveledClip(x: number, y: number, width: number, height: number, radius: number): this;
         public setColor(color: string|CanvasGradient): this;
         public setTextFont(font: string): this;
-        public setTextAlign(align: textAlignType): this;
-        public setTextBaseline(baseline: textBaselineType): this;
+        public setTextAlign(align: TextAlignType): this;
+        public setTextBaseline(baseline: TextBaselineType): this;
         public beginPath(): this;
         public closePath(): this;
-        public createPattern(image: Image, repetition: patternRepetition): this;
+        public createPattern(image: Image, repetition: PatternRepetition): this;
         public createLinearGradient(x0: number, y0: number, x1: number, y1: number, steps?: GradientStep[]): CanvasGradient;
         public printLinearGradient(x0: number, y0: number, x1: number, y1: number, steps?: GradientStep[]): this;
         public createRadialGradient(x0: number, y0: number, r0: number, x1: number, y1: number, r1: number, steps?: GradientStep[]): CanvasGradient;
@@ -85,22 +85,20 @@ declare module 'canvas-constructor' {
         public setShadowOffsetX(value: number): this;
         public setShadowOffsetY(value: number): this;
         public setMiterLimit(value: number): this;
-        public setPatternQuality(pattern: patternQuality): this;
-        public setTextDrawingMode(mode: textDrawingMode): this;
-        public setAntialiasing(antialias: antialiasType): this;
-        public setGlobalCompositeOperation(type: globalCompositeOperation): this;
+        public setPatternQuality(pattern: PatternQuality): this;
+        public setTextDrawingMode(mode: TextDrawingMode): this;
+        public setAntialiasing(antialias: AntialiasType): this;
+        public setGlobalCompositeOperation(type: GlobalCompositeOperation): this;
         public setGlobalAlpha(value: number): this;
         public resetShadows(): this;
         public clearCircle(x: number, y: number, radius: number, start?: number, angle?: number): this;
         public clearPixels(x?: number, y?: number, width?: number, height?: number): this;
         public getLineDash(): number[];
-        public isPointInPath(x: number, y: number, fillRule: fillRuleType): boolean;
+        public isPointInPath(x: number, y: number, fillRule: FillRuleType): boolean;
         public isPointInStroke(x: number, y: number): boolean;
-        public addTextFont(path: string, family: string | fontFaceType): this;
-
-        public process(fn: (canvas: this) => void): this;
-
-        public toBuffer(...args?: any[]): Buffer;
+        public addTextFont(path: string, family: string | FontFaceType): this;
+        public process(fn: (canvas: this) => any): this;
+        public toBuffer(...args: any[]): Buffer;
         public toBufferAsync(): Promise<Buffer>;
         public toDataURL(type: string, ...args: any[]): string;
         public toDataURLAsync(type: string): Promise<string>;
@@ -108,62 +106,66 @@ declare module 'canvas-constructor' {
         private _resolveImage(imageOrBuffer: Image | Buffer): Image;
 
         public static getCanvas(): NodeCanvas;
-        public static registerFont(path: string, family: string | fontFaceType);
+        public static registerFont(path: string, family: string | FontFaceType);
 
     }
 
     export type CanvasType = 'pdf'
         | 'svg';
-    export type fillRuleType = 'nonzero'
+
+    export type FillRuleType = 'nonzero'
         | 'evenodd';
-    export type lineCapValue = 'butt'
+
+    export type LineCapValue = 'butt'
         | 'round'
         | 'square';
-    export type lineJoinValue = 'bevel'
+
+    export type LineJoinValue = 'bevel'
         | 'round'
         | 'miter';
-    export type addImageOptions = {
+
+    export type AddImageOptions = {
         radius?: number;
-        type?: roundType;
+        type?: RoundType;
         restore?: boolean;
     };
 
-    export type antialiasType = 'default'
+    export type AntialiasType = 'default'
         | 'none'
         | 'gray'
         | 'subpixel';
 
-    export type patternQuality = 'fast'
+    export type PatternQuality = 'fast'
         | 'good'
         | 'best'
         | 'nearest'
         | 'bilinear';
 
-    export type patternRepetition = 'repeat'
+    export type PatternRepetition = 'repeat'
         | 'repeat-x'
         | 'repeat-y'
         | 'no-repeat';
 
-    export type roundType = 'round'
+    export type RoundType = 'round'
         | 'bevel';
 
-    export type textAlignType = 'left'
+    export type TextAlignType = 'left'
         | 'center'
         | 'right'
         | 'start'
         | 'end';
 
-    export type textBaselineType = 'alphabetic'
+    export type TextBaselineType = 'alphabetic'
         | 'bottom'
         | 'hanging'
         | 'ideographic'
         | 'middle'
         | 'top';
 
-    export type textDrawingMode = 'path'
+    export type TextDrawingMode = 'path'
         | 'glyph';
 
-    export type globalCompositeOperation = 'color-burn'
+    export type GlobalCompositeOperation = 'color-burn'
         | 'color-dodge'
         | 'color'
         | 'copy'
@@ -194,7 +196,7 @@ declare module 'canvas-constructor' {
         | 'source-over'
         | 'xor';
 
-    export type fontFaceType = {
+    export type FontFaceType = {
         family: string;
         style?: string;
         weight?: string;
@@ -207,6 +209,10 @@ declare module 'canvas-constructor' {
 
     export type CanvasGradient = {
         addColorStop: (offset: number, color: string) => void;
+    };
+
+    export type CanvasPattern = {
+        setTransform: (matrix: SVGMatrix) => void;
     };
 
     // node-canvas related typings.
@@ -228,37 +234,28 @@ declare module 'canvas-constructor' {
         parseFont: (str: string) => ParsedFont;
         PDFStream: CanvasPDFStream;
         PNGStream: CanvasPNGStream;
-        registerFont: (src: string, fontFace: fontFaceType) => any;
+        registerFont: (src: string, fontFace: FontFaceType) => any;
         version: string;
     };
 
     export class CanvasJPEGStream {
-
         public constructor(canvas: any, options: any);
         public canvas: any;
         public options: any;
-
         private _read(): void;
-
     }
 
     export class CanvasPDFStream {
-
         public constructor(canvas: any);
         public canvas: any;
-
         private _read(): void;
-
     }
 
     export class CanvasPNGStream {
-
         public constructor(canvas: any, options: any);
         public canvas: any;
         public options: any;
-
         private _read(): void;
-
     }
 
     export type ParsedFont = {
