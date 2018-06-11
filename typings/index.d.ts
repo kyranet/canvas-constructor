@@ -12,10 +12,10 @@ declare module 'canvas-constructor' {
 
     export class Canvas {
 
-        public constructor(width: number, dHeigth: number, type?: CanvasType);
+        public constructor(dWidth: number, dHeigth: number, type?: CanvasType);
         public canvas: HTMLCanvasElement;
         public context: CanvasRenderingContext2D;
-        public dWidth: number;
+        public width: number;
         public heigth: number;
         public readonly lineDash: number[];
 
@@ -26,25 +26,25 @@ declare module 'canvas-constructor' {
         public addImage(buffer: Image | Buffer, dx: number, dy: number, dWidth: number, dHeight: number, options?: AddImageOptions): this;
         public addImage(buffer: Image | Buffer, dx: number, dy: number, options?: AddImageOptions): this;
         public addImage(buffer: Image | Buffer, sx: number, sy: number, sWidth: number, sHeigth: number, dx: number, dy: number, dWidth: number, dHeigth: number, options?: AddImageOptions): this;
-        public addMultilineText(text: string, x: number, dx: number, maxWidth: number, lineHeight: number): this;
+        public addMultilineText(text: string, dx: number, dx: number, maxWidth: number, lineHeight: number): this;
         public addRect(dx: number, dx: number, dWidth: number, dHeigth: number): this;
-        public addResponsiveText(text: string, x: number, dx: number, maxWidth: number): this;
+        public addResponsiveText(text: string, dx: number, dx: number, maxWidth: number): this;
         public addRoundImage(buffer: Image | Buffer, dx: number, dy: number, dWidth: number, dHeight: number, radius?: number, restore?: boolean): this;
         public addRoundImage(buffer: Image | Buffer, dx: number, dy: number, dWidth: number, dHeight: number, restore?: boolean): this;
         public addStrokeRect(dx: number, dx: number, dWidth: number, dHeigth: number): this;
-        public addStrokeText(text: string, x: number, dx: number): this;
-        public addText(text: string, x: number, dx: number, maxWidth?: number): this;
+        public addStrokeText(text: string, dx: number, dx: number): this;
+        public addText(text: string, dx: number, dx: number, maxWidth?: number): this;
         public addTextFont(path: string, family: string | FontFaceType): this;
         public arc(dx: number, dx: number, radius: number, startAngle: number, endAngle: number, anticlockwise?: boolean): this;
         public arcTo(x1: number, y1: number, x2: number, y2: number, radius: number): this;
         public arcTo(x1: number, y1: number, x2: number, y2: number, radiusX: number, radiusY: number, rotation: number): this;
         public beginPath(): this;
-        public bezierCurveTo(cp1x: number, cp1y: number, cp2x: number, cp2y: number, x: number, dx: number): this;
-        public changeCanvasHeigth(heigth: number): this;
-        public changeCanvasSize(width?: number, dHeigth?: number): this;
-        public changeCanvasWidth(width: number): this;
+        public bezierCurveTo(cp1x: number, cp1y: number, cp2x: number, cp2y: number, dx: number, dx: number): this;
+        public changeCanvasHeigth(dHeigth: number): this;
+        public changeCanvasSize(dWidth?: number, dHeigth?: number): this;
+        public changeCanvasWidth(dWidth: number): this;
         public clearCircle(dx: number, dx: number, radius: number, start?: number, angle?: number): this;
-        public clearPixels(x?: number, y?: number, dWidth?: number, dHeigth?: number): this;
+        public clearPixels(dx?: number, dy?: number, dWidth?: number, dHeigth?: number): this;
         public clip(fillRule?: FillRuleType): this;
         public clip(path?: any, fillRule?: FillRuleType): this;
         public closePath(): this;
@@ -61,7 +61,7 @@ declare module 'canvas-constructor' {
         public fill(fillRule?: FillRuleType): this;
         public getImageData(cb: (data: ImageData, canvas: this) => void): this;
         public getImageData(dx: number, dx: number, dWidth: number, dHeigth: number, cb: (data: ImageData, canvas: this) => void): this;
-        public getImageData(x?: number, y?: number, dWidth?: number, dHeigth?: number): ImageData;
+        public getImageData(dx?: number, dy?: number, dWidth?: number, dHeigth?: number): ImageData;
         public getLineDash(): number[];
         public isPointInPath(dx: number, dx: number, fillRule: FillRuleType): boolean;
         public isPointInStroke(dx: number, dx: number): boolean;
@@ -72,7 +72,7 @@ declare module 'canvas-constructor' {
         public printRadialGradient(x0: number, y0: number, r0: number, x1: number, y1: number, r1: number, steps?: GradientStep[]): this;
         public process(fn: (canvas: this) => any): this;
         public putImageData(imageData: ImageData, dx: number, dy: number, dirtyX?: number, dirtyY?: number, dirtyWidth?: number, dirtyHeight?: number): this;
-        public quadraticCurveTo(cpx: number, cpy: number, x: number, dx: number): this;
+        public quadraticCurveTo(cpx: number, cpy: number, dx: number, dx: number): this;
         public resetShadows(): this;
         public resetTransformation(): this;
         public restore(): this;
@@ -87,7 +87,7 @@ declare module 'canvas-constructor' {
         public setLineDash(segments: number[]): this;
         public setLineDashOffset(value: number): this;
         public setLineJoin(value: LineJoinValue): this;
-        public setLineWidth(width?: number): this;
+        public setLineWidth(dWidth?: number): this;
         public setMiterLimit(value: number): this;
         public setPatternQuality(pattern: PatternQuality): this;
         public setShadowBlur(radius: number): this;
@@ -95,7 +95,7 @@ declare module 'canvas-constructor' {
         public setShadowOffsetX(value: number): this;
         public setShadowOffsetY(value: number): this;
         public setStroke(color: string): this;
-        public setStrokeWidth(width: number): this;
+        public setStrokeWidth(dWidth: number): this;
         public setTextAlign(align: TextAlignType): this;
         public setTextBaseline(baseline: TextBaselineType): this;
         public setTextDrawingMode(mode: TextDrawingMode): this;
@@ -228,14 +228,14 @@ declare module 'canvas-constructor' {
     };
 
     // node-canvas related typings.
-    export type Image = (width?: number, dHeigth?: number) => HTMLImageElement;
+    export type Image = (dWidth?: number, dHeigth?: number) => HTMLImageElement;
     export type NodeCanvas = {
         backends: Object;
         cairoVersion: string;
         Canvas: NodeCanvas;
         Context2d: typeof CanvasRenderingContext2D;
-        createCanvas: (width: number, dHeigth: number, type: CanvasType) => any;
-        createImageData: (array: any[], dWidth: number, heigth: number) => any;
+        createCanvas: (dWidth: number, dHeigth: number, type: CanvasType) => any;
+        createImageData: (array: any[], dWidth: number, dHeigth: number) => any;
         freetypeVersion: string;
         gifVersion: string;
         Image: typeof Image;
