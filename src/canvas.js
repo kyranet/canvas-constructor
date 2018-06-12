@@ -5,12 +5,8 @@ try {
 	Canvas = require('canvas');
 }
 
-/**
- * This variable helps Canvas-Constructor to identify if the version
- * of canvas is older than 2.0.0 (new Canvas()) or newer (Canvas.createCanvas).
- * @type {string}
- * @private
- */
+// This variable helps Canvas-Constructor to identify if the version
+// of canvas is older than 2.0.0 (new Canvas()) or newer (Canvas.createCanvas).
 const isNotConstructor = typeof Canvas.createCanvas === 'function';
 
 class CanvasConstructor {
