@@ -4,12 +4,4 @@
         "name": "Getting Started",
         "path": "GettingStarted.md"
     }]
-},
-{
-    "name": "Piece Basics",
-    "files": [
-    {
-        "name": "Creating IPC Pieces",
-        "path": "CreatingIPCPieces.md"
-    }]
 }]
