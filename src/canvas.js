@@ -8,6 +8,8 @@ try {
 /**
  * This variable helps Canvas-Constructor to identify if the version
  * of canvas is older than 2.0.0 (new Canvas()) or newer (Canvas.createCanvas).
+ * @type {string}
+ * @private
  */
 const isNotConstructor = typeof Canvas.createCanvas === 'function';
 
@@ -1247,7 +1249,7 @@ class CanvasConstructor {
 	}
 
 	/**
-	 * @returns {number[]}
+	 * @type {number[]}
 	 * @readonly
 	 * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/getLineDash
 	 */
