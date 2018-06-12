@@ -1245,6 +1245,8 @@ class CanvasConstructor {
 	}
 
 	/**
+	 * A list of numbers that specifies distances to alternately draw a line and a gap (in coordinate space units).
+	 * If the number, when setting the elements, was odd, the elements of the array get copied and concatenated.
 	 * @type {number[]}
 	 * @readonly
 	 * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/getLineDash
