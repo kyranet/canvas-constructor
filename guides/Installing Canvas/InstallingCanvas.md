@@ -2,7 +2,7 @@
 
 Let's start off by introducing what canvas is. In HTML, the `<canvas>` element can be used to draw images via scripting with JavaScript. The canvas that we're talking about is a Cairo backed canvas implementation for NodeJS. An example of something that can be done with canvas is this.
 
-![Canvas Command](../assets/canvas-example.png)
+![Canvas Command](https://github.com/kyranet/canvasConstructor/blob/master/guides/assets/canvas-example.png)
 
 Here, the bot is using canvas to edit a template and insert your avatar, and a random users avatar onto the template. So that's just an example of what Canvas can do, let's get down to installing it.
 
@@ -54,4 +54,4 @@ npm i canvas-constructor
 
 If you followed the guide completely, your console should look something like this, and you're good to go!
 
-![Install Screenshot](../assets/installation-screenshot.png)
+![Install Screenshot](https://github.com/kyranet/canvasConstructor/blob/master/guides/assets/installation-screenshot.png)

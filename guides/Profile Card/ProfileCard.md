@@ -6,7 +6,7 @@ This tutorial follows uses Evie's [Enmap-Based Points System](https://anidiots.g
 
 Right, this is the image you will be creating in this guide.
 
-![Profile image](../assets/profile-end-result.png)
+![Profile image](https://github.com/kyranet/canvasConstructor/blob/master/guides/assets/profile-end-result.png)
 
 Okay, now you've seen what you're going to create, I want to go over what I'll be covering in this tutorial.
 
@@ -159,7 +159,7 @@ That's the beauty of chanable methods, you don't need to constantly call the sam
 
 If you've been following along closely, your profile image should look like this now.
 
-![Boxes... yay](../assets/profile-boxes.png)
+![Boxes... yay](https://github.com/kyranet/canvasConstructor/blob/master/guides/assets/profile-boxes.png)
 
 As you can see, we've managed to successfully create an image with multiple boxes of different colours, now we'll do something different, let's create a drop shadow effect on a circular clip path.
 
@@ -178,7 +178,7 @@ As you can see, we've managed to successfully create an image with multiple boxe
 
 That will create the following image:
 
-![Shadows](../assets/profile-shadow.png)
+![Shadows](https://github.com/kyranet/canvasConstructor/blob/master/guides/assets/profile-shadow.png)
 
 Now, for the keen eyed observers, you may have noticed this comment line `// We need to put something here next.`, guess what you're about to put the avatar in that circle, so replace that line of text with this.
 
@@ -188,7 +188,7 @@ Now, for the keen eyed observers, you may have noticed this comment line `// We 
 
 And boom
 
-![Now with extra avatar.](../assets/profile-avatar.png)
+![Now with extra avatar.](https://github.com/kyranet/canvasConstructor/blob/master/guides/assets/profile-avatar.png)
 
 You're on the home stretch, you've only got to create a "level" plate over the avatar, and then add the text, so let's get that plate sorted \(I won't display how it looks\).
 
