@@ -1,7 +1,19 @@
 [{
+    "name": "Installing Canvas",
+    "files": [{
+        "name": "Installing Canvas",
+        "path": "InstallingCanvas.md"
+    }]
+}, {
     "name": "Getting Started",
     "files": [{
         "name": "Getting Started",
         "path": "GettingStarted.md"
+    }]
+}, {
+    "name": "Profile Card",
+    "files": [{
+        "name": "Profile Card",
+        "path": "ProfileCard.md"
     }]
 }]
