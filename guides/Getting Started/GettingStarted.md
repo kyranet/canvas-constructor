@@ -1,6 +1,6 @@
 # Getting Started
 
-Please check [Installing Canvas](./InstallingCanvas.md) for the installation. You **must** have Canvas installed and working before using this package.
+Please check {@tutorial InstallingCanvas} for the installation. You **must** have Canvas installed and working before using this package.
 
 ---
 
