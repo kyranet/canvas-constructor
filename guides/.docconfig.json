@@ -1,12 +1,9 @@
 [{
-    "name": "Installing Canvas",
+    "name": "Getting Started",
     "files": [{
         "name": "Installing Canvas",
         "path": "InstallingCanvas.md"
-    }]
-}, {
-    "name": "Getting Started",
-    "files": [{
+    }, {
         "name": "Getting Started",
         "path": "GettingStarted.md"
     }]
