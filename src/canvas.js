@@ -1371,17 +1371,19 @@ class CanvasConstructor {
 	}
 
 	/**
+	 * <warning>registerFont is not supported in node-canvas 1.6.x, you will need to use node-canvas 2.x</warning>
 	 * Register a new font (Canvas 2.x).
 	 * @param {string} path   The path for the font.
 	 * @param {string} family The font's family name.
 	 * @returns {CanvasConstructor}
 	 */
 	static registerFont(path, family) {
-		if (family && family.constructor === Object)
-			Canvas.registerFont(path, family);
-		else
-			Canvas.registerFont(path, { family });
+		if (typeof Canvas.registerFont !== 'function')
+    throw new Error('registerFont is not supported in this version of node-canvas, please install node-canvas 2.x.');
+		if (!family)
+    	throw new TypeError('A family must be specified for registerFont.');
 
+		Canvas.registerFont(family.constructor === Object ? family : { family });
 		return CanvasConstructor;
 	}
 
