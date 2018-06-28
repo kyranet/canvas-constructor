@@ -1379,9 +1379,9 @@ class CanvasConstructor {
 	 */
 	static registerFont(path, family) {
 		if (typeof Canvas.registerFont !== 'function')
-    throw new Error('registerFont is not supported in this version of node-canvas, please install node-canvas 2.x.');
+			throw new Error('registerFont is not supported in this version of node-canvas, please install node-canvas 2.x.');
 		if (!family)
-    	throw new TypeError('A family must be specified for registerFont.');
+			throw new TypeError('A family must be specified for registerFont.');
 
 		Canvas.registerFont(family.constructor === Object ? family : { family });
 		return CanvasConstructor;
