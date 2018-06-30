@@ -1383,7 +1383,7 @@ class CanvasConstructor {
 		if (!family)
 			throw new TypeError('A family must be specified for registerFont.');
 
-		Canvas.registerFont(family.constructor === Object ? family : { family });
+		Canvas.registerFont(path, family.constructor === Object ? family : { family });
 		return CanvasConstructor;
 	}
 
