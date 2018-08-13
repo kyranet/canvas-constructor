@@ -10,7 +10,7 @@ declare module 'canvas-constructor' {
     export function blur(canvas: Canvas, amount: number): Canvas;
     export function convolute(canvas: Canvas, weights: number[]): Canvas;
 
-    export function vibrant(buffer: Buffer) : any;
+    export function vibrant(buffer: Buffer): any;
 
     export class Canvas {
 
