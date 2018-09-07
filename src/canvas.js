@@ -164,8 +164,8 @@ class CanvasConstructor {
 
 	/**
 	 * Turns the path currently being built into the current clipping path.
-	 * @param {any} path A Path2D path to fill.
-	 * @param {('nonzero'|'evenodd')} fillRule The algorithm by which to determine if a point is inside a path or
+	 * @param {any} [path] A Path2D path to fill.
+	 * @param {('nonzero'|'evenodd')} [fillRule] The algorithm by which to determine if a point is inside a path or
 	 * outside a path.
 	 * @returns {this}
 	 * @chainable
@@ -252,8 +252,8 @@ class CanvasConstructor {
 
 	/**
 	 * Fills the current or given path with the current fill style using the non-zero or even-odd winding rule.
-	 * @param {any} path A Path2D path to fill.
-	 * @param {('nonzero'|'evenodd')} fillRule The algorithm by which to determine if a point is inside a path or
+	 * @param {any} [path] A Path2D path to fill.
+	 * @param {('nonzero'|'evenodd')} [fillRule] The algorithm by which to determine if a point is inside a path or
 	 * outside a path.
 	 * @returns {this}
 	 * @chainable
@@ -723,6 +723,7 @@ class CanvasConstructor {
 				radiusObject = { tl: radius, tr: radius, br: radius, bl: radius };
 			} else {
 				radiusObject = radius;
+				radius = Math.min(5, width / 2, height / 2);
 			}
 			const { tl = radius, tr = radius, br = radius, bl = radius } = radiusObject;
 			this.context.beginPath();
@@ -1401,7 +1402,6 @@ class CanvasConstructor {
 
 CanvasConstructor.prototype.addBevelImage = require('util').deprecate(
 	CanvasConstructor.prototype.addBeveledImage,
-	'CanvasConstructor#addBevelImage() is deprecated. Use CanvasConstructor#addBeveledImage() instead.',
-	'DEP-CC-0001');
+	'CanvasConstructor#addBevelImage() is deprecated. Use CanvasConstructor#addBeveledImage() instead.');
 
 module.exports = CanvasConstructor;
