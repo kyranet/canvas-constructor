@@ -385,8 +385,7 @@ class CanvasConstructor {
 	 * @param {Function} callback The callback, if not specified, this method won't be chainable as it will return a
 	 * number. If you use an arrow function, you might want to use the second argument which is the instance of the
 	 * class. Otherwise, the keyword this is binded to the class instance itself, so you can use it safely.
-	 * @returns {(CanvasConstructor|number)}
-	 * @chainable
+	 * @returns {(CanvasConstructor|TextMetrics)}
 	 * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/measureText
 	 * @example
 	 * new Canvas(500, 400)
@@ -421,7 +420,7 @@ class CanvasConstructor {
 	measureText(text, callback) {
 		if (callback) {
 			if (typeof callback !== 'function') throw new TypeError('Callback must be a function.');
-			callback.bind(this)(this.context.measureText(text), this);
+			callback.call(this, this.context.measureText(text), this);
 			return this;
 		}
 		return this.context.measureText(text);

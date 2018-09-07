@@ -39,7 +39,7 @@ declare module 'canvas-constructor' {
         public arcTo(x1: number, y1: number, x2: number, y2: number, radius: number): this;
         public arcTo(x1: number, y1: number, x2: number, y2: number, radiusX: number, radiusY: number, rotation: number): this;
         public beginPath(): this;
-        public bezierCurveTo(cp1x: number, cp1y: number, cp2x: number, cp2y: number, dx: number, dx: number): this;
+        public bezierCurveTo(cp1x: number, cp1y: number, cp2x: number, cp2y: number, dx: number, dy: number): this;
         public changeCanvasHeigth(dHeigth: number): this;
         public changeCanvasSize(dWidth?: number, dHeigth?: number): this;
         public changeCanvasWidth(dWidth: number): this;
@@ -66,7 +66,8 @@ declare module 'canvas-constructor' {
         public isPointInPath(dx: number, dy: number, fillRule: FillRuleType): boolean;
         public isPointInStroke(dx: number, dy: number): boolean;
         public lineTo(dx: number, dy: number): this;
-        public measureText(text: string, callback?: Function): this | number;
+        public measureText(text: string): number;
+        public measureText(text: string, callback: (metrics: TextMetrics, canvas: this) => void): this;
         public moveTo(dx: number, dy: number): this;
         public printLinearGradient(x0: number, y0: number, x1: number, y1: number, steps?: GradientStep[]): this;
         public printRadialGradient(x0: number, y0: number, r0: number, x1: number, y1: number, r1: number, steps?: GradientStep[]): this;
@@ -112,7 +113,7 @@ declare module 'canvas-constructor' {
         private _resolveImage(imageOrBuffer: Image | Buffer): Image;
 
         public static getCanvas(): NodeCanvas;
-        public static registerFont(path: string, family: string | FontFaceType);
+        public static registerFont(path: string, family: string | FontFaceType): Canvas;
     }
 
     export type BeveledRadiusOptions = {

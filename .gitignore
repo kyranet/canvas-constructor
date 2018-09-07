@@ -61,3 +61,4 @@ docs
 \.vscode/
 \.idea/
 desktop.ini
+yarn.lock
