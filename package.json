@@ -17,12 +17,13 @@
         "canvas": "github:Automattic/node-canvas"
     },
     "devDependencies": {
+        "@types/node": "^10.9.4",
         "docgen": "github:dirigeants/docsgen",
-        "eslint": "^4.19.1",
+        "eslint": "^5.5.0",
         "eslint-config-klasa": "github:dirigeants/klasa-lint",
-        "fs-nextra": "^0.3.5",
-        "tslint": "^5.10.0",
-        "typescript": "^2.9.1"
+        "fs-nextra": "^0.3.7",
+        "tslint": "^5.11.0",
+        "typescript": "^3.0.3"
     },
     "keywords": [
         "node-canvas",
