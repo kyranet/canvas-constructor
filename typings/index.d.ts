@@ -12,7 +12,7 @@ declare module 'canvas-constructor' {
 
     export class Canvas {
 
-        constructor(dWidth: number, dHeigth: number, type?: CanvasType);
+        public constructor(dWidth: number, dHeigth: number, type?: CanvasType);
         public canvas: HTMLCanvasElement;
         public context: CanvasRenderingContext2D;
         public width: number;
