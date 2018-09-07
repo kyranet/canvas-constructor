@@ -8,7 +8,7 @@
 			true, "check-space"
 		],
 		"indent": [
-			true, "spaces"
+			true, "tabs"
 		],
 		"curly": false,
 		"class-name": true,
