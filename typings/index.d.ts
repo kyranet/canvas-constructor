@@ -12,7 +12,7 @@ declare module 'canvas-constructor' {
 
     export class Canvas {
 
-        public constructor(dWidth: number, dHeigth: number, type?: CanvasType);
+        constructor(dWidth: number, dHeigth: number, type?: CanvasType);
         public canvas: HTMLCanvasElement;
         public context: CanvasRenderingContext2D;
         public width: number;
@@ -116,69 +116,69 @@ declare module 'canvas-constructor' {
         public static registerFont(path: string, family: string | FontFaceType): Canvas;
     }
 
-    export type BeveledRadiusOptions = {
+    type BeveledRadiusOptions = {
         tl?: number;
         tr?: number;
         br?: number;
         bl?: number;
     };
 
-    export type CanvasType = 'pdf'
+    type CanvasType = 'pdf'
         | 'svg';
 
-    export type FillRuleType = 'nonzero'
+    type FillRuleType = 'nonzero'
         | 'evenodd';
 
-    export type LineCapValue = 'butt'
+    type LineCapValue = 'butt'
         | 'round'
         | 'square';
 
-    export type LineJoinValue = 'bevel'
+    type LineJoinValue = 'bevel'
         | 'round'
         | 'miter';
 
-    export type AddImageOptions = {
+    type AddImageOptions = {
         radius?: number;
         type?: RoundType;
         restore?: boolean;
     };
 
-    export type AntialiasType = 'default'
+    type AntialiasType = 'default'
         | 'none'
         | 'gray'
         | 'subpixel';
 
-    export type PatternQuality = 'fast'
+    type PatternQuality = 'fast'
         | 'good'
         | 'best'
         | 'nearest'
         | 'bilinear';
 
-    export type PatternRepetition = 'repeat'
+    type PatternRepetition = 'repeat'
         | 'repeat-x'
         | 'repeat-y'
         | 'no-repeat';
 
-    export type RoundType = 'round'
+    type RoundType = 'round'
         | 'bevel';
 
-    export type TextAlignType = 'left'
+    type TextAlignType = 'left'
         | 'center'
         | 'right'
         | 'start'
         | 'end';
 
-    export type TextBaselineType = 'alphabetic'
+    type TextBaselineType = 'alphabetic'
         | 'bottom'
         | 'hanging'
         | 'ideographic'
         | 'middle'
         | 'top';
 
-    export type TextDrawingMode = 'path'
+    type TextDrawingMode = 'path'
         | 'glyph';
 
-    export type GlobalCompositeOperation = 'color-burn'
+    type GlobalCompositeOperation = 'color-burn'
         | 'color-dodge'
         | 'color'
         | 'copy'
@@ -209,28 +209,28 @@ declare module 'canvas-constructor' {
         | 'source-over'
         | 'xor';
 
-    export type FontFaceType = {
+    type FontFaceType = {
         family: string;
         style?: string;
         weight?: string;
     };
 
-    export type GradientStep = {
+    type GradientStep = {
         position: number;
         color: string;
     };
 
-    export type CanvasGradient = {
+    type CanvasGradient = {
         addColorStop: (offset: number, color: string) => void;
     };
 
-    export type CanvasPattern = {
+    type CanvasPattern = {
         setTransform: (matrix: SVGMatrix) => void;
     };
 
     // node-canvas related typings.
-    export type Image = (dWidth?: number, dHeigth?: number) => HTMLImageElement;
-    export type NodeCanvas = {
+    type Image = (dWidth?: number, dHeigth?: number) => HTMLImageElement;
+    type NodeCanvas = {
         backends: Object;
         cairoVersion: string;
         Canvas: NodeCanvas;
@@ -251,27 +251,27 @@ declare module 'canvas-constructor' {
         version: string;
     };
 
-    export class CanvasJPEGStream {
+    class CanvasJPEGStream {
         public constructor(canvas: any, options: any);
         public canvas: any;
         public options: any;
         private _read(): void;
     }
 
-    export class CanvasPDFStream {
+    class CanvasPDFStream {
         public constructor(canvas: any);
         public canvas: any;
         private _read(): void;
     }
 
-    export class CanvasPNGStream {
+    class CanvasPNGStream {
         public constructor(canvas: any, options: any);
         public canvas: any;
         public options: any;
         private _read(): void;
     }
 
-    export type ParsedFont = {
+    type ParsedFont = {
         weight: number;
         style: string;
         size: number;
