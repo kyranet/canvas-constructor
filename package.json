@@ -5,8 +5,8 @@
     "main": "index",
     "types": "typings/index.d.ts",
     "scripts": {
-        "lint": "npx eslint --fix src test && npx tslint --fix 'typings/*.ts'",
-        "test": "npx eslint src test && npx tslint 'typings/*.ts'",
+        "lint": "npx eslint --fix src && npx tslint --fix 'typings/*.ts'",
+        "test": "npx eslint src && npx tslint 'typings/*.ts'",
         "docs": "npx dg --source src --custom guides/.docconfig.json --output docs/docs.json --logging"
     },
     "repository": {
