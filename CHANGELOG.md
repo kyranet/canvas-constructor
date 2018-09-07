@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## 1.1.0
 ### Added
+- Added `toDataURL()` and `toDataURLAsync()`.
 - Added `addCircularImage()`, similar to `addCircle()`.
 - Added `setTextSize()`, similar to `setTextFont()` but changes the font size only (not the font itself).
 - Added all overloads for `addImage()`.
