@@ -1,15 +1,6 @@
-# canvas-constructor
-[![npm](https://img.shields.io/npm/v/canvas-constructor.svg?maxAge=3600)](https://www.npmjs.com/package/canvas-constructor)
-[![npm](https://img.shields.io/npm/dt/canvas-constructor.svg?maxAge=3600)](https://www.npmjs.com/package/canvas-constructor)
-[![Build Status](https://travis-ci.org/kyranet/canvasConstructor.svg?branch=master)](https://travis-ci.org/kyranet/canvasConstructor)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/d673cda285b34ce4b8b6601458b29527)](https://www.codacy.com/app/kyranet/canvasConstructor?utm_source=github.com&utm_medium=referral&utm_content=kyranet/canvasConstructor&utm_campaign=badger)
-[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/kyranet/canvasConstructor/master/LICENSE)
+# Getting Started
 
-A ES6 function for node-canvas with built-in functions and chained methods.
-
-## Installation
-
-Please check [node-canvas readme](https://github.com/Automattic/node-canvas/blob/master/Readme.md#installation) for the installation. You **must** have Canvas installed and working before using this package.
+Please check {@tutorial InstallingCanvas} for the installation. You **must** have Canvas installed and working before using this package.
 
 ---
 
@@ -34,6 +25,8 @@ new Canvas(300, 300)
 - Set the font size to 28 pixels with font Impact.
 - Write the text 'Hello World!' in the position (130, 150)
 - Return a buffer.
+
+![Hello World!](https://raw.githubusercontent.com/kyranet/canvasConstructor/master/guides/assets/getting-started-example-01.png)
 
 Now, let's suppose we want to add images. I'd recommend [fs-nextra](https://github.com/bdistin/fs-nextra), by BDISTIN, it requires Node.js 8.5.0 to work (it promisifies the async fs methods with `Util.promisify()`), it's a dependency-free and lightweight package that provides support for **atomic operations**.
 
@@ -61,6 +54,8 @@ async function createCanvas() {
 - Set the text alignment to center.
 - Write the text 'Kitten!' in the position (150, 370)
 - Return a buffer.
+
+![Kitten!](https://raw.githubusercontent.com/kyranet/canvasConstructor/master/guides/assets/getting-started-example-02.png)
 
 And now, you have created an image with a kitten in the background and some centered text in the bottom of it.
 

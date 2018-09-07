@@ -1,13 +1,13 @@
 {
     "name": "canvas-constructor",
-    "version": "1.0.1",
+    "version": "1.1.0",
     "description": "A ES6 class for node-canvas with built-in functions and chained methods.",
-    "main": "index.js",
+    "main": "index",
     "types": "typings/index.d.ts",
     "scripts": {
-        "lint": "npx eslint --fix src test && npx tslint --fix 'typings/*.ts'",
-        "test": "npx eslint src test && npx tslint 'typings/*.ts'",
-        "docs": "node docs.js"
+        "lint": "npx eslint --fix src && npx tslint --fix 'typings/*.ts'",
+        "test": "npx eslint src && npx tslint 'typings/*.ts'",
+        "docs": "npx dg --source src --custom guides/.docconfig.json --output docs/docs.json --logging"
     },
     "repository": {
         "type": "git",
@@ -17,16 +17,22 @@
         "canvas": "github:Automattic/node-canvas"
     },
     "devDependencies": {
-        "docma": "^1.5.3",
-        "eslint": "^4.19.1",
-        "fs-nextra": "^0.3.2",
-        "tslint": "^5.9.1",
-        "typescript": "^2.8.1"
+        "@types/node": "^10.9.4",
+        "docgen": "github:dirigeants/docsgen",
+        "eslint": "^5.5.0",
+        "eslint-config-klasa": "github:dirigeants/klasa-lint",
+        "fs-nextra": "^0.3.7",
+        "tslint": "^5.11.0",
+        "typescript": "^3.0.3"
     },
     "keywords": [
         "node-canvas",
         "es6",
         "constructor"
+    ],
+    "contributors": [
+        "kyranet",
+        "yorkaargh"
     ],
     "author": "kyranet",
     "license": "MIT",
