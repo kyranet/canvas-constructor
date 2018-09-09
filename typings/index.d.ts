@@ -113,7 +113,7 @@ declare module 'canvas-constructor' {
 		private _resolveImage(imageOrBuffer: Image | Buffer): Image;
 
 		public static getCanvas(): NodeCanvas;
-		public static registerFont(path: string, family: string | FontFaceType): Canvas;
+		public static registerFont(path: string, family: string | FontFaceType): typeof Canvas;
 	}
 
 	type BeveledRadiusOptions = {
