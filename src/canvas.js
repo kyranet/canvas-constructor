@@ -218,7 +218,7 @@ class CanvasConstructor {
 	 * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/getImageData
 	 */
 	getImageData(dx = 0, dy = 0, width = this.width, height = this.height, callback) {
-		if (typeof x === 'function') {
+		if (typeof dx === 'function') {
 			callback = dx;
 			dx = 0;
 		}
