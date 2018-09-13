@@ -584,9 +584,9 @@ class CanvasConstructor {
 	 */
 	addCircularImage(imageOrBuffer, dx, dy, radius, restore = false) {
 		if (restore) this.save();
-		const x = dx - radius, y = dy - radius, diameter = radius * 2;
-		this.createRoundClip(x, y, radius);
-		this._resolveImage(imageOrBuffer, (image) => this.context.drawImage(image, x, y, diameter, diameter));
+		const x = diameter = radius * 2;
+		this.createRoundClip(dx, dy, radius);
+		this._resolveImage(imageOrBuffer, (image) => this.context.drawImage(image, dx - radius, dy - radius, diameter, diameter));
 		if (restore) this.restore();
 		return this;
 	}
