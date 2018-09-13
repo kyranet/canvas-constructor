@@ -4,9 +4,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## 1.1.2
+### Fixed
+- Fixed `addCircularImage()` adding the circular clip in the wrong center.
+
 ## 1.1.1
 ### Fixed
-- Fixed `addCircularImage()` not adding a circule clip before adding the image.
+- Fixed `addCircularImage()` not adding a circular clip before adding the image.
 
 ## 1.1.0
 ### Added
