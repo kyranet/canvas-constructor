@@ -1,5 +1,5 @@
 #!/bin/bash
-# Based on https://github.com/discordjs/discord.js-site/blob/master/deploy/deploy.sh
+# Based on https://github.com/discordjs/discord.js/blob/master/travis/deploy.sh
 set -e
 
 DONT_COMMIT=false
@@ -54,7 +54,7 @@ rm -rf out
 # Do the thing once more for webpack
 TARGET_BRANCH="webpack"
 git clone $REPO out -b $TARGET_BRANCH
-mv webpack/discord.min.js out/discord.$SOURCE.min.js
+mv webpack/canvasconstructor.min.js out/canvasconstructor.$SOURCE.min.js
 
 # Commit and push
 cd out
