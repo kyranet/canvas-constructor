@@ -18,7 +18,12 @@ guides/
 .gitignore
 .travis.yml
 CHANGELOG.md
+dist/
+README.md
 test/
 travis-deploy.sh
 tsconfig.json
 tslint.json
+webpack.config.js
+webpack/
+yarn.lock
