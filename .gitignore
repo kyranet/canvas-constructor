@@ -60,5 +60,7 @@ docs
 
 \.vscode/
 \.idea/
+dist/
+webpack/
 desktop.ini
 yarn.lock

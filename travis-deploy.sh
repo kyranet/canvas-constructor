@@ -14,6 +14,7 @@ echo -e "Building for a branch push - building and deploying."
 REPO=$(git config remote.origin.url)
 SHA=$(git rev-parse --verify HEAD)
 
+# Docs
 TARGET_BRANCH="docs"
 git clone $REPO out -b $TARGET_BRANCH
 
@@ -24,6 +25,23 @@ mv docs/docs.json out/${TRAVIS_BRANCH//\//_}.json
 cd out
 git add --all .
 git config user.name "Travis CI"
-git config user.email "${COMMIT_EMAIL}"
+git config user.email "$COMMIT_AUTHOR_EMAIL"
 git commit -m "Docs build: ${SHA}" || true
+git push "https://${GH_TOKEN}@${GH_REF}" $TARGET_BRANCH
+
+# Clean-up
+cd ..
+rm -rf out
+
+# Do the thing once more for webpack
+TARGET_BRANCH="webpack"
+git clone $REPO out -b $TARGET_BRANCH
+mv webpack/discord.min.js out/discord.$SOURCE.min.js
+
+# Commit and push
+cd out
+git add --all .
+git config user.name "Travis CI"
+git config user.email "$COMMIT_AUTHOR_EMAIL"
+git commit -m "Webpack build: ${SHA}" || true
 git push "https://${GH_TOKEN}@${GH_REF}" $TARGET_BRANCH
