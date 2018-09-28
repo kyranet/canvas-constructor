@@ -1,15 +1,33 @@
 #!/bin/bash
 # Based on https://github.com/discordjs/discord.js-site/blob/master/deploy/deploy.sh
-
 set -e
 
-if [ -n "$TRAVIS_TAG" -o "$TRAVIS_PULL_REQUEST" != "false" ]; then
-  echo -e "Not building for a non branch push - building without deploying."
-  npm run docs
+DONT_COMMIT=false
+
+if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then
+  echo -e "\e[36m\e[1mBuild triggered for PR #${TRAVIS_PULL_REQUEST} to branch \"${TRAVIS_BRANCH}\" - not commiting"
+  SOURCE_TYPE="pr"
+  DONT_COMMIT=true
+elif [ -n "$TRAVIS_TAG" ]; then
+  echo -e "\e[36m\e[1mBuild triggered for tag \"${TRAVIS_TAG}\"."
+  SOURCE=$TRAVIS_TAG
+  SOURCE_TYPE="tag"
+else
+  echo -e "\e[36m\e[1mBuild triggered for branch \"${TRAVIS_BRANCH}\"."
+  SOURCE=$TRAVIS_BRANCH
+  SOURCE_TYPE="branch"
+fi
+
+if [ $DONT_COMMIT == true ]; then
+  echo -e "\e[36m\e[1mNot commiting - exiting early"
   exit 0
 fi
 
 echo -e "Building for a branch push - building and deploying."
+
+# Run the build
+npm run docs
+NODE_ENV=production npm run build:browser
 
 REPO=$(git config remote.origin.url)
 SHA=$(git rev-parse --verify HEAD)
