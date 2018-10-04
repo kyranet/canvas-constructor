@@ -1,4 +1,5 @@
 import filters from './src/filters';
+import extra from './src/extra';
 import Canvas from './src/canvas';
 
 // Canvas
@@ -20,3 +21,5 @@ export const myOldFriend = filters.myOldFriend;
 export const sharpen = filters.sharpen;
 export const blur = filters.blur;
 export const convolute = filters.convolute;
+export const vibrant = extra.vibrant;
+export const average = extra.average;

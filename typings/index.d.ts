@@ -9,6 +9,8 @@ declare module 'canvas-constructor' {
 	export function sharpen(canvas: Canvas, amounts: [number, number]): Canvas;
 	export function blur(canvas: Canvas, amount: number): Canvas;
 	export function convolute(canvas: Canvas, weights: number[]): Canvas;
+	export function vibrant(buffer: Uint8Array, quality: number) : any;
+	export function average(buffer: Uint8Array) : any;
 
 	export class Canvas {
 
