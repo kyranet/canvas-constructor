@@ -25,7 +25,7 @@ class CanvasConstructor {
 	 * @param {number} height The canvas' height in pixels.
 	 * @param {('pdf'|'svg')} [type] The canvas type.
 	 */
-	constructor(width, height, type) {
+	constructor(...args) {
 		/**
 		 * The constructed Canvas
 		 * @since 0.0.1
@@ -34,9 +34,9 @@ class CanvasConstructor {
 		 */
 		this.canvas = isNotConstructor
 			// node-canvas >2.0.0
-			? Canvas.createCanvas(width, height, type)
+			? Canvas.createCanvas(...args)
 			// node-canvas <2.0.0
-			: new Canvas(width, height);
+			: new Canvas(...args);
 
 		/**
 		 * The 2D context for this canvas
@@ -45,20 +45,32 @@ class CanvasConstructor {
 		 * @private
 		 */
 		this.context = this.canvas.getContext('2d');
+	}
 
-		/**
-		 * The image width of this canvas
-		 * @since 0.0.1
-		 * @type {number}
-		 */
-		this.width = width;
+	/**
+	 * The image width of this canvas
+	 * @since 0.0.1
+	 * @type {number}
+	 */
+	get width() {
+		return this.canvas.width;
+	}
 
-		/**
-		 * The image height of this canvas
-		 * @since 0.0.1
-		 * @type {number}
-		 */
-		this.height = height;
+	set width(value) {
+		this.canvas.width = value;
+	}
+
+	/**
+	 * The image height of this canvas
+	 * @since 0.0.1
+	 * @type {number}
+	 */
+	get height() {
+		return this.canvas.height;
+	}
+
+	set height(value) {
+		this.canvas.height = value;
 	}
 
 	/**
@@ -69,15 +81,11 @@ class CanvasConstructor {
 	 * @chainable
 	 */
 	changeCanvasSize(width, height) {
-		if (width && isNaN(width) === false) {
-			this.canvas.width = width;
+		if (typeof width === 'number' && Number.isNaN(width) === false)
 			this.width = width;
-		}
 
-		if (height && isNaN(height) === false) {
-			this.canvas.height = height;
+		if (typeof height === 'number' && Number.isNaN(height) === false)
 			this.height = height;
-		}
 
 		return this;
 	}
@@ -131,8 +139,8 @@ class CanvasConstructor {
 	 * @chainable
 	 * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/rotate
 	 */
-	rotate(angle) {
-		this.context.rotate(angle);
+	rotate(...args) {
+		this.context.rotate(...args);
 		return this;
 	}
 
@@ -144,8 +152,8 @@ class CanvasConstructor {
 	 * @chainable
 	 * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/scale
 	 */
-	scale(dx, dy) {
-		this.context.scale(dx, dy);
+	scale(...args) {
+		this.context.scale(...args);
 		return this;
 	}
 
@@ -157,8 +165,8 @@ class CanvasConstructor {
 	 * @chainable
 	 * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/translate
 	 */
-	translate(dx, dy) {
-		this.context.translate(dx, dy);
+	translate(...args) {
+		this.context.translate(...args);
 		return this;
 	}
 
@@ -171,8 +179,8 @@ class CanvasConstructor {
 	 * @chainable
 	 * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/clip
 	 */
-	clip(path, fillRule) {
-		this.context.clip(fillRule);
+	clip(...args) {
+		this.context.clip(...args);
 		return this;
 	}
 
@@ -189,8 +197,8 @@ class CanvasConstructor {
 	 * @chainable
 	 * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/setTransform
 	 */
-	setTransform(a, b, c, d, e, f) {
-		this.context.setTransform(a, b, c, d, e, f);
+	setTransform(...args) {
+		this.context.setTransform(...args);
 		return this;
 	}
 
@@ -259,8 +267,8 @@ class CanvasConstructor {
 	 * @chainable
 	 * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/fill
 	 */
-	fill(path, fillRule) {
-		this.context.fill(path, fillRule);
+	fill(...args) {
+		this.context.fill(...args);
 		return this;
 	}
 
@@ -275,8 +283,8 @@ class CanvasConstructor {
 	 * @chainable
 	 * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/fillText
 	 */
-	addText(text, dx, dy, maxWidth) {
-		this.context.fillText(text, dx, dy, maxWidth);
+	addText(...args) {
+		this.context.fillText(...args);
 		return this;
 	}
 
@@ -343,8 +351,8 @@ class CanvasConstructor {
 	 * @chainable
 	 * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/stroke
 	 */
-	stroke(path) {
-		this.context.stroke(path);
+	stroke(...args) {
+		this.context.stroke(...args);
 		return this;
 	}
 
@@ -359,8 +367,8 @@ class CanvasConstructor {
 	 * @chainable
 	 * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/strokeRect
 	 */
-	addStrokeRect(dx, dy, width, height) {
-		this.context.strokeRect(dx, dy, width, height);
+	addStrokeRect(...args) {
+		this.context.strokeRect(...args);
 		return this;
 	}
 
@@ -373,8 +381,8 @@ class CanvasConstructor {
 	 * @chainable
 	 * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/strokeText
 	 */
-	addStrokeText(text, dx, dy) {
-		this.context.strokeText(text, dx, dy);
+	addStrokeText(...args) {
+		this.context.strokeText(...args);
 		return this;
 	}
 
@@ -515,8 +523,8 @@ class CanvasConstructor {
 	 * @chainable
 	 * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/setLineDash
 	 */
-	setLineDash(segments) {
-		this.context.setLineDash(segments);
+	setLineDash(...args) {
+		this.context.setLineDash(...args);
 		return this;
 	}
 
@@ -562,13 +570,13 @@ class CanvasConstructor {
 	 * @param {number} dWidth The width to draw the image in the destination canvas. This allows scaling of the drawn image. If not specified, the image is not scaled in width when drawn.
 	 * @param {number} dHeight The height to draw the image in the destination canvas. This allows scaling of the drawn image. If not specified, the image is not scaled in height when drawn.
 	 * @param {number} [radius] The radius for the circle
-	 * @param {boolean} [restore=false] Whether this method should restore the drawing state.
+	 * @param {boolean} [restore=true] Whether this method should restore the drawing state.
 	 * @returns {this}
 	 * @chainable
 	 */
 	addRoundImage(imageOrBuffer, dx, dy, dWidth, dHeight, radius, restore) {
 		if (typeof radius === 'boolean') [radius = Math.min(dWidth, dHeight) / 2, restore] = [restore, radius];
-		if (typeof restore === 'undefined') restore = false;
+		if (typeof restore === 'undefined') restore = true;
 		return this.addImage(imageOrBuffer, dx, dy, dWidth, dHeight, { type: 'round', radius, restore });
 	}
 
@@ -578,11 +586,11 @@ class CanvasConstructor {
 	 * @param {number} dx The X coordinate in the destination canvas at which to place the center of the image.
 	 * @param {number} dy The Y coordinate in the destination canvas at which to place the center of the image.
 	 * @param {number} radius The radius for the circle, it sets the image's width and heigth as the diameter (radius * 2).
-	 * @param {boolean} [restore=false] Whether this method should restore the drawing state.
+	 * @param {boolean} [restore=true] Whether this method should restore the drawing state.
 	 * @returns {this}
 	 * @chainable
 	 */
-	addCircularImage(imageOrBuffer, dx, dy, radius, restore = false) {
+	addCircularImage(imageOrBuffer, dx, dy, radius, restore = true) {
 		if (restore) this.save();
 		const diameter = radius * 2;
 		this.createRoundClip(dx, dy, radius);
@@ -599,11 +607,11 @@ class CanvasConstructor {
 	 * @param {number} width The width of the element.
 	 * @param {number} height The heigth of the element.
 	 * @param {number} [radius=10] The radius for the new image.
-	 * @param {boolean} [restore=false] Whether this method should restore the drawing state.
+	 * @param {boolean} [restore=true] Whether this method should restore the drawing state.
 	 * @returns {this}
 	 * @chainable
 	 */
-	addBeveledImage(imageOrBuffer, dx, dy, width, height, radius = 10, restore = false) {
+	addBeveledImage(imageOrBuffer, dx, dy, width, height, radius = 10, restore = true) {
 		return this.addImage(imageOrBuffer, dx, dy, width, height, { type: 'bevel', radius, restore });
 	}
 
@@ -629,8 +637,8 @@ class CanvasConstructor {
 	 * @chainable
 	 * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/fillRect
 	 */
-	addRect(dx, dy, width, height) {
-		this.context.fillRect(dx, dy, width, height);
+	addRect(...args) {
+		this.context.fillRect(...args);
 		return this;
 	}
 
@@ -645,8 +653,8 @@ class CanvasConstructor {
 	 * @chainable
 	 * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/fillRect
 	 */
-	addBeveledRect(dx, dy, width, height, radius = 10) {
-		return this.save().createBeveledPath(dx, dy, width, height, radius).fill().restore();
+	addBeveledRect(...args) {
+		return this.save().createBeveledPath(...args).fill().restore();
 	}
 
 	/**
@@ -675,8 +683,8 @@ class CanvasConstructor {
 	 * @returns {this}
 	 * @chainable
 	 */
-	createRoundClip(dx, dy, radius, start = 0, angle = Math.PI * 2) {
-		return this.createRoundPath(dx, dy, radius, start, angle).clip();
+	createRoundClip(...args) {
+		return this.createRoundPath(...args).clip();
 	}
 
 	/**
@@ -688,8 +696,8 @@ class CanvasConstructor {
 	 * @returns {this}
 	 * @chainable
 	 */
-	createRectPath(dx, dy, width, height) {
-		this.context.rect(dx, dy, width, height);
+	createRectPath(...args) {
+		this.context.rect(...args);
 		return this;
 	}
 
@@ -702,8 +710,8 @@ class CanvasConstructor {
 	 * @returns {this}
 	 * @chainable
 	 */
-	createRectClip(dx, dy, width, height) {
-		return this.createRectPath(dx, dy, width, height).clip();
+	createRectClip(...args) {
+		return this.createRectPath(...args).clip();
 	}
 
 	/**
@@ -716,7 +724,7 @@ class CanvasConstructor {
 	 * @returns {this}
 	 * @chainable
 	 */
-	createBeveledPath(dx, dy, width, height, radius) {
+	createBeveledPath(dx, dy, width, height, radius = 10) {
 		if (width > 0 && height > 0) {
 			let radiusObject;
 			if (typeof radius === 'number') {
@@ -749,12 +757,12 @@ class CanvasConstructor {
 	 * @param {number} dy The position y to start drawing clip.
 	 * @param {number} width The width of clip.
 	 * @param {number} height The heigth of clip.
-	 * @param {number} radius The radius for clip's rounded borders.
+	 * @param {number} [radius] The radius for clip's rounded borders.
 	 * @returns {this}
 	 * @chainable
 	 */
-	createBeveledClip(dx, dy, width, height, radius) {
-		return this.createBeveledPath(dx, dy, width, height, radius).clip();
+	createBeveledClip(...args) {
+		return this.createBeveledPath(...args).clip();
 	}
 
 	/**
@@ -896,8 +904,8 @@ class CanvasConstructor {
 	 *     ])
 	 *     .addRect(10, 10, 200, 100)
 	 */
-	printLinearGradient(x0, y0, x1, y1, steps) {
-		const gradient = this.createLinearGradient(x0, y0, x1, y1, steps);
+	printLinearGradient(...args) {
+		const gradient = this.createLinearGradient(...args);
 		return this.setColor(gradient);
 	}
 
@@ -935,8 +943,8 @@ class CanvasConstructor {
 	 * @chainable
 	 * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/createRadialGradient
 	 */
-	printRadialGradient(x0, y0, r0, x1, y1, r1, steps) {
-		const gradient = this.createRadialGradient(x0, y0, r0, x1, y1, r1, steps);
+	printRadialGradient(...args) {
+		const gradient = this.createRadialGradient(...args);
 		return this.setColor(gradient);
 	}
 
@@ -947,7 +955,7 @@ class CanvasConstructor {
 	 * @param {number} dy The y axis of the coordinate for the ellipse's center.
 	 * @param {number} radiusX The ellipse's major-axis radius.
 	 * @param {number} radiusY The ellipse's minor-axis radius.
-	 * @param {number} rotation The rotation for this ellipse, expressed in radians.
+	 * @param {number} [rotation=0] The rotation for this ellipse, expressed in radians.
 	 * @param {number} [startAngle=0] The starting point, measured from the x axis, from which it will be drawn, expressed
 	 * in radians.
 	 * @param {number} [endAngle=Math.PI * 2] The end ellipse's angle to which it will be drawn, expressed in radians.
@@ -957,7 +965,7 @@ class CanvasConstructor {
 	 * @chainable
 	 * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/ellipse
 	 */
-	createEllipse(dx, dy, radiusX, radiusY, rotation, startAngle = 0, endAngle = Math.PI * 2, anticlockwise) {
+	createEllipse(dx, dy, radiusX, radiusY, rotation = 0, startAngle = 0, endAngle = Math.PI * 2, anticlockwise) {
 		this.context.ellipse(dx, dy, radiusX, radiusY, rotation, startAngle, endAngle, anticlockwise);
 		return this;
 	}
@@ -994,8 +1002,8 @@ class CanvasConstructor {
 	 * @chainable
 	 * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/arcTo
 	 */
-	arcTo(x1, y1, x2, y2, radius) {
-		this.context.arcTo(x1, y1, x2, y2, radius);
+	arcTo(...args) {
+		this.context.arcTo(...args);
 		return this;
 	}
 
@@ -1011,8 +1019,8 @@ class CanvasConstructor {
 	 * @chainable
 	 * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/quadraticCurveTo
 	 */
-	quadraticCurveTo(cpx, cpy, dx, dy) {
-		this.context.quadraticCurveTo(cpx, cpy, dx, dy);
+	quadraticCurveTo(...args) {
+		this.context.quadraticCurveTo(...args);
 		return this;
 	}
 
@@ -1030,8 +1038,8 @@ class CanvasConstructor {
 	 * @chainable
 	 * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/bezierCurveTo
 	 */
-	bezierCurveTo(cp1x, cp1y, cp2x, cp2y, dx, dy) {
-		this.context.bezierCurveTo(cp1x, cp1y, cp2x, cp2y, dx, dy);
+	bezierCurveTo(...args) {
+		this.context.bezierCurveTo(...args);
 		return this;
 	}
 
@@ -1043,8 +1051,8 @@ class CanvasConstructor {
 	 * @chainable
 	 * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/lineTo
 	 */
-	lineTo(dx, dy) {
-		this.context.lineTo(dx, dy);
+	lineTo(...args) {
+		this.context.lineTo(...args);
 		return this;
 	}
 
@@ -1056,8 +1064,8 @@ class CanvasConstructor {
 	 * @chainable
 	 * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/moveTo
 	 */
-	moveTo(dx, dy) {
-		this.context.moveTo(dx, dy);
+	moveTo(...args) {
+		this.context.moveTo(...args);
 		return this;
 	}
 
@@ -1265,8 +1273,8 @@ class CanvasConstructor {
 	 * @returns {boolean}
 	 * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/isPointInPath
 	 */
-	isPointInPath(dx, dy, fillRule) {
-		return this.context.isPointInPath(dx, dy, fillRule);
+	isPointInPath(...args) {
+		return this.context.isPointInPath(...args);
 	}
 
 	/**
@@ -1276,8 +1284,8 @@ class CanvasConstructor {
 	 * @returns {boolean}
 	 * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/isPointInStroke
 	 */
-	isPointInStroke(dx, dy) {
-		return this.context.isPointInStroke(dx, dy);
+	isPointInStroke(...args) {
+		return this.context.isPointInStroke(...args);
 	}
 
 	/**
@@ -1331,8 +1339,8 @@ class CanvasConstructor {
 	 * @returns {string}
 	 * @see https://github.com/Automattic/node-canvas#canvastodataurl-sync-and-async
 	 */
-	toDataURL(type, ...args) {
-		return this.canvas.toDataURL(type, ...args);
+	toDataURL(...args) {
+		return this.canvas.toDataURL(...args);
 	}
 
 	/**
@@ -1400,9 +1408,5 @@ class CanvasConstructor {
 	 */
 
 }
-
-CanvasConstructor.prototype.addBevelImage = require('util').deprecate(
-	CanvasConstructor.prototype.addBeveledImage,
-	'CanvasConstructor#addBevelImage() is deprecated. Use CanvasConstructor#addBeveledImage() instead.');
 
 module.exports = CanvasConstructor;
