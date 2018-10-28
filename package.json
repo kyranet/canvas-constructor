@@ -18,16 +18,16 @@
         "canvas": "github:Automattic/node-canvas"
     },
     "devDependencies": {
-        "@types/node": "^10.11.2",
+        "@types/node": "^10.12.0",
         "docgen": "github:dirigeants/docsgen",
         "eslint-config-klasa": "github:dirigeants/klasa-lint",
-        "eslint": "^5.6.0",
+        "eslint": "^5.8.0",
         "fs-nextra": "^0.3.7",
         "terser-webpack-plugin": "^1.1.0",
         "tslint": "^5.11.0",
         "typescript": "^3.1.1",
-        "webpack-cli": "^3.1.1",
-        "webpack": "^4.20.2"
+        "webpack-cli": "^3.1.2",
+        "webpack": "^4.23.1"
     },
     "keywords": [
         "node-canvas",
