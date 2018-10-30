@@ -839,7 +839,7 @@ class CanvasConstructor {
 	/**
 	 * Creates a pattern using the specified image. It repeats the source in the directions specified by the repetition
 	 * argument.
-	 * @param {Image} imageOrBuffer A Canvas Image to be used as the image to repeat.
+	 * @param {Image|Buffer} imageOrBuffer A Canvas Image to be used as the image to repeat.
 	 * @param {('repeat'|'repeat-x'|'repeat-y'|'no-repeat')} repetition The repeat mode.
 	 * @param {Function} callback The callback to take the createPattern
 	 * @returns {this}
@@ -854,7 +854,7 @@ class CanvasConstructor {
 	/**
 	 * Creates a pattern using the specified image. It repeats the source in the directions specified by the repetition
 	 * argument, and prints it.
-	 * @param {Image} imageOrBuffer A Canvas Image to be used as the image to repeat.
+	 * @param {Image|Buffer} imageOrBuffer A Canvas Image to be used as the image to repeat.
 	 * @param {('repeat'|'repeat-x'|'repeat-y'|'no-repeat')} repetition The repeat mode.
 	 * @returns {this}
 	 * @chainable

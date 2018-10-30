@@ -1,3 +1,6 @@
+/// <reference types="node" />
+/// <reference lib="esnext" />
+
 declare module 'canvas-constructor' {
 
 	export function invert(canvas: Canvas): Canvas;
@@ -10,6 +13,9 @@ declare module 'canvas-constructor' {
 	export function blur(canvas: Canvas, amount: number): Canvas;
 	export function convolute(canvas: Canvas, weights: number[]): Canvas;
 
+	type Image = HTMLImageElement;
+	type BufferOrImage = Image | Buffer;
+
 	export class Canvas {
 
 		public constructor(dWidth: number, dHeigth: number, type?: CanvasType);
@@ -20,17 +26,17 @@ declare module 'canvas-constructor' {
 		public readonly lineDash: number[];
 
 		public addBeveledRect(dx: number, dy: number, dWidth: number, dHeigth: number, radius?: number): this;
-		public addBeveledImage(buffer: Image | Buffer, dx: number, dy: number, dWidth: number, dHeight: number, radius?: BeveledRadiusOptions | number, restore?: boolean): this;
+		public addBeveledImage(bufferOrImage: BufferOrImage, dx: number, dy: number, dWidth: number, dHeight: number, radius?: BeveledRadiusOptions | number, restore?: boolean): this;
 		public addCircle(dx: number, dy: number, radius: number): this;
-		public addCircularImage(buffer: Image | Buffer, dx: number, dy: number, radius: number, restore?: boolean): this;
-		public addImage(buffer: Image | Buffer, dx: number, dy: number, options?: AddImageOptions): this;
-		public addImage(buffer: Image | Buffer, dx: number, dy: number, dWidth: number, dHeight: number, options?: AddImageOptions): this;
-		public addImage(buffer: Image | Buffer, sx: number, sy: number, sWidth: number, sHeigth: number, dx: number, dy: number, dWidth: number, dHeigth: number, options?: AddImageOptions): this;
+		public addCircularImage(bufferOrImage: BufferOrImage, dx: number, dy: number, radius: number, restore?: boolean): this;
+		public addImage(bufferOrImage: BufferOrImage, dx: number, dy: number, options?: AddImageOptions): this;
+		public addImage(bufferOrImage: BufferOrImage, dx: number, dy: number, dWidth: number, dHeight: number, options?: AddImageOptions): this;
+		public addImage(bufferOrImage: BufferOrImage, sx: number, sy: number, sWidth: number, sHeigth: number, dx: number, dy: number, dWidth: number, dHeigth: number, options?: AddImageOptions): this;
 		public addMultilineText(text: string, dx: number, dy: number, maxWidth: number, lineHeight: number): this;
 		public addRect(dx: number, dy: number, dWidth: number, dHeigth: number): this;
 		public addResponsiveText(text: string, dx: number, dy: number, maxWidth: number): this;
-		public addRoundImage(buffer: Image | Buffer, dx: number, dy: number, dWidth: number, dHeight: number, radius?: number, restore?: boolean): this;
-		public addRoundImage(buffer: Image | Buffer, dx: number, dy: number, dWidth: number, dHeight: number, restore?: boolean): this;
+		public addRoundImage(bufferOrImage: BufferOrImage, dx: number, dy: number, dWidth: number, dHeight: number, radius?: number, restore?: boolean): this;
+		public addRoundImage(bufferOrImage: BufferOrImage, dx: number, dy: number, dWidth: number, dHeight: number, restore?: boolean): this;
 		public addStrokeRect(dx: number, dy: number, dWidth: number, dHeigth: number): this;
 		public addStrokeText(text: string, dx: number, dy: number): this;
 		public addText(text: string, dx: number, dy: number, maxWidth?: number): this;
@@ -52,7 +58,7 @@ declare module 'canvas-constructor' {
 		public createBeveledPath(dx: number, dy: number, dWidth: number, dHeigth: number, radius: BeveledRadiusOptions | number): this;
 		public createEllipse(dx: number, dy: number, radiusX: number, radiusY: number, rotation: number, startAngle: number, endAngle: number, anticlockwise?: boolean): this;
 		public createLinearGradient(x0: number, y0: number, x1: number, y1: number, steps?: GradientStep[]): CanvasGradient;
-		public createPattern(image: Image, repetition: PatternRepetition): this;
+		public createPattern(bufferOrImage: BufferOrImage, repetition: PatternRepetition): this;
 		public createRadialGradient(x0: number, y0: number, r0: number, x1: number, y1: number, r1: number, steps?: GradientStep[]): CanvasGradient;
 		public createRectClip(dx: number, dy: number, dWidth: number, dHeigth: number): this;
 		public createRectPath(dx: number, dy: number, dWidth: number, dHeigth: number): this;
@@ -110,9 +116,9 @@ declare module 'canvas-constructor' {
 		public toDataURLAsync(type: string): Promise<string>;
 		public translate(dx: number, dy: number): this;
 
-		private _resolveImage(imageOrBuffer: Image | Buffer): Image;
+		private _resolveImage(imageOrBuffer: BufferOrImage): Image;
 
-		public static getCanvas(): NodeCanvas;
+		public static getCanvas(): any;
 		public static registerFont(path: string, family: string | FontFaceType): typeof Canvas;
 	}
 
@@ -222,61 +228,6 @@ declare module 'canvas-constructor' {
 
 	type CanvasGradient = {
 		addColorStop: (offset: number, color: string) => void;
-	};
-
-	type CanvasPattern = {
-		setTransform: (matrix: SVGMatrix) => void;
-	};
-
-	// node-canvas related typings.
-	type Image = (dWidth?: number, dHeigth?: number) => HTMLImageElement;
-	type NodeCanvas = {
-		backends: Object;
-		cairoVersion: string;
-		Canvas: NodeCanvas;
-		Context2d: typeof CanvasRenderingContext2D;
-		createCanvas: (dWidth: number, dHeigth: number, type: CanvasType) => any;
-		createImageData: (array: any[], dWidth: number, dHeigth: number) => any;
-		freetypeVersion: string;
-		gifVersion: string;
-		Image: typeof Image;
-		ImageData: typeof ImageData;
-		JPEGStream: CanvasJPEGStream;
-		jpegVersion: string;
-		loadImage: (src: any) => Promise<any>;
-		parseFont: (str: string) => ParsedFont;
-		PDFStream: CanvasPDFStream;
-		PNGStream: CanvasPNGStream;
-		registerFont: (src: string, fontFace: FontFaceType) => any;
-		version: string;
-	};
-
-	class CanvasJPEGStream {
-		public constructor(canvas: any, options: any);
-		public canvas: any;
-		public options: any;
-		private _read(): void;
-	}
-
-	class CanvasPDFStream {
-		public constructor(canvas: any);
-		public canvas: any;
-		private _read(): void;
-	}
-
-	class CanvasPNGStream {
-		public constructor(canvas: any, options: any);
-		public canvas: any;
-		public options: any;
-		private _read(): void;
-	}
-
-	type ParsedFont = {
-		weight: number;
-		style: string;
-		size: number;
-		unit: string;
-		family: string;
 	};
 
 }
