@@ -13,17 +13,17 @@ declare module 'canvas-constructor' {
 	export function blur(canvas: Canvas, amount: number): Canvas;
 	export function convolute(canvas: Canvas, weights: number[]): Canvas;
 
-	type Image = HTMLImageElement;
+	type Image = (...args: any[]) => any;
 	type BufferOrImage = Image | Buffer;
 
 	export class Canvas {
 
 		public constructor(dWidth: number, dHeigth: number, type?: CanvasType);
-		public canvas: HTMLCanvasElement;
-		public context: CanvasRenderingContext2D;
 		public width: number;
 		public heigth: number;
 		public readonly lineDash: number[];
+		private canvas: any;
+		private context: any;
 
 		public addBeveledRect(dx: number, dy: number, dWidth: number, dHeigth: number, radius?: number): this;
 		public addBeveledImage(bufferOrImage: BufferOrImage, dx: number, dy: number, dWidth: number, dHeight: number, radius?: BeveledRadiusOptions | number, restore?: boolean): this;
@@ -229,5 +229,29 @@ declare module 'canvas-constructor' {
 	type CanvasGradient = {
 		addColorStop: (offset: number, color: string) => void;
 	};
+
+	class ImageData {
+		public constructor(width: number, height: number);
+		public constructor(array: Uint8ClampedArray, width: number, height: number);
+		public readonly data: Uint8ClampedArray;
+		public readonly height: number;
+		public readonly width: number;
+	}
+
+	class TextMetrics {
+		public constructor();
+		public readonly actualBoundingBoxAscent: number;
+		public readonly actualBoundingBoxDescent: number;
+		public readonly actualBoundingBoxLeft: number;
+		public readonly actualBoundingBoxRight: number;
+		public readonly alphabeticBaseline: number;
+		public readonly emHeightAscent: number;
+		public readonly emHeightDescent: number;
+		public readonly fontBoundingBoxAscent: number;
+		public readonly fontBoundingBoxDescent: number;
+		public readonly hangingBaseline: number;
+		public readonly ideographicBaseline: number;
+		public readonly width: number;
+	}
 
 }
