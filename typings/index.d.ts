@@ -3,6 +3,8 @@
 
 declare module 'canvas-constructor' {
 
+	import { Image } from 'canvas';
+
 	export function invert(canvas: Canvas): Canvas;
 	export function greyscale(canvas: Canvas): Canvas;
 	export function sepia(canvas: Canvas): Canvas;
@@ -13,7 +15,6 @@ declare module 'canvas-constructor' {
 	export function blur(canvas: Canvas, amount: number): Canvas;
 	export function convolute(canvas: Canvas, weights: number[]): Canvas;
 
-	type Image = (...args: any[]) => any;
 	type BufferOrImage = Image | Buffer;
 
 	export class Canvas {
@@ -252,6 +253,25 @@ declare module 'canvas-constructor' {
 		public readonly hangingBaseline: number;
 		public readonly ideographicBaseline: number;
 		public readonly width: number;
+	}
+
+}
+
+declare module 'canvas' {
+
+	export class Image {
+		public constructor(width?: number, height?: number);
+		public src: string | Buffer;
+		public onload: () => void | null;
+		public onerror: (error: Error) => void | null;
+		public complete: boolean;
+		public width: number;
+		public height: number;
+		public naturalWidth: number;
+		public naturalHeight: number;
+		public dataMode: number;
+		public static MODE_IMAGE: number;
+		public static MODE_MIME: number;
 	}
 
 }
