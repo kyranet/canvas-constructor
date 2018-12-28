@@ -115,6 +115,8 @@ declare module 'canvas-constructor' {
 		public toBufferAsync(): Promise<Buffer>;
 		public toDataURL(type: string, ...args: any[]): string;
 		public toDataURLAsync(type: string): Promise<string>;
+		public toBlob(callback: (blob: any) => void, mimeType?: string, qualityArgument?: number): void;
+		public toBlobAsync(mimeType?: string, qualityArgument?: number): Promise<any>;
 		public translate(dx: number, dy: number): this;
 
 		private _resolveImage(imageOrBuffer: BufferOrImage): Image;

@@ -1320,6 +1320,7 @@ class Canvas {
 	}
 
 	/**
+	 * <warn>This is for Node.js usage only, HTMLCanvasElement does not support this</warn>
 	 * Render the canvas into a buffer.
 	 * @param {any[]} args The render's options.
 	 * @returns {Buffer}
@@ -1329,6 +1330,7 @@ class Canvas {
 	}
 
 	/**
+	 * <warn>This is for Node.js usage only, HTMLCanvasElement does not support this</warn>
 	 * Render the canvas into a buffer using a Promise.
 	 * @returns {Promise<Buffer>}
 	 */
@@ -1360,6 +1362,30 @@ class Canvas {
 			if (err) reject(err);
 			else resolve(url);
 		}));
+	}
+
+	/**
+	 * <warn>This is for web usage only, node-canvas does not support this</warn>
+	 * Render the canvas into a Blob object representing the image contained in the canvas
+	 * @param {Function} callback A callback function with the resulting `Blob` object as a single argument.
+	 * @param {string} [mimeType] A string indicating the image format. The default type is `image/png`.
+	 * @param {number} [qualityArgument] A number between 0 and 1 indicating image quality if the requested type is `image/jpeg` or `image/webp`.
+	 * @returns {void}
+	 * @see https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/toBlob
+	 */
+	toBlob(...args) {
+		return this.canvas.toBlob(...args);
+	}
+
+	/**
+	 * <warn>This is for web usage only, node-canvas does not support this</warn>
+	 * Render the canvas into a Blob object representing the image contained in the canvas
+	 * @param {string} [mimeType] A string indicating the image format. The default type is `image/png`.
+	 * @param {number} [qualityArgument] A number between 0 and 1 indicating image quality if the requested type is `image/jpeg` or `image/webp`.
+	 * @returns {Promise<Blob>}
+	 */
+	toBlobAsync(...args) {
+		return new Promise((resolve) => this.canvas.toBlob(resolve, ...args));
 	}
 
 	/**
