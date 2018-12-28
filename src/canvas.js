@@ -1388,6 +1388,9 @@ class CanvasConstructor {
 	 * @param {HTMLCanvasElement} canvas The canvas element
 	 * @example
 	 * // Node.js
+	 * const Canvas = require('canvas');
+	 * const { Canvas: CanvasConstructor } = require('canvas-constructor');
+	 *
 	 * const canvasInstance = Canvas.createCanvas(200, 200);
 	 * const buffer = CanvasConstructor.fromCanvas(canvasElement)
 	 *     .setColor('green')
@@ -1395,9 +1398,10 @@ class CanvasConstructor {
 	 *     .toBuffer();
 	 * @example
 	 * // Browsers
-	 * <script>
+	 * <script type="text/javascript" src="canvasconstructor.master.min.js"></script>
+	 * <script type="text/javascript">
 	 * const canvasElement = document.getElementById('canvas');
-	 * CanvasConstructor.fromCanvas(canvasElement)
+	 * CanvasConstructor.Canvas.fromCanvas(canvasElement)
 	 *     .setColor('green')
 	 *     .addRect(10, 10, 100, 100);
 	 * </script>
