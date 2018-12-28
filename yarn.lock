@@ -1422,7 +1422,7 @@ fs-minipass@^1.2.5:
   dependencies:
     minipass "^2.2.1"
 
-fs-nextra@^0.3.2, fs-nextra@^0.3.8:
+fs-nextra@^0.3.2:
   version "0.3.8"
   resolved "https://registry.yarnpkg.com/fs-nextra/-/fs-nextra-0.3.8.tgz#2a0c860a7a3c5d4b398548059d481d6155aac3c8"
   integrity sha512-zHTMl89RbxuUUoGhG+Jx1Y2UkuOGnK4Q0Ibq6o/QHexhA91e0rtZf1Vo7G4iP2xdnUAnsDXvnfIa+r2Ffr29Lg==

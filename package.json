@@ -21,14 +21,13 @@
     "devDependencies": {
         "@types/node": "^10.12.18",
         "docgen": "github:dirigeants/docsgen",
-        "eslint-config-klasa": "github:dirigeants/klasa-lint",
         "eslint": "^5.11.1",
-        "fs-nextra": "^0.3.8",
+        "eslint-config-klasa": "github:dirigeants/klasa-lint",
         "terser-webpack-plugin": "^1.2.1",
         "tslint": "^5.12.0",
         "typescript": "^3.2.2",
-        "webpack-cli": "^3.1.2",
-        "webpack": "^4.28.2"
+        "webpack": "^4.28.2",
+        "webpack-cli": "^3.1.2"
     },
     "keywords": [
         "node-canvas",
