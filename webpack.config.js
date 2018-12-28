@@ -2,10 +2,9 @@
 const path = require('path');
 const webpack = require('webpack');
 const TerserJSPlugin = require('terser-webpack-plugin');
-const { version } = require('./package.json');
 
 const production = process.env.NODE_ENV === 'production';
-const filename = `canvasconstructor${process.env.VERSIONED ? `.${version}` : ''}${production ? '.min' : ''}.js`;
+const filename = `canvasconstructor${production ? '.min' : ''}.js`;
 
 module.exports = {
 	entry: './index.js',

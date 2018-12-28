@@ -11,6 +11,7 @@ fi
 
 echo -e "Building for a branch push - building and deploying."
 
+SOURCE="${TRAVIS_BRANCH//\/|\./_/}"
 REPO=$(git config remote.origin.url)
 SHA=$(git rev-parse --verify HEAD)
 
@@ -24,7 +25,7 @@ git clone $REPO out -b $TARGET_BRANCH
 
 yarn docs
 
-mv docs/docs.json out/${TRAVIS_BRANCH//\/|\./_/}.json
+mv docs/docs.json out/${SOURCE}.json
 
 cd out
 git add --all .
