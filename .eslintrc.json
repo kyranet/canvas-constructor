@@ -3,6 +3,9 @@
 	"parserOptions": {
 		"ecmaVersion": 2018
 	},
+	"globals": {
+		"HTMLCanvasElement": false
+	},
 	"rules": {
         "max-len": "off",
 		"operator-linebreak": ["error", "before", { "overrides": { "+": "after", "=": "after" } }],

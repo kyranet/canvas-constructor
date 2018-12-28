@@ -11,7 +11,7 @@ module.exports = {
 	entry: './index.js',
 	mode: production ? 'production' : 'development',
 	output: {
-		path: path.resolve(__dirname, 'webpack'),
+		path: path.resolve('./webpack'),
 		filename,
 		library: 'CanvasConstructor',
 		libraryTarget: 'umd'
@@ -48,7 +48,6 @@ module.exports = {
 		]
 	},
 	plugins: [
-		new webpack.optimize.ModuleConcatenationPlugin(),
-		new webpack.IgnorePlugin(/canvas|canvas-prebuilt/, /canvas/)
+		new webpack.optimize.ModuleConcatenationPlugin()
 	]
 };

@@ -1,13 +1,24 @@
-let Canvas;
-try {
-	Canvas = require('canvas-prebuilt');
-} catch (_) {
-	Canvas = require('canvas');
-}
+const browser = typeof window !== 'undefined';
+
+const Canvas = (() => {
+	if (browser) return typeof HTMLCanvasElement !== 'undefined' ? HTMLCanvasElement : null;
+	try {
+		return require('canvas-prebuilt');
+	} catch (_) {
+		return require('canvas');
+	}
+})();
+
+const createCanvas = browser
+	? () => null
+	: typeof Canvas.createCanvas === 'function'
+		// node-canvas >2.0.0
+		? Canvas.createCanvas
+		// node-canvas <2.0.0
+		: (...args) => new Canvas(...args);
 
 // This variable helps Canvas-Constructor to identify if the version
 // of canvas is older than 2.0.0 (new Canvas()) or newer (Canvas.createCanvas).
-const isNotConstructor = typeof Canvas.createCanvas === 'function';
 
 class CanvasConstructor {
 
@@ -32,11 +43,7 @@ class CanvasConstructor {
 		 * @type {Canvas}
 		 * @private
 		 */
-		this.canvas = isNotConstructor
-			// node-canvas >2.0.0
-			? Canvas.createCanvas(...args)
-			// node-canvas <2.0.0
-			: new Canvas(...args);
+		this.canvas = createCanvas(...args);
 
 		/**
 		 * The 2D context for this canvas
@@ -44,7 +51,7 @@ class CanvasConstructor {
 		 * @type {CanvasRenderingContext2D}
 		 * @private
 		 */
-		this.context = this.canvas.getContext('2d');
+		this.context = this.canvas ? this.canvas.getContext('2d') : null;
 	}
 
 	/**
@@ -1307,8 +1314,8 @@ class CanvasConstructor {
 	 * @chainable
 	 */
 	addTextFont(path, family) {
-		if (isNotConstructor) CanvasConstructor.registerFont(path, family);
-		else this.context.addFont(new Canvas.Font(family, path));
+		if (typeof this.context.addFont === 'function') this.context.addFont(new Canvas.Font(family, path));
+		else CanvasConstructor.registerFont(path, family);
 		return this;
 	}
 
@@ -1373,6 +1380,32 @@ class CanvasConstructor {
 		image.src = imageOrBuffer;
 
 		return image;
+	}
+
+	/**
+	 * Create a canvas from an HTMLCanvasElement or NodeCanvas instance
+	 * @since 2.1.0
+	 * @param {HTMLCanvasElement} canvas The canvas element
+	 * @example
+	 * // Node.js
+	 * const canvasInstance = Canvas.createCanvas(200, 200);
+	 * const buffer = CanvasConstructor.fromCanvas(canvasElement)
+	 *     .setColor('green')
+	 *     .addRect(10, 10, 100, 100)
+	 *     .toBuffer();
+	 * @example
+	 * // Browsers
+	 * <script>
+	 * const canvasElement = document.getElementById('canvas');
+	 * CanvasConstructor.fromCanvas(canvasElement)
+	 *     .setColor('green')
+	 *     .addRect(10, 10, 100, 100);
+	 * </script>
+	 */
+	static fromCanvas(canvas) {
+		const instance = new CanvasConstructor();
+		instance.canvas = canvas;
+		instance.context = canvas.getContext('2d');
 	}
 
 	static getCanvas() {

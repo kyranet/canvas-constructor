@@ -1,6 +1,6 @@
 {
     "name": "canvas-constructor",
-    "version": "2.0.1",
+    "version": "2.1.0",
     "description": "A ES6 class for node-canvas with built-in functions and chained methods.",
     "main": "index",
     "types": "typings/index.d.ts",
@@ -14,8 +14,9 @@
         "type": "git",
         "url": "git+https://github.com/kyranet/canvasConstructor.git"
     },
+    "unpkg": "./webpack/canvasconstructor.min.js",
     "peerDependencies": {
-        "canvas": "github:Automattic/node-canvas"
+        "canvas": "*"
     },
     "devDependencies": {
         "@types/node": "^10.12.1",
@@ -42,6 +43,13 @@
     "license": "MIT",
     "bugs": {
         "url": "https://github.com/kyranet/canvasConstructor/issues"
+    },
+    "browser": {
+        "canvas": false,
+        "canvas-prebuilt": false
+    },
+    "engines": {
+        "node": ">=8.6.0"
     },
     "homepage": "https://github.com/kyranet/canvasConstructor#readme"
 }

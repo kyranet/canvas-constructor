@@ -1,1 +1,1 @@
-module.exports = Object.assign(require('./src/filters'), { Canvas: require('./src/canvas') });
+module.exports = { ...require('./src/filters'), Canvas: require('./src/canvas') };
