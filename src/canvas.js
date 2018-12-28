@@ -1,6 +1,6 @@
 const browser = typeof window !== 'undefined';
 
-const Canvas = (() => {
+const InternalCanvas = (() => {
 	if (browser) return typeof HTMLCanvasElement !== 'undefined' ? HTMLCanvasElement : null;
 	try {
 		return require('canvas-prebuilt');
@@ -11,16 +11,16 @@ const Canvas = (() => {
 
 const createCanvas = browser
 	? () => null
-	: typeof Canvas.createCanvas === 'function'
+	: typeof InternalCanvas.createCanvas === 'function'
 		// node-canvas >2.0.0
-		? Canvas.createCanvas
+		? InternalCanvas.createCanvas
 		// node-canvas <2.0.0
-		: (...args) => new Canvas(...args);
+		: (...args) => new InternalCanvas(...args);
 
 // This variable helps Canvas-Constructor to identify if the version
 // of canvas is older than 2.0.0 (new Canvas()) or newer (Canvas.createCanvas).
 
-class CanvasConstructor {
+class Canvas {
 
 	/**
 	 * @typedef {Object} BeveledRadiusOptions
@@ -40,7 +40,7 @@ class CanvasConstructor {
 		/**
 		 * The constructed Canvas
 		 * @since 0.0.1
-		 * @type {Canvas}
+		 * @type {HTMLCanvasElement}
 		 * @private
 		 */
 		this.canvas = createCanvas(...args);
@@ -228,7 +228,7 @@ class CanvasConstructor {
 	 * @param {Function} callback The callback, if not specified, this method won't be chainable as it will return a
 	 * number. If you use an arrow function, you might want to use the second argument which is the instance of the
 	 * class. Otherwise, the keyword this is binded to the class instance itself, so you can use it safely.
-	 * @returns {this}
+	 * @returns {this|ImageData}
 	 * @chainable
 	 * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/getImageData
 	 */
@@ -397,10 +397,10 @@ class CanvasConstructor {
 	 * Measure a text's width given a string.
 	 * If a callback is not passed, this method will not be chainable, and it will return an integer instead.
 	 * @param {string} text The text to measure.
-	 * @param {Function} callback The callback, if not specified, this method won't be chainable as it will return a
+	 * @param {Function} [callback] The callback, if not specified, this method won't be chainable as it will return a
 	 * number. If you use an arrow function, you might want to use the second argument which is the instance of the
 	 * class. Otherwise, the keyword this is binded to the class instance itself, so you can use it safely.
-	 * @returns {(CanvasConstructor|TextMetrics)}
+	 * @returns {(Canvas|TextMetrics)}
 	 * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/measureText
 	 * @example
 	 * new Canvas(500, 400)
@@ -1314,8 +1314,8 @@ class CanvasConstructor {
 	 * @chainable
 	 */
 	addTextFont(path, family) {
-		if (typeof this.context.addFont === 'function') this.context.addFont(new Canvas.Font(family, path));
-		else CanvasConstructor.registerFont(path, family);
+		if (typeof this.context.addFont === 'function') this.context.addFont(new InternalCanvas.Font(family, path));
+		else Canvas.registerFont(path, family);
 		return this;
 	}
 
@@ -1370,12 +1370,12 @@ class CanvasConstructor {
 	 * @private
 	 */
 	_resolveImage(imageOrBuffer, cb) {
-		if (imageOrBuffer instanceof Canvas.Image) {
+		if (imageOrBuffer instanceof InternalCanvas.Image) {
 			cb(imageOrBuffer);
 			return imageOrBuffer;
 		}
 
-		const image = new Canvas.Image();
+		const image = new InternalCanvas.Image();
 		image.onload = cb.bind(this, image);
 		image.src = imageOrBuffer;
 
@@ -1407,13 +1407,13 @@ class CanvasConstructor {
 	 * </script>
 	 */
 	static fromCanvas(canvas) {
-		const instance = new CanvasConstructor();
+		const instance = new Canvas();
 		instance.canvas = canvas;
 		instance.context = canvas.getContext('2d');
 	}
 
 	static getCanvas() {
-		return Canvas;
+		return InternalCanvas;
 	}
 
 	/**
@@ -1421,16 +1421,16 @@ class CanvasConstructor {
 	 * Register a new font (Canvas 2.x).
 	 * @param {string} path   The path for the font.
 	 * @param {string} family The font's family name.
-	 * @returns {CanvasConstructor}
+	 * @returns {Canvas}
 	 */
 	static registerFont(path, family) {
-		if (typeof Canvas.registerFont !== 'function')
+		if (typeof InternalCanvas.registerFont !== 'function')
 			throw new Error('registerFont is not supported in this version of node-canvas, please install node-canvas 2.x.');
 		if (!family)
 			throw new TypeError('A family must be specified for registerFont.');
 
-		Canvas.registerFont(path, family.constructor === Object ? family : { family });
-		return CanvasConstructor;
+		InternalCanvas.registerFont(path, family.constructor === Object ? family : { family });
+		return Canvas;
 	}
 
 	/**
@@ -1446,4 +1446,4 @@ class CanvasConstructor {
 
 }
 
-module.exports = CanvasConstructor;
+module.exports = Canvas;
