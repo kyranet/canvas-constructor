@@ -74,7 +74,7 @@ async function profile(member, score) {
 }
 ```
 
-We also need to add a bit of regex \(I'll explain why later\), so throw this under the requires you added earlier
+We also need to add a bit of regular expressions \(I'll explain why later\), so throw this under the requires you added earlier
 
 ```javascript
 const imageUrlRegex = /\?size=2048$/g;
@@ -146,7 +146,7 @@ return new Canvas(400, 180)
   .addRect(84, 0, 316, 180)
 ```
 
-That's the beauty of chanable methods, you don't need to constantly call the same thing over and over, so from this point on, everything I add will just be added onto the previous code block.
+That's the beauty of chainable methods, you don't need to constantly call the same thing over and over, so from this point on, everything I add will just be added onto the previous code block.
 
 ```javascript
   // Create the "Dark, but not black" boxes for the left side of the image
@@ -161,7 +161,7 @@ If you've been following along closely, your profile image should look like this
 
 ![Boxes... yay](https://raw.githubusercontent.com/kyranet/canvasConstructor/master/guides/assets/profile-boxes.png)
 
-As you can see, we've managed to successfully create an image with multiple boxes of different colours, now we'll do something different, let's create a drop shadow effect on a circular clip path.
+As you can see, we've managed to successfully create an image with multiple boxes of different colors, now we'll do something different, let's create a drop shadow effect on a circular clip path.
 
 ```javascript
   // Create a shadow effect for the avatar placement.
