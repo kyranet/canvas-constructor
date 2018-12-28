@@ -25,5 +25,4 @@ travis-deploy.sh
 tsconfig.json
 tslint.json
 webpack.config.js
-webpack/
 yarn.lock

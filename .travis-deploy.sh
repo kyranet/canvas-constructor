@@ -35,7 +35,7 @@ rm -rf out
 # Do the thing once more for webpack
 TARGET_BRANCH="webpack"
 git clone $REPO out -b $TARGET_BRANCH
-NODE_ENV=production yarn build:browser
+yarn build:browser
 mv webpack/canvasconstructor.min.js out/canvasconstructor.$SOURCE.min.js
 
 # Commit and push
