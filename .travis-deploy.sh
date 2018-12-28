@@ -15,16 +15,10 @@ SOURCE="${TRAVIS_BRANCH//\/|\./_/}"
 REPO=$(git config remote.origin.url)
 SHA=$(git rev-parse --verify HEAD)
 
-# Run the build
-yarn docs
-NODE_ENV=production yarn build:browser
-
 # Docs
 TARGET_BRANCH="docs"
 git clone $REPO out -b $TARGET_BRANCH
-
 yarn docs
-
 mv docs/docs.json out/${SOURCE}.json
 
 cd out
@@ -41,6 +35,7 @@ rm -rf out
 # Do the thing once more for webpack
 TARGET_BRANCH="webpack"
 git clone $REPO out -b $TARGET_BRANCH
+NODE_ENV=production yarn build:browser
 mv webpack/canvasconstructor.min.js out/canvasconstructor.$SOURCE.min.js
 
 # Commit and push
