@@ -41,7 +41,6 @@ class Canvas {
 		 * The constructed Canvas
 		 * @since 0.0.1
 		 * @type {HTMLCanvasElement}
-		 * @private
 		 */
 		this.canvas = createCanvas(...args);
 
@@ -49,7 +48,6 @@ class Canvas {
 		 * The 2D context for this canvas
 		 * @since 0.0.1
 		 * @type {CanvasRenderingContext2D}
-		 * @private
 		 */
 		this.context = this.canvas ? this.canvas.getContext('2d') : null;
 	}
@@ -325,30 +323,43 @@ class Canvas {
 	 * @param {number} dx The position x to start drawing the element.
 	 * @param {number} dy The position y to start drawing the element.
 	 * @param {number} maxWidth The max length in pixels for the text.
-	 * @param {number} lineHeight The line's height.
 	 * @returns {this}
 	 * @chainable
 	 * @example
 	 * new Canvas(400, 300)
 	 *     .setTextFont('25px Tahoma')
-	 *     .addMultilineText('This is a really long text!', 139, 360, 156, 28)
+	 *     .addMultilineText('This is a really long text!', 139, 360, 156)
 	 *     .toBuffer();
 	 */
-	addMultilineText(text, dx, dy, maxWidth, lineHeight) {
-		const words = text.split(' '), wordLength = words.length;
-		let line = words[0];
+	addMultilineText(text, dx, dy, maxWidth) {
+		const words = text.split(' ');
+		// If it is a single word (or none), skip and run addText instead
+		if (words.length <= 1) return this.addText(text, dx, dy);
 
-		for (let n = 1; n < wordLength; n++) {
-			const testLine = `${line} ${words[n]}`;
-			if (this.measureText(testLine).width > maxWidth) {
-				this.addText(line, dx, dy);
-				line = `${words[n]} `;
-				dy += lineHeight;
+		// Cache the array length and the space pixel width,
+		// as they will be used often in the loop
+		const wordLength = words.length, spaceWidth = this.measureText(' ').width;
+		const lines = [];
+
+		let currentLine = words[0];
+		let currentWidth = this.measureText(currentLine).width;
+
+		for (let i = 1; i < wordLength; i++) {
+			const word = words[i];
+			const wordWidth = this.measureText(word).width;
+			if (currentWidth + spaceWidth + wordWidth > maxWidth) {
+				lines.push(currentLine);
+				currentLine = word;
+				currentWidth = wordWidth;
 			} else {
-				line = testLine;
+				currentLine += ` ${word}`;
+				currentWidth += spaceWidth + wordWidth;
 			}
 		}
-		return line.length ? this.addText(line, dx, dy) : this;
+
+		// Push the last line
+		lines.push(currentLine);
+		return this.addText(lines.join('\n'), dx, dy);
 	}
 
 	/**

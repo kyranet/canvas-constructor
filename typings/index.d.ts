@@ -1,5 +1,6 @@
 /// <reference types="node" />
 /// <reference lib="esnext" />
+/// <reference lib="dom" />
 
 declare module 'canvas-constructor' {
 
@@ -23,8 +24,8 @@ declare module 'canvas-constructor' {
 		public width: number;
 		public heigth: number;
 		public readonly lineDash: number[];
-		private canvas: any;
-		private context: any;
+		public canvas: HTMLCanvasElement;
+		public context: CanvasRenderingContext2D;
 
 		public addBeveledRect(dx: number, dy: number, dWidth: number, dHeigth: number, radius?: number): this;
 		public addBeveledImage(bufferOrImage: BufferOrImage, dx: number, dy: number, dWidth: number, dHeight: number, radius?: BeveledRadiusOptions | number, restore?: boolean): this;
@@ -33,7 +34,7 @@ declare module 'canvas-constructor' {
 		public addImage(bufferOrImage: BufferOrImage, dx: number, dy: number, options?: AddImageOptions): this;
 		public addImage(bufferOrImage: BufferOrImage, dx: number, dy: number, dWidth: number, dHeight: number, options?: AddImageOptions): this;
 		public addImage(bufferOrImage: BufferOrImage, sx: number, sy: number, sWidth: number, sHeigth: number, dx: number, dy: number, dWidth: number, dHeigth: number, options?: AddImageOptions): this;
-		public addMultilineText(text: string, dx: number, dy: number, maxWidth: number, lineHeight: number): this;
+		public addMultilineText(text: string, dx: number, dy: number, maxWidth: number): this;
 		public addRect(dx: number, dy: number, dWidth: number, dHeigth: number): this;
 		public addResponsiveText(text: string, dx: number, dy: number, maxWidth: number): this;
 		public addRoundImage(bufferOrImage: BufferOrImage, dx: number, dy: number, dWidth: number, dHeight: number, radius?: number, restore?: boolean): this;
