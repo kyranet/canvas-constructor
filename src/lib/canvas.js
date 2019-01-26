@@ -4,7 +4,7 @@ const { browser, getFontHeight, InternalCanvas, textWrap } = require('./util/uti
 const createCanvas = browser
 	? () => null
 	: typeof InternalCanvas.createCanvas === 'function'
-		// node-canvas >2.0.0
+		// node-canvas >=2.0.0
 		? InternalCanvas.createCanvas
 		// node-canvas <2.0.0
 		: (...args) => new InternalCanvas(...args);
