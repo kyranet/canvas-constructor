@@ -1448,7 +1448,7 @@ class Canvas {
 	 * const { Canvas: CanvasConstructor } = require('canvas-constructor');
 	 *
 	 * const canvasInstance = Canvas.createCanvas(200, 200);
-	 * const buffer = CanvasConstructor.fromCanvas(canvasElement)
+	 * const buffer = CanvasConstructor.from(canvasElement)
 	 *     .setColor('green')
 	 *     .addRect(10, 10, 100, 100)
 	 *     .toBuffer();
@@ -1457,12 +1457,12 @@ class Canvas {
 	 * <script type="text/javascript" src="canvasconstructor.master.min.js"></script>
 	 * <script type="text/javascript">
 	 * const canvasElement = document.getElementById('canvas');
-	 * CanvasConstructor.Canvas.fromCanvas(canvasElement)
+	 * CanvasConstructor.Canvas.from(canvasElement)
 	 *     .setColor('green')
 	 *     .addRect(10, 10, 100, 100);
 	 * </script>
 	 */
-	static fromCanvas(canvas) {
+	static from(canvas) {
 		const instance = new Canvas();
 		instance.canvas = canvas;
 		instance.context = canvas.getContext('2d');

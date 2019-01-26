@@ -27,7 +27,7 @@ new Canvas(300, 300)
 <script type="text/javascript" src="canvasconstructor.master.min.js"></script>
 <script type="text/javascript">
 const canvasElement = document.getElementById('canvas');
-CanvasConstructor.Canvas.fromCanvas(canvasElement)
+CanvasConstructor.Canvas.from(canvasElement)
     .setColor('#AEFD54')
     .addRect(5, 5, 290, 290)
     .setColor('#FFAE23')
