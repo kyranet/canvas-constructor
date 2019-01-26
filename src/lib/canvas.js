@@ -89,13 +89,9 @@ class Canvas {
 	 * @chainable
 	 */
 	changeCanvasSize(width, height) {
-		if (typeof width === 'number' && !Number.isNaN(width))
-			this.width = width;
-
-		if (typeof height === 'number' && !Number.isNaN(height))
-			this.height = height;
-
-		return this;
+		return this
+			.changeCanvasWidth(width)
+			.changeCanvasHeight(height);
 	}
 
 	/**
@@ -105,7 +101,8 @@ class Canvas {
 	 * @chainable
 	 */
 	changeCanvasWidth(width) {
-		return this.changeCanvasSize(width, undefined);
+		this.width = width;
+		return this;
 	}
 
 	/**
@@ -115,7 +112,8 @@ class Canvas {
 	 * @chainable
 	 */
 	changeCanvasHeight(height) {
-		return this.changeCanvasSize(undefined, height);
+		this.height = height;
+		return this;
 	}
 
 	/**
