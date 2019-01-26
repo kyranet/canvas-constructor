@@ -1398,7 +1398,7 @@ class Canvas {
 	 *     .setTextFont('48px Verdana')
 	 *     .wrapText('Hello World, this is a quite\nlong text.', 300, (wrappedText, canvas) => canvas
 	 *         .setTextAlign('center')
-	 *         .addText(wrappedText, 250, 50))
+	 *         .addMultilineText(wrappedText, 250, 50))
 	 *     .toBuffer(); // Returns a Buffer
 	 *
 	 * // Calculate the wrapped text and return it, which
