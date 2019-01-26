@@ -1,3 +1,4 @@
+// @ts-nocheck
 /**
  * Invert an image
  * @param {Canvas} canvas The Canvas instance
