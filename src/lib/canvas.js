@@ -89,10 +89,10 @@ class Canvas {
 	 * @chainable
 	 */
 	changeCanvasSize(width, height) {
-		if (typeof width === 'number' && Number.isNaN(width) === false)
+		if (typeof width === 'number' && !Number.isNaN(width))
 			this.width = width;
 
-		if (typeof height === 'number' && Number.isNaN(height) === false)
+		if (typeof height === 'number' && !Number.isNaN(height))
 			this.height = height;
 
 		return this;
