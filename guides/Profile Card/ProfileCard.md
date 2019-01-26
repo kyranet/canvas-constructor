@@ -117,11 +117,11 @@ Alright, now we've got the actual command sorted, all we have left is the `profi
 
 > _You should go get a drink, this may take a while lol._
 
-Inside your profile function you need to define a few variables, we're going do to some more fancy [Destructuring assignment](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment), we are passing the entire object, but we actually only need a few things, so here we go.
+Inside your profile function you need to define a few variables, we're going do to some more fancy [Destructuring assignment][DestructuringAssignment], we are passing the entire object, but we actually only need a few things, so here we go.
 
 ```javascript
 // We only need the level, and points values, we don't need the user or guild id.
-const { level, points } = score;
+const { level, points } = client.points.get(key);
 // We're grabbing the body out of snekfetch's get method, but at the same time we're assigning a variable
 // to it, avatar.
 // Remember when I mentioned the regex before? Now we get to use it, we want to set the size to 128 pixels,
