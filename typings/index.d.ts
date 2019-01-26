@@ -1,5 +1,6 @@
 /// <reference types="node" />
 /// <reference lib="esnext" />
+/// <reference lib="dom" />
 
 declare module 'canvas-constructor' {
 
@@ -23,8 +24,8 @@ declare module 'canvas-constructor' {
 		public width: number;
 		public heigth: number;
 		public readonly lineDash: number[];
-		private canvas: any;
-		private context: any;
+		public canvas: HTMLCanvasElement;
+		public context: CanvasRenderingContext2D;
 
 		public addBeveledRect(dx: number, dy: number, dWidth: number, dHeigth: number, radius?: number): this;
 		public addBeveledImage(bufferOrImage: BufferOrImage, dx: number, dy: number, dWidth: number, dHeight: number, radius?: BeveledRadiusOptions | number, restore?: boolean): this;
