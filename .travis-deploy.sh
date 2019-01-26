@@ -3,6 +3,13 @@
 
 set -e
 
+# For revert branches, do nothing
+if [[ "$TRAVIS_BRANCH" == revert-* ]] || [[ "$TRAVIS_BRANCH" == dependabot/* ]]; then
+  echo -e "\e[36m\e[1mBuild triggered for reversion branch \"${TRAVIS_BRANCH}\" - doing nothing."
+  exit 0
+fi
+
+# For tags or pull requests, do nothing
 if [ -n "$TRAVIS_TAG" ] || [ "$TRAVIS_PULL_REQUEST" != "false" ]; then
   echo -e "Not building for a non branch push - building without deploying."
   yarn docs
