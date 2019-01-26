@@ -319,35 +319,33 @@ class Canvas {
 	}
 
 	/**
-	 * Add responsive text
+	 * Add text with line breaks (node-canvas and web canvas compatible)
 	 * @param {string} text The text to write.
 	 * @param {number} dx The position x to start drawing the element.
 	 * @param {number} dy The position y to start drawing the element.
-	 * @param {number} maxWidth The max length in pixels for the text.
-	 * @param {number} lineHeight The line's height.
 	 * @returns {this}
 	 * @chainable
 	 * @example
 	 * new Canvas(400, 300)
 	 *     .setTextFont('25px Tahoma')
-	 *     .addMultilineText('This is a really long text!', 139, 360, 156, 28)
+	 *     .addMultilineText('This is a really\nlong text!', 139, 360)
 	 *     .toBuffer();
 	 */
-	addMultilineText(text, dx, dy, maxWidth, lineHeight) {
-		const words = text.split(' '), wordLength = words.length;
-		let line = words[0];
+	addMultilineText(text, dx, dy) {
+		const lines = text.split(/\r?\n/);
 
-		for (let n = 1; n < wordLength; n++) {
-			const testLine = `${line} ${words[n]}`;
-			if (this.measureText(testLine).width > maxWidth) {
-				this.addText(line, dx, dy);
-				line = `${words[n]} `;
-				dy += lineHeight;
-			} else {
-				line = testLine;
-			}
+		// If there are no new lines, return using addText
+		if (lines.length <= 1) return this.addText(text, dx, dy);
+
+		const height = this.textFontHeight;
+
+		let linePositionY = dy;
+		for (const line of lines) {
+			this.addText(line, dx, Math.floor(linePositionY));
+			linePositionY += height;
 		}
-		return line.length ? this.addText(line, dx, dy) : this;
+
+		return this;
 	}
 
 	/**
