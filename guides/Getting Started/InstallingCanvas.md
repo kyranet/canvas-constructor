@@ -65,4 +65,18 @@ development branches.
 
 If you followed the guide completely, your console should look something like this, and you're good to go!
 
+```bash
+$ yarn add canvas canvas-constructor
+yarn add v1.13.0
+[1/4] Resolving packages...
+[2/4] Fetching packages...
+[3/4] Linking dependencies...
+[4/4] Building fresh packages...
+success Saved lockfile.
+success Saved 64 new dependencies.
+info Direct dependencies
+├─ canvas-constructor@2.1.1
+└─ canvas@2.3.1
+```
+
 ![Install Screenshot](https://raw.githubusercontent.com/kyranet/canvasConstructor/master/guides/assets/installation-screenshot.png)
