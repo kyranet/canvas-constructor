@@ -1,6 +1,6 @@
 # Profile Card
 
-> _**NOTE:** _This tutorial was originally written for [An Idiot's Guide][AnIdiotsGuide], as it is using
+> **NOTE:** _This tutorial was originally written for [An Idiot's Guide][AnIdiotsGuide], as it is using
 [GuideBot][GuideBot] as a base. Future tutorials will have no bias towards any Discord bot libraries, the only reason
 it was not rewritten with no Discord library in mind, is due to how far the tutorial progressed._
 
