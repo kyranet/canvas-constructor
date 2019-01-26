@@ -1,5 +1,5 @@
 // @ts-nocheck
-const { browser, getFontHeight, InternalCanvas } = require('./util/util');
+const { browser, getFontHeight, InternalCanvas, textWrap } = require('./util/util');
 
 const createCanvas = browser
 	? () => null
@@ -1381,6 +1381,41 @@ class Canvas {
 	 */
 	toBlobAsync(...args) {
 		return new Promise((resolve) => this.canvas.toBlob(resolve, ...args));
+	}
+
+	/**
+	 * Wraps a text into a width-limited multi-line text.
+	 * @param {string} text The text to wrap
+	 * @param {number} wrapWidth The wrap width
+	 * @param {Function} callback The callback, if not specified, this method won't be chainable as it will return a
+	 * string. If you use an arrow function, you might want to use the second argument which is the instance of the
+	 * class. Otherwise, the keyword this is binded to the class instance itself, so you can use it safely.
+	 * @returns {this|string}
+	 * @chainable
+	 * @example
+	 * // Wrap the text and add it
+	 * const buffer = new Canvas(500, 300)
+	 *     .setTextFont('48px Verdana')
+	 *     .wrapText('Hello World, this is a quite\nlong text.', 300, (wrappedText, canvas) => canvas
+	 *         .setTextAlign('center')
+	 *         .addText(wrappedText, 250, 50))
+	 *     .toBuffer(); // Returns a Buffer
+	 *
+	 * // Calculate the wrapped text and return it, which
+	 * // is useful for storage to avoid re-calculating the
+	 * // wrapped text
+	 * const wrappedText = new Canvas(500, 300)
+	 *     .setTextFont('48px Verdana')
+	 *     .wrapText('Hello World, this is a quite\nlong text.', 300);
+	 */
+	wrapText(text, wrapWidth, callback) {
+		const wrappedText = textWrap(this, text, wrapWidth);
+		if (callback) {
+			if (typeof callback !== 'function') throw new TypeError('Callback must be a function');
+			callback.call(this, wrappedText, this);
+			return this;
+		}
+		return wrappedText;
 	}
 
 	/**
