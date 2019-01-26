@@ -1468,7 +1468,7 @@ class Canvas {
 		instance.context = canvas.getContext('2d');
 	}
 
-	static getCanvas() {
+	static get internalCanvas() {
 		return InternalCanvas;
 	}
 

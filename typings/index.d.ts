@@ -123,7 +123,7 @@ declare module 'canvas-constructor' {
 		private _resolveImage(imageOrBuffer: BufferOrImage): Image;
 
 		public static from(canvas: any): Canvas;
-		public static getCanvas(): any;
+		public static readonly internalCanvas: any;
 		public static registerFont(path: string, family: string | FontFaceType): typeof Canvas;
 	}
 
