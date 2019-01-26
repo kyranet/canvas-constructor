@@ -67,19 +67,19 @@ declare module 'canvas-constructor' {
 		public createRoundClip(dx: number, dy: number, radius: number, start?: number, angle?: number): this;
 		public createRoundPath(dx: number, dy: number, radius: number, start?: number, angle?: number): this;
 		public fill(fillRule?: FillRuleType): this;
-		public getImageData(cb: (data: ImageData, canvas: this) => void): this;
-		public getImageData(dx: number, dy: number, dWidth: number, dHeight: number, cb: (data: ImageData, canvas: this) => void): this;
+		public getImageData(cb: (data: ImageData, instance: this) => unknown): this;
+		public getImageData(dx: number, dy: number, dWidth: number, dHeight: number, cb: (data: ImageData, instance: this) => unknown): this;
 		public getImageData(dx?: number, dy?: number, dWidth?: number, dHeight?: number): ImageData;
 		public getLineDash(): number[];
 		public isPointInPath(dx: number, dy: number, fillRule: FillRuleType): boolean;
 		public isPointInStroke(dx: number, dy: number): boolean;
 		public lineTo(dx: number, dy: number): this;
 		public measureText(text: string): number;
-		public measureText(text: string, callback: (metrics: TextMetrics, canvas: this) => void): this;
+		public measureText(text: string, callback: (metrics: TextMetrics, instance: this) => unknown): this;
 		public moveTo(dx: number, dy: number): this;
 		public printLinearGradient(x0: number, y0: number, x1: number, y1: number, steps?: GradientStep[]): this;
 		public printRadialGradient(x0: number, y0: number, r0: number, x1: number, y1: number, r1: number, steps?: GradientStep[]): this;
-		public process(fn: (canvas: this) => any): this;
+		public process<T extends unknown[]>(fn: (instance: this, ...args: T) => unknown, ...args: T): this;
 		public putImageData(imageData: ImageData, dx: number, dy: number, dirtyX?: number, dirtyY?: number, dirtyWidth?: number, dirtyHeight?: number): this;
 		public quadraticCurveTo(cpx: number, cpy: number, dx: number, dy: number): this;
 		public resetShadows(): this;
@@ -116,9 +116,11 @@ declare module 'canvas-constructor' {
 		public toBufferAsync(): Promise<Buffer>;
 		public toDataURL(type: string, ...args: any[]): string;
 		public toDataURLAsync(type: string): Promise<string>;
-		public toBlob(callback: (blob: any) => void, mimeType?: string, qualityArgument?: number): void;
+		public toBlob(callback: (blob: any) => unknown, mimeType?: string, qualityArgument?: number): void;
 		public toBlobAsync(mimeType?: string, qualityArgument?: number): Promise<any>;
 		public translate(dx: number, dy: number): this;
+		public wrapText(text: string, wrapWidth: number, cb: (wrappedText: string, instance: this) => unknown): this;
+		public wrapText(text: string, wrapWidth: number): string;
 
 		private _resolveImage(imageOrBuffer: BufferOrImage): Image;
 
@@ -232,7 +234,7 @@ declare module 'canvas-constructor' {
 	};
 
 	type CanvasGradient = {
-		addColorStop: (offset: number, color: string) => void;
+		addColorStop: (offset: number, color: string) => unknown;
 	};
 
 	class ImageData {
@@ -266,8 +268,8 @@ declare module 'canvas' {
 	export class Image {
 		public constructor(width?: number, height?: number);
 		public src: string | Buffer;
-		public onload: () => void | null;
-		public onerror: (error: Error) => void | null;
+		public onload: () => unknown | null;
+		public onerror: (error: Error) => unknown | null;
 		public complete: boolean;
 		public width: number;
 		public height: number;
