@@ -1,6 +1,7 @@
 # Getting Started
 
-Please check {@tutorial InstallingCanvas} for the installation. You **must** have Canvas installed and working before using this package.
+Please check {@tutorial InstallingCanvas} for the installation. You **must** have Canvas installed and working before
+using this package.
 
 ---
 
@@ -45,7 +46,9 @@ CanvasConstructor.Canvas.fromCanvas(canvasElement)
 
 ![Hello World!](https://raw.githubusercontent.com/kyranet/canvasConstructor/master/guides/assets/getting-started-example-01.png)
 
-Now, let's suppose we want to add images. I'd recommend [fs-nextra](https://github.com/bdistin/fs-nextra), by BDISTIN, it requires Node.js 8.5.0 to work (it promisifies the async fs methods with `Util.promisify()`), it's a dependency-free and lightweight package that provides support for **atomic operations**.
+Now, let's suppose we want to add images. I'd recommend [fs-nextra](https://github.com/bdistin/fs-nextra), by BDISTIN,
+it requires Node.js LTS to work, it is a dependency-free and lightweight package that provides support for
+**atomic operations**.
 
 ```js
 const { Canvas } = require('canvas-constructor');
@@ -76,4 +79,7 @@ async function createCanvas() {
 
 And now, you have created an image with a kitten in the background and some centered text in the bottom of it.
 
-If you experience issues with **Canvas** or want to install it, please refer to the [canvas](https://www.npmjs.com/package/canvas) repository, if you feel you found an issue in this package, feel free to file an issue [here](https://github.com/kyranet/canvasConstructor/issues), or make a [Pull Request](https://help.github.com/articles/about-pull-requests/) if you have the fix.
+If you experience issues with **Canvas** or want to install it, please refer to the
+[canvas](https://www.npmjs.com/package/canvas) repository, if you feel you found an issue in this package, feel free to
+file an issue [here](https://github.com/kyranet/canvasConstructor/issues), or make a
+[Pull Request](https://help.github.com/articles/about-pull-requests/) if you have the fix.
