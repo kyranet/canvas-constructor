@@ -27,7 +27,7 @@
         "tslint": "^5.12.0",
         "typescript": "^3.2.4",
         "webpack": "^4.28.2",
-        "webpack-cli": "^3.1.2"
+        "webpack-cli": "^3.2.1"
     },
     "keywords": [
         "node-canvas",
