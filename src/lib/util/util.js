@@ -59,3 +59,40 @@ exports.getFontHeight = (() => {
 		return size;
 	};
 })();
+
+exports.textWrap = (canvas, text, wrapWidth) => {
+	const result = [];
+	const buffer = [];
+
+	const spaceWidth = canvas.context.measureText(' ').width;
+
+	// Run the loop for each line
+	for (const line of text.split(/\r?\n/)) {
+		let spaceLeft = wrapWidth;
+
+		// Run the loop for each word
+		for (const word of line.split(' ')) {
+			const wordWidth = canvas.context.measureText(word).width;
+			const wordWidthWithSpace = wordWidth + spaceWidth;
+
+			if (wordWidthWithSpace > spaceLeft) {
+				if (buffer.length) {
+					result.push(buffer.join(' '));
+					buffer.length = 0;
+				}
+				buffer.push(word);
+				spaceLeft = wrapWidth - wordWidth;
+			} else {
+				spaceLeft -= wordWidthWithSpace;
+				buffer.push(word);
+			}
+		}
+
+		if (buffer.length) {
+			result.push(buffer.join(' '));
+			buffer.length = 0;
+		}
+	}
+
+	return result.join('\n');
+};
