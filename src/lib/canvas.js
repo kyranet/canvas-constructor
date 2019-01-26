@@ -1243,10 +1243,10 @@ class Canvas {
 	}
 
 	/**
-	 * @returns {number[]} An Array. A list of numbers that specifies distances to alternately draw a line and a gap (in
-	 * coordinate space units). If the number, when setting the elements, was odd, the elements of the array get copied
-	 * and concatenated. For example, setting the line dash to [5, 15, 25] will result in getting back [5, 15, 25, 5, 15,
-	 * 25].
+	 * A list of numbers that specifies distances to alternately draw a line and a gap (in coordinate space units).
+	 * If the number, when setting the elements, was odd, the elements of the array get copied and concatenated. For
+	 * example, setting the line dash to [5, 15, 25] will result in getting back [5, 15, 25, 5, 15, 25].
+	 * @returns {number[]}
 	 * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/getLineDash
 	 * @example
 	 * new Canvas(400, 300)
@@ -1262,11 +1262,9 @@ class Canvas {
 	}
 
 	/**
-	 * A list of numbers that specifies distances to alternately draw a line and a gap (in coordinate space units).
-	 * If the number, when setting the elements, was odd, the elements of the array get copied and concatenated.
+	 * Alias of Canvas#getLineDash();
 	 * @type {number[]}
 	 * @readonly
-	 * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/getLineDash
 	 */
 	get lineDash() {
 		return this.getLineDash();
