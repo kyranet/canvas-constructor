@@ -1,13 +1,5 @@
-const browser = typeof window !== 'undefined';
-
-const InternalCanvas = (() => {
-	if (browser) return typeof HTMLCanvasElement !== 'undefined' ? HTMLCanvasElement : null;
-	try {
-		return require('canvas-prebuilt');
-	} catch (_) {
-		return require('canvas');
-	}
-})();
+// @ts-nocheck
+const { browser, InternalCanvas } = require('./util/util');
 
 const createCanvas = browser
 	? () => null
