@@ -1,5 +1,5 @@
 // @ts-nocheck
-const { browser, InternalCanvas } = require('./util/util');
+const { browser, getFontHeight, InternalCanvas } = require('./util/util');
 
 const createCanvas = browser
 	? () => null
@@ -73,9 +73,18 @@ class Canvas {
 	}
 
 	/**
+	 * The font height
+	 * @sinc 3.0.0
+	 * @type {number}
+	 */
+	get textFontHeight() {
+		return getFontHeight(this.context.font);
+	}
+
+	/**
 	 * Change the current canvas' size.
 	 * @param {number} width  The new width for the canvas.
-	 * @param {number} height The new heigth for the canvas.
+	 * @param {number} height The new height for the canvas.
 	 * @returns {this}
 	 * @chainable
 	 */
@@ -105,7 +114,7 @@ class Canvas {
 	 * @returns {this}
 	 * @chainable
 	 */
-	changeCanvasHeigth(height) {
+	changeCanvasHeight(height) {
 		return this.changeCanvasSize(undefined, height);
 	}
 
@@ -584,7 +593,7 @@ class Canvas {
 	 * @param {Image|Buffer} imageOrBuffer The image's buffer.
 	 * @param {number} dx The X coordinate in the destination canvas at which to place the center of the image.
 	 * @param {number} dy The Y coordinate in the destination canvas at which to place the center of the image.
-	 * @param {number} radius The radius for the circle, it sets the image's width and heigth as the diameter (radius * 2).
+	 * @param {number} radius The radius for the circle, it sets the image's width and height as the diameter (radius * 2).
 	 * @param {boolean} [restore=true] Whether this method should restore the drawing state.
 	 * @returns {this}
 	 * @chainable
@@ -604,7 +613,7 @@ class Canvas {
 	 * @param {number} dx The position x to start drawing the element.
 	 * @param {number} dy The position y to start drawing the element.
 	 * @param {number} width The width of the element.
-	 * @param {number} height The heigth of the element.
+	 * @param {number} height The height of the element.
 	 * @param {number} [radius=10] The radius for the new image.
 	 * @param {boolean} [restore=true] Whether this method should restore the drawing state.
 	 * @returns {this}
@@ -631,7 +640,7 @@ class Canvas {
 	 * @param {number} dx The position x to start drawing the element.
 	 * @param {number} dy The position y to start drawing the element.
 	 * @param {number} width  The width of the element.
-	 * @param {number} height The heigth of the element.
+	 * @param {number} height The height of the element.
 	 * @returns {this}
 	 * @chainable
 	 * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/fillRect
@@ -646,7 +655,7 @@ class Canvas {
 	 * @param {number} dx The position x to start drawing the element.
 	 * @param {number} dy The position y to start drawing the element.
 	 * @param {number} width  The width of the element.
-	 * @param {number} height The heigth of the element.
+	 * @param {number} height The height of the element.
 	 * @param {number} [radius=10] The radius for the bevels.
 	 * @returns {this}
 	 * @chainable
@@ -718,7 +727,7 @@ class Canvas {
 	 * @param {number} dx The position x to start drawing clip.
 	 * @param {number} dy The position y to start drawing clip.
 	 * @param {number} width The width of clip.
-	 * @param {number} height The heigth of clip.
+	 * @param {number} height The height of clip.
 	 * @param {(BeveledRadiusOptions|number)} radius The radius for clip's rounded borders.
 	 * @returns {this}
 	 * @chainable
@@ -755,7 +764,7 @@ class Canvas {
 	 * @param {number} dx The position x to start drawing clip.
 	 * @param {number} dy The position y to start drawing clip.
 	 * @param {number} width The width of clip.
-	 * @param {number} height The heigth of clip.
+	 * @param {number} height The height of clip.
 	 * @param {number} [radius] The radius for clip's rounded borders.
 	 * @returns {this}
 	 * @chainable
@@ -1223,7 +1232,7 @@ class Canvas {
 	 * @param {number} [dx=0] The position x to start drawing the element.
 	 * @param {number} [dy=0] The position y to start drawing the element.
 	 * @param {number} [width=this.width] The width of the element.
-	 * @param {number} [height=this.heigth] The heigth of the element.
+	 * @param {number} [height=this.height] The height of the element.
 	 * @returns {this}
 	 * @chainable
 	 * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/clearRect
