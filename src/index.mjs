@@ -1,5 +1,5 @@
 import filters from './lib/filters/filters';
-import Canvas from './lib/util/canvas';
+import Canvas from './lib/canvas';
 
 // Canvas
 export { Canvas };
