@@ -34,7 +34,8 @@ declare module 'canvas-constructor' {
 		public addImage(bufferOrImage: BufferOrImage, dx: number, dy: number, options?: AddImageOptions): this;
 		public addImage(bufferOrImage: BufferOrImage, dx: number, dy: number, dWidth: number, dHeight: number, options?: AddImageOptions): this;
 		public addImage(bufferOrImage: BufferOrImage, sx: number, sy: number, sWidth: number, sHeight: number, dx: number, dy: number, dWidth: number, dHeight: number, options?: AddImageOptions): this;
-		public addMultilineText(text: string, dx: number, dy: number, maxWidth: number, lineHeight: number): this;
+		public addMultilineText(text: string, dx: number, dy: number): this;
+		public addWrappedText(text: string, dx: number, dy: number, wrapWidth: number): this;
 		public addRect(dx: number, dy: number, dWidth: number, dHeight: number): this;
 		public addResponsiveText(text: string, dx: number, dy: number, maxWidth: number): this;
 		public addRoundImage(bufferOrImage: BufferOrImage, dx: number, dy: number, dWidth: number, dHeight: number, radius?: number, restore?: boolean): this;

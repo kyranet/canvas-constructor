@@ -349,6 +349,25 @@ class Canvas {
 	}
 
 	/**
+	 * Wrap the text in multiple lines and write it
+	 * @param {string} text The text to wrap and write.
+	 * @param {number} dx The position x to start drawing the element.
+	 * @param {number} dy The position y to start drawing the element.
+	 * @param {number} wrapWidth The width in pixels of the line wrap
+	 * @returns {this}
+	 * @chainable
+	 * @example
+	 * new Canvas(400, 300)
+	 *     .setTextFont('25px Tahoma')
+	 *     .addWrappedText('This is a really long text!', 139, 360)
+	 *     .toBuffer();
+	 */
+	addWrappedText(text, dx, dy, wrapWidth) {
+		const wrappedText = textWrap(this, text, wrapWidth);
+		return this.addMultilineText(wrappedText, dx, dy);
+	}
+
+	/**
 	 * Strokes the current or given path with the current stroke style using the non-zero winding rule.
 	 * @param {any} path A Path2D path to stroke.
 	 * @returns {this}
