@@ -23,7 +23,7 @@
         "docgen": "github:dirigeants/docsgen",
         "eslint": "^5.12.1",
         "eslint-config-klasa": "github:dirigeants/klasa-lint",
-        "terser-webpack-plugin": "^1.2.1",
+        "terser-webpack-plugin": "^1.2.2",
         "tslint": "^5.12.1",
         "typescript": "^3.3.3",
         "webpack": "^4.29.3",
