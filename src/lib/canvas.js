@@ -1,18 +1,10 @@
-const browser = typeof window !== 'undefined';
-
-const InternalCanvas = (() => {
-	if (browser) return typeof HTMLCanvasElement !== 'undefined' ? HTMLCanvasElement : null;
-	try {
-		return require('canvas-prebuilt');
-	} catch (_) {
-		return require('canvas');
-	}
-})();
+// @ts-nocheck
+const { browser, getFontHeight, InternalCanvas, textWrap } = require('./util/util');
 
 const createCanvas = browser
 	? () => null
 	: typeof InternalCanvas.createCanvas === 'function'
-		// node-canvas >2.0.0
+		// node-canvas >=2.0.0
 		? InternalCanvas.createCanvas
 		// node-canvas <2.0.0
 		: (...args) => new InternalCanvas(...args);
@@ -81,20 +73,25 @@ class Canvas {
 	}
 
 	/**
+	 * The font height
+	 * @sinc 3.0.0
+	 * @type {number}
+	 */
+	get textFontHeight() {
+		return getFontHeight(this.context.font);
+	}
+
+	/**
 	 * Change the current canvas' size.
 	 * @param {number} width  The new width for the canvas.
-	 * @param {number} height The new heigth for the canvas.
+	 * @param {number} height The new height for the canvas.
 	 * @returns {this}
 	 * @chainable
 	 */
 	changeCanvasSize(width, height) {
-		if (typeof width === 'number' && Number.isNaN(width) === false)
-			this.width = width;
-
-		if (typeof height === 'number' && Number.isNaN(height) === false)
-			this.height = height;
-
-		return this;
+		return this
+			.changeCanvasWidth(width)
+			.changeCanvasHeight(height);
 	}
 
 	/**
@@ -104,7 +101,8 @@ class Canvas {
 	 * @chainable
 	 */
 	changeCanvasWidth(width) {
-		return this.changeCanvasSize(width, undefined);
+		this.width = width;
+		return this;
 	}
 
 	/**
@@ -113,8 +111,9 @@ class Canvas {
 	 * @returns {this}
 	 * @chainable
 	 */
-	changeCanvasHeigth(height) {
-		return this.changeCanvasSize(undefined, height);
+	changeCanvasHeight(height) {
+		this.height = height;
+		return this;
 	}
 
 	/**
@@ -320,35 +319,52 @@ class Canvas {
 	}
 
 	/**
-	 * Add responsive text
+	 * Add text with line breaks (node-canvas and web canvas compatible)
 	 * @param {string} text The text to write.
 	 * @param {number} dx The position x to start drawing the element.
 	 * @param {number} dy The position y to start drawing the element.
-	 * @param {number} maxWidth The max length in pixels for the text.
-	 * @param {number} lineHeight The line's height.
 	 * @returns {this}
 	 * @chainable
 	 * @example
 	 * new Canvas(400, 300)
 	 *     .setTextFont('25px Tahoma')
-	 *     .addMultilineText('This is a really long text!', 139, 360, 156, 28)
+	 *     .addMultilineText('This is a really\nlong text!', 139, 360)
 	 *     .toBuffer();
 	 */
-	addMultilineText(text, dx, dy, maxWidth, lineHeight) {
-		const words = text.split(' '), wordLength = words.length;
-		let line = words[0];
+	addMultilineText(text, dx, dy) {
+		const lines = text.split(/\r?\n/);
 
-		for (let n = 1; n < wordLength; n++) {
-			const testLine = `${line} ${words[n]}`;
-			if (this.measureText(testLine).width > maxWidth) {
-				this.addText(line, dx, dy);
-				line = `${words[n]} `;
-				dy += lineHeight;
-			} else {
-				line = testLine;
-			}
+		// If there are no new lines, return using addText
+		if (lines.length <= 1) return this.addText(text, dx, dy);
+
+		const height = this.textFontHeight;
+
+		let linePositionY = dy;
+		for (const line of lines) {
+			this.addText(line, dx, Math.floor(linePositionY));
+			linePositionY += height;
 		}
-		return line.length ? this.addText(line, dx, dy) : this;
+
+		return this;
+	}
+
+	/**
+	 * Wrap the text in multiple lines and write it
+	 * @param {string} text The text to wrap and write.
+	 * @param {number} dx The position x to start drawing the element.
+	 * @param {number} dy The position y to start drawing the element.
+	 * @param {number} wrapWidth The width in pixels of the line wrap
+	 * @returns {this}
+	 * @chainable
+	 * @example
+	 * new Canvas(400, 300)
+	 *     .setTextFont('25px Tahoma')
+	 *     .addWrappedText('This is a really long text!', 139, 360)
+	 *     .toBuffer();
+	 */
+	addWrappedText(text, dx, dy, wrapWidth) {
+		const wrappedText = textWrap(this, text, wrapWidth);
+		return this.addMultilineText(wrappedText, dx, dy);
 	}
 
 	/**
@@ -592,7 +608,7 @@ class Canvas {
 	 * @param {Image|Buffer} imageOrBuffer The image's buffer.
 	 * @param {number} dx The X coordinate in the destination canvas at which to place the center of the image.
 	 * @param {number} dy The Y coordinate in the destination canvas at which to place the center of the image.
-	 * @param {number} radius The radius for the circle, it sets the image's width and heigth as the diameter (radius * 2).
+	 * @param {number} radius The radius for the circle, it sets the image's width and height as the diameter (radius * 2).
 	 * @param {boolean} [restore=true] Whether this method should restore the drawing state.
 	 * @returns {this}
 	 * @chainable
@@ -612,7 +628,7 @@ class Canvas {
 	 * @param {number} dx The position x to start drawing the element.
 	 * @param {number} dy The position y to start drawing the element.
 	 * @param {number} width The width of the element.
-	 * @param {number} height The heigth of the element.
+	 * @param {number} height The height of the element.
 	 * @param {number} [radius=10] The radius for the new image.
 	 * @param {boolean} [restore=true] Whether this method should restore the drawing state.
 	 * @returns {this}
@@ -639,7 +655,7 @@ class Canvas {
 	 * @param {number} dx The position x to start drawing the element.
 	 * @param {number} dy The position y to start drawing the element.
 	 * @param {number} width  The width of the element.
-	 * @param {number} height The heigth of the element.
+	 * @param {number} height The height of the element.
 	 * @returns {this}
 	 * @chainable
 	 * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/fillRect
@@ -654,7 +670,7 @@ class Canvas {
 	 * @param {number} dx The position x to start drawing the element.
 	 * @param {number} dy The position y to start drawing the element.
 	 * @param {number} width  The width of the element.
-	 * @param {number} height The heigth of the element.
+	 * @param {number} height The height of the element.
 	 * @param {number} [radius=10] The radius for the bevels.
 	 * @returns {this}
 	 * @chainable
@@ -726,7 +742,7 @@ class Canvas {
 	 * @param {number} dx The position x to start drawing clip.
 	 * @param {number} dy The position y to start drawing clip.
 	 * @param {number} width The width of clip.
-	 * @param {number} height The heigth of clip.
+	 * @param {number} height The height of clip.
 	 * @param {(BeveledRadiusOptions|number)} radius The radius for clip's rounded borders.
 	 * @returns {this}
 	 * @chainable
@@ -763,7 +779,7 @@ class Canvas {
 	 * @param {number} dx The position x to start drawing clip.
 	 * @param {number} dy The position y to start drawing clip.
 	 * @param {number} width The width of clip.
-	 * @param {number} height The heigth of clip.
+	 * @param {number} height The height of clip.
 	 * @param {number} [radius] The radius for clip's rounded borders.
 	 * @returns {this}
 	 * @chainable
@@ -1231,7 +1247,7 @@ class Canvas {
 	 * @param {number} [dx=0] The position x to start drawing the element.
 	 * @param {number} [dy=0] The position y to start drawing the element.
 	 * @param {number} [width=this.width] The width of the element.
-	 * @param {number} [height=this.heigth] The heigth of the element.
+	 * @param {number} [height=this.height] The height of the element.
 	 * @returns {this}
 	 * @chainable
 	 * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/clearRect
@@ -1242,10 +1258,10 @@ class Canvas {
 	}
 
 	/**
-	 * @returns {number[]} An Array. A list of numbers that specifies distances to alternately draw a line and a gap (in
-	 * coordinate space units). If the number, when setting the elements, was odd, the elements of the array get copied
-	 * and concatenated. For example, setting the line dash to [5, 15, 25] will result in getting back [5, 15, 25, 5, 15,
-	 * 25].
+	 * A list of numbers that specifies distances to alternately draw a line and a gap (in coordinate space units).
+	 * If the number, when setting the elements, was odd, the elements of the array get copied and concatenated. For
+	 * example, setting the line dash to [5, 15, 25] will result in getting back [5, 15, 25, 5, 15, 25].
+	 * @returns {number[]}
 	 * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/getLineDash
 	 * @example
 	 * new Canvas(400, 300)
@@ -1261,11 +1277,9 @@ class Canvas {
 	}
 
 	/**
-	 * A list of numbers that specifies distances to alternately draw a line and a gap (in coordinate space units).
-	 * If the number, when setting the elements, was odd, the elements of the array get copied and concatenated.
+	 * Alias of Canvas#getLineDash();
 	 * @type {number[]}
 	 * @readonly
-	 * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/getLineDash
 	 */
 	get lineDash() {
 		return this.getLineDash();
@@ -1389,6 +1403,41 @@ class Canvas {
 	}
 
 	/**
+	 * Wraps a text into a width-limited multi-line text.
+	 * @param {string} text The text to wrap
+	 * @param {number} wrapWidth The wrap width
+	 * @param {Function} callback The callback, if not specified, this method won't be chainable as it will return a
+	 * string. If you use an arrow function, you might want to use the second argument which is the instance of the
+	 * class. Otherwise, the keyword this is binded to the class instance itself, so you can use it safely.
+	 * @returns {this|string}
+	 * @chainable
+	 * @example
+	 * // Wrap the text and add it
+	 * const buffer = new Canvas(500, 300)
+	 *     .setTextFont('48px Verdana')
+	 *     .wrapText('Hello World, this is a quite\nlong text.', 300, (wrappedText, canvas) => canvas
+	 *         .setTextAlign('center')
+	 *         .addMultilineText(wrappedText, 250, 50))
+	 *     .toBuffer(); // Returns a Buffer
+	 *
+	 * // Calculate the wrapped text and return it, which
+	 * // is useful for storage to avoid re-calculating the
+	 * // wrapped text
+	 * const wrappedText = new Canvas(500, 300)
+	 *     .setTextFont('48px Verdana')
+	 *     .wrapText('Hello World, this is a quite\nlong text.', 300);
+	 */
+	wrapText(text, wrapWidth, callback) {
+		const wrappedText = textWrap(this, text, wrapWidth);
+		if (callback) {
+			if (typeof callback !== 'function') throw new TypeError('Callback must be a function');
+			callback.call(this, wrappedText, this);
+			return this;
+		}
+		return wrappedText;
+	}
+
+	/**
 	 * Resolves an Image or Buffer
 	 * @param {(Image|Buffer)} imageOrBuffer An Image instance or a buffer
 	 * @param {Function} cb The callback
@@ -1418,7 +1467,7 @@ class Canvas {
 	 * const { Canvas: CanvasConstructor } = require('canvas-constructor');
 	 *
 	 * const canvasInstance = Canvas.createCanvas(200, 200);
-	 * const buffer = CanvasConstructor.fromCanvas(canvasElement)
+	 * const buffer = CanvasConstructor.from(canvasElement)
 	 *     .setColor('green')
 	 *     .addRect(10, 10, 100, 100)
 	 *     .toBuffer();
@@ -1427,18 +1476,18 @@ class Canvas {
 	 * <script type="text/javascript" src="canvasconstructor.master.min.js"></script>
 	 * <script type="text/javascript">
 	 * const canvasElement = document.getElementById('canvas');
-	 * CanvasConstructor.Canvas.fromCanvas(canvasElement)
+	 * CanvasConstructor.Canvas.from(canvasElement)
 	 *     .setColor('green')
 	 *     .addRect(10, 10, 100, 100);
 	 * </script>
 	 */
-	static fromCanvas(canvas) {
+	static from(canvas) {
 		const instance = new Canvas();
 		instance.canvas = canvas;
 		instance.context = canvas.getContext('2d');
 	}
 
-	static getCanvas() {
+	static get internalCanvas() {
 		return InternalCanvas;
 	}
 

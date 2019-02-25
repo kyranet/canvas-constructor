@@ -6,7 +6,7 @@ const TerserJSPlugin = require('terser-webpack-plugin');
 const filename = `canvasconstructor.min.js`;
 
 module.exports = {
-	entry: './index.js',
+	entry: './src/index.js',
 	mode: 'production',
 	output: {
 		path: path.resolve('./webpack'),

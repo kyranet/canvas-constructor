@@ -1,10 +1,17 @@
 # Installing Canvas
 
-Let's start off by introducing what canvas is. In HTML, the `<canvas>` element can be used to draw images via scripting with JavaScript. The canvas that we're talking about is a Cairo backed canvas implementation for **Node.js**. An example of something that can be done with canvas is this.
+> **NOTE**: This guide is for installing `canvas` for node.js, if you want to use `canvas-constructor` for web browsers,
+use the package link from unpkg or get the bundle from the
+[webpack branch](https://github.com/kyranet/canvasConstructor/tree/webpack)
+
+Let's start off by introducing what canvas is. In HTML, the `<canvas>` element can be used to draw images via scripting
+with JavaScript. The canvas that we're talking about is a Cairo backed canvas implementation for **Node.js**. An example
+of something that can be done with canvas is this.
 
 ![Canvas Command](https://raw.githubusercontent.com/kyranet/canvasConstructor/master/guides/assets/canvas-example.png)
 
-Here, the bot is using canvas to edit a template and insert your avatar, and a random users avatar onto the template. So that's just an example of what Canvas can do, let's get down to installing it.
+Here, the bot is using canvas to edit a template and insert your avatar, and a random users avatar onto the template. So
+that's just an example of what Canvas can do, let's get down to installing it.
 
 ## Installation Steps
 
@@ -22,39 +29,54 @@ Based on what OS you're on, there are different steps to install the required pr
 
 ### Step 1
 
-First, you need to run `npm install --global --production windows-build-tools` from a PowerShell or command prompt run as an administrator. This will take a little while, so be prepared to do other stuff while it installs.
+You need to install [`windows-build-tools`](https://github.com/felixrieseberg/windows-build-tools) globally from
+PowerShell or cmd.exe run as an administrator, this will take a little while, as it will install C++ build tools
+necessary to be able to compile native modules like canvas.
+
+```bash
+# Using npm
+$ npm install --global windows-build-tools
+
+# Using yarn
+$ yarn global add windows-build-tools
+```
 
 **>Notes:**
 
-- While the npm page tells you to install GTK and libjpeg-turbo, those aren't needed! Both canvas and canvas-constructor function perfectly fine without them, so they're really just taking up space that could be used for something else.
+- While the npm page tells you to install `GTK` and `libjpeg-turbo`, those aren't needed! Both `canvas` and
+`canvas-constructor` function perfectly fine without them, so they're really just taking up space that could be used for
+something else.
 
 ### Step 2
 
-The next and final step is simple.
-
-You can either do...
+The next and final step is simple, install canvas and canvas-constructor
 
 ```bash
 # Using npm
-$ npm i canvas
+$ npm i canvas canvas-constructor
 
 # Using yarn
-$ yarn add canvas
+$ yarn add canvas canvas-constructor
 ```
 
-> **Note**: You can install a development version of canvas by replacing `canvas` with `Automattic/node-canvas`,
-however, we do not guarantee it will work with latest `canvas-constructor`.
-
-Next, to install canvas-constructor, you just need to do
-
-```bash
-# Using npm
-$ npm i canvas-constructor
-
-# Using yarn
-$ yarn add canvas-constructor
-```
+> **Note**: You can install a development version of `canvas` by replacing `canvas` with `Automattic/node-canvas`,
+or `canvas-constructor` with `kyranet/canvasConstructor` for that matter. However, we do not guarantee stability in
+development branches.
 
 If you followed the guide completely, your console should look something like this, and you're good to go!
+
+```bash
+$ yarn add canvas canvas-constructor
+yarn add v1.13.0
+[1/4] Resolving packages...
+[2/4] Fetching packages...
+[3/4] Linking dependencies...
+[4/4] Building fresh packages...
+success Saved lockfile.
+success Saved 64 new dependencies.
+info Direct dependencies
+├─ canvas-constructor@2.1.1
+└─ canvas@2.3.1
+```
 
 ![Install Screenshot](https://raw.githubusercontent.com/kyranet/canvasConstructor/master/guides/assets/installation-screenshot.png)

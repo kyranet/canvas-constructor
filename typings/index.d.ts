@@ -1,5 +1,6 @@
 /// <reference types="node" />
 /// <reference lib="esnext" />
+/// <reference lib="dom" />
 
 declare module 'canvas-constructor' {
 
@@ -19,26 +20,27 @@ declare module 'canvas-constructor' {
 
 	export class Canvas {
 
-		public constructor(dWidth: number, dHeigth: number, type?: CanvasType);
+		public constructor(dWidth: number, dHeight: number, type?: CanvasType);
 		public width: number;
-		public heigth: number;
+		public height: number;
 		public readonly lineDash: number[];
-		private canvas: any;
-		private context: any;
+		public canvas: HTMLCanvasElement;
+		public context: CanvasRenderingContext2D;
 
-		public addBeveledRect(dx: number, dy: number, dWidth: number, dHeigth: number, radius?: number): this;
+		public addBeveledRect(dx: number, dy: number, dWidth: number, dHeight: number, radius?: number): this;
 		public addBeveledImage(bufferOrImage: BufferOrImage, dx: number, dy: number, dWidth: number, dHeight: number, radius?: BeveledRadiusOptions | number, restore?: boolean): this;
 		public addCircle(dx: number, dy: number, radius: number): this;
 		public addCircularImage(bufferOrImage: BufferOrImage, dx: number, dy: number, radius: number, restore?: boolean): this;
 		public addImage(bufferOrImage: BufferOrImage, dx: number, dy: number, options?: AddImageOptions): this;
 		public addImage(bufferOrImage: BufferOrImage, dx: number, dy: number, dWidth: number, dHeight: number, options?: AddImageOptions): this;
-		public addImage(bufferOrImage: BufferOrImage, sx: number, sy: number, sWidth: number, sHeigth: number, dx: number, dy: number, dWidth: number, dHeigth: number, options?: AddImageOptions): this;
-		public addMultilineText(text: string, dx: number, dy: number, maxWidth: number, lineHeight: number): this;
-		public addRect(dx: number, dy: number, dWidth: number, dHeigth: number): this;
+		public addImage(bufferOrImage: BufferOrImage, sx: number, sy: number, sWidth: number, sHeight: number, dx: number, dy: number, dWidth: number, dHeight: number, options?: AddImageOptions): this;
+		public addMultilineText(text: string, dx: number, dy: number): this;
+		public addWrappedText(text: string, dx: number, dy: number, wrapWidth: number): this;
+		public addRect(dx: number, dy: number, dWidth: number, dHeight: number): this;
 		public addResponsiveText(text: string, dx: number, dy: number, maxWidth: number): this;
 		public addRoundImage(bufferOrImage: BufferOrImage, dx: number, dy: number, dWidth: number, dHeight: number, radius?: number, restore?: boolean): this;
 		public addRoundImage(bufferOrImage: BufferOrImage, dx: number, dy: number, dWidth: number, dHeight: number, restore?: boolean): this;
-		public addStrokeRect(dx: number, dy: number, dWidth: number, dHeigth: number): this;
+		public addStrokeRect(dx: number, dy: number, dWidth: number, dHeight: number): this;
 		public addStrokeText(text: string, dx: number, dy: number): this;
 		public addText(text: string, dx: number, dy: number, maxWidth?: number): this;
 		public addTextFont(path: string, family: string | FontFaceType): this;
@@ -47,38 +49,38 @@ declare module 'canvas-constructor' {
 		public arcTo(x1: number, y1: number, x2: number, y2: number, radiusX: number, radiusY: number, rotation: number): this;
 		public beginPath(): this;
 		public bezierCurveTo(cp1x: number, cp1y: number, cp2x: number, cp2y: number, dx: number, dy: number): this;
-		public changeCanvasHeigth(dHeigth: number): this;
-		public changeCanvasSize(dWidth?: number, dHeigth?: number): this;
+		public changeCanvasHeight(dHeight: number): this;
+		public changeCanvasSize(dWidth?: number, dHeight?: number): this;
 		public changeCanvasWidth(dWidth: number): this;
 		public clearCircle(dx: number, dy: number, radius: number, start?: number, angle?: number): this;
-		public clearPixels(dx?: number, dy?: number, dWidth?: number, dHeigth?: number): this;
+		public clearPixels(dx?: number, dy?: number, dWidth?: number, dHeight?: number): this;
 		public clip(fillRule?: FillRuleType): this;
 		public clip(path?: any, fillRule?: FillRuleType): this;
 		public closePath(): this;
-		public createBeveledClip(dx: number, dy: number, dWidth: number, dHeigth: number, radius: BeveledRadiusOptions | number): this;
-		public createBeveledPath(dx: number, dy: number, dWidth: number, dHeigth: number, radius: BeveledRadiusOptions | number): this;
+		public createBeveledClip(dx: number, dy: number, dWidth: number, dHeight: number, radius: BeveledRadiusOptions | number): this;
+		public createBeveledPath(dx: number, dy: number, dWidth: number, dHeight: number, radius: BeveledRadiusOptions | number): this;
 		public createEllipse(dx: number, dy: number, radiusX: number, radiusY: number, rotation: number, startAngle: number, endAngle: number, anticlockwise?: boolean): this;
 		public createLinearGradient(x0: number, y0: number, x1: number, y1: number, steps?: GradientStep[]): CanvasGradient;
 		public createPattern(bufferOrImage: BufferOrImage, repetition: PatternRepetition): this;
 		public createRadialGradient(x0: number, y0: number, r0: number, x1: number, y1: number, r1: number, steps?: GradientStep[]): CanvasGradient;
-		public createRectClip(dx: number, dy: number, dWidth: number, dHeigth: number): this;
-		public createRectPath(dx: number, dy: number, dWidth: number, dHeigth: number): this;
+		public createRectClip(dx: number, dy: number, dWidth: number, dHeight: number): this;
+		public createRectPath(dx: number, dy: number, dWidth: number, dHeight: number): this;
 		public createRoundClip(dx: number, dy: number, radius: number, start?: number, angle?: number): this;
 		public createRoundPath(dx: number, dy: number, radius: number, start?: number, angle?: number): this;
 		public fill(fillRule?: FillRuleType): this;
-		public getImageData(cb: (data: ImageData, canvas: this) => void): this;
-		public getImageData(dx: number, dy: number, dWidth: number, dHeigth: number, cb: (data: ImageData, canvas: this) => void): this;
-		public getImageData(dx?: number, dy?: number, dWidth?: number, dHeigth?: number): ImageData;
+		public getImageData(cb: (data: ImageData, instance: this) => unknown): this;
+		public getImageData(dx: number, dy: number, dWidth: number, dHeight: number, cb: (data: ImageData, instance: this) => unknown): this;
+		public getImageData(dx?: number, dy?: number, dWidth?: number, dHeight?: number): ImageData;
 		public getLineDash(): number[];
 		public isPointInPath(dx: number, dy: number, fillRule: FillRuleType): boolean;
 		public isPointInStroke(dx: number, dy: number): boolean;
 		public lineTo(dx: number, dy: number): this;
 		public measureText(text: string): number;
-		public measureText(text: string, callback: (metrics: TextMetrics, canvas: this) => void): this;
+		public measureText(text: string, callback: (metrics: TextMetrics, instance: this) => unknown): this;
 		public moveTo(dx: number, dy: number): this;
 		public printLinearGradient(x0: number, y0: number, x1: number, y1: number, steps?: GradientStep[]): this;
 		public printRadialGradient(x0: number, y0: number, r0: number, x1: number, y1: number, r1: number, steps?: GradientStep[]): this;
-		public process(fn: (canvas: this) => any): this;
+		public process<T extends unknown[]>(fn: (instance: this, ...args: T) => unknown, ...args: T): this;
 		public putImageData(imageData: ImageData, dx: number, dy: number, dirtyX?: number, dirtyY?: number, dirtyWidth?: number, dirtyHeight?: number): this;
 		public quadraticCurveTo(cpx: number, cpy: number, dx: number, dy: number): this;
 		public resetShadows(): this;
@@ -115,14 +117,16 @@ declare module 'canvas-constructor' {
 		public toBufferAsync(): Promise<Buffer>;
 		public toDataURL(type: string, ...args: any[]): string;
 		public toDataURLAsync(type: string): Promise<string>;
-		public toBlob(callback: (blob: any) => void, mimeType?: string, qualityArgument?: number): void;
+		public toBlob(callback: (blob: any) => unknown, mimeType?: string, qualityArgument?: number): void;
 		public toBlobAsync(mimeType?: string, qualityArgument?: number): Promise<any>;
 		public translate(dx: number, dy: number): this;
+		public wrapText(text: string, wrapWidth: number, cb: (wrappedText: string, instance: this) => unknown): this;
+		public wrapText(text: string, wrapWidth: number): string;
 
 		private _resolveImage(imageOrBuffer: BufferOrImage): Image;
 
-		public static fromCanvas(canvas: any): Canvas;
-		public static getCanvas(): any;
+		public static from(canvas: any): Canvas;
+		public static readonly internalCanvas: any;
 		public static registerFont(path: string, family: string | FontFaceType): typeof Canvas;
 	}
 
@@ -231,7 +235,7 @@ declare module 'canvas-constructor' {
 	};
 
 	type CanvasGradient = {
-		addColorStop: (offset: number, color: string) => void;
+		addColorStop: (offset: number, color: string) => unknown;
 	};
 
 	class ImageData {
@@ -265,8 +269,8 @@ declare module 'canvas' {
 	export class Image {
 		public constructor(width?: number, height?: number);
 		public src: string | Buffer;
-		public onload: () => void | null;
-		public onerror: (error: Error) => void | null;
+		public onload: () => unknown | null;
+		public onerror: (error: Error) => unknown | null;
 		public complete: boolean;
 		public width: number;
 		public height: number;
