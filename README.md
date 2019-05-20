@@ -1,4 +1,5 @@
 # canvas-constructor
+[![Discord](https://discordapp.com/api/guilds/437335547711848458/embed.png)](https://discord.gg/taNgb9d)
 [![npm](https://img.shields.io/npm/v/canvas-constructor.svg?maxAge=3600)](https://www.npmjs.com/package/canvas-constructor)
 [![npm](https://img.shields.io/npm/dt/canvas-constructor.svg?maxAge=3600)](https://www.npmjs.com/package/canvas-constructor)
 [![Build Status](https://travis-ci.org/kyranet/canvasConstructor.svg?branch=master)](https://travis-ci.org/kyranet/canvasConstructor)
