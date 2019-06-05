@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## 3.0.3
+### Fixed
+- Resolved security vulnerability by upgrading to `handlebars@4.1.2`.
+
 ## 3.0.2
 ### Fixed
 - `Canvas#resetShadows()` not clearing shadows.
