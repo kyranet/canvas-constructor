@@ -1216,14 +1216,29 @@ class Canvas {
 	}
 
 	/**
-	 * Reset the canvas' shadows.
+	 * Sets the shadow blur and offsets to zero, then sets the shadow color to transparent. If shadows are not longer
+	 * used in a canvas and performance is critical, `.setShadowColor('transparent')` should be used instead, as of the
+	 * [note from Mozilla Developer Network](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/shadowColor).
+	 * @example
+	 * new Canvas(500, 500)
+	 *     // Set a shadow color and blur
+	 *     .setShadowColor('rgba(23, 23, 23, 0.2)')
+	 *     .setShadowBlur(5)
+	 *     // Render the text with a blow effect
+	 *     .addText('Hello', 30, 50)
+	 *     // Reset the shadows
+	 *     .resetShadows()
+	 *     // Render the text without shadows
+	 *     .addText('World!', 30, 100);
 	 * @returns {this}
 	 * @chainable
 	 */
 	resetShadows() {
 		return this
 			.setShadowBlur(0)
-			.setShadowColor('#000000');
+			.setShadowOffsetX(0)
+			.setShadowOffsetY(0)
+			.setShadowColor('transparent');
 	}
 
 	/**
