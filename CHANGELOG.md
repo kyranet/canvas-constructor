@@ -4,6 +4,47 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## 3.0.1
+### Fixed
+- Publish not running the browser build, thus missing it sometimes or deploying old versions.
+
+## 3.0.0
+### Added
+- Added `Canvas#wrapText()`.
+
+### Changed
+- Make `Canvas#addMultilineText()` not wrap lines.
+- Renamed `Canvas.getCanvas()` to `Canvas.internalCanvas`.
+- Renamed `Canvas.fromCanvas()` to `Canvas.from()`.
+- Changed the word wrap algorithm to respect newlines while also being slightly faster.
+- Changed callback return types in typings from `void` to `unknown` for strict rules to allow return.
+
+## 2.1.1
+### Fixed
+- Webpack builds in unpkg.
+
+## 2.1.0
+### Added
+- Canvas#{toBlob,toBlobAsync} for browser support.
+- Canvas.fromCanvas() for browser support (this is a must in browsers as you can't construct HTMLCanvasElement).
+- Examples for usage in web.
+
+### Fixed
+- Webpack builds.
+- Guides being stale.
+
+## 2.0.0
+### Changed
+- The `restore` argument now default to `true` instead of `false`, the previous default kept functionality from pre-releases and 1.x but I couldn't change it under a minor version, only with a major one. But now I decided it's enough, and made it default to the intuitive, and very often most-wanted choice: `true`.
+
+### Fixed
+- Fixed `addCircularImage()` adding the circular clip in the wrong center.
+- Fixed text not rendering in canvas@2.x.
+- Typings
+
+### Removed
+- `addBevelImage` has been removed. As per the deprecation added over 2 months ago, it has been renamed to `addBeveledImage`
+
 ## 1.1.2
 ### Fixed
 - Fixed `addCircularImage()` adding the circular clip in the wrong center.
