@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## 3.0.2
+### Fixed
+- `Canvas#resetShadows()` not clearing shadows.
+
 ## 3.0.1
 ### Fixed
 - Publish not running the browser build, thus missing it sometimes or deploying old versions.
