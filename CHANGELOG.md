@@ -29,8 +29,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## 2.1.0
 ### Added
-- Canvas#{toBlob,toBlobAsync} for browser support.
-- Canvas.fromCanvas() for browser support (this is a must in browsers as you can't construct HTMLCanvasElement).
+- `Canvas#{toBlob,toBlobAsync}` for browser support.
+- `Canvas.fromCanvas()` for browser support (this is a must in browsers as you can't construct `HTMLCanvasElement`).
 - Examples for usage in web.
 
 ### Fixed
@@ -43,11 +43,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 - Fixed `addCircularImage()` adding the circular clip in the wrong center.
-- Fixed text not rendering in canvas@2.x.
-- Typings
+- Fixed text not rendering in `canvas@2.x`.
+- Typings.
 
 ### Removed
-- `addBevelImage` has been removed. As per the deprecation added over 2 months ago, it has been renamed to `addBeveledImage`
+- `addBevelImage` has been removed. As per the deprecation added over 2 months ago, it has been renamed to `addBeveledImage`.
 
 ## 1.1.2
 ### Fixed
@@ -92,8 +92,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## 0.3.0
 ### Added
 - **Typings**. This package will also work in TypeScript.
-- `createBeveledPath()` same usage as `createBeveledClip()`, but does not create clips (so you can use shadows and fill to colourize it).
-- `createRoundPath()` same usage as `createRoundClip()`, but does not create clips (so you can use shadows and fill to colourize it).
+- `createBeveledPath()` same usage as `createBeveledClip()`, but does not create clips (so you can use shadows and fill to colorize it).
+- `createRoundPath()` same usage as `createRoundClip()`, but does not create clips (so you can use shadows and fill to colorize it).
 - `clip()` (how come this was not implemented?).
 
 ### Changed
@@ -110,10 +110,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - `changeCanvasSize()` to change the canvas' width/height.
 - `changeCanvasWidth()` to change the canvas' width.
-- `changeCanvasHeigth()` to change the canvas' heigth.
+- `changeCanvasHeigth()` to change the canvas' height.
 
 ### Removed
-- `registerTextFont()` as canvas-constructor relies on Canvas 1.6.6, this method is useless.
+- `registerTextFont()` as canvas-constructor relies on `canvas@1.6.6`, this method is useless.
 
 ## 0.1.6
 ### Added
@@ -144,9 +144,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - `fill()` To fill the current/given path.
 - `stroke()` To stroke the current/given path.
 - `addStrokeText()` To add stroked text.
-- `measureText()` To measure in pixels a text. Be **careful**, if you do not
-provide a callback (second argument), this method will return an Integer value
-instead of being chainable.
+- `measureText()` To measure in pixels a text. Be **careful**, if you do not provide a callback (second argument), this method will return an Integer value instead of being chainable.
 - `setTextBaseline()` To set the text's baseline.
 - `setShadowOffsetX()` To set the shadow offset for the axis X.
 - `setShadowOffsetY()` To set the shadow offset for the axis Y.
@@ -174,7 +172,7 @@ identical to `addRect()`).
 
 ## 0.1.0
 ### Added
-- Added `addFont()` method for retrocompatibility with old versions of Canvas.
+- Added `addFont()` method for retro-compatibility with old versions of Canvas.
 (Thanks to [York](https://github.com/YorkAARGH) in
 [PR#1](https://github.com/kyranet/canvasConstructor/pull/1))
 
