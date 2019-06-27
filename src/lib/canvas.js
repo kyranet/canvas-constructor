@@ -671,7 +671,7 @@ class Canvas {
 	 * @param {number} dy The position y to start drawing the element.
 	 * @param {number} width  The width of the element.
 	 * @param {number} height The height of the element.
-	 * @param {number} [radius=10] The radius for the bevels.
+	 * @param {(number|BeveledRadiusOptions)} [radius=10] The radius for the bevels.
 	 * @returns {this}
 	 * @chainable
 	 * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/fillRect
@@ -743,7 +743,7 @@ class Canvas {
 	 * @param {number} dy The position y to start drawing clip.
 	 * @param {number} width The width of clip.
 	 * @param {number} height The height of clip.
-	 * @param {(BeveledRadiusOptions|number)} radius The radius for clip's rounded borders.
+	 * @param {(BeveledRadiusOptions|number)} [radius=10] The radius for clip's rounded borders.
 	 * @returns {this}
 	 * @chainable
 	 */
@@ -780,7 +780,7 @@ class Canvas {
 	 * @param {number} dy The position y to start drawing clip.
 	 * @param {number} width The width of clip.
 	 * @param {number} height The height of clip.
-	 * @param {number} [radius] The radius for clip's rounded borders.
+	 * @param {(number|BeveledRadiusOptions)} [radius=10] The radius for clip's rounded borders.
 	 * @returns {this}
 	 * @chainable
 	 */
