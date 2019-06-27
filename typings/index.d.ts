@@ -130,69 +130,61 @@ declare module 'canvas-constructor' {
 		public static registerFont(path: string, family: string | FontFaceType): typeof Canvas;
 	}
 
-	type BeveledRadiusOptions = {
+	export interface BeveledRadiusOptions {
 		tl?: number;
 		tr?: number;
 		br?: number;
 		bl?: number;
-	};
+	}
 
-	type CanvasType = 'pdf'
-		| 'svg';
+	export type CanvasType = 'pdf' | 'svg';
 
-	type FillRuleType = 'nonzero'
-		| 'evenodd';
+	export type FillRuleType = 'nonzero' | 'evenodd';
 
-	type LineCapValue = 'butt'
-		| 'round'
-		| 'square';
+	export type LineCapValue = 'butt' | 'round' | 'square';
 
-	type LineJoinValue = 'bevel'
-		| 'round'
-		| 'miter';
+	export type LineJoinValue = 'bevel' | 'round' | 'miter';
 
-	type AddImageOptions = {
+	export interface AddImageOptions {
 		radius?: number;
 		type?: RoundType;
 		restore?: boolean;
-	};
+	}
 
-	type AntialiasType = 'default'
+	export type AntialiasType = 'default'
 		| 'none'
 		| 'gray'
 		| 'subpixel';
 
-	type PatternQuality = 'fast'
+	export type PatternQuality = 'fast'
 		| 'good'
 		| 'best'
 		| 'nearest'
 		| 'bilinear';
 
-	type PatternRepetition = 'repeat'
+	export type PatternRepetition = 'repeat'
 		| 'repeat-x'
 		| 'repeat-y'
 		| 'no-repeat';
 
-	type RoundType = 'round'
-		| 'bevel';
+	export type RoundType = 'round' | 'bevel';
 
-	type TextAlignType = 'left'
+	export type TextAlignType = 'left'
 		| 'center'
 		| 'right'
 		| 'start'
 		| 'end';
 
-	type TextBaselineType = 'alphabetic'
+	export type TextBaselineType = 'alphabetic'
 		| 'bottom'
 		| 'hanging'
 		| 'ideographic'
 		| 'middle'
 		| 'top';
 
-	type TextDrawingMode = 'path'
-		| 'glyph';
+	export type TextDrawingMode = 'path' | 'glyph';
 
-	type GlobalCompositeOperation = 'color-burn'
+	export type GlobalCompositeOperation = 'color-burn'
 		| 'color-dodge'
 		| 'color'
 		| 'copy'
@@ -223,20 +215,20 @@ declare module 'canvas-constructor' {
 		| 'source-over'
 		| 'xor';
 
-	type FontFaceType = {
+	export interface FontFaceType {
 		family: string;
 		style?: string;
 		weight?: string;
-	};
+	}
 
-	type GradientStep = {
+	export interface GradientStep {
 		position: number;
 		color: string;
-	};
+	}
 
-	type CanvasGradient = {
+	export interface CanvasGradient {
 		addColorStop: (offset: number, color: string) => unknown;
-	};
+	}
 
 	class ImageData {
 		public constructor(width: number, height: number);
