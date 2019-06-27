@@ -27,7 +27,7 @@ declare module 'canvas-constructor' {
 		public canvas: HTMLCanvasElement;
 		public context: CanvasRenderingContext2D;
 
-		public addBeveledRect(dx: number, dy: number, dWidth: number, dHeight: number, radius?: number): this;
+		public addBeveledRect(dx: number, dy: number, dWidth: number, dHeight: number, radius?: BeveledRadiusOptions | number): this;
 		public addBeveledImage(bufferOrImage: BufferOrImage, dx: number, dy: number, dWidth: number, dHeight: number, radius?: BeveledRadiusOptions | number, restore?: boolean): this;
 		public addCircle(dx: number, dy: number, radius: number): this;
 		public addCircularImage(bufferOrImage: BufferOrImage, dx: number, dy: number, radius: number, restore?: boolean): this;
