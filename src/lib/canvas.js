@@ -809,6 +809,36 @@ class Canvas {
 	 * @param {(number|BeveledRadiusOptions)} [radius=10] The radius for clip's rounded borders.
 	 * @returns {this}
 	 * @chainable
+	 * @example
+	 * // Radius argument, fill the content
+	 * new Canvas(200, 200)
+	 *     .createBeveledClip(0, 0, 200, 50, 35)
+	 *     .fill()
+	 *     .toBuffer();
+	 *
+	 * @example
+	 * // Configured bevels
+	 * new Canvas(200, 200)
+	 *     .createBeveledClip(0, 0, 200, 50, {
+	 *         // Top left border
+	 *         tl: 15,
+	 *         // Top right border
+	 *         tr: 20,
+	 *         // Bottom left border
+	 *         bl: 5,
+	 *         // Bottom right border
+	 *         br: 10
+	 *     })
+	 *     // Add an image with the shape of the beveled clip using different borders
+	 *     .addImage(buffer, 0, 0, 200, 50)
+	 *     .toBuffer();
+	 *
+	 * @example
+	 * // Top bevels only
+	 * new Canvas(200, 200)
+	 *     .createBeveledClip(0, 0, 200, 50, { tl: 20, tr: 20, bl: 0, br: 0 })
+	 *     .addImage(buffer, 0, 0, 200, 50)
+	 *     .toBuffer();
 	 */
 	createBeveledClip(...args) {
 		return this.createBeveledPath(...args).clip();
