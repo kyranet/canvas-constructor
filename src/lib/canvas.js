@@ -675,6 +675,32 @@ class Canvas {
 	 * @returns {this}
 	 * @chainable
 	 * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/fillRect
+	 * @example
+	 * // Radius argument
+	 * new Canvas(200, 200)
+	 *     .addBeveledRect(0, 0, 200, 50, 35)
+	 *     .toBuffer();
+	 *
+	 * @example
+	 * // Configured bevels
+	 * new Canvas(200, 200)
+	 *     .addBeveledRect(0, 0, 200, 50, {
+	 *         // Top left border
+	 *         tl: 15,
+	 *         // Top right border
+	 *         tr: 20,
+	 *         // Bottom left border
+	 *         bl: 5,
+	 *         // Bottom right border
+	 *         br: 10
+	 *     })
+	 *     .toBuffer();
+	 *
+	 * @example
+	 * // Top bevels only
+	 * new Canvas(200, 200)
+	 *     .addBeveledRect(0, 0, 200, 50, { tl: 20, tr: 20, bl: 0, br: 0 })
+	 *     .toBuffer();
 	 */
 	addBeveledRect(...args) {
 		return this.save().createBeveledPath(...args).fill().restore();
