@@ -22,7 +22,7 @@
     "devDependencies": {
         "@types/node": "^12.7.2",
         "docgen": "github:dirigeants/docsgen",
-        "eslint": "^6.2.0",
+        "eslint": "^6.2.1",
         "eslint-config-klasa": "github:dirigeants/klasa-lint",
         "terser-webpack-plugin": "^1.4.1",
         "tslint": "^5.19.0",
