@@ -1048,10 +1048,10 @@ dmd@^4.0.4:
 
 "docgen@github:dirigeants/docsgen":
   version "0.0.1"
-  uid "38f5e41af0d31a0dd15efb4c348957ef587da364"
-  resolved "https://codeload.github.com/dirigeants/docsgen/tar.gz/38f5e41af0d31a0dd15efb4c348957ef587da364"
+  uid d8711776dc02342cf68f522d310d26ffdc1b79db
+  resolved "https://codeload.github.com/dirigeants/docsgen/tar.gz/d8711776dc02342cf68f522d310d26ffdc1b79db"
   dependencies:
-    fs-nextra "^0.4.5"
+    fs-nextra "^0.4.6"
     jsdoc-to-markdown "^5.0.2"
     yargs "^14.2.0"
 
@@ -1500,10 +1500,10 @@ fs-minipass@^2.0.0:
   dependencies:
     minipass "^3.0.0"
 
-fs-nextra@^0.4.5:
-  version "0.4.5"
-  resolved "https://registry.yarnpkg.com/fs-nextra/-/fs-nextra-0.4.5.tgz#0f44a00dd6c0547adaf59ce875e59941d0c70664"
-  integrity sha512-oY2o6j0izYzJWp2sow21SekkR3qeMZqHV5ZfNFvfKimFU7piw1/AWwiwbcWjuSfwrfCmHyHymWZOyNbKOzew5g==
+fs-nextra@^0.4.6:
+  version "0.4.6"
+  resolved "https://registry.yarnpkg.com/fs-nextra/-/fs-nextra-0.4.6.tgz#db83e1c8d451caad804ff1478e399875f7134c94"
+  integrity sha512-Z258Sdpe+FsyJDjU2DT/q+PedjnSOvSeDROCD9CwDerlNt+GMHOLmfGnDLYMPnHXPWPRJNfozfnMjJn8kHmYng==
 
 fs-then-native@^2.0.0:
   version "2.0.0"
