@@ -300,6 +300,8 @@ class Canvas {
 	 * @param {number} dx The position x to start drawing the element.
 	 * @param {number} dy The position y to start drawing the element.
 	 * @param {number} maxWidth The max length in pixels for the text.
+	 * @param {Function} callback The callback. If you use an arrow function, you might want to use the second argument which is the instance of the
+	 * class. Otherwise, the keyword this is binded to the class instance itself, so you can use it safely.
 	 * @returns {this}
 	 * @chainable
 	 * @example
@@ -308,11 +310,15 @@ class Canvas {
 	 *     .addResponsiveText('Hello World', 30, 30, 50)
 	 *     .toBuffer();
 	 */
-	addResponsiveText(text, dx, dy, maxWidth) {
+	addResponsiveText(text, dx, dy, maxWidth, callback) {
 		const [, style = '', size, font] = /(\w+ )?(\d+)(.+)/.exec(this.context.font);
 		const currentSize = parseInt(size);
 		const { width } = this.measureText(text);
 		const newLength = maxWidth > width ? currentSize : (maxWidth / width) * currentSize;
+		if (callback) {
+			if (typeof callback !== 'function') throw new TypeError('Callback must be a function');
+			callback.call(this, newLength, this);
+		}
 		return this
 			.setTextFont(style + newLength + font)
 			.addText(text, dx, dy);
