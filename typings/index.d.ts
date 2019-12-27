@@ -75,7 +75,7 @@ declare module 'canvas-constructor' {
 		public isPointInPath(dx: number, dy: number, fillRule: FillRuleType): boolean;
 		public isPointInStroke(dx: number, dy: number): boolean;
 		public lineTo(dx: number, dy: number): this;
-		public measureText(text: string): MeasureTextProps;
+		public measureText(text: string): TextMetrics;
 		public measureText(text: string, callback: (metrics: TextMetrics, instance: this) => unknown): this;
 		public moveTo(dx: number, dy: number): this;
 		public printLinearGradient(x0: number, y0: number, x1: number, y1: number, steps?: GradientStep[]): this;
@@ -228,17 +228,6 @@ declare module 'canvas-constructor' {
 
 	export interface CanvasGradient {
 		addColorStop: (offset: number, color: string) => unknown;
-	}
-	
-	export interface MeasureTextProps {
-		width: number;
-		actualBoundingBoxLeft: number;
-		actualBoundingBoxRight: number;
-		actualBoundingBoxAscent: number;
-		actualBoundingBoxDescent: number;
-		emHeightAscent: number;
-		emHeightDescent: number;
-		alphabeticBaseline: number;	
 	}
 
 	class ImageData {
