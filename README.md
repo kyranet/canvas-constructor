@@ -7,7 +7,7 @@
 [![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=kyranet/canvasConstructor)](https://dependabot.com)
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/kyranet/canvasConstructor/master/LICENSE)
 
-A ES6 function for node-canvas with built-in functions and chained methods.
+An ES6 function for node-canvas with built-in utilities and chained methods.
 
 ## Installation
 
@@ -54,7 +54,7 @@ CanvasConstructor.Canvas.from(canvasElement)
 - Write the text 'Hello World!' in the position (130, 150)
 - Return a buffer.
 
-Now, let's suppose we want to add images. I'd recommend [fs-nextra](https://github.com/bdistin/fs-nextra), by BDISTIN, it requires Node.js 8.5.0 to work (it promisifies the async fs methods with `Util.promisify()`), it's a dependency-free and lightweight package that provides support for **atomic operations**.
+Now, let's suppose we want to add images. I'd recommend [fs-nextra](https://github.com/bdistin/fs-nextra), by [BDISTIN](https://github.com/bdistin/), it requires Node.js 8.5.0 to work (it promisifies the async fs methods with `Util.promisify()`), it's a dependency-free and lightweight package that provides support for **atomic operations**.
 
 ```js
 const { Canvas } = require('canvas-constructor');
