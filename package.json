@@ -20,7 +20,7 @@
         "canvas": "*"
     },
     "devDependencies": {
-        "@types/node": "^13.1.6",
+        "@types/node": "^13.7.6",
         "docgen": "github:dirigeants/docsgen",
         "eslint": "^6.8.0",
         "eslint-config-klasa": "github:dirigeants/klasa-lint",
