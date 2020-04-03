@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires, @typescript-eslint/restrict-plus-operands, @typescript-eslint/explicit-member-accessibility */
 // @ts-nocheck
 const { browser, getFontHeight, InternalCanvas, textWrap } = require('./util/util');
 
@@ -310,11 +311,11 @@ class Canvas {
 	 */
 	addResponsiveText(text, dx, dy, maxWidth) {
 		const [, style = '', size, font] = /(\w+ )?(\d+)(.+)/.exec(this.context.font);
-		const currentSize = parseInt(size);
+		const currentSize = parseInt(size, 10);
 		const { width } = this.measureText(text);
 		const newLength = maxWidth > width ? currentSize : (maxWidth / width) * currentSize;
 		return this
-			.setTextFont(style + newLength + font)
+			.setTextFont(`${style}${newLength}${font}`)
 			.addText(text, dx, dy);
 	}
 
@@ -465,7 +466,7 @@ class Canvas {
 	 */
 	setTextSize(size) {
 		const [, style = '', font] = /(\w+ )?(?:\d+)(.+)/.exec(this.context.font);
-		return this.setTextFont(style + size + font);
+		return this.setTextFont(`${style}${size}${font}`);
 	}
 
 	/**
@@ -580,7 +581,7 @@ class Canvas {
 			if (options.type === 'round') this.createRoundClip(dx + options.radius, dy + options.radius, options.radius);
 			else if (options.type === 'bevel') this.createBeveledClip(dx, dy, width, height, options.radius);
 		}
-		this._resolveImage(imageOrBuffer, (image) => this.context.drawImage(image, ...args));
+		this._resolveImage(imageOrBuffer, image => this.context.drawImage(image, ...args));
 		if (options.restore) this.restore();
 		return this;
 	}
@@ -617,7 +618,7 @@ class Canvas {
 		if (restore) this.save();
 		const diameter = radius * 2;
 		this.createRoundClip(dx, dy, radius);
-		this._resolveImage(imageOrBuffer, (image) => this.context.drawImage(image, dx - radius, dy - radius, diameter, diameter));
+		this._resolveImage(imageOrBuffer, image => this.context.drawImage(image, dx - radius, dy - radius, diameter, diameter));
 		if (restore) this.restore();
 		return this;
 	}
@@ -647,7 +648,8 @@ class Canvas {
 	 * @chainable
 	 */
 	addCircle(dx, dy, radius) {
-		return this.save().createRoundPath(dx, dy, radius).fill().restore();
+		return this.save().createRoundPath(dx, dy, radius).fill()
+			.restore();
 	}
 
 	/**
@@ -703,7 +705,8 @@ class Canvas {
 	 *     .toBuffer();
 	 */
 	addBeveledRect(...args) {
-		return this.save().createBeveledPath(...args).fill().restore();
+		return this.save().createBeveledPath(...args).fill()
+			.restore();
 	}
 
 	/**
@@ -926,7 +929,7 @@ class Canvas {
 	 * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/createPattern
 	 */
 	createPattern(imageOrBuffer, repetition, callback) {
-		this._resolveImage(imageOrBuffer, (image) => callback(this.context.createPattern(image, repetition)));
+		this._resolveImage(imageOrBuffer, image => callback(this.context.createPattern(image, repetition)));
 		return this;
 	}
 
@@ -956,8 +959,9 @@ class Canvas {
 	 */
 	createLinearGradient(x0, y0, x1, y1, steps = []) {
 		const gradient = this.context.createLinearGradient(x0, y0, x1, y1);
-		for (let i = 0; i < steps.length; i++)
-			gradient.addColorStop(steps[i].position, steps[i].color);
+		for (const step of steps) {
+			gradient.addColorStop(step.position, step.color);
+		}
 
 		return gradient;
 	}
@@ -1002,8 +1006,9 @@ class Canvas {
 	 */
 	createRadialGradient(x0, y0, r0, x1, y1, r1, steps = []) {
 		const gradient = this.context.createRadialGradient(x0, y0, r0, x1, y1, r1);
-		for (let i = 0; i < steps.length; i++)
-			gradient.addColorStop(steps[i].position, steps[i].color);
+		for (const step of steps) {
+			gradient.addColorStop(step.position, step.color);
+		}
 
 		return gradient;
 	}
@@ -1470,7 +1475,7 @@ class Canvas {
 	 * @returns {Promise<Blob>}
 	 */
 	toBlobAsync(...args) {
-		return new Promise((resolve) => this.canvas.toBlob(resolve, ...args));
+		return new Promise(resolve => this.canvas.toBlob(resolve, ...args));
 	}
 
 	/**
@@ -1570,10 +1575,13 @@ class Canvas {
 	 * @returns {Canvas}
 	 */
 	static registerFont(path, family) {
-		if (typeof InternalCanvas.registerFont !== 'function')
+		if (typeof InternalCanvas.registerFont !== 'function') {
 			throw new Error('registerFont is not supported in this version of node-canvas, please install node-canvas 2.x.');
-		if (!family)
+		}
+
+		if (!family) {
 			throw new TypeError('A family must be specified for registerFont.');
+		}
 
 		InternalCanvas.registerFont(path, family.constructor === Object ? family : { family });
 		return Canvas;
