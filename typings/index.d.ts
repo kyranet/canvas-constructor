@@ -1,3 +1,4 @@
+/* eslint-disable spaced-comment */
 /// <reference types="node" />
 /// <reference lib="esnext" />
 /// <reference lib="dom" />
@@ -20,12 +21,13 @@ declare module 'canvas-constructor' {
 
 	export class Canvas {
 
-		public constructor(dWidth: number, dHeight: number, type?: CanvasType);
 		public width: number;
 		public height: number;
 		public readonly lineDash: number[];
 		public canvas: HTMLCanvasElement;
 		public context: CanvasRenderingContext2D;
+
+		public constructor(dWidth: number, dHeight: number, type?: CanvasType);
 
 		public addBeveledRect(dx: number, dy: number, dWidth: number, dHeight: number, radius?: BeveledRadiusOptions | number): this;
 		public addBeveledImage(bufferOrImage: BufferOrImage, dx: number, dy: number, dWidth: number, dHeight: number, radius?: BeveledRadiusOptions | number, restore?: boolean): this;
@@ -122,12 +124,12 @@ declare module 'canvas-constructor' {
 		public translate(dx: number, dy: number): this;
 		public wrapText(text: string, wrapWidth: number, cb: (wrappedText: string, instance: this) => unknown): this;
 		public wrapText(text: string, wrapWidth: number): string;
-
 		private _resolveImage(imageOrBuffer: BufferOrImage): Image;
 
-		public static from(canvas: any): Canvas;
 		public static readonly internalCanvas: any;
+		public static from(canvas: any): Canvas;
 		public static registerFont(path: string, family: string | FontFaceType): typeof Canvas;
+
 	}
 
 	export interface BeveledRadiusOptions {
@@ -152,68 +154,68 @@ declare module 'canvas-constructor' {
 	}
 
 	export type AntialiasType = 'default'
-		| 'none'
-		| 'gray'
-		| 'subpixel';
+	| 'none'
+	| 'gray'
+	| 'subpixel';
 
 	export type PatternQuality = 'fast'
-		| 'good'
-		| 'best'
-		| 'nearest'
-		| 'bilinear';
+	| 'good'
+	| 'best'
+	| 'nearest'
+	| 'bilinear';
 
 	export type PatternRepetition = 'repeat'
-		| 'repeat-x'
-		| 'repeat-y'
-		| 'no-repeat';
+	| 'repeat-x'
+	| 'repeat-y'
+	| 'no-repeat';
 
 	export type RoundType = 'round' | 'bevel';
 
 	export type TextAlignType = 'left'
-		| 'center'
-		| 'right'
-		| 'start'
-		| 'end';
+	| 'center'
+	| 'right'
+	| 'start'
+	| 'end';
 
 	export type TextBaselineType = 'alphabetic'
-		| 'bottom'
-		| 'hanging'
-		| 'ideographic'
-		| 'middle'
-		| 'top';
+	| 'bottom'
+	| 'hanging'
+	| 'ideographic'
+	| 'middle'
+	| 'top';
 
 	export type TextDrawingMode = 'path' | 'glyph';
 
 	export type GlobalCompositeOperation = 'color-burn'
-		| 'color-dodge'
-		| 'color'
-		| 'copy'
-		| 'darken'
-		| 'destination-atop'
-		| 'destination-in'
-		| 'destination-out'
-		| 'destination-over'
-		| 'difference'
-		| 'exclusion'
-		| 'hard-light'
-		| 'hsl-color'
-		| 'hsl-hue'
-		| 'hsl-luminosity'
-		| 'hsl-saturation'
-		| 'hue'
-		| 'lighten'
-		| 'lighter'
-		| 'luminosity'
-		| 'multiply'
-		| 'overlay'
-		| 'saturation'
-		| 'screen'
-		| 'soft-light'
-		| 'source-atop'
-		| 'source-in'
-		| 'source-out'
-		| 'source-over'
-		| 'xor';
+	| 'color-dodge'
+	| 'color'
+	| 'copy'
+	| 'darken'
+	| 'destination-atop'
+	| 'destination-in'
+	| 'destination-out'
+	| 'destination-over'
+	| 'difference'
+	| 'exclusion'
+	| 'hard-light'
+	| 'hsl-color'
+	| 'hsl-hue'
+	| 'hsl-luminosity'
+	| 'hsl-saturation'
+	| 'hue'
+	| 'lighten'
+	| 'lighter'
+	| 'luminosity'
+	| 'multiply'
+	| 'overlay'
+	| 'saturation'
+	| 'screen'
+	| 'soft-light'
+	| 'source-atop'
+	| 'source-in'
+	| 'source-out'
+	| 'source-over'
+	| 'xor';
 
 	export interface FontFaceType {
 		family: string;
@@ -231,15 +233,17 @@ declare module 'canvas-constructor' {
 	}
 
 	class ImageData {
-		public constructor(width: number, height: number);
-		public constructor(array: Uint8ClampedArray, width: number, height: number);
+
 		public readonly data: Uint8ClampedArray;
 		public readonly height: number;
 		public readonly width: number;
+		public constructor(width: number, height: number);
+		public constructor(array: Uint8ClampedArray, width: number, height: number);
+
 	}
 
 	class TextMetrics {
-		public constructor();
+
 		public readonly actualBoundingBoxAscent: number;
 		public readonly actualBoundingBoxDescent: number;
 		public readonly actualBoundingBoxLeft: number;
@@ -252,6 +256,8 @@ declare module 'canvas-constructor' {
 		public readonly hangingBaseline: number;
 		public readonly ideographicBaseline: number;
 		public readonly width: number;
+		public constructor();
+
 	}
 
 }
@@ -259,7 +265,7 @@ declare module 'canvas-constructor' {
 declare module 'canvas' {
 
 	export class Image {
-		public constructor(width?: number, height?: number);
+
 		public src: string | Buffer;
 		public onload: () => unknown | null;
 		public onerror: (error: Error) => unknown | null;
@@ -269,8 +275,10 @@ declare module 'canvas' {
 		public naturalWidth: number;
 		public naturalHeight: number;
 		public dataMode: number;
+		public constructor(width?: number, height?: number);
 		public static MODE_IMAGE: number;
 		public static MODE_MIME: number;
+
 	}
 
 }

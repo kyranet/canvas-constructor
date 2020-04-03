@@ -1,13 +1,15 @@
 {
+	"extends": "eslint-config-bamboo",
 	"compilerOptions": {
-		"module": "commonjs",
-		"target": "es2018",
-		"noImplicitAny": true,
-		"strictNullChecks": true,
-		"noEmit": true,
-		"forceConsistentCasingInFileNames": true
+		"newLine": "LF",
+		"sourceMap": true,
+		"declaration": true,
+		"removeComments": false,
+		"outDir": "./dist",
+		"types": ["node"]
 	},
-	"files": [
-		"typings/index.d.ts"
+	"include": [
+		"./src/**/*",
+		"./typings/**/*"
 	]
 }

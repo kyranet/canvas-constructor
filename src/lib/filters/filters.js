@@ -4,7 +4,7 @@
  * @param {Canvas} canvas The Canvas instance
  * @returns {Canvas}
  */
-exports.invert = (canvas) => canvas
+exports.invert = canvas => canvas
 	.save()
 	.setGlobalCompositeOperation('difference')
 	.setColor('white')
@@ -16,36 +16,45 @@ exports.invert = (canvas) => canvas
  * @param {Canvas} canvas The Canvas instance
  * @returns {Canvas}
  */
-exports.greyscale =
-exports.grayscale = (canvas) => canvas
-	.save()
-	.setGlobalCompositeOperation('hsl-saturation')
-	.setColor('white')
-	.addRect(0, 0, canvas.width, canvas.height)
-	.restore();
+exports.greyscale = canvas => {
+	const imageData = canvas.getImageData();
+	const { data } = imageData;
+	for (let i = 0; i < data.length; i += 4) {
+		const luminance = (0.2126 * data[i]) + (0.7152 * data[i + 1]) + (0.0722 * data[i + 2]);
+		data[i] = luminance;
+		data[i + 1] = luminance;
+		data[i + 2] = luminance;
+	}
+
+	return canvas.putImageData(imageData, 0, 0);
+};
+exports.grayscale = exports.greyscale;
 
 /**
  * Invert then greyscale an image
  * @param {Canvas} canvas The Canvas instance
  * @returns {Canvas}
  */
-exports.invertGreyscale =
-exports.invertGrayscale = (canvas) => canvas
-	.save()
-	.setGlobalCompositeOperation('hsl-saturation')
-	.setColor('white')
-	.addRect(0, 0, canvas.width, canvas.height)
-	.setGlobalCompositeOperation('difference')
-	.setColor('white')
-	.addRect(0, 0, canvas.width, canvas.height)
-	.restore();
+exports.invertGrayscale = canvas => {
+	const imageData = canvas.getImageData();
+	const { data } = imageData;
+	for (let i = 0; i < data.length; i += 4) {
+		const luminance = 255 - ((0.2126 * data[i]) + (0.7152 * data[i + 1]) + (0.0722 * data[i + 2]));
+		data[i] = luminance;
+		data[i + 1] = luminance;
+		data[i + 2] = luminance;
+	}
+
+	return canvas.putImageData(imageData, 0, 0);
+};
+exports.invertGreyscale = exports.invertGrayscale;
 
 /**
  * Give an image a sepia tone
  * @param {Canvas} canvas The Canvas instance
  * @returns {Canvas}
  */
-exports.sepia = (canvas) => {
+exports.sepia = canvas => {
 	const imageData = canvas.getImageData();
 	const { data } = imageData;
 	for (let i = 0; i < data.length; i += 4) {
@@ -64,11 +73,14 @@ exports.sepia = (canvas) => {
  * @param {Canvas} canvas The Canvas instance
  * @returns {Canvas}
  */
-exports.silhouette = (canvas) => {
+exports.silhouette = canvas => {
 	const imageData = canvas.getImageData();
 	const { data } = imageData;
-	for (let i = 0; i < data.length; i += 4)
-		data[i] = data[i + 1] = data[i + 2] = 0;
+	for (let i = 0; i < data.length; i += 4) {
+		data[i] = 0;
+		data[i + 1] = 0;
+		data[i + 2] = 0;
+	}
 
 	return canvas.putImageData(imageData, 0, 0);
 };
@@ -82,8 +94,12 @@ exports.silhouette = (canvas) => {
 exports.threshold = (canvas, threshold) => {
 	const imageData = canvas.getImageData();
 	const { data } = imageData;
-	for (let i = 0; i < data.length; i += 4)
-		data[i] = data[i + 1] = data[i + 2] = (0.2126 * data[i]) + (0.7152 * data[i + 1]) + (0.0722 * data[i + 2]) >= threshold ? 255 : 0;
+	for (let i = 0; i < data.length; i += 4) {
+		const luminance = (0.2126 * data[i]) + (0.7152 * data[i + 1]) + (0.0722 * data[i + 2]) >= threshold ? 255 : 0;
+		data[i] = luminance;
+		data[i + 1] = luminance;
+		data[i + 2] = luminance;
+	}
 
 	return canvas.putImageData(imageData, 0, 0);
 };
@@ -97,8 +113,12 @@ exports.threshold = (canvas, threshold) => {
 exports.invertedThreshold = (canvas, threshold) => {
 	const imageData = canvas.getImageData();
 	const { data } = imageData;
-	for (let i = 0; i < data.length; i += 4)
-		data[i] = data[i + 1] = data[i + 2] = (0.2126 * data[i]) + (0.7152 * data[i + 1]) + (0.0722 * data[i + 2]) >= threshold ? 0 : 255;
+	for (let i = 0; i < data.length; i += 4) {
+		const luminance = (0.2126 * data[i]) + (0.7152 * data[i + 1]) + (0.0722 * data[i + 2]) >= threshold ? 0 : 255;
+		data[i] = luminance;
+		data[i + 1] = luminance;
+		data[i + 2] = luminance;
+	}
 
 	return canvas.putImageData(imageData, 0, 0);
 };
@@ -106,39 +126,54 @@ exports.invertedThreshold = (canvas, threshold) => {
 /**
  * Brighten an image
  * @param {Canvas} canvas The Canvas instance
- * @param {number} brightness The brightness to apply in a range of 0 to 100
+ * @param {number} brightness The brightness to apply in a range of 0 to 255
  * @returns {Canvas}
  */
-exports.brightness = (canvas, brightness) => canvas
-	.save()
-	.setGlobalAlpha(brightness / 100)
-	.setColor('white')
-	.addRect(0, 0, canvas.width, canvas.height)
-	.restore();
+exports.brightness = (canvas, brightness) => {
+	const imageData = canvas.getImageData();
+	const { data } = imageData;
+	for (let i = 0; i < data.length; i += 4) {
+		data[i] += brightness;
+		data[i + 1] += brightness;
+		data[i + 2] += brightness;
+	}
+
+	return canvas.putImageData(imageData, 0, 0);
+};
 
 /**
  * Darken an image
  * @param {Canvas} canvas The Canvas instance
- * @param {number} darkness The darkness to apply in a range of 0 to 100
+ * @param {number} darkness The darkness to apply in a range of 0 to 255
  * @returns {Canvas}
  */
-exports.darkness =
-exports.myOldFriend = (canvas, darkness) => canvas
-	.save()
-	.setGlobalAlpha(darkness / 100)
-	.setColor('black')
-	.addRect(0, 0, canvas.width, canvas.height)
-	.restore();
+exports.darkness = (canvas, darkness) => {
+	const imageData = canvas.getImageData();
+	const { data } = imageData;
+	for (let i = 0; i < data.length; i += 4) {
+		data[i] += darkness;
+		data[i + 1] += darkness;
+		data[i + 2] += darkness;
+	}
+
+	return canvas.putImageData(imageData, 0, 0);
+};
+exports.myOldFriend = exports.darkness;
 
 // The following filters need an improvement, as they're not working correctly.
 
 /**
  * Sharpen an image
  * @param {Canvas} canvas The Canvas instance
- * @param {number[]} amounts The edge and the center
+ * @param {number} edge How much edges should convolve
+ * @param {number} center How much the center should convolve
  * @returns {Canvas}
  */
-exports.sharpen = (canvas, [edge, center]) => exports.convolute(canvas, [0, edge, 0, edge, center, edge, 0, edge, 0]);
+exports.sharpen = (canvas, edge, center) => exports.convolute(canvas, [
+	0, edge, 0,
+	edge, center, edge,
+	0, edge, 0
+]);
 
 /**
  * Blur an image
@@ -155,34 +190,54 @@ exports.blur = (canvas, amount) => exports.convolute(canvas, new Array(9).fill(1
  * @returns {Canvas}
  * @see https://www.html5rocks.com/en/tutorials/canvas/imagefilters/
  */
-exports.convolute = (canvas, weights) => {
-	const side = 3 | 0, halfSide = (3 / 2) | 0; // eslint-disable-line no-bitwise
-	const imageData = canvas.getImageData();
-	const { data } = imageData;
-	const { width, height } = canvas;
+exports.convolute = (canvas, weights, opaque) => {
+	const side = Math.round(Math.sqrt(weights.length));
+	const halfSide = Math.floor(side / 2);
+
+	const pixels = canvas.getImageData();
+	const src = pixels.data;
+	const sw = pixels.width;
+	const sh = pixels.height;
+
+	// pad output by the convolution matrix
+	const w = sw;
+	const h = sh;
+	const output = pixels;
+	const dst = new Uint8ClampedArray(output.data);
 
 	// go through the destination image pixels
-	for (let y = 0; y < height; y++) {
-		for (let x = 0; x < width; x++) {
-			const dstOff = ((y * width) + x) * 4;
+	const alphaFac = opaque ? 1 : 0;
+	for (let y = 0; y < h; y++) {
+		for (let x = 0; x < w; x++) {
+			const sy = y;
+			const sx = x;
+			const dstOff = ((y * w) + x) * 4;
 			// calculate the weighed sum of the source image pixels that
 			// fall under the convolution matrix
-            let r = 0, g = 0, b = 0; // eslint-disable-line
+			let r = 0;
+			let g = 0;
+			let b = 0;
+			let a = 0;
 			for (let cy = 0; cy < side; cy++) {
 				for (let cx = 0; cx < side; cx++) {
-					const scy = y + cy - halfSide, scx = x + cx - halfSide;
-					if (scy < 0 || scy >= height || scx < 0 || scx >= width) continue; // eslint-disable-line max-depth
-					const srcOff = ((scy * width) + scx) * 4;
-					const wt = weights[(cy * side) + cx];
-					r += data[srcOff] * wt;
-					g += data[srcOff + 1] * wt;
-					b += data[srcOff + 2] * wt;
+					const scy = sy + cy - halfSide;
+					const scx = sx + cx - halfSide;
+					if (scy >= 0 && scy < sh && scx >= 0 && scx < sw) {
+						const srcOff = ((scy * sw) + scx) * 4;
+						const wt = weights[(cy * side) + cx];
+						r += src[srcOff] * wt;
+						g += src[srcOff + 1] * wt;
+						b += src[srcOff + 2] * wt;
+						a += src[srcOff + 3] * wt;
+					}
 				}
 			}
-			data[dstOff] = r;
-			data[dstOff + 1] = g;
-			data[dstOff + 2] = b;
+			dst[dstOff] = r;
+			dst[dstOff + 1] = g;
+			dst[dstOff + 2] = b;
+			dst[dstOff + 3] = a + (alphaFac * (255 - a));
 		}
 	}
-	return canvas.putImageData(imageData, 0, 0);
+
+	return canvas.putImageData(dst, 0, 0);
 };
