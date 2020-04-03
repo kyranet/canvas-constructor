@@ -160,20 +160,48 @@ exports.darkness = (canvas, darkness) => {
 };
 exports.myOldFriend = exports.darkness;
 
-// The following filters need an improvement, as they're not working correctly.
+/**
+ * Display an image's edges
+ * @param {Canvas} canvas The Canvas instance
+ * @returns {Canvas}
+ */
+exports.edge = canvas => exports.convolute(canvas, exports.edgeLaPlaceMatrix);
+
+/**
+ * The LaPlace matrix for edge
+ * @private
+ * @internal
+ */
+exports.edgeLaPlaceMatrix = [
+	0, -1, 0,
+	-1, 4, -1,
+	0, -1, 0
+];
 
 /**
  * Sharpen an image
  * @param {Canvas} canvas The Canvas instance
- * @param {number} edge How much edges should convolve
- * @param {number} center How much the center should convolve
+ * @param {number} passes The amount of iterations to do
  * @returns {Canvas}
  */
-exports.sharpen = (canvas, edge, center) => exports.convolute(canvas, [
-	0, edge, 0,
-	edge, center, edge,
-	0, edge, 0
-]);
+exports.sharpen = (canvas, passes) => {
+	for (let i = 0; i < passes; ++i) {
+		exports.convolute(canvas, exports.sharpenLaPlaceMatrix);
+	}
+
+	return canvas;
+};
+
+/**
+ * The LaPlace matrix for sharpen
+ * @private
+ * @internal
+ */
+exports.sharpenLaPlaceMatrix = [
+	0, -1, 0,
+	-1, 5, -1,
+	0, -1, 0
+];
 
 /**
  * Blur an image
