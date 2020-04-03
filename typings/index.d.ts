@@ -13,9 +13,10 @@ declare module 'canvas-constructor' {
 	export function silhouette(canvas: Canvas): Canvas;
 	export function threshold(canvas: Canvas, threshold: number): Canvas;
 	export function invertedThreshold(canvas: Canvas, threshold: number): Canvas;
-	export function sharpen(canvas: Canvas, amounts: [number, number]): Canvas;
-	export function blur(canvas: Canvas, amount: number): Canvas;
-	export function convolute(canvas: Canvas, weights: number[]): Canvas;
+	export function edge(canvas: Canvas): Canvas;
+	export function sharpen(canvas: Canvas, passes?: number): Canvas;
+	export function blur(canvas: Canvas, passes?: number): Canvas;
+	export function convolute(canvas: Canvas, weights: number[], alpha?: boolean): Canvas;
 
 	type BufferOrImage = Image | Buffer;
 
