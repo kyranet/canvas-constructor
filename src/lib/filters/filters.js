@@ -151,9 +151,9 @@ exports.darkness = (canvas, darkness) => {
 	const imageData = canvas.getImageData();
 	const { data } = imageData;
 	for (let i = 0; i < data.length; i += 4) {
-		data[i] += darkness;
-		data[i + 1] += darkness;
-		data[i + 2] += darkness;
+		data[i] -= darkness;
+		data[i + 1] -= darkness;
+		data[i + 2] -= darkness;
 	}
 
 	return canvas.putImageData(imageData, 0, 0);
@@ -202,8 +202,8 @@ exports.convolute = (canvas, weights, opaque) => {
 	// pad output by the convolution matrix
 	const w = sw;
 	const h = sh;
-	const output = pixels;
-	const dst = new Uint8ClampedArray(output.data);
+	const output = canvas.getImageData();
+	const dst = output.data;
 
 	// go through the destination image pixels
 	const alphaFac = opaque ? 1 : 0;
@@ -239,5 +239,5 @@ exports.convolute = (canvas, weights, opaque) => {
 		}
 	}
 
-	return canvas.putImageData(dst, 0, 0);
+	return canvas.putImageData(output, 0, 0);
 };
