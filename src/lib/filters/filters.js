@@ -178,10 +178,27 @@ exports.sharpen = (canvas, edge, center) => exports.convolute(canvas, [
 /**
  * Blur an image
  * @param {Canvas} canvas The Canvas instance
- * @param {number} amount The edge and the center
+ * @param {number} passes The amount of iterations to do
  * @returns {Canvas}
  */
-exports.blur = (canvas, amount) => exports.convolute(canvas, new Array(9).fill(1 / amount));
+exports.blur = (canvas, passes) => {
+	for (let i = 0; i < passes; ++i) {
+		exports.convolute(canvas, exports.blurLaPlaceMatrix);
+	}
+
+	return canvas;
+};
+
+/**
+ * The LaPlace matrix for blur
+ * @private
+ * @internal
+ */
+exports.blurLaPlaceMatrix = [
+	1 / 9, 1 / 9, 1 / 9,
+	1 / 9, 1 / 9, 1 / 9,
+	1 / 9, 1 / 9, 1 / 9
+];
 
 /**
  * Convolute a image. This filter needs a fix.
