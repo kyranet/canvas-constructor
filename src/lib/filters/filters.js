@@ -165,7 +165,7 @@ exports.myOldFriend = exports.darkness;
  * @param {Canvas} canvas The Canvas instance
  * @returns {Canvas}
  */
-exports.edge = canvas => exports.convolute(canvas, exports.edgeLaPlaceMatrix);
+exports.edge = canvas => exports.convolute(canvas, exports.edgeLaPlaceMatrix, true);
 
 /**
  * The LaPlace matrix for edge
@@ -186,7 +186,7 @@ exports.edgeLaPlaceMatrix = [
  */
 exports.sharpen = (canvas, passes = 1) => {
 	for (let i = 0; i < passes; ++i) {
-		exports.convolute(canvas, exports.sharpenLaPlaceMatrix);
+		exports.convolute(canvas, exports.sharpenLaPlaceMatrix, true);
 	}
 
 	return canvas;
@@ -211,7 +211,7 @@ exports.sharpenLaPlaceMatrix = [
  */
 exports.blur = (canvas, passes = 1) => {
 	for (let i = 0; i < passes; ++i) {
-		exports.convolute(canvas, exports.blurLaPlaceMatrix);
+		exports.convolute(canvas, exports.blurLaPlaceMatrix, true);
 	}
 
 	return canvas;
@@ -232,10 +232,11 @@ exports.blurLaPlaceMatrix = [
  * Convolute a image. This filter needs a fix.
  * @param {Canvas} canvas The Canvas instance
  * @param {number[]} weights The weights
+ * @param {boolean} [opaque] Whether or not pixels should try to be opaque
  * @returns {Canvas}
  * @see https://www.html5rocks.com/en/tutorials/canvas/imagefilters/
  */
-exports.convolute = (canvas, weights, opaque) => {
+exports.convolute = (canvas, weights, opaque = true) => {
 	const side = Math.round(Math.sqrt(weights.length));
 	const halfSide = Math.floor(side / 2);
 
