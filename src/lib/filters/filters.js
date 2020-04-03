@@ -181,10 +181,10 @@ exports.edgeLaPlaceMatrix = [
 /**
  * Sharpen an image
  * @param {Canvas} canvas The Canvas instance
- * @param {number} passes The amount of iterations to do
+ * @param {number} [passes] The amount of iterations to do
  * @returns {Canvas}
  */
-exports.sharpen = (canvas, passes) => {
+exports.sharpen = (canvas, passes = 1) => {
 	for (let i = 0; i < passes; ++i) {
 		exports.convolute(canvas, exports.sharpenLaPlaceMatrix);
 	}
@@ -206,10 +206,10 @@ exports.sharpenLaPlaceMatrix = [
 /**
  * Blur an image
  * @param {Canvas} canvas The Canvas instance
- * @param {number} passes The amount of iterations to do
+ * @param {number} [passes] The amount of iterations to do
  * @returns {Canvas}
  */
-exports.blur = (canvas, passes) => {
+exports.blur = (canvas, passes = 1) => {
 	for (let i = 0; i < passes; ++i) {
 		exports.convolute(canvas, exports.blurLaPlaceMatrix);
 	}
