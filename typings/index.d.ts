@@ -140,7 +140,7 @@ declare module 'canvas-constructor' {
 		bl?: number;
 	}
 
-	export type CanvasType = 'pdf' | 'svg';
+	export type CanvasType = 'pdf' | 'svg' | 'png';
 
 	export type FillRuleType = 'nonzero' | 'evenodd';
 
