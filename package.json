@@ -20,9 +20,9 @@
         "canvas": "*"
     },
     "devDependencies": {
-        "@types/node": "^13.11.1",
-        "@typescript-eslint/eslint-plugin": "^2.27.0",
-        "@typescript-eslint/parser": "^2.27.0",
+        "@types/node": "^13.13.0",
+        "@typescript-eslint/eslint-plugin": "^2.28.0",
+        "@typescript-eslint/parser": "^2.28.0",
         "docgen": "github:dirigeants/docsgen",
         "eslint": "^6.8.0",
         "eslint-config-bamboo": "^3.0.0",
