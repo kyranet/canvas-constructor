@@ -798,7 +798,6 @@ class Canvas {
 			this.context.lineTo(dx, dy + tl);
 			this.context.quadraticCurveTo(dx, dy, dx + tl, dy);
 			this.context.closePath();
-			this.context.clip();
 		}
 		return this;
 	}
