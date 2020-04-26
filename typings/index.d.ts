@@ -81,8 +81,10 @@ declare module 'canvas-constructor' {
 		public measureText(text: string): TextMetrics;
 		public measureText(text: string, callback: (metrics: TextMetrics, instance: this) => unknown): this;
 		public moveTo(dx: number, dy: number): this;
-		public printLinearGradient(x0: number, y0: number, x1: number, y1: number, steps?: GradientStep[]): this;
-		public printRadialGradient(x0: number, y0: number, r0: number, x1: number, y1: number, r1: number, steps?: GradientStep[]): this;
+		public printLinearColorGradient(x0: number, y0: number, x1: number, y1: number, steps?: GradientStep[]): this;
+		public printLinearStrokeGradient(x0: number, y0: number, x1: number, y1: number, steps?: GradientStep[]): this;
+		public printRadialColorGradient(x0: number, y0: number, r0: number, x1: number, y1: number, r1: number, steps?: GradientStep[]): this;
+		public printRadialStrokeGradient(x0: number, y0: number, r0: number, x1: number, y1: number, r1: number, steps?: GradientStep[]): this;
 		public process<T extends unknown[]>(fn: (instance: this, ...args: T) => unknown, ...args: T): this;
 		public putImageData(imageData: ImageData, dx: number, dy: number, dirtyX?: number, dirtyY?: number, dirtyWidth?: number, dirtyHeight?: number): this;
 		public quadraticCurveTo(cpx: number, cpy: number, dx: number, dy: number): this;

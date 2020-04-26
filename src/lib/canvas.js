@@ -979,16 +979,42 @@ class Canvas {
 	 * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/createLinearGradient
 	 * @example
 	 * new Canvas(200, 200)
-	 *     .printLinearGradient(0, 0, 200, 50, [
+	 *     .printLinearColorGradient(0, 0, 200, 50, [
 	 *         { position: 0, color: 'white' },
 	 *         { position: 0.25, color: 'red' },
 	 *         { position: 0.5, color: 'blue' }
 	 *     ])
 	 *     .addRect(10, 10, 200, 100)
 	 */
-	printLinearGradient(...args) {
+	printLinearColorGradient(...args) {
 		const gradient = this.createLinearGradient(...args);
 		return this.setColor(gradient);
+	}
+
+	/**
+	 * Creates a gradient along the line given by the coordinates represented by the parameters.
+	 * The coordinates are global, the second point does not rely on the position of the first and vice versa. This
+	 * method is chainable and calls setStroke after creating the gradient.
+	 * @param {number} x0 The x axis of the coordinate of the start point.
+	 * @param {number} y0 The y axis of the coordinate of the start point.
+	 * @param {number} x1 The x axis of the coordinate of the end point.
+	 * @param {number} y1 The y axis of the coordinate of the end point.
+	 * @param {GradientStep[]} [steps=[]] The steps.
+	 * @returns {this}
+	 * @chainable
+	 * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/createLinearGradient
+	 * @example
+	 * new Canvas(200, 200)
+	 *     .printLinearStrokeGradient(0, 0, 200, 50, [
+	 *         { position: 0, color: 'white' },
+	 *         { position: 0.25, color: 'red' },
+	 *         { position: 0.5, color: 'blue' }
+	 *     ])
+	 *     .addRect(10, 10, 200, 100)
+	 */
+	printLinearStrokeGradient(...args) {
+		const gradient = this.createLinearGradient(...args);
+		return this.setStroke(gradient);
 	}
 
 	/**
@@ -1026,9 +1052,28 @@ class Canvas {
 	 * @chainable
 	 * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/createRadialGradient
 	 */
-	printRadialGradient(...args) {
+	printRadialColorGradient(...args) {
 		const gradient = this.createRadialGradient(...args);
 		return this.setColor(gradient);
+	}
+  
+	/**
+	 * Creates a radial gradient given by the coordinates of the two circles represented by the parameters. This
+	 * method is chainable and calls setStroke after creating the gradient.
+	 * @param {number} x0 The x axis of the coordinate of the start circle.
+	 * @param {number} y0 The y axis of the coordinate of the start circle.
+	 * @param {number} r0 The radius of the start circle.
+	 * @param {number} x1 The x axis of the coordinate of the end circle.
+	 * @param {number} y1 The y axis of the coordinate of the end circle.
+	 * @param {number} r1 The radius of the end circle.
+	 * @param {GradientStep[]} steps The steps.
+	 * @returns {this}
+	 * @chainable
+	 * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/createRadialGradient
+	 */
+	printRadialStrokeGradient(...args) {
+		const gradient = this.createRadialGradient(...args);
+		return this.setStroke(gradient);
 	}
 
 	/**
