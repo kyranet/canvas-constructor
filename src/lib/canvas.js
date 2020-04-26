@@ -969,12 +969,12 @@ class Canvas {
 	 * Creates a gradient along the line given by the coordinates represented by the parameters.
 	 * The coordinates are global, the second point does not rely on the position of the first and vice versa. This
 	 * method is chainable and calls setColor or setStroke after creating the gradient.
+	 * @param {boolean} [stroke=false] If false will call setColor, otherwise setStroke.
 	 * @param {number} x0 The x axis of the coordinate of the start point.
 	 * @param {number} y0 The y axis of the coordinate of the start point.
 	 * @param {number} x1 The x axis of the coordinate of the end point.
 	 * @param {number} y1 The y axis of the coordinate of the end point.
 	 * @param {GradientStep[]} [steps=[]] The steps.
-	 * @param {boolean} [stroke=false] If false will call setColor, otherwise setStroke.
 	 * @returns {this}
 	 * @chainable
 	 * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/createLinearGradient
@@ -987,7 +987,7 @@ class Canvas {
 	 *     ])
 	 *     .addRect(10, 10, 200, 100)
 	 */
-	printLinearGradient(...args, stroke = false) {
+	printLinearGradient(stroke = false, ...args) {
 		const gradient = this.createLinearGradient(...args);
 		return stroke ? this.setStroke(gradient) : this.setColor(gradient);
   }
@@ -1016,6 +1016,7 @@ class Canvas {
 	/**
 	 * Creates a radial gradient given by the coordinates of the two circles represented by the parameters. This
 	 * method is chainable and calls setColor or setStroke after creating the gradient.
+	 * @param {boolean} [stroke=false] If false will call setColor, otherwise setStroke.
 	 * @param {number} x0 The x axis of the coordinate of the start circle.
 	 * @param {number} y0 The y axis of the coordinate of the start circle.
 	 * @param {number} r0 The radius of the start circle.
@@ -1023,12 +1024,11 @@ class Canvas {
 	 * @param {number} y1 The y axis of the coordinate of the end circle.
 	 * @param {number} r1 The radius of the end circle.
 	 * @param {GradientStep[]} steps The steps.
-	 * @param {boolean} [stroke=false] If false will call setColor, otherwise setStroke.
 	 * @returns {this}
 	 * @chainable
 	 * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/createRadialGradient
 	 */
-	printRadialGradient(...args, stroke = false) {
+	printRadialGradient(stroke = false, ...args) {
 		const gradient = this.createRadialGradient(...args);
 		return stroke ? this.setStroke(gradient) : this.setColor(gradient);
 	}
