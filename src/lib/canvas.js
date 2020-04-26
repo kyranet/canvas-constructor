@@ -991,7 +991,7 @@ class Canvas {
 		return this.setColor(gradient);
   }
 
-  /**
+  	/**
 	 * Creates a gradient along the line given by the coordinates represented by the parameters.
 	 * The coordinates are global, the second point does not rely on the position of the first and vice versa. This
 	 * method is chainable and calls setStroke after creating the gradient.
@@ -1057,7 +1057,7 @@ class Canvas {
 		return this.setColor(gradient);
   }
   
-  /**
+  	/**
 	 * Creates a radial gradient given by the coordinates of the two circles represented by the parameters. This
 	 * method is chainable and calls setStroke after creating the gradient.
 	 * @param {number} x0 The x axis of the coordinate of the start circle.
