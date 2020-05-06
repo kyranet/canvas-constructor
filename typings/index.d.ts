@@ -47,7 +47,7 @@ declare module 'canvas-constructor' {
 		public addStrokeText(text: string, dx: number, dy: number): this;
 		public addText(text: string, dx: number, dy: number, maxWidth?: number): this;
 		public addTextFont(path: string, family: string | FontFaceType): this;
-		public arc(dx: number, dy: number, radius: number, startAngle: number, endAngle: number, anticlockwise?: boolean): this;
+		public arc(dx: number, dy: number, radius: number, startAngle?: number, endAngle?: number, anticlockwise?: boolean): this;
 		public arcTo(x1: number, y1: number, x2: number, y2: number, radius: number): this;
 		public arcTo(x1: number, y1: number, x2: number, y2: number, radiusX: number, radiusY: number, rotation: number): this;
 		public beginPath(): this;
