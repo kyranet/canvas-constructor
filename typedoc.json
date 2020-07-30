@@ -1,0 +1,13 @@
+{
+	"inputFiles": ["./src"],
+	"out": "./docs/",
+	"readme": "./README.md",
+	"name": "canvas-constructor",
+	"exclude": ["**/node_modules/**", "rollup.config.ts"],
+	"mode": "file",
+	"excludeExternals": true,
+	"excludePrivate": true,
+	"excludeProtected": true,
+	"excludeNotExported": true,
+	"tsconfig": "./tsconfig.base.json"
+}

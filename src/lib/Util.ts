@@ -1,9 +1,10 @@
-// @ts-nocheck
-exports.browser = typeof window !== 'undefined';
+import type { Canvas } from './Canvas';
 
-exports.InternalCanvas = (() => {
+export const browser = typeof window !== 'undefined';
+
+export const internalCanvas = (() => {
 	// eslint-disable-next-line no-undef
-	if (exports.browser) return typeof HTMLCanvasElement === 'undefined' ? null : HTMLCanvasElement;
+	if (browser) return typeof HTMLCanvasElement === 'undefined' ? null : HTMLCanvasElement;
 	try {
 		return require('canvas-prebuilt');
 	} catch (_) {
@@ -11,21 +12,21 @@ exports.InternalCanvas = (() => {
 	}
 })();
 
-exports.getFontHeight = (() => {
+export const getFontHeight = (() => {
 	// node-canvas has its own font parser
-	if (!exports.browser && 'parseFont' in exports.InternalCanvas) return font => exports.InternalCanvas.parseFont(font).size;
+	if (!browser && 'parseFont' in internalCanvas) return (font: string) => internalCanvas.parseFont(font).size;
 
 	// Load polyfill
-	const REGEX_SIZE = /([\d.]+)(px|pt|pc|in|cm|mm|%|em|ex|ch|rem|q)/i;
-	const CACHE = new Map();
+	const kRegexSize = /([\d.]+)(px|pt|pc|in|cm|mm|%|em|ex|ch|rem|q)/i;
+	const kCache = new Map<string, number>();
 
-	return font => {
+	return (font: string) => {
 		// If it was already parsed, do not parse again
-		const previous = CACHE.get(font);
+		const previous = kCache.get(font);
 		if (previous) return previous;
 
 		// Test for required properties first, return null if the text is invalid
-		const sizeFamily = REGEX_SIZE.exec(font);
+		const sizeFamily = kRegexSize.exec(font);
 		if (!sizeFamily) return null;
 
 		let size = Number(sizeFamily[1]);
@@ -56,16 +57,16 @@ exports.getFontHeight = (() => {
 				break;
 		}
 
-		CACHE.set(font, size);
+		kCache.set(font, size);
 		return size;
 	};
 })();
 
-exports.textWrap = (canvas, text, wrapWidth) => {
+export const textWrap = (canvas: Canvas, text: string, wrapWidth: number): string => {
 	const result = [];
 	const buffer = [];
 
-	const spaceWidth = canvas.context.measureText(' ').width;
+	const spaceWidth = canvas.measureText(' ').width;
 
 	// Run the loop for each line
 	for (const line of text.split(/\r?\n/)) {
@@ -73,7 +74,7 @@ exports.textWrap = (canvas, text, wrapWidth) => {
 
 		// Run the loop for each word
 		for (const word of line.split(' ')) {
-			const wordWidth = canvas.context.measureText(word).width;
+			const wordWidth = canvas.measureText(word).width;
 			// eslint-disable-next-line @typescript-eslint/restrict-plus-operands
 			const wordWidthWithSpace = wordWidth + spaceWidth;
 
