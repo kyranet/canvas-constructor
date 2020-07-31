@@ -1,4 +1,4 @@
-import { Canvas as NodeCanvas, Image, loadImage } from 'canvas';
+import { Image, loadImage } from 'canvas';
 import type { Canvas, LoadableImage } from './Canvas';
 
 export const browser = typeof window !== 'undefined';
@@ -101,7 +101,7 @@ export const textWrap = (canvas: Canvas, text: string, wrapWidth: number): strin
  * @param src An Image instance or a buffer
  * @param cb The callback
  */
-export const resolveImage = (src: LoadableImage, options?: any): Promise<NodeCanvas | Image> => {
+export const resolveImage = (src: LoadableImage, options?: any): Promise<Image> => {
 	if (browser) {
 		return new Promise((resolve, reject) => {
 			// eslint-disable-next-line no-undef
