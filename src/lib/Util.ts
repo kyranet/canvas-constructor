@@ -1,4 +1,5 @@
-import type { Canvas } from './Canvas';
+import { Canvas as NodeCanvas, Image, loadImage } from 'canvas';
+import type { Canvas, LoadableImage } from './Canvas';
 
 export const browser = typeof window !== 'undefined';
 
@@ -98,4 +99,36 @@ export const textWrap = (canvas: Canvas, text: string, wrapWidth: number): strin
 	}
 
 	return result.join('\n');
+};
+
+/**
+ * Resolves an Image or Buffer
+ * @param src An Image instance or a buffer
+ * @param cb The callback
+ */
+export const resolveImage = (src: LoadableImage, options?: any): Promise<NodeCanvas | Image> => {
+	if (browser) {
+		return new Promise((resolve, reject) => {
+			// eslint-disable-next-line no-undef
+			const image = Object.assign(document.createElement('img'), options);
+
+			function cleanup() {
+				image.onload = null;
+				image.onerror = null;
+			}
+
+			image.onload = () => {
+				cleanup();
+				resolve(image);
+			};
+			image.onerror = () => {
+				cleanup();
+				reject(new Error(`Failed to load the image "${src}"`));
+			};
+
+			image.src = src;
+		});
+	}
+
+	return loadImage(src, options);
 };
