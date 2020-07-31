@@ -1485,7 +1485,7 @@ export class Canvas {
 		arg9: P9
 	): this;
 
-	public process(fn: (this: Canvas, canvas: Canvas, ...args: readonly any[]) => unknown, ...args: readonly any[]): this;
+	public process<T>(fn: (this: Canvas, canvas: Canvas, ...args: readonly T[]) => unknown, ...args: readonly T[]): this;
 	/**
 	 * Process data with this as the context
 	 * @param fn A callback function
