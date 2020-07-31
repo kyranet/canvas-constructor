@@ -672,10 +672,9 @@ export class Canvas {
 
 	/**
 	 * Add a circle or semi circle.
-	 * @param {number} x The position x in the center of the circle.
-	 * @param {number} y The position y in the center of the ircle.
-	 * @param {number} radius The radius for the clip.
-	 * @returns {this}
+	 * @param x The position x in the center of the circle.
+	 * @param y The position y in the center of the ircle.
+	 * @param radius The radius for the clip.
 	 */
 	public printCircle(x: number, y: number, radius: number): this {
 		return this.save().createCircularPath(x, y, radius).fill().restore();
@@ -1393,7 +1392,6 @@ export class Canvas {
 
 	/**
 	 * Alias of Canvas#getLineDash();
-	 * @readonly
 	 */
 	public get lineDash(): number[] {
 		return this.getLineDash();
@@ -1499,45 +1497,71 @@ export class Canvas {
 	}
 
 	/**
+	 * <warn>This is for Node.js usage only, HTMLCanvasElement does not support this</warn>
 	 * For image canvases, encodes the canvas as a PNG. For PDF canvases, encodes the canvas as a PDF. For SVG canvases,
 	 * encodes the canvas as an SVG.
 	 */
 	public toBuffer(): Buffer;
 	/**
+	 * <warn>This is for Node.js usage only, HTMLCanvasElement does not support this</warn>
 	 * Encodes the canvas as a PNG.
+	 * @param mimeType the standard MIME type for the image format to return.
+	 * @param config The render configuration.
 	 */
 	public toBuffer(mimeType: 'image/png', config?: PngConfig): Buffer;
 	/**
+	 * <warn>This is for Node.js usage only, HTMLCanvasElement does not support this</warn>
 	 * Encodes the canvas as a JPG.
+	 * @param mimeType the standard MIME type for the image format to return.
+	 * @param config The render configuration.
 	 */
 	public toBuffer(mimeType: 'image/jpeg', config?: JpegConfig): Buffer;
 	/**
+	 * <warn>This is for Node.js usage only, HTMLCanvasElement does not support this</warn>
 	 * Encodes the canvas as a PDF.
+	 * @param mimeType the standard MIME type for the image format to return.
+	 * @param config The render configuration.
 	 */
 	public toBuffer(mimeType: 'application/pdf', config?: PdfConfig): Buffer;
 	/**
+	 * <warn>This is for Node.js usage only, HTMLCanvasElement does not support this</warn>
 	 * Returns the unencoded pixel data, top-to-bottom. On little-endian (most) systems, the array will be ordered BGRA;
 	 * on big-endian systems, it will be ARGB.
+	 * @param mimeType the standard MIME type for the image format to return.
 	 */
 	public toBuffer(mimeType: 'raw'): Buffer;
-	/**
-	 * <warn>This is for Node.js usage only, HTMLCanvasElement does not support this</warn>
-	 * Render the canvas into a buffer.
-	 * @param args The render's options.
-	 */
 	public toBuffer(...args: readonly any[]): Buffer {
 		// @ts-expect-error: Complains about invalid overload (expects more than 0 overloads).
 		return this.canvas.toBuffer(...args);
 	}
 
+	/**
+	 * <warn>This is for Node.js usage only, HTMLCanvasElement does not support this</warn>
+	 * For image canvases, encodes the canvas as a PNG. For PDF canvases, encodes the canvas as a PDF. For SVG canvases,
+	 * encodes the canvas as an SVG.
+	 */
 	public toBufferAsync(): Promise<Buffer>;
+	/**
+	 * <warn>This is for Node.js usage only, HTMLCanvasElement does not support this</warn>
+	 * Encodes the canvas as a PNG.
+	 * @param mimeType the standard MIME type for the image format to return.
+	 * @param config The render configuration.
+	 */
 	public toBufferAsync(mimeType: 'image/png', config?: PngConfig): Promise<Buffer>;
+	/**
+	 * <warn>This is for Node.js usage only, HTMLCanvasElement does not support this</warn>
+	 * Encodes the canvas as a JPG.
+	 * @param mimeType the standard MIME type for the image format to return.
+	 * @param config The render configuration.
+	 */
 	public toBufferAsync(mimeType: 'image/jpeg', config?: JpegConfig): Promise<Buffer>;
 	/**
 	 * <warn>This is for Node.js usage only, HTMLCanvasElement does not support this</warn>
-	 * Render the canvas into a buffer using a Promise.
-	 * @returns {Promise<Buffer>}
+	 * Encodes the canvas as a PDF.
+	 * @param mimeType the standard MIME type for the image format to return.
+	 * @param config The render configuration.
 	 */
+	public toBufferAsync(mimeType: 'application/pdf', config?: PdfConfig): Promise<Buffer>;
 	public toBufferAsync(...args: readonly any[]): Promise<Buffer> {
 		return new Promise<Buffer>((resolve, reject) =>
 			// @ts-expect-error: Complains about invalid overload (expects more than 0 overloads).
@@ -1549,36 +1573,59 @@ export class Canvas {
 	}
 
 	/**
-	 * Render the canvas into a Data URL.
-	 * @param {string} type the standard MIME type for the image format to return. If you do not specify this parameter, the default value is PNG.
-	 * @param {any[]} args Extra arguments
-	 * @returns {string}
+	 * Render the canvas into a PNG Data URL.
 	 * @see https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/toDataURL
 	 */
 	public toDataURL(): string;
-	public toDataURL(mimeType: 'image/png'): string;
-	public toDataURL(mimeType: 'image/jpeg', quality?: number): string;
 	/**
-	 * Render the canvas into a Data URL.
-	 * @param {string} type the standard MIME type for the image format to return. If you do not specify this parameter, the default value is PNG.
-	 * @param {any[]} args Extra arguments
-	 * @returns {string}
-	 * @see https://github.com/Automattic/node-canvas#canvastodataurl-sync-and-async
+	 * Render the canvas into a PNG Data URL.
+	 * @param type the standard MIME type for the image format to return.
+	 * @see https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/toDataURL
 	 */
+	public toDataURL(mimeType: 'image/png'): string;
+	/**
+	 * Render the canvas into a JPEG Data URL.
+	 * @param type the standard MIME type for the image format to return.
+	 * @param quality The quality for the JPEG.
+	 * @see https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/toDataURL
+	 */
+	public toDataURL(mimeType: 'image/jpeg', quality?: number): string;
 	public toDataURL(...args: readonly any[]): string {
 		return this.canvas.toDataURL(...args);
 	}
 
-	public toDataURLAsync(): Promise<string>;
-	public toDataURLAsync(mimeType: 'image/png'): Promise<string>;
-	public toDataURLAsync(mimeType: 'image/jpeg'): Promise<string>;
-	public toDataURLAsync(mimeType: 'image/jpeg', config: JpegConfig): Promise<string>;
-	public toDataURLAsync(mimeType: 'image/jpeg', quality: number): Promise<string>;
 	/**
-	 * Render the canvas into a Data URL using a Promise.
-	 * @param type the standard MIME type for the image format to return. If you do not specify this parameter, the default value is PNG.
+	 * Render the canvas into a PNG Data URL.
 	 * @see https://github.com/Automattic/node-canvas#canvastodataurl-sync-and-async
 	 */
+	public toDataURLAsync(): Promise<string>;
+	/**
+	 * Render the canvas into a PNG Data URL.
+	 * @param type the standard MIME type for the image format to return.
+	 * @see https://github.com/Automattic/node-canvas#canvastodataurl-sync-and-async
+	 */
+	public toDataURLAsync(mimeType: 'image/png'): Promise<string>;
+	/**
+	 * Render the canvas into a JPEG Data URL.
+	 * @param type the standard MIME type for the image format to return.
+	 * @param quality The quality for the JPEG.
+	 * @see https://github.com/Automattic/node-canvas#canvastodataurl-sync-and-async
+	 */
+	public toDataURLAsync(mimeType: 'image/jpeg'): Promise<string>;
+	/**
+	 * Render the canvas into a JPEG Data URL.
+	 * @param type the standard MIME type for the image format to return.
+	 * @param config The render configuration.
+	 * @see https://github.com/Automattic/node-canvas#canvastodataurl-sync-and-async
+	 */
+	public toDataURLAsync(mimeType: 'image/jpeg', config: JpegConfig): Promise<string>;
+	/**
+	 * Render the canvas into a JPEG Data URL.
+	 * @param type the standard MIME type for the image format to return.
+	 * @param quality The quality for the JPEG.
+	 * @see https://github.com/Automattic/node-canvas#canvastodataurl-sync-and-async
+	 */
+	public toDataURLAsync(mimeType: 'image/jpeg', quality: number): Promise<string>;
 	public toDataURLAsync(...args: readonly any[]): Promise<string> {
 		return new Promise<string>((resolve, reject) =>
 			// @ts-expect-error: Complains about invalid overload (expects more than 0 overloads).
