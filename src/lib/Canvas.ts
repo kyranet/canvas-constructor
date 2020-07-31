@@ -304,7 +304,7 @@ export class Canvas {
 	 * @param dy Vertical position (y-coordinate) at which to place the image data in the destination canvas.
 	 * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/putImageData
 	 */
-	public putImageData(imagedata: ImageResolvable, dx: number, dy: number): this;
+	public putImageData(imagedata: ImageData, dx: number, dy: number): this;
 	/**
 	 * The CanvasRenderingContext2D.putImageData() method of the Canvas 2D API paints data from the given ImageData object onto the bitmap.
 	 * Only the pixels from that rectangle are painted.
@@ -318,15 +318,7 @@ export class Canvas {
 	 * @param dirtyHeight Height of the rectangle to be painted. Defaults to the height of the image data.
 	 * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/putImageData
 	 */
-	public putImageData(
-		imagedata: ImageResolvable,
-		x: number,
-		y: number,
-		dirtyX: number,
-		dirtyY: number,
-		dirtyWidth: number,
-		dirtyHeight: number
-	): this;
+	public putImageData(imagedata: ImageData, x: number, y: number, dirtyX: number, dirtyY: number, dirtyWidth: number, dirtyHeight: number): this;
 
 	public putImageData(...args: readonly any[]): this {
 		// @ts-expect-error: Complains about invalid overload (expects more than 0 overloads).
@@ -353,8 +345,9 @@ export class Canvas {
 	 * the font is adjusted to use a more horizontally condensed font.
 	 * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/fillText
 	 */
-	public printText(text: string, x: number, y: number, maxWidth?: number): this {
-		this.context.fillText(text, x, y, maxWidth);
+	public printText(text: string, x: number, y: number, maxWidth?: number): this;
+	public printText(text: string, x: number, y: number, ...rest: readonly any[]): this {
+		this.context.fillText(text, x, y, ...rest);
 		return this;
 	}
 
