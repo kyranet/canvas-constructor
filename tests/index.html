@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<head>
+	<title>Canvas Constructor</title>
+</head>
+<body>
+	<h1>Canvas Constructor!</h1>
+	<canvas id="basic" width="300" height="300"></canvas>
+	<canvas id="image" width="300" height="300"></canvas>
+	<script type="text/javascript" src="../dist/index.umd.js" ></script>
+	<script type="text/javascript" >
+		const canvasElement = document.getElementById('basic');
+		new CanvasConstructor.Canvas(canvasElement)
+			.setColor('#AEFD54')
+			.printRectangle(5, 5, 290, 290)
+			.setColor('#FFAE23')
+			.setTextFont('28px Impact')
+			.printText('Hello World!', 130, 150);
+	</script>
+
+	<script type="text/javascript">
+		(async () => {
+			const canvasElement = document.getElementById('image');
+			const image = await CanvasConstructor.resolveImage('https://github.com/NM-EEA-Y.png');
+			new CanvasConstructor.Canvas(canvasElement)
+				.setColor('#AEFD54')
+				.printRectangle(5, 5, 290, 290)
+				.printImage(image, 0, 0, 300, 300)
+				.setTextAlign('center')
+				.printText('Skyra!', 150, 250);
+		})();
+	</script>
+</body>
