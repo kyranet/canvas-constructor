@@ -2,12 +2,10 @@
 [![Discord](https://discordapp.com/api/guilds/437335547711848458/embed.png)](https://discord.gg/taNgb9d)
 [![npm](https://img.shields.io/npm/v/canvas-constructor.svg?maxAge=3600)](https://www.npmjs.com/package/canvas-constructor)
 [![npm](https://img.shields.io/npm/dt/canvas-constructor.svg?maxAge=3600)](https://www.npmjs.com/package/canvas-constructor)
-[![Build Status](https://travis-ci.org/kyranet/canvas-constructor.svg?branch=master)](https://travis-ci.org/kyranet/canvas-constructor)
 [![Total alerts](https://img.shields.io/lgtm/alerts/g/kyranet/canvas-constructor.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/kyranet/canvas-constructor/alerts/)
-[![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=kyranet/canvas-constructor)](https://dependabot.com)
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/kyranet/canvas-constructor/master/LICENSE)
 
-An ES6 function for node-canvas with built-in utilities and chained methods.
+An ES6 chainable class for node-canvas with built-in utilities.
 
 ## Installation
 
@@ -54,11 +52,10 @@ new CanvasConstructor.Canvas(canvasElement)
 - Write the text 'Hello World!' in the position (130, 150)
 - Return a buffer.
 
-Now, let's suppose we want to add images. I'd recommend [fs-nextra](https://github.com/bdistin/fs-nextra), by [BDISTIN](https://github.com/bdistin/), it requires Node.js 8.5.0 to work (it promisifies the async fs methods with `Util.promisify()`), it's a dependency-free and lightweight package that provides support for **atomic operations**.
+Now, let's suppose we want to add images, we'll use `Canvas.resolveImage`, which works in both Node.js and browser:
 
 ```js
 const { Canvas } = require('canvas-constructor');
-const fsn = require('fs-nextra');
 
 async function createCanvas() {
     const image = await Canvas.resolveImage('./images/kitten.png');

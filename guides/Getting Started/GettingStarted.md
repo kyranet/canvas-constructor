@@ -24,10 +24,10 @@ new Canvas(300, 300)
 **Browser**:
 
 ```html
-<script type="text/javascript" src="canvasconstructor.master.min.js"></script>
+<script type="text/javascript" src="canvas-constructor/dist/index.umd.js"></script>
 <script type="text/javascript">
 const canvasElement = document.getElementById('canvas');
-CanvasConstructor.Canvas.from(canvasElement)
+new CanvasConstructor.Canvas(canvasElement)
     .setColor('#AEFD54')
     .printRectangle(5, 5, 290, 290)
     .setColor('#FFAE23')
@@ -44,18 +44,13 @@ CanvasConstructor.Canvas.from(canvasElement)
 - Write the text 'Hello World!' in the position (130, 150)
 - Return a buffer.
 
-![Hello World!](https://raw.githubusercontent.com/kyranet/canvas-constructor/master/guides/assets/getting-started-example-01.png)
-
-Now, let's suppose we want to add images. I'd recommend [fs-nextra](https://github.com/bdistin/fs-nextra), by BDISTIN,
-it requires Node.js LTS to work, it is a dependency-free and lightweight package that provides support for
-**atomic operations**.
+Now, let's suppose we want to add images, we'll use `Canvas.resolveImage`, which works in both Node.js and browser:
 
 ```js
 const { Canvas } = require('canvas-constructor');
-const fsn = require('fs-nextra');
 
 async function createCanvas() {
-    const image = await fsn.readFile('./images/kitten.png');
+    const image = await Canvas.resolveImage('./images/kitten.png');
 
     return new Canvas(300, 400)
         .printImage(image, 0, 0, 300, 400)
@@ -75,11 +70,6 @@ async function createCanvas() {
 - Write the text 'Kitten!' in the position (150, 370)
 - Return a buffer.
 
-![Kitten!](https://raw.githubusercontent.com/kyranet/canvas-constructor/master/guides/assets/getting-started-example-02.png)
-
 And now, you have created an image with a kitten in the background and some centered text in the bottom of it.
 
-If you experience issues with **Canvas** or want to install it, please refer to the
-[canvas](https://www.npmjs.com/package/canvas) repository, if you feel you found an issue in this package, feel free to
-file an issue [here](https://github.com/kyranet/canvas-constructor/issues), or make a
-[Pull Request](https://help.github.com/articles/about-pull-requests/) if you have the fix.
+If you experience issues with **Canvas** or want to install it, please refer to the [canvas](https://www.npmjs.com/package/canvas) repository, if you feel you found an issue in this package, feel free to file an issue [here](https://github.com/kyranet/canvas-constructor/issues), or make a [Pull Request](https://help.github.com/articles/about-pull-requests/) if you have the fix.
