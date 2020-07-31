@@ -178,7 +178,7 @@ identical to `addRect()`).
 ### Added
 - Added `addFont()` method for retro-compatibility with old versions of Canvas.
 (Thanks to [York](https://github.com/YorkAARGH) in
-[PR#1](https://github.com/kyranet/canvasConstructor/pull/1))
+[PR#1](https://github.com/kyranet/canvas-constructor/pull/1))
 
 ### Changed
 - Better `README.md`.

@@ -2,13 +2,13 @@
 
 > **NOTE**: This guide is for installing `canvas` for node.js, if you want to use `canvas-constructor` for web browsers,
 use the package link from unpkg or get the bundle from the
-[webpack branch](https://github.com/kyranet/canvasConstructor/tree/webpack)
+[webpack branch](https://github.com/kyranet/canvas-constructor/tree/webpack)
 
 Let's start off by introducing what canvas is. In HTML, the `<canvas>` element can be used to draw images via scripting
 with JavaScript. The canvas that we're talking about is a Cairo backed canvas implementation for **Node.js**. An example
 of something that can be done with canvas is this.
 
-![Canvas Command](https://raw.githubusercontent.com/kyranet/canvasConstructor/master/guides/assets/canvas-example.png)
+![Canvas Command](https://raw.githubusercontent.com/kyranet/canvas-constructor/master/guides/assets/canvas-example.png)
 
 Here, the bot is using canvas to edit a template and insert your avatar, and a random users avatar onto the template. So
 that's just an example of what Canvas can do, let's get down to installing it.
@@ -60,7 +60,7 @@ $ yarn add canvas canvas-constructor
 ```
 
 > **Note**: You can install a development version of `canvas` by replacing `canvas` with `Automattic/node-canvas`,
-or `canvas-constructor` with `kyranet/canvasConstructor` for that matter. However, we do not guarantee stability in
+or `canvas-constructor` with `kyranet/canvas-constructor` for that matter. However, we do not guarantee stability in
 development branches.
 
 If you followed the guide completely, your console should look something like this, and you're good to go!
@@ -79,4 +79,4 @@ info Direct dependencies
 └─ canvas@2.3.1
 ```
 
-![Install Screenshot](https://raw.githubusercontent.com/kyranet/canvasConstructor/master/guides/assets/installation-screenshot.png)
+![Install Screenshot](https://raw.githubusercontent.com/kyranet/canvas-constructor/master/guides/assets/installation-screenshot.png)

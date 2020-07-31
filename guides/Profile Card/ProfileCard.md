@@ -10,7 +10,7 @@ populating the image with text.
 
 Right, this is the image you will be creating in this guide.
 
-![Profile image](https://raw.githubusercontent.com/kyranet/canvasConstructor/master/guides/assets/profile-end-result.png)
+![Profile image](https://raw.githubusercontent.com/kyranet/canvas-constructor/master/guides/assets/profile-end-result.png)
 
 Okay, now you have seen what you are going to create, I want to go over what I will be covering in this tutorial.
 
@@ -174,7 +174,7 @@ point on, everything I add will just be added onto the previous code block.
 
 If you've been following along closely, your profile image should look like this now.
 
-![Boxes... yay](https://raw.githubusercontent.com/kyranet/canvasConstructor/master/guides/assets/profile-boxes.png)
+![Boxes... yay](https://raw.githubusercontent.com/kyranet/canvas-constructor/master/guides/assets/profile-boxes.png)
 
 As you can see, we've managed to successfully create an image with multiple boxes of different colors, now we'll do
 something different, let's create a drop shadow effect on a circular clip path.
@@ -190,7 +190,7 @@ something different, let's create a drop shadow effect on a circular clip path.
 
 That will create the following image:
 
-![Shadows](https://raw.githubusercontent.com/kyranet/canvasConstructor/master/guides/assets/profile-shadow.png)
+![Shadows](https://raw.githubusercontent.com/kyranet/canvas-constructor/master/guides/assets/profile-shadow.png)
 
 Now, for the keen eyed observers, you may have noticed this comment line `// We need to put something here next.`, guess
 what you're about to put the avatar in that circle, so replace that line of text with this.
@@ -201,7 +201,7 @@ what you're about to put the avatar in that circle, so replace that line of text
 
 And boom
 
-![Now with extra avatar.](https://raw.githubusercontent.com/kyranet/canvasConstructor/master/guides/assets/profile-avatar.png)
+![Now with extra avatar.](https://raw.githubusercontent.com/kyranet/canvas-constructor/master/guides/assets/profile-avatar.png)
 
 You're on the home stretch, you've only got to create a "level" plate over the avatar, and then add the text, so let's
 get that plate sorted \(I won't display how it looks\).
