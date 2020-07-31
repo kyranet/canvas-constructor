@@ -360,7 +360,7 @@ export class Canvas {
 	 * @example
 	 * new Canvas(400, 300)
 	 *     .setTextFont('40px Tahoma')
-	 *     .addResponsiveText('Hello World', 30, 30, 50)
+	 *     .printResponsiveText('Hello World', 30, 30, 50)
 	 *     .toBuffer();
 	 */
 	public printResponsiveText(text: string, x: number, y: number, maxWidth: number): this {
@@ -379,13 +379,13 @@ export class Canvas {
 	 * @example
 	 * new Canvas(400, 300)
 	 *     .setTextFont('25px Tahoma')
-	 *     .addMultilineText('This is a really\nlong text!', 139, 360)
+	 *     .printMultilineText('This is a really\nlong text!', 139, 360)
 	 *     .toBuffer();
 	 */
 	public printMultilineText(text: string, x: number, y: number): this {
 		const lines = text.split(/\r?\n/);
 
-		// If there are no new lines, return using addText
+		// If there are no new lines, return using printText
 		if (lines.length <= 1) return this.printText(text, x, y);
 
 		const height = this.textFontHeight;
@@ -408,7 +408,7 @@ export class Canvas {
 	 * @example
 	 * new Canvas(400, 300)
 	 *     .setTextFont('25px Tahoma')
-	 *     .addWrappedText('This is a really long text!', 139, 360)
+	 *     .printWrappedText('This is a really long text!', 139, 360)
 	 *     .toBuffer();
 	 */
 	public printWrappedText(text: string, x: number, y: number, wrapWidth: number): this {
@@ -466,7 +466,7 @@ export class Canvas {
 	 *
 	 * new Canvas(500, 400)
 	 *     .setTextFont(`${newSize}px Tahoma`)
-	 *     .addText('Hello World!', 30, 50)
+	 *     .printText('Hello World!', 30, 50)
 	 *     .toBuffer(); // Returns a Buffer
 	 */
 	public measureText(text: string): TextMetrics;
@@ -484,7 +484,7 @@ export class Canvas {
 	 *         const newSize = size.width < 500 ? 40 : (500 / size.width) * 40;
 	 *         this.setTextFont(`${newSize}px Tahoma`);
 	 *     })
-	 *     .addText('Hello World!', 30, 50)
+	 *     .printText('Hello World!', 30, 50)
 	 *     .toBuffer(); // Returns a Buffer
 	 * @example
 	 * new Canvas(500, 400)
@@ -493,7 +493,7 @@ export class Canvas {
 	 *         const newSize = size.width < 500 ? 40 : (500 / size.width) * 40;
 	 *         inst.setTextFont(`${newSize}px`);
 	 *     })
-	 *     .addText('Hello World!', 30, 50)
+	 *     .printText('Hello World!', 30, 50)
 	 *     .toBuffer(); // Returns a Buffer
 	 */
 	public measureText(text: string, callback: MeasureTextCallback): this;
@@ -705,13 +705,13 @@ export class Canvas {
 	 * @example
 	 * // Radius argument
 	 * new Canvas(200, 200)
-	 *     .addBeveledRect(0, 0, 200, 50, 35)
+	 *     .printRoundedRectangle(0, 0, 200, 50, 35)
 	 *     .toBuffer();
 	 *
 	 * @example
 	 * // Configured bevels
 	 * new Canvas(200, 200)
-	 *     .addBeveledRect(0, 0, 200, 50, {
+	 *     .printRoundedRectangle(0, 0, 200, 50, {
 	 *         // Top left border
 	 *         tl: 15,
 	 *         // Top right border
@@ -726,7 +726,7 @@ export class Canvas {
 	 * @example
 	 * // Top bevels only
 	 * new Canvas(200, 200)
-	 *     .addBeveledRect(0, 0, 200, 50, { tl: 20, tr: 20, bl: 0, br: 0 })
+	 *     .printRoundedRectangle(0, 0, 200, 50, { tl: 20, tr: 20, bl: 0, br: 0 })
 	 *     .toBuffer();
 	 */
 	public printRoundedRectangle(x: number, y: number, width: number, height: number, radius: number | BeveledRadiusOptions): this {
@@ -847,14 +847,14 @@ export class Canvas {
 	 *         br: 10
 	 *     })
 	 *     // Add an image with the shape of the beveled clip using different borders
-	 *     .addImage(buffer, 0, 0, 200, 50)
+	 *     .printImage(buffer, 0, 0, 200, 50)
 	 *     .toBuffer();
 	 *
 	 * @example
 	 * // Top bevels only
 	 * new Canvas(200, 200)
 	 *     .createBeveledClip(0, 0, 200, 50, { tl: 20, tr: 20, bl: 0, br: 0 })
-	 *     .addImage(buffer, 0, 0, 200, 50)
+	 *     .printImage(buffer, 0, 0, 200, 50)
 	 *     .toBuffer();
 	 */
 	public createBeveledClip(x: number, y: number, width: number, height: number, radius: number | BeveledRadiusOptions): this {
@@ -1337,11 +1337,11 @@ export class Canvas {
 	 *     .setShadowColor('rgba(23, 23, 23, 0.2)')
 	 *     .setShadowBlur(5)
 	 *     // Render the text with a blow effect
-	 *     .addText('Hello', 30, 50)
+	 *     .printText('Hello', 30, 50)
 	 *     // Reset the shadows
 	 *     .resetShadows()
 	 *     // Render the text without shadows
-	 *     .addText('World!', 30, 100);
+	 *     .printText('World!', 30, 100);
 	 */
 	public resetShadows(): this {
 		return this.setShadowBlur(0).setShadowOffsetX(0).setShadowOffsetY(0).setShadowColor('transparent');

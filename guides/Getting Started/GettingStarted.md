@@ -14,10 +14,10 @@ const { Canvas } = require('canvas-constructor');
 
 new Canvas(300, 300)
     .setColor('#AEFD54')
-    .addRect(5, 5, 290, 290)
+    .printRectangle(5, 5, 290, 290)
     .setColor('#FFAE23')
     .setTextFont('28px Impact')
-    .addText('Hello World!', 130, 150)
+    .printText('Hello World!', 130, 150)
     .toBuffer();
 ```
 
@@ -29,10 +29,10 @@ new Canvas(300, 300)
 const canvasElement = document.getElementById('canvas');
 CanvasConstructor.Canvas.from(canvasElement)
     .setColor('#AEFD54')
-    .addRect(5, 5, 290, 290)
+    .printRectangle(5, 5, 290, 290)
     .setColor('#FFAE23')
     .setTextFont('28px Impact')
-    .addText('Hello World!', 130, 150);
+    .printText('Hello World!', 130, 150);
 </script>
 ```
 
@@ -58,11 +58,11 @@ async function createCanvas() {
     const image = await fsn.readFile('./images/kitten.png');
 
     return new Canvas(300, 400)
-        .addImage(image, 0, 0, 300, 400)
+        .printImage(image, 0, 0, 300, 400)
         .setColor('#FFAE23')
         .setTextFont('28px Impact')
         .setTextAlign('center')
-        .addText('Kitten!', 150, 370)
+        .printText('Kitten!', 150, 370)
         .toBufferAsync();
 }
 ```

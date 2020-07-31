@@ -157,7 +157,7 @@ Now, here comes the beauty of canvas-constructor's [`chainable` methods][Chainin
 return new Canvas(400, 180)
   // Create the Blurple rectangle on the right side of the image.
   .setColor("#7289DA")
-  .addRect(84, 0, 316, 180)
+  .printRectangle(84, 0, 316, 180)
 ```
 
 That's the beauty of chainable methods, you don't need to constantly call the same thing over and over, so from this
@@ -167,9 +167,9 @@ point on, everything I add will just be added onto the previous code block.
   // Create the "Dark, but not black" boxes for the left side of the image
   // and the text boxes on the right.
   .setColor("#2C2F33")
-  .addRect(0, 0, 84, 180)
-  .addRect(169, 26, 231, 46)
-  .addRect(224, 108, 176, 46)
+  .printRectangle(0, 0, 84, 180)
+  .printRectangle(169, 26, 231, 46)
+  .printRectangle(224, 108, 176, 46)
 ```
 
 If you've been following along closely, your profile image should look like this now.
@@ -185,7 +185,7 @@ something different, let's create a drop shadow effect on a circular clip path.
   .setShadowOffsetY(5) // Drop the shadow by 5 pixels.
   .setShadowBlur(10) // Blur the shadow by 10.
   // This circle is 2 pixels smaller in the radius to prevent a pixel border.
-  .addCircle(84, 90, 62)
+  .printCircle(84, 90, 62)
 ```
 
 That will create the following image:
@@ -196,7 +196,7 @@ Now, for the keen eyed observers, you may have noticed this comment line `// We 
 what you're about to put the avatar in that circle, so replace that line of text with this.
 
 ```javascript
-  .addCircularImage(avatar, 20, 26, 64)
+  .printCircularImage(avatar, 20, 26, 64)
 ```
 
 And boom
@@ -230,14 +230,14 @@ Let's add all of the textual elements now.
   // Set the colour to white, since we have a dark background for all the text boxes.
   .setColor("#FFFFFF")
   // Add the name variable.
-  .addText(name, 285, 54)
+  .printText(name, 285, 54)
   // Using template literals, you can add text and variables, we're applying the toLocaleString()
   // to break up the number into a nice readable format.
-  .addText(`Level: ${level.toLocaleString()}`, 84, 159)
+  .printText(`Level: ${level.toLocaleString()}`, 84, 159)
   // Now we want to align the text to the left.
   .setTextAlign("left")
   // Let's add all the points!
-  .addText(`Score: ${points.toLocaleString()}`, 241, 136)
+  .printText(`Score: ${points.toLocaleString()}`, 241, 136)
 ```
 
 Alright, and we're just about done, just two things left to do, you need to include a font file \(if you're not using an
