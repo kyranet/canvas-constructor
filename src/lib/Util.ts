@@ -5,30 +5,25 @@ export const browser = typeof window !== 'undefined';
 
 export const internalCanvas = (() => {
 	// eslint-disable-next-line no-undef
-	if (browser) return typeof HTMLCanvasElement === 'undefined' ? null : HTMLCanvasElement;
-	try {
-		return require('canvas-prebuilt');
-	} catch (_) {
-		return require('canvas');
-	}
+	return browser ? (typeof HTMLCanvasElement === 'undefined' ? null : HTMLCanvasElement) : require('canvas');
 })();
 
 export const getFontHeight = (() => {
 	// node-canvas has its own font parser
-	if (!browser && 'parseFont' in internalCanvas) return (font: string) => internalCanvas.parseFont(font).size;
+	if (!browser && 'parseFont' in internalCanvas) return (font: string): number => internalCanvas.parseFont(font).size;
 
 	// Load polyfill
 	const kRegexSize = /([\d.]+)(px|pt|pc|in|cm|mm|%|em|ex|ch|rem|q)/i;
 	const kCache = new Map<string, number>();
 
-	return (font: string) => {
+	return (font: string): number => {
 		// If it was already parsed, do not parse again
 		const previous = kCache.get(font);
 		if (previous) return previous;
 
 		// Test for required properties first, return null if the text is invalid
 		const sizeFamily = kRegexSize.exec(font);
-		if (!sizeFamily) return null;
+		if (!sizeFamily) return 0;
 
 		let size = Number(sizeFamily[1]);
 		const unit = sizeFamily[2];
