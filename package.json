@@ -51,9 +51,23 @@
 		"typescript": "^3.9.7"
 	},
 	"keywords": [
+		"canvas",
+		"graphic",
+		"graphics",
+		"image",
+		"images",
+		"pdf",
+		"svg",
 		"node-canvas",
-		"es6",
-		"constructor"
+		"constructor",
+		"chainable",
+		"browser",
+		"nodejs",
+		"node.js",
+		"cjs",
+		"commonjs",
+		"esm",
+		"umd"
 	],
 	"contributors": [
 		"kyranet <kyradiscord@gmail.com>",
