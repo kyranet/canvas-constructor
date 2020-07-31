@@ -643,10 +643,10 @@ export class Canvas {
 	 * @param height The height to draw the image in the destination canvas. This allows scaling of the drawn image. If not specified, the image is not scaled in height when drawn.
 	 * @param radius The radius for the circle
 	 */
-	public printCircularImage(imageOrBuffer: ImageResolvable, x: number, y: number, width: number, height: number, radius: number): this {
+	public printCircularImage(imageOrBuffer: ImageResolvable, x: number, y: number, radius: number): this {
 		return this.save()
 			.createCircularClip(x, y, radius, 0, Math.PI * 2, false)
-			.printImage(imageOrBuffer, x - radius, y - radius, width, height)
+			.printImage(imageOrBuffer, x - radius, y - radius, radius * 2, radius * 2)
 			.restore();
 	}
 
