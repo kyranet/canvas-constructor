@@ -20,11 +20,10 @@
 	<script type="text/javascript">
 		(async () => {
 			const canvasElement = document.getElementById('image');
-			const image = await CanvasConstructor.resolveImage('https://github.com/NM-EEA-Y.png');
 			new CanvasConstructor.Canvas(canvasElement)
 				.setColor('#AEFD54')
 				.printRectangle(5, 5, 290, 290)
-				.printImage(image, 0, 0, 300, 300)
+				.printImage(await CanvasConstructor.resolveImage('https://github.com/NM-EEA-Y.png'), 0, 0, 300, 300)
 				.setTextAlign('center')
 				.setColor('#000000')
 				.setTextFont('28px Impact')
