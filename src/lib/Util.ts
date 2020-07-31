@@ -132,3 +132,224 @@ export const resolveImage = (src: LoadableImage, options?: any): Promise<NodeCan
 
 	return loadImage(src, options);
 };
+
+/**
+ * Utility to format an hexadecimal string into a CSS hexadecimal string.
+ * @param hex The hexadecimal code.
+ * @example
+ * hex('FFF'); // -> '#FFF'
+ * hex('0F0F0F'); // -> '#0F0F0F'
+ */
+export const hex = (hex: string): string => `#${hex}`;
+
+/**
+ * Utility to format a RGB set of values into a string.
+ * @param red The red value, must be a number between 0 and 255 inclusive.
+ * @param green The green value, must be a number between 0 and 255 inclusive.
+ * @param blue The blue value, must be a number between 0 and 255 inclusive.
+ * @see https://en.wikipedia.org/wiki/RGB_color_model#Geometric_representation
+ * @example
+ * rgb(255, 150, 65); // -> 'rgb(255, 150, 65)'
+ */
+export const rgb = (red: number, green: number, blue: number): string => `rgb(${red}, ${green}, ${blue})`;
+
+/**
+ * Utility to format a RGBA set of values into a string.
+ * @param red The red value, must be a number between 0 and 255 inclusive.
+ * @param green The green value, must be a number between 0 and 255 inclusive.
+ * @param blue The blue value, must be a number between 0 and 255 inclusive.
+ * @param alpha The alpha value, must be a number between 0 and 1 inclusive.
+ * @see https://en.wikipedia.org/wiki/RGB_color_model#Geometric_representation
+ * @example
+ * rgba(255, 150, 65, 0.3); // -> 'rgba(255, 150, 65, 0.3)'
+ */
+export const rgba = (red: number, green: number, blue: number, alpha: number): string => `rgba(${red}, ${green}, ${blue}, ${alpha})`;
+
+/**
+ * Utility to format a HSL set of values into a string.
+ * @param hue The hue, must be a number between 0 and 360 inclusive.
+ * @param saturation The saturation, must be a number between 0 and 100 inclusive.
+ * @param lightness The lightness, must be a number between 0 and 100 inclusive, 0 will make it black, 100 will make it white.
+ * @see https://en.wikipedia.org/wiki/HSL_and_HSV
+ * @example
+ * hsl(120, 100, 40); // -> 'hsl(120, 100, 40)'
+ */
+export const hsl = (hue: number, saturation: number, lightness: number): string => `hsl(${hue}, ${saturation}%, ${lightness}%)`;
+
+/**
+ * Utility to format a HSLA set of values into a string.
+ * @param hue The hue, must be a number between 0 and 360 inclusive.
+ * @param saturation The saturation, must be a number between 0 and 100 inclusive.
+ * @param lightness The lightness, must be a number between 0 and 100 inclusive, 0 will make it black, 100 will make it white
+ * @param alpha The alpha value, must be a number between 0 and 1 inclusive.
+ * @see https://en.wikipedia.org/wiki/HSL_and_HSV
+ * @example
+ * hsla(120, 100, 40, 0.4); // -> 'hsla(120, 100, 40, 0.4)'
+ */
+export const hsla = (hue: number, saturation: number, lightness: number, alpha: number): string =>
+	`hsla(${hue}, ${saturation}%, ${lightness}%, ${alpha})`;
+
+/**
+ * Utility to type-safely use CSS colors.
+ * @param color The CSS keyword color.
+ * @example
+ * color('silver'); // ✔
+ * color('some-imaginary-number'); // ❌
+ */
+export const color = (color: ColorKeyword): ColorKeyword => color;
+
+export type ColorKeyword = ColorKeywordLevel1 | ColorKeywordLevel2 | ColorKeywordLevel3 | ColorKeywordLevel4;
+
+export type ColorKeywordLevel1 =
+	| 'black'
+	| 'silver'
+	| 'gray'
+	| 'white'
+	| 'maroon'
+	| 'red'
+	| 'purple'
+	| 'fuchsia'
+	| 'green'
+	| 'lime'
+	| 'olive'
+	| 'yellow'
+	| 'navy'
+	| 'blue'
+	| 'teal'
+	| 'aqua';
+
+export type ColorKeywordLevel2 = 'orange';
+
+export type ColorKeywordLevel3 =
+	| 'aliceblue'
+	| 'antiquewhite'
+	| 'aquamarine'
+	| 'azure'
+	| 'beige'
+	| 'bisque'
+	| 'blanchedalmond'
+	| 'blueviolet'
+	| 'brown'
+	| 'burlywood'
+	| 'cadetblue'
+	| 'chartreuse'
+	| 'chocolate'
+	| 'coral'
+	| 'cornflowerblue'
+	| 'cornsilk'
+	| 'crimson'
+	| 'cyan'
+	| 'darkblue'
+	| 'darkcyan'
+	| 'darkgoldenrod'
+	| 'darkgray'
+	| 'darkgreen'
+	| 'darkgrey'
+	| 'darkkhaki'
+	| 'darkmagenta'
+	| 'darkolivegreen'
+	| 'darkorange'
+	| 'darkorchid'
+	| 'darkred'
+	| 'darksalmon'
+	| 'darkseagreen'
+	| 'darkslateblue'
+	| 'darkslategray'
+	| 'darkslategrey'
+	| 'darkturquoise'
+	| 'darkviolet'
+	| 'deeppink'
+	| 'deepskyblue'
+	| 'dimgray'
+	| 'dimgrey'
+	| 'dodgerblue'
+	| 'firebrick'
+	| 'floralwhite'
+	| 'forestgreen'
+	| 'gainsboro'
+	| 'ghostwhite'
+	| 'gold'
+	| 'goldenrod'
+	| 'greenyellow'
+	| 'grey'
+	| 'honeydew'
+	| 'hotpink'
+	| 'indianred'
+	| 'indigo'
+	| 'ivory'
+	| 'khaki'
+	| 'lavender'
+	| 'lavenderblush'
+	| 'lawngreen'
+	| 'lemonchiffon'
+	| 'lightblue'
+	| 'lightcoral'
+	| 'lightcyan'
+	| 'lightgoldenrodyellow'
+	| 'lightgray'
+	| 'lightgreen'
+	| 'lightgrey'
+	| 'lightpink'
+	| 'lightsalmon'
+	| 'lightseagreen'
+	| 'lightskyblue'
+	| 'lightslategray'
+	| 'lightslategrey'
+	| 'lightsteelblue'
+	| 'lightyellow'
+	| 'limegreen'
+	| 'linen'
+	| 'magenta'
+	| 'mediumaquamarine'
+	| 'mediumblue'
+	| 'mediumorchid'
+	| 'mediumpurple'
+	| 'mediumseagreen'
+	| 'mediumslateblue'
+	| 'mediumspringgreen'
+	| 'mediumturquoise'
+	| 'mediumvioletred'
+	| 'midnightblue'
+	| 'mintcream'
+	| 'mistyrose'
+	| 'moccasin'
+	| 'navajowhite'
+	| 'oldlace'
+	| 'olivedrab'
+	| 'orangered'
+	| 'orchid'
+	| 'palegoldenrod'
+	| 'palegreen'
+	| 'paleturquoise'
+	| 'palevioletred'
+	| 'papayawhip'
+	| 'peachpuff'
+	| 'peru'
+	| 'pink'
+	| 'plum'
+	| 'powderblue'
+	| 'rosybrown'
+	| 'royalblue'
+	| 'saddlebrown'
+	| 'salmon'
+	| 'sandybrown'
+	| 'seagreen'
+	| 'seashell'
+	| 'sienna'
+	| 'skyblue'
+	| 'slateblue'
+	| 'slategray'
+	| 'slategrey'
+	| 'snow'
+	| 'springgreen'
+	| 'steelblue'
+	| 'tan'
+	| 'thistle'
+	| 'tomato'
+	| 'turquoise'
+	| 'violet'
+	| 'wheat'
+	| 'whitesmoke'
+	| 'yellowgreen';
+
+export type ColorKeywordLevel4 = 'rebeccapurple';
