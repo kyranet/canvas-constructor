@@ -210,7 +210,7 @@ get that plate sorted \(I won't display how it looks\).
   // This creates a rounded corner rectangle, you must use save and restore to
   // clear the clip after we are done with it
   .save()
-  .createBeveledClip(20, 138, 128, 32, 5)
+  .createRoundedClip(20, 138, 128, 32, 5)
   .setColor("#23272A")
   .fill()
   .restore()

@@ -434,7 +434,7 @@ export class Canvas {
 	 * @param height The rectangle's height.
 	 * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/strokeRect
 	 */
-	public printStrokeRect(x: number, y: number, width: number, height: number): this {
+	public printStrokeRectangle(x: number, y: number, width: number, height: number): this {
 		this.context.strokeRect(x, y, width, height);
 		return this;
 	}
@@ -667,7 +667,7 @@ export class Canvas {
 		height: number,
 		radius: BeveledRadiusOptions | number
 	): this {
-		return this.save().createBeveledClip(x, y, width, height, radius).printImage(imageOrBuffer, x, y, width, height).restore();
+		return this.save().createRoundedClip(x, y, width, height, radius).printImage(imageOrBuffer, x, y, width, height).restore();
 	}
 
 	/**
@@ -729,7 +729,7 @@ export class Canvas {
 	 *     .toBuffer();
 	 */
 	public printRoundedRectangle(x: number, y: number, width: number, height: number, radius: number | BeveledRadiusOptions): this {
-		return this.save().createBeveledPath(x, y, width, height, radius).fill().restore();
+		return this.save().createRoundedPath(x, y, width, height, radius).fill().restore();
 	}
 
 	/**
@@ -792,7 +792,7 @@ export class Canvas {
 	 * @param height The height of clip.
 	 * @param radius The radius for clip's rounded borders.
 	 */
-	public createBeveledPath(x: number, y: number, width: number, height: number, radius: number | BeveledRadiusOptions): this {
+	public createRoundedPath(x: number, y: number, width: number, height: number, radius: number | BeveledRadiusOptions): this {
 		if (width > 0 && height > 0) {
 			let radiusObject: BeveledRadiusOptions | undefined = undefined;
 			if (typeof radius === 'number') {
@@ -828,14 +828,14 @@ export class Canvas {
 	 * @example
 	 * // Radius argument, fill the content
 	 * new Canvas(200, 200)
-	 *     .createBeveledClip(0, 0, 200, 50, 35)
+	 *     .createRoundedClip(0, 0, 200, 50, 35)
 	 *     .fill()
 	 *     .toBuffer();
 	 *
 	 * @example
 	 * // Configured bevels
 	 * new Canvas(200, 200)
-	 *     .createBeveledClip(0, 0, 200, 50, {
+	 *     .createRoundedClip(0, 0, 200, 50, {
 	 *         // Top left border
 	 *         tl: 15,
 	 *         // Top right border
@@ -852,12 +852,12 @@ export class Canvas {
 	 * @example
 	 * // Top bevels only
 	 * new Canvas(200, 200)
-	 *     .createBeveledClip(0, 0, 200, 50, { tl: 20, tr: 20, bl: 0, br: 0 })
+	 *     .createRoundedClip(0, 0, 200, 50, { tl: 20, tr: 20, bl: 0, br: 0 })
 	 *     .printImage(buffer, 0, 0, 200, 50)
 	 *     .toBuffer();
 	 */
-	public createBeveledClip(x: number, y: number, width: number, height: number, radius: number | BeveledRadiusOptions): this {
-		return this.createBeveledPath(x, y, width, height, radius).clip();
+	public createRoundedClip(x: number, y: number, width: number, height: number, radius: number | BeveledRadiusOptions): this {
+		return this.createRoundedPath(x, y, width, height, radius).clip();
 	}
 
 	/**
@@ -926,7 +926,7 @@ export class Canvas {
 	 * @param repetition The repeat mode.
 	 * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/createPattern
 	 */
-	public createPattern(image: Canvas | Image, repetition: PatternRepeat): CanvasPattern;
+	public createPattern(image: ImageResolvable, repetition: PatternRepeat): CanvasPattern;
 	/**
 	 * Creates a pattern using the specified image. It repeats the source in the directions specified by the repetition
 	 * argument, and calls the callback.
@@ -935,8 +935,8 @@ export class Canvas {
 	 * @param callback The callback to take the createPattern.
 	 * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/createPattern
 	 */
-	public createPattern(image: Canvas | Image, repetition: PatternRepeat, callback: PatternCallback): this;
-	public createPattern(image: Canvas | Image, repetition: PatternRepeat, callback?: PatternCallback): CanvasPattern | this {
+	public createPattern(image: ImageResolvable, repetition: PatternRepeat, callback: PatternCallback): this;
+	public createPattern(image: ImageResolvable, repetition: PatternRepeat, callback?: PatternCallback): CanvasPattern | this {
 		const pattern = this.context.createPattern(image, repetition);
 		if (callback) {
 			callback.call(this, pattern, this);
