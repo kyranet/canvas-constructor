@@ -4,6 +4,68 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## 4.0.0
+### Added
+- Added `hex` util to format hexadecimal strings into a valid color string.
+- Added `rgb` util to format the parameters into a valid color string.
+- Added `rgba` util to format the parameters into a valid color string.
+- Added `hsl` util to format the parameters into a valid color string.
+- Added `hsla` util to format the parameters into a valid color string.
+- Added `color` util to provide type safety when picking colors.
+- Added `Canvas#createEllipseClip`.
+- Added better types for `Canvas#process`.
+- Added better types for `Canvas#toBuffer{Async}`.
+- Added better types for `Canvas#toDataURL{Async}`.
+- Added better types for `Canvas#toBlob{Async}`.
+- Added ESM support.
+- Added lots of documentation and examples.
+
+### Changed
+- Renamed `createRectClip` to `createRectangleClip`.
+- Renamed `clearPixels` to `clearRectangle`.
+- Renamed `addRect` to `printRectangle`.
+- Renamed `addStrokeRect` to `printStrokeRectangle`.
+- Renamed `addCircle` to `printCircle`.
+- Renamed `addText` to `printText`.
+- Renamed `addStrokeText` to `printStrokeText`.
+- Renamed `addWrappedText` to `printWrappedText`.
+- Renamed `addResponsiveText` to `printResponsiveText`.
+- Renamed `addBeveledRect` to `printRoundedRectangle`.
+- Renamed `addCircularImage` to `printCircularImage`.
+- Renamed `addBeveledImage` to `printRoundedImage`.
+- Renamed `addPattern` to `printPattern`.
+- Renamed `createRoundPath` to `createCircularPath`.
+- Renamed `createRoundClip` to `createCircularClip`.
+- Renamed `createRectPath` to `createRectanglePath`.
+- Renamed `createRectClip` to `createRectangleClip`.
+- Renamed `createBeveledPath` to `createRoundedPath`.
+- Renamed `createBeveledClip` to `createRoundedClip`.
+- Renamed `addLinearColorGradient` to `printLinearColorGradient`.
+- Renamed `addLinearStrokeGradient` to `printLinearStrokeGradient`.
+- Renamed `addRadialColorGradient` to `printRadialColorGradient`.
+- Renamed `addRadialStrokeGradient` to `printRadialStrokeGradient`.
+- Renamed `createEllipse` to `createEllipsePath`.
+- Renamed `addImage` to `printImage`.
+- Modified `addImage` to take `Image | Canvas` instead of `Buffer | Image`, you must use `loadImage`.
+- Modified `addCircularImage` to take `Image | Canvas` instead of `Buffer | Image`, you must use `loadImage`.
+- Modified `addBeveledImage` to take `Image | Canvas` instead of `Buffer | Image`, you must use `loadImage`.
+- Modified `addPattern` to take `Image | Canvas` instead of `Buffer | Image`, you must use `loadImage`.
+- Modified `createPattern` to take `Image | Canvas` instead of `Buffer | Image`, you must use `loadImage`.
+- Modified `printPattern` to take `Image | Canvas` instead of `Buffer | Image`, you must use `loadImage`.
+- Changed website, we are now using a typedoc generated one rather than the half-broken one.
+- Changed bundler from webpack to rollup.
+- Rewritten the library to strict TypeScript.
+
+### Fixed
+- Browser support is now fully operational.
+- Fixed typing conflicts with `canvas`, since they added typings recently.
+- Fixed interface callback types, the `this` parameter is now typed.
+
+### Removed
+- Removed options in `addImage`. Use `printCircularImage` or `printRoundedImage` instead.
+- Removed `addRoundImage`. Use `printCircularImage` instead, beware that (x, y) is the centre and not top-left.
+- Removed `registerFont` from `Canvas`, use the export from `canvas` instead.
+
 ## 3.0.3
 ### Fixed
 - Resolved security vulnerability by upgrading to `handlebars@4.1.2`.
