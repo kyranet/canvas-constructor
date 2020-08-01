@@ -20,6 +20,7 @@
 		"commit": "git-cz",
 		"cz": "git-cz"
 	},
+	"files": ["dist"],
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/kyranet/canvas-constructor.git"
