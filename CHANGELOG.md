@@ -18,6 +18,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Added better types for `Canvas#toDataURL{Async}`.
 - Added better types for `Canvas#toBlob{Async}`.
 - Added ESM support.
+- Added treeshaking support for web bundles.
 - Added lots of documentation and examples.
 
 ### Changed
@@ -65,6 +66,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Removed options in `addImage`. Use `printCircularImage` or `printRoundedImage` instead.
 - Removed `addRoundImage`. Use `printCircularImage` instead, beware that (x, y) is the centre and not top-left.
 - Removed `registerFont` from `Canvas`, use the export from `canvas` instead.
+- Removed support for `canvas-prebuilt`. `canvas` already comes with them.
 
 ## 3.0.3
 ### Fixed
