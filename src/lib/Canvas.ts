@@ -45,6 +45,14 @@ export interface GradientStop {
 	color: string;
 }
 
+export interface PrintCircularOptions {
+	/**
+	 * The fit options, this is similar to CSS's object-fit.
+	 * @see https://developer.mozilla.org/en-US/docs/Web/CSS/object-fit
+	 */
+	fit?: 'fill' | 'contain' | 'cover' | 'none';
+}
+
 export type GlobalCompositeOperation = CanvasRenderingContext2D['globalCompositeOperation'];
 export type AntiAlias = CanvasRenderingContext2D['antialias'];
 export type TextDrawingMode = CanvasRenderingContext2D['textDrawingMode'];
@@ -643,17 +651,17 @@ export class Canvas {
 	 * @param height The height to draw the image in the destination canvas. This allows scaling of the drawn image. If not specified, the image is not scaled in height when drawn.
 	 * @param radius The radius for the circle
 	 */
-	public printCircularImage(imageOrBuffer: ImageResolvable, x: number, y: number, radius: number): this {
-		const ratio = imageOrBuffer.width / imageOrBuffer.height;
-		const [posX, posY, sizeX, sizeY] =
-			ratio === 1
-				? [x - radius, y - radius, radius * 2, radius * 2]
-				: ratio > 1
-				? [x - radius, y - radius / ratio, radius * 2, (radius * 2) / ratio]
-				: [x - radius * ratio, y - radius, radius * 2 * ratio, radius * 2];
+	public printCircularImage(
+		imageOrBuffer: ImageResolvable,
+		x: number,
+		y: number,
+		radius: number,
+		{ fit = 'fill' }: PrintCircularOptions = {}
+	): this {
+		const { positionX, positionY, sizeX, sizeY } = Canvas.resolveCircularCoordinates(imageOrBuffer, x, y, radius, fit);
 		return this.save()
 			.createCircularClip(x, y, radius, 0, Math.PI * 2, false)
-			.printImage(imageOrBuffer, posX, posY, sizeX, sizeY)
+			.printImage(imageOrBuffer, positionX, positionY, sizeX, sizeY)
 			.restore();
 	}
 
@@ -1702,4 +1710,77 @@ export class Canvas {
 		}
 		return wrappedText;
 	}
+
+	private static resolveCircularCoordinates(
+		imageOrBuffer: ImageResolvable,
+		x: number,
+		y: number,
+		radius: number,
+		fit: NonNullable<PrintCircularOptions['fit']>
+	): ResolvedCircularCoordinates {
+		const { width, height } = imageOrBuffer;
+		if (fit === 'none') {
+			return {
+				positionX: x - width / 2,
+				positionY: y - height / 2,
+				sizeX: width,
+				sizeY: height
+			};
+		}
+
+		const ratio = width / height;
+		const diameter = radius * 2;
+
+		if (fit === 'fill' || ratio === 1) {
+			return {
+				positionX: x - radius,
+				positionY: y - radius,
+				sizeX: diameter,
+				sizeY: diameter
+			};
+		}
+
+		if (fit === 'contain') {
+			return ratio > 1
+				? {
+						positionX: x - radius,
+						positionY: y - radius / ratio,
+						sizeX: diameter,
+						sizeY: diameter / ratio
+				  }
+				: {
+						positionX: x - radius * ratio,
+						positionY: y - radius,
+						sizeX: diameter * ratio,
+						sizeY: diameter
+				  };
+		}
+
+		if (ratio > 1) {
+			const sizeX = diameter * ratio;
+			const sizeY = diameter;
+			return {
+				positionX: x - sizeX / 2,
+				positionY: y - sizeY / 2,
+				sizeX,
+				sizeY
+			};
+		}
+
+		const sizeX = diameter;
+		const sizeY = diameter / ratio;
+		return {
+			positionX: x - sizeX / 2,
+			positionY: y - sizeY / 2,
+			sizeX,
+			sizeY
+		};
+	}
+}
+
+interface ResolvedCircularCoordinates {
+	positionX: number;
+	positionY: number;
+	sizeX: number;
+	sizeY: number;
 }
