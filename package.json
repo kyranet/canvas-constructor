@@ -20,7 +20,9 @@
 		"commit": "git-cz",
 		"cz": "git-cz"
 	},
-	"files": ["dist"],
+	"files": [
+		"dist"
+	],
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/kyranet/canvas-constructor.git"
@@ -36,7 +38,7 @@
 		"@typescript-eslint/parser": "^3.7.0",
 		"canvas": "^2.6.1",
 		"cz-conventional-changelog": "^3.2.0",
-		"eslint": "^7.5.0",
+		"eslint": "^7.6.0",
 		"eslint-config-prettier": "^6.11.0",
 		"eslint-plugin-prettier": "^3.1.4",
 		"husky": "^4.2.5",
