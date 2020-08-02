@@ -644,9 +644,16 @@ export class Canvas {
 	 * @param radius The radius for the circle
 	 */
 	public printCircularImage(imageOrBuffer: ImageResolvable, x: number, y: number, radius: number): this {
+		const ratio = imageOrBuffer.width / imageOrBuffer.height;
+		const [posX, posY, sizeX, sizeY] =
+			ratio === 1
+				? [x - radius, y - radius, radius * 2, radius * 2]
+				: ratio > 1
+				? [x - radius, y - radius / ratio, radius * 2, (radius * 2) / ratio]
+				: [x - radius * ratio, y - radius, radius * 2 * ratio, radius * 2];
 		return this.save()
 			.createCircularClip(x, y, radius, 0, Math.PI * 2, false)
-			.printImage(imageOrBuffer, x - radius, y - radius, radius * 2, radius * 2)
+			.printImage(imageOrBuffer, posX, posY, sizeX, sizeY)
 			.restore();
 	}
 
