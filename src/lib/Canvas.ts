@@ -59,7 +59,7 @@ export type TextDrawingMode = CanvasRenderingContext2D['textDrawingMode'];
 export type PatternQuality = CanvasRenderingContext2D['patternQuality'];
 export type PatternRepeat = 'repeat' | 'repeat-x' | 'repeat-y' | 'no-repeat' | '' | null;
 export type LoadableImage = string | Buffer;
-export type ImageResolvable = Canvas | Image;
+export type ImageResolvable = Canvas | Image | Buffer;
 
 export class Canvas {
 	/**
@@ -638,7 +638,7 @@ export class Canvas {
 	): this;
 
 	public printImage(image: ImageResolvable, ...args: readonly any[]) {
-		this.context.drawImage(image, ...args);
+		this.context.drawImage(this.resolveImage(image), ...args);
 		return this;
 	}
 
@@ -658,10 +658,11 @@ export class Canvas {
 		radius: number,
 		{ fit = 'fill' }: PrintCircularOptions = {}
 	): this {
-		const { positionX, positionY, sizeX, sizeY } = Canvas.resolveCircularCoordinates(imageOrBuffer, x, y, radius, fit);
+		const image = this.resolveImage(imageOrBuffer);
+		const { positionX, positionY, sizeX, sizeY } = Canvas.resolveCircularCoordinates(image, x, y, radius, fit);
 		return this.save()
 			.createCircularClip(x, y, radius, 0, Math.PI * 2, false)
-			.printImage(imageOrBuffer, positionX, positionY, sizeX, sizeY)
+			.printImage(image, positionX, positionY, sizeX, sizeY)
 			.restore();
 	}
 
@@ -682,7 +683,7 @@ export class Canvas {
 		height: number,
 		radius: BeveledRadiusOptions | number
 	): this {
-		return this.save().createRoundedClip(x, y, width, height, radius).printImage(imageOrBuffer, x, y, width, height).restore();
+		return this.save().createRoundedClip(x, y, width, height, radius).printImage(this.resolveImage(imageOrBuffer), x, y, width, height).restore();
 	}
 
 	/**
@@ -1711,8 +1712,17 @@ export class Canvas {
 		return wrappedText;
 	}
 
+	private resolveImage(imageOrBuffer: ImageResolvable): Image | Canvas {
+		if (imageOrBuffer instanceof Buffer) {
+			const image = new Image();
+			image.src = imageOrBuffer;
+			return image;
+		}
+		return imageOrBuffer as Image | Canvas;
+	}
+
 	private static resolveCircularCoordinates(
-		imageOrBuffer: ImageResolvable,
+		imageOrBuffer: Image | Canvas,
 		x: number,
 		y: number,
 		radius: number,
