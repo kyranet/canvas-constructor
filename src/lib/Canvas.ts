@@ -688,7 +688,7 @@ export class Canvas {
 	/**
 	 * Add a circle or semi circle.
 	 * @param x The position x in the center of the circle.
-	 * @param y The position y in the center of the ircle.
+	 * @param y The position y in the center of the circle.
 	 * @param radius The radius for the clip.
 	 */
 	public printCircle(x: number, y: number, radius: number): this {
