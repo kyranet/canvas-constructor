@@ -1,11 +1,7 @@
 {
-	"extends": "@skyra/eslint-config",
+	"extends": "@sapphire/ts-config",
 	"compilerOptions": {
-		"module": "ESNext",
-		"target": "ES2019",
-		"declaration": true,
-		"declarationMap": true,
-		"removeComments": false,
-		"importsNotUsedAsValues": "error"
+		"target": "ES2020",
+		"module": "ESNext"
 	}
 }

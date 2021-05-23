@@ -6,5 +6,70 @@
 	"editor.detectIndentation": false,
 	"files.eol": "\n",
 	"deno.enable": false,
-	"eslint.enable": true
+	"eslint.enable": true,
+	"editor.tokenColorCustomizations": {
+		"[Monokai Night]": {
+			"textMateRules": [
+				{
+					"name": "Storage type",
+					"scope": "storage.type",
+					"settings": {
+						"fontStyle": "",
+						"foreground": "#F92672"
+					}
+				},
+				{
+					"name": "Comment",
+					"scope": "comment",
+					"settings": {
+						"foreground": "#3f3f3f"
+					}
+				},
+				{
+					"name": "Class name",
+					"scope": "entity.name.type, entity.name.class",
+					"settings": {
+						"fontStyle": "",
+						"foreground": "#66D9EF"
+					}
+				},
+				{
+					"name": "Inherited class",
+					"scope": "entity.other.inherited-class",
+					"settings": {
+						"fontStyle": "",
+						"foreground": "#A6E22E"
+					}
+				},
+				{
+					"name": "Function argument",
+					"scope": "variable.parameter",
+					"settings": {
+						"fontStyle": "",
+						"foreground": "#FD971F"
+					}
+				}
+			]
+		},
+		"textMateRules": [
+			{
+				"scope": "googletest.failed",
+				"settings": {
+					"foreground": "#f00"
+				}
+			},
+			{
+				"scope": "googletest.passed",
+				"settings": {
+					"foreground": "#0f0"
+				}
+			},
+			{
+				"scope": "googletest.run",
+				"settings": {
+					"foreground": "#0f0"
+				}
+			}
+		]
+	}
 }
