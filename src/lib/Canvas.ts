@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/unified-signatures */
-import { Canvas as NodeCanvas, CanvasRenderingContext2D, createCanvas, Image, JpegConfig, PdfConfig, PngConfig } from 'canvas';
-import { getFontHeight, textWrap } from './Util';
+import { BrowserCanvas, CanvasType, getFontHeight, mod, NodeCanvas, SkiaCanvas, textWrap } from './Util';
 
 export interface ImageDataCallback {
 	(this: Canvas, data: ImageData, canvas: Canvas): unknown;
@@ -53,26 +52,29 @@ export interface PrintCircularOptions {
 	fit?: 'fill' | 'contain' | 'cover' | 'none';
 }
 
+export type ModuleCanvas = BrowserCanvas.Canvas | SkiaCanvas.Canvas | NodeCanvas.Canvas;
+export type ModuleImage = BrowserCanvas.Image | SkiaCanvas.Image | NodeCanvas.Image;
+
 export type GlobalCompositeOperation = CanvasRenderingContext2D['globalCompositeOperation'];
-export type AntiAlias = CanvasRenderingContext2D['antialias'];
-export type TextDrawingMode = CanvasRenderingContext2D['textDrawingMode'];
-export type PatternQuality = CanvasRenderingContext2D['patternQuality'];
+export type AntiAlias = import('canvas').CanvasRenderingContext2D['antialias'];
+export type TextDrawingMode = import('canvas').CanvasRenderingContext2D['textDrawingMode'];
+export type PatternQuality = import('canvas').CanvasRenderingContext2D['patternQuality'];
 export type PatternRepeat = 'repeat' | 'repeat-x' | 'repeat-y' | 'no-repeat' | '' | null;
 export type LoadableImage = string | Buffer;
-export type ImageResolvable = Canvas | Image;
+export type ImageResolvable = ModuleCanvas | ModuleImage | CanvasImageSource;
 
 export class Canvas {
 	/**
 	 * The constructed Canvas
 	 * @since 0.0.1
 	 */
-	private canvas: NodeCanvas | HTMLCanvasElement;
+	private canvas: ModuleCanvas;
 
 	/**
 	 * The 2D context for the Canvas.
 	 * @since 0.0.1
 	 */
-	private context: CanvasRenderingContext2D | CanvasRenderingContext2D;
+	private context: CanvasRenderingContext2D;
 
 	/**
 	 * Initialize canvas-constructor in a browser.
@@ -94,12 +96,19 @@ export class Canvas {
 	 */
 	public constructor(width: number, height: number, type?: 'pdf' | 'svg');
 	public constructor(width: number | HTMLCanvasElement, height?: number, type?: 'pdf' | 'svg') {
-		this.canvas = typeof width === 'number' ? createCanvas(width, height!, type) : width;
+		if (typeof width === 'number') {
+			if (mod.type === CanvasType.NodeCanvas) this.canvas = mod.module.createCanvas(width, height!, type);
+			else if (mod.type === CanvasType.SkiaCanvas) this.canvas = new mod.module.Canvas(width, height!);
+			else throw new TypeError('Expected a HTMLCanvasElement, but received a number instead.');
+		} else {
+			this.canvas = width;
+		}
+
 		this.context = this.canvas.getContext('2d') as CanvasRenderingContext2D;
 	}
 
 	private get windowCanvas(): HTMLCanvasElement {
-		return (this.canvas as unknown) as HTMLCanvasElement;
+		return this.canvas as unknown as HTMLCanvasElement;
 	}
 
 	/**
@@ -111,6 +120,7 @@ export class Canvas {
 	}
 
 	public set width(value: number) {
+		// @ts-expect-error: skia-canvas complains about 'width' being read-only.
 		this.canvas.width = value;
 	}
 
@@ -123,12 +133,13 @@ export class Canvas {
 	}
 
 	public set height(value: number) {
+		// @ts-expect-error: skia-canvas complains about 'height' being read-only.
 		this.canvas.height = value;
 	}
 
 	/**
 	 * The font height
-	 * @sinc 3.0.0
+	 * @since 3.0.0
 	 */
 	public get textFontHeight(): number {
 		return getFontHeight(this.context.font);
@@ -248,10 +259,17 @@ export class Canvas {
 	}
 
 	/**
-	 * Reset the transformation.
+	 * Resets the transformation.
 	 */
 	public resetTransformation(): this {
 		return this.setTransform(1, 0, 0, 1, 0, 0);
+	}
+
+	/**
+	 * Resets the filters.
+	 */
+	public resetFilters(): this {
+		return this.setFilter('none');
 	}
 
 	/**
@@ -483,7 +501,7 @@ export class Canvas {
 	 * @param text The text to measure.
 	 * @param callback The callback, if not specified, this method won't be chainable as it will return a
 	 * number. If you use an arrow function, you might want to use the second argument which is the instance of the
-	 * class. Otherwise, the keyword this is binded to the class instance itself, so you can use it safely.
+	 * class. Otherwise, the keyword this is bound to the class instance itself, so you can use it safely.
 	 * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/measureText
 	 * @example
 	 * new Canvas(500, 400)
@@ -596,55 +614,46 @@ export class Canvas {
 
 	/**
 	 * Add an image at a position (x, y) with the source image's width and height.
-	 * @param imageOrBuffer The image's buffer.
-	 * @param x The X coordinate in the destination canvas at which to place the top-left corner of the source image.
-	 * @param y The Y coordinate in the destination canvas at which to place the top-left corner of the source image.
+	 * @param image The image.
+	 * @param dx The x-axis coordinate in the destination canvas at which to place the top-left corner of the source `image`.
+	 * @param dy The y-axis coordinate in the destination canvas at which to place the top-left corner of the source `image`.
 	 * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/drawImage
 	 */
-	public printImage(imageOrBuffer: ImageResolvable, x: number, y: number): this;
+	public printImage(image: ImageResolvable, dx: number, dy: number): this;
 	/**
 	 * Add an image at a position (x, y) with a given width and height.
-	 * @param imageOrBuffer The image's buffer.
-	 * @param x The X coordinate in the destination canvas at which to place the top-left corner of the source image.
-	 * @param y The Y coordinate in the destination canvas at which to place the top-left corner of the source image.
-	 * @param width The width to draw the image in the destination canvas. This allows scaling of the drawn image. If not specified, the image is not scaled in width when drawn.
-	 * @param height The height to draw the image in the destination canvas. This allows scaling of the drawn image. If not specified, the image is not scaled in height when drawn.
+	 * @param image The image.
+	 * @param dx The x-axis coordinate in the destination canvas at which to place the top-left corner of the source `image`.
+	 * @param dy The y-axis coordinate in the destination canvas at which to place the top-left corner of the source `image`.
+	 * @param dw The width to draw the `image` in the destination canvas. This allows scaling of the drawn image.
+	 * @param dh The height to draw the `image` in the destination canvas. This allows scaling of the drawn image.
 	 * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/drawImage
 	 */
-	public printImage(imageOrBuffer: ImageResolvable, x: number, y: number, width: number, height: number): this;
+	public printImage(image: ImageResolvable, dx: number, dy: number, dw: number, dh: number): this;
 	/**
 	 * Add an image at a position (x, y) with a given width and height, from a specific source rectangle.
-	 * @param imageOrBuffer The image's buffer.
-	 * @param x The X coordinate in the destination canvas at which to place the top-left corner of the source image.
-	 * @param y The Y coordinate in the destination canvas at which to place the top-left corner of the source image.
-	 * @param width The width to draw the image in the destination canvas. This allows scaling of the drawn image. If not specified, the image is not scaled in width when drawn.
-	 * @param height The height to draw the image in the destination canvas. This allows scaling of the drawn image. If not specified, the image is not scaled in height when drawn.
-	 * @param sourceX The X coordinate of the top left corner of the sub-rectangle of the source image to draw into the destination context.
-	 * @param sourceY The Y coordinate of the top left corner of the sub-rectangle of the source image to draw into the destination context.
-	 * @param sourceWidth The width of the sub-rectangle of the source image to draw into the destination context. If not specified, the entire rectangle from the coordinates specified by sx and sy to the bottom-right corner of the image is used.
-	 * @param sourceHeight The height of the sub-rectangle of the source image to draw into the destination context.
+	 * @param image The image.
+	 * @param sx The x-axis coordinate of the top left corner of the sub-rectangle of the source `image` to draw into the destination context.
+	 * @param sy The y-axis coordinate of the top left corner of the sub-rectangle of the source `image` to draw into the destination context.
+	 * @param sw The width of the sub-rectangle of the source `image` to draw into the destination context.
+	 * @param sh The height of the sub-rectangle of the source `image` to draw into the destination context.
+	 * @param dx The x-axis coordinate in the destination canvas at which to place the top-left corner of the source `image`.
+	 * @param dy The y-axis coordinate in the destination canvas at which to place the top-left corner of the source `image`.
+	 * @param dw The width to draw the `image` in the destination canvas. This allows scaling of the drawn image.
+	 * @param dh The height to draw the `image` in the destination canvas. This allows scaling of the drawn image.
 	 * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/drawImage
 	 */
-	public printImage(
-		imageOrBuffer: ImageResolvable,
-		sx: number,
-		sy: number,
-		sw: number,
-		sh: number,
-		dx: number,
-		dy: number,
-		dw: number,
-		dh: number
-	): this;
+	public printImage(image: ImageResolvable, sx: number, sy: number, sw: number, sh: number, dx: number, dy: number, dw: number, dh: number): this;
 
-	public printImage(image: ImageResolvable, ...args: readonly any[]) {
+	public printImage(image: ImageResolvable, ...args: readonly number[]) {
+		// @ts-expect-error: Mismatching overloads
 		this.context.drawImage(image, ...args);
 		return this;
 	}
 
 	/**
 	 * Add a round image.
-	 * @param imageOrBuffer The image's buffer.
+	 * @param imageOrBuffer The image.
 	 * @param x The X coordinate in the destination canvas at which to place the top-left corner of the source image.
 	 * @param y The Y coordinate in the destination canvas at which to place the top-left corner of the source image.
 	 * @param width The width to draw the image in the destination canvas. This allows scaling of the drawn image. If not specified, the image is not scaled in width when drawn.
@@ -667,7 +676,7 @@ export class Canvas {
 
 	/**
 	 * Add a beveled image.
-	 * @param imageOrBuffer The image's buffer.
+	 * @param imageOrBuffer The image.
 	 * @param x The position x to start drawing the element.
 	 * @param y The position y to start drawing the element.
 	 * @param width The width of the element.
@@ -916,6 +925,16 @@ export class Canvas {
 	}
 
 	/**
+	 * Change the canvas's filters.
+	 * @param filter The filter to set.
+	 * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/filter
+	 */
+	public setFilter(filter: string): this {
+		this.context.filter = filter;
+		return this;
+	}
+
+	/**
 	 * Starts a new path by emptying the list of sub-paths.
 	 * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/beginPath
 	 */
@@ -952,7 +971,8 @@ export class Canvas {
 	 */
 	public createPattern(image: ImageResolvable, repetition: PatternRepeat, callback: PatternCallback): this;
 	public createPattern(image: ImageResolvable, repetition: PatternRepeat, callback?: PatternCallback): CanvasPattern | this {
-		const pattern = this.context.createPattern(image, repetition);
+		// @ts-expect-error: Mismatching overloads between different modules:
+		const pattern = this.context.createPattern(image, repetition)!;
 		if (callback) {
 			callback.call(this, pattern, this);
 			return this;
@@ -1293,30 +1313,36 @@ export class Canvas {
 	/**
 	 * Change the pattern quality
 	 * @param pattern The pattern quality.
+	 * @note This is only available when using the `canvas` module.
 	 */
 	public setPatternQuality(pattern: PatternQuality): this {
-		this.context.patternQuality = pattern;
+		if (mod.type === CanvasType.NodeCanvas) (this.context as NodeCanvas.Context2D).patternQuality = pattern;
+		else throw new Error('`patternQuality` is only available with the `canvas` module.');
 		return this;
 	}
 
 	/**
 	 * Set the text drawing mode. Using glyph is much faster than path for drawing, and when using a PDF context will
-	 * embed the text natively, so will be selectable and lower filesize. The downside is that cairo does not have any
+	 * embed the text natively, so will be selectable and lower file size. The downside is that cairo does not have any
 	 * subpixel precision for glyph, so this will be noticeably lower quality for text positioning in cases such as
 	 * rotated text. Also, strokeText in glyph will act the same as fillText, except using the stroke style for the fill.
 	 * @param mode The drawing mode.
+	 * @note This is only available when using the `canvas` module.
 	 */
 	public setTextDrawingMode(mode: TextDrawingMode): this {
-		this.context.textDrawingMode = mode;
+		if (mod.type === CanvasType.NodeCanvas) (this.context as NodeCanvas.Context2D).textDrawingMode = mode;
+		else throw new Error('`textDrawingMode` is only available with the `canvas` module.');
 		return this;
 	}
 
 	/**
 	 * Set anti-aliasing mode.
 	 * @param antialias The antialias mode.
+	 * @note This is only available when using the `canvas` module.
 	 */
-	public setAntialiasing(antialias: AntiAlias): this {
-		this.context.antialias = antialias;
+	public setAntiAliasing(antialias: AntiAlias): this {
+		if (mod.type === CanvasType.NodeCanvas) (this.context as NodeCanvas.Context2D).antialias = antialias;
+		else throw new Error('`antialias` is only available with the `canvas` module.');
 		return this;
 	}
 
@@ -1523,21 +1549,21 @@ export class Canvas {
 	 * @param mimeType the standard MIME type for the image format to return.
 	 * @param config The render configuration.
 	 */
-	public toBuffer(mimeType: 'image/png', config?: PngConfig): Buffer;
+	public toBuffer(mimeType: 'image/png', config?: import('canvas').PngConfig): Buffer;
 	/**
 	 * <warn>This is for Node.js usage only, HTMLCanvasElement does not support this</warn>
 	 * Encodes the canvas as a JPG.
 	 * @param mimeType the standard MIME type for the image format to return.
 	 * @param config The render configuration.
 	 */
-	public toBuffer(mimeType: 'image/jpeg', config?: JpegConfig): Buffer;
+	public toBuffer(mimeType: 'image/jpeg', config?: import('canvas').JpegConfig): Buffer;
 	/**
 	 * <warn>This is for Node.js usage only, HTMLCanvasElement does not support this</warn>
 	 * Encodes the canvas as a PDF.
 	 * @param mimeType the standard MIME type for the image format to return.
 	 * @param config The render configuration.
 	 */
-	public toBuffer(mimeType: 'application/pdf', config?: PdfConfig): Buffer;
+	public toBuffer(mimeType: 'application/pdf', config?: import('canvas').PdfConfig): Buffer;
 	/**
 	 * <warn>This is for Node.js usage only, HTMLCanvasElement does not support this</warn>
 	 * Returns the unencoded pixel data, top-to-bottom. On little-endian (most) systems, the array will be ordered BGRA;
@@ -1562,21 +1588,21 @@ export class Canvas {
 	 * @param mimeType the standard MIME type for the image format to return.
 	 * @param config The render configuration.
 	 */
-	public toBufferAsync(mimeType: 'image/png', config?: PngConfig): Promise<Buffer>;
+	public toBufferAsync(mimeType: 'image/png', config?: import('canvas').PngConfig): Promise<Buffer>;
 	/**
 	 * <warn>This is for Node.js usage only, HTMLCanvasElement does not support this</warn>
 	 * Encodes the canvas as a JPG.
 	 * @param mimeType the standard MIME type for the image format to return.
 	 * @param config The render configuration.
 	 */
-	public toBufferAsync(mimeType: 'image/jpeg', config?: JpegConfig): Promise<Buffer>;
+	public toBufferAsync(mimeType: 'image/jpeg', config?: import('canvas').JpegConfig): Promise<Buffer>;
 	/**
 	 * <warn>This is for Node.js usage only, HTMLCanvasElement does not support this</warn>
 	 * Encodes the canvas as a PDF.
 	 * @param mimeType the standard MIME type for the image format to return.
 	 * @param config The render configuration.
 	 */
-	public toBufferAsync(mimeType: 'application/pdf', config?: PdfConfig): Promise<Buffer>;
+	public toBufferAsync(mimeType: 'application/pdf', config?: import('canvas').PdfConfig): Promise<Buffer>;
 	public toBufferAsync(...args: readonly any[]): Promise<Buffer> {
 		return new Promise<Buffer>((resolve, reject) =>
 			// @ts-expect-error: Complains about invalid overload (expects more than 0 overloads).
@@ -1606,6 +1632,7 @@ export class Canvas {
 	 */
 	public toDataURL(mimeType: 'image/jpeg', quality?: number): string;
 	public toDataURL(...args: readonly any[]): string {
+		// @ts-expect-error: Required number of options.
 		return this.canvas.toDataURL(...args);
 	}
 
@@ -1633,7 +1660,7 @@ export class Canvas {
 	 * @param config The render configuration.
 	 * @see https://github.com/Automattic/node-canvas#canvastodataurl-sync-and-async
 	 */
-	public toDataURLAsync(mimeType: 'image/jpeg', config: JpegConfig): Promise<string>;
+	public toDataURLAsync(mimeType: 'image/jpeg', config: import('canvas').JpegConfig): Promise<string>;
 	/**
 	 * Render the canvas into a JPEG Data URL.
 	 * @param type the standard MIME type for the image format to return.
@@ -1719,16 +1746,17 @@ export class Canvas {
 		fit: NonNullable<PrintCircularOptions['fit']>
 	): ResolvedCircularCoordinates {
 		const { width, height } = imageOrBuffer;
+		const [w, h] = [typeof width === 'number' ? width : width.animVal.value, typeof height === 'number' ? height : height.animVal.value];
 		if (fit === 'none') {
 			return {
-				positionX: x - width / 2,
-				positionY: y - height / 2,
-				sizeX: width,
-				sizeY: height
+				positionX: x - w / 2,
+				positionY: y - h / 2,
+				sizeX: w,
+				sizeY: h
 			};
 		}
 
-		const ratio = width / height;
+		const ratio = w / h;
 		const diameter = radius * 2;
 
 		if (fit === 'fill' || ratio === 1) {

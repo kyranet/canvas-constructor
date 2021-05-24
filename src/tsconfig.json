@@ -3,9 +3,8 @@
 	"compilerOptions": {
 		"rootDir": "./",
 		"outDir": "../dist",
-		"composite": true
+		"composite": true,
+		"useDefineForClassFields": false
 	},
-	"include": [
-		"."
-	]
+	"include": ["."]
 }

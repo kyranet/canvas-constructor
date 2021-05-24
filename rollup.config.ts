@@ -13,7 +13,7 @@ export default {
 			sourcemap: true
 		},
 		{
-			file: './dist/index.es.mjs',
+			file: './dist/index.mjs',
 			format: 'es',
 			exports: 'named',
 			sourcemap: true
@@ -38,5 +38,5 @@ export default {
 			output: { comments: false }
 		})
 	],
-	external: ['canvas']
+	external: ['canvas', 'skia-canvas']
 };

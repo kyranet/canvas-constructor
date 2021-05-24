@@ -1,18 +1,23 @@
-import { Image, loadImage } from 'canvas';
+/* eslint-disable @typescript-eslint/no-namespace */
 import type { Canvas, LoadableImage } from './Canvas';
 
 export const browser = typeof window !== 'undefined';
 
-export const internalCanvas = (() => {
-	// eslint-disable-next-line no-undef
-	return browser ? (typeof HTMLCanvasElement === 'undefined' ? null : HTMLCanvasElement) : require('canvas');
+export type InternalCanvas = BrowserCanvas | SkiaCanvas | NodeCanvas;
+
+export const mod: InternalCanvas = (() => {
+	if (browser) {
+		return { type: CanvasType.Browser, module: HTMLCanvasElement };
+	}
+
+	try {
+		return { type: CanvasType.SkiaCanvas, module: require('skia-canvas') };
+	} catch {
+		return { type: CanvasType.NodeCanvas, module: require('canvas') };
+	}
 })();
 
 export const getFontHeight = (() => {
-	// node-canvas has its own font parser
-	if (!browser && 'parseFont' in internalCanvas) return (font: string): number => internalCanvas.parseFont(font).size;
-
-	// Load polyfill
 	const kRegexSize = /([\d.]+)(px|pt|pc|in|cm|mm|%|em|ex|ch|rem|q)/i;
 	const kCache = new Map<string, number>();
 
@@ -101,32 +106,112 @@ export const textWrap = (canvas: Canvas, text: string, wrapWidth: number): strin
  * @param src An Image instance or a buffer
  * @param cb The callback
  */
-export const resolveImage = (src: LoadableImage, options?: any): Promise<Image> => {
-	if (browser) {
-		return new Promise((resolve, reject) => {
-			// eslint-disable-next-line no-undef
-			const image = Object.assign(document.createElement('img'), options);
+export const resolveImage = (() => {
+	if (mod.type === CanvasType.Browser) {
+		return (src: string, options?: Partial<HTMLImageElement>): Promise<HTMLImageElement> => {
+			return new Promise<HTMLImageElement>((resolve, reject) => {
+				// eslint-disable-next-line no-undef
+				const image = Object.assign(document.createElement('img'), options) as HTMLImageElement;
 
-			function cleanup() {
-				image.onload = null;
-				image.onerror = null;
-			}
+				function cleanup() {
+					image.onload = null;
+					image.onerror = null;
+				}
 
-			image.onload = () => {
-				cleanup();
-				resolve(image);
-			};
-			image.onerror = () => {
-				cleanup();
-				reject(new Error(`Failed to load the image "${src}"`));
-			};
+				image.onload = () => {
+					cleanup();
+					resolve(image);
+				};
+				image.onerror = () => {
+					cleanup();
+					reject(new Error(`Failed to load the image "${src}"`));
+				};
 
-			image.src = src;
-		});
+				image.src = src;
+			});
+		};
 	}
 
-	return loadImage(src, options);
-};
+	if (mod.type === CanvasType.SkiaCanvas) {
+		return (src: string | Buffer) => mod.module.loadImage(src);
+	}
+
+	return (src: LoadableImage, options?: any) => mod.module.loadImage(src, options);
+})();
+
+export const registerFont = (() => {
+	if (mod.type === CanvasType.Browser) {
+		return (() => {
+			throw new Error('Unsupported, please use `@font-face` from CSS to load custom fonts.');
+		}) as BrowserCanvas.registerFont;
+	}
+
+	if (mod.type === CanvasType.SkiaCanvas) {
+		return mod.module.FontLibrary.use.bind(mod.module.FontLibrary) as SkiaCanvas.registerFont;
+	}
+
+	return mod.module.registerFont.bind(mod.module) as NodeCanvas.registerFont;
+})();
+
+/**
+ * The names of the filters that take a string argument.
+ */
+type LiteralFilters = 'url';
+
+export type Percentage<T extends number = number> = `${T}%`;
+
+/**
+ * The names of the filters that take a percentage argument.
+ */
+type PercentageFilters = 'brightness' | 'contrast' | 'grayscale' | 'invert' | 'opacity' | 'saturate' | 'sepia';
+
+type RelativeLengthUnits = 'cap' | 'ch' | 'em' | 'ex' | 'ic' | 'lh' | 'rem' | 'rlh';
+type RelativeUnits = RelativeLengthUnits | '%';
+type ViewportPercentageUnits = 'vh' | 'vw' | 'vi' | 'vb' | 'vmin' | 'vmax';
+type AbsoluteLengthUnits = 'px' | 'cm' | 'mm' | 'Q' | 'in' | 'pc' | 'pt';
+type LengthUnits = RelativeUnits | ViewportPercentageUnits | AbsoluteLengthUnits;
+export type Length<T extends number = number> = `${T}${LengthUnits}`;
+
+/**
+ * The names of the filters that take a length argument.
+ */
+type LengthFilters = 'blur';
+
+type AngleUnits = 'deg' | 'grad' | 'rad' | 'turn';
+export type Angle<T extends number = number> = `${T}${AngleUnits}`;
+
+/**
+ * The names of the filters that take an angle argument.
+ */
+type AngleFilters = 'hue-rotate';
+
+export type Color = ColorKeyword | ColorHexadecimal | ColorRGB | ColorRGBA | ColorHSL | ColorHSLA;
+
+interface Filter {
+	<K extends LiteralFilters, V extends string>(name: K, url: V): `${K}(${V})`;
+	<K extends PercentageFilters, V extends Percentage>(name: K, percentage: V): `${K}(${V})`;
+	<K extends LengthFilters, V extends Length>(name: K, length: V): `${K}(${V})`;
+	<K extends AngleFilters, V extends Angle>(name: K, angle: V): `${K}(${V})`;
+	<Vx extends Length, Vy extends Length>(name: 'drop-shadow', x: Vx, y: Vy): `drop-shadow(${Vx} ${Vy})`;
+	<Vx extends Length, Vy extends Length, Vb extends Length>(name: 'drop-shadow', x: Vx, y: Vy, blur: Vb): `drop-shadow(${Vx} ${Vy} ${Vb})`;
+	<Vx extends Length, Vy extends Length, Vc extends Color>(name: 'drop-shadow', x: Vx, y: Vy, color: Vc): `drop-shadow(${Vx} ${Vy} ${Vc})`;
+	<Vx extends Length, Vy extends Length, Vb extends Length, Vc extends Color>(
+		name: 'drop-shadow',
+		x: Vx,
+		y: Vy,
+		blur: Vb,
+		color: Vc
+	): `drop-shadow(${Vx} ${Vy} ${Vb} ${Vc})`;
+	(value: 'none'): 'none';
+}
+
+// @ts-expect-error: Overload hell
+export const filter: Filter = (name: string, ...args: readonly any[]) => `${name}(${args.join(' ')})` as const;
+
+/**
+ * Represents a formatted hexadecimal value.
+ */
+export type ColorHexadecimal<T extends string = string> = `#${T}`;
 
 /**
  * Utility to format an hexadecimal string into a CSS hexadecimal string.
@@ -135,7 +220,12 @@ export const resolveImage = (src: LoadableImage, options?: any): Promise<Image> 
  * hex('FFF'); // -> '#FFF'
  * hex('0F0F0F'); // -> '#0F0F0F'
  */
-export const hex = (hex: string): string => `#${hex}`;
+export const hex = <T extends string>(hex: T): ColorHexadecimal<T> => `#${hex}` as const;
+
+/**
+ * Represents a formatted RGB value.
+ */
+export type ColorRGB<R extends number = number, G extends number = number, B extends number = number> = `rgb(${R}, ${G}, ${B})`;
 
 /**
  * Utility to format a RGB set of values into a string.
@@ -146,7 +236,14 @@ export const hex = (hex: string): string => `#${hex}`;
  * @example
  * rgb(255, 150, 65); // -> 'rgb(255, 150, 65)'
  */
-export const rgb = (red: number, green: number, blue: number): string => `rgb(${red}, ${green}, ${blue})`;
+export const rgb = <R extends number, G extends number, B extends number>(red: R, green: G, blue: B): ColorRGB<R, G, B> =>
+	`rgb(${red}, ${green}, ${blue})` as const;
+
+/**
+ * Represents a formatted RGBA value.
+ */
+export type ColorRGBA<R extends number = number, G extends number = number, B extends number = number, A extends number = number> =
+	`rgba(${R}, ${G}, ${B}, ${A})`;
 
 /**
  * Utility to format a RGBA set of values into a string.
@@ -158,7 +255,17 @@ export const rgb = (red: number, green: number, blue: number): string => `rgb(${
  * @example
  * rgba(255, 150, 65, 0.3); // -> 'rgba(255, 150, 65, 0.3)'
  */
-export const rgba = (red: number, green: number, blue: number, alpha: number): string => `rgba(${red}, ${green}, ${blue}, ${alpha})`;
+export const rgba = <R extends number, G extends number, B extends number, A extends number>(
+	red: R,
+	green: G,
+	blue: B,
+	alpha: A
+): ColorRGBA<R, G, B, A> => `rgba(${red}, ${green}, ${blue}, ${alpha})` as const;
+
+/**
+ * Represents a formatted HSL value.
+ */
+export type ColorHSL<H extends number = number, S extends number = number, L extends number = number> = `hsl(${H}, ${S}%, ${L}%)`;
 
 /**
  * Utility to format a HSL set of values into a string.
@@ -169,7 +276,14 @@ export const rgba = (red: number, green: number, blue: number, alpha: number): s
  * @example
  * hsl(120, 100, 40); // -> 'hsl(120, 100, 40)'
  */
-export const hsl = (hue: number, saturation: number, lightness: number): string => `hsl(${hue}, ${saturation}%, ${lightness}%)`;
+export const hsl = <H extends number, S extends number, L extends number>(hue: H, saturation: S, lightness: L): ColorHSL<H, S, L> =>
+	`hsl(${hue}, ${saturation}%, ${lightness}%)` as const;
+
+/**
+ * Represents a formatted HSL value.
+ */
+export type ColorHSLA<H extends number = number, S extends number = number, L extends number = number, A extends number = number> =
+	`hsla(${H}, ${S}%, ${L}%, ${A})`;
 
 /**
  * Utility to format a HSLA set of values into a string.
@@ -181,8 +295,12 @@ export const hsl = (hue: number, saturation: number, lightness: number): string 
  * @example
  * hsla(120, 100, 40, 0.4); // -> 'hsla(120, 100, 40, 0.4)'
  */
-export const hsla = (hue: number, saturation: number, lightness: number, alpha: number): string =>
-	`hsla(${hue}, ${saturation}%, ${lightness}%, ${alpha})`;
+export const hsla = <H extends number, S extends number, L extends number, A extends number>(
+	hue: H,
+	saturation: S,
+	lightness: L,
+	alpha: A
+): ColorHSLA<H, S, L, A> => `hsla(${hue}, ${saturation}%, ${lightness}%, ${alpha})` as const;
 
 /**
  * Utility to type-safely use CSS colors.
@@ -348,3 +466,45 @@ export type ColorKeywordLevel3 =
 	| 'yellowgreen';
 
 export type ColorKeywordLevel4 = 'rebeccapurple';
+
+export const enum CanvasType {
+	Browser,
+	SkiaCanvas,
+	NodeCanvas
+}
+
+export interface BrowserCanvas {
+	type: CanvasType.Browser;
+	module: typeof HTMLCanvasElement;
+}
+
+export namespace BrowserCanvas {
+	export type Canvas = HTMLCanvasElement;
+	export type Image = HTMLImageElement;
+	export type Context2D = CanvasRenderingContext2D;
+	export type registerFont = () => never;
+}
+
+export interface SkiaCanvas {
+	type: CanvasType.SkiaCanvas;
+	module: typeof import('skia-canvas');
+}
+
+export namespace SkiaCanvas {
+	export type Canvas = import('skia-canvas').Canvas;
+	export type Image = import('skia-canvas').Image;
+	export type Context2D = import('skia-canvas').CanvasRenderingContext2D;
+	export type registerFont = import('skia-canvas').FontLibrary['use'];
+}
+
+export interface NodeCanvas {
+	type: CanvasType.NodeCanvas;
+	module: typeof import('canvas');
+}
+
+export namespace NodeCanvas {
+	export type Canvas = import('canvas').Canvas;
+	export type Image = import('canvas').Image;
+	export type Context2D = import('canvas').CanvasRenderingContext2D;
+	export type registerFont = typeof import('canvas')['registerFont'];
+}
