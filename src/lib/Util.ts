@@ -1,24 +1,8 @@
 /* eslint-disable @typescript-eslint/no-namespace */
-import type { Canvas, LoadableImage } from './Canvas';
+import type { BaseCanvas, BaseCanvasElement } from './BaseCanvas';
 
-export const browser = typeof window !== 'undefined';
-
-export type InternalCanvas = BrowserCanvas | SkiaCanvas | NodeCanvas;
-
-export const mod: InternalCanvas = (() => {
-	if (browser) {
-		return { type: CanvasType.Browser, module: HTMLCanvasElement };
-	}
-
-	try {
-		return { type: CanvasType.SkiaCanvas, module: require('skia-canvas') };
-	} catch {
-		return { type: CanvasType.NodeCanvas, module: require('canvas') };
-	}
-})();
-
+export const fontRegExp = /([\d.]+)(px|pt|pc|in|cm|mm|%|em|ex|ch|rem|q)/i;
 export const getFontHeight = (() => {
-	const kRegexSize = /([\d.]+)(px|pt|pc|in|cm|mm|%|em|ex|ch|rem|q)/i;
 	const kCache = new Map<string, number>();
 
 	return (font: string): number => {
@@ -27,7 +11,7 @@ export const getFontHeight = (() => {
 		if (previous) return previous;
 
 		// Test for required properties first, return null if the text is invalid
-		const sizeFamily = kRegexSize.exec(font);
+		const sizeFamily = fontRegExp.exec(font);
 		if (!sizeFamily) return 0;
 
 		let size = Number(sizeFamily[1]);
@@ -63,7 +47,16 @@ export const getFontHeight = (() => {
 	};
 })();
 
-export const textWrap = (canvas: Canvas, text: string, wrapWidth: number): string => {
+export const textWrap = <
+	CanvasType extends BaseCanvasElement,
+	ContextType extends CanvasRenderingContext2D,
+	ImageType extends Parameters<ContextType['drawImage']>[0],
+	TextMetricsType extends ReturnType<ContextType['measureText']>
+>(
+	canvas: BaseCanvas<CanvasType, ContextType, ImageType, TextMetricsType>,
+	text: string,
+	wrapWidth: number
+): string => {
 	const result = [];
 	const buffer = [];
 
@@ -100,58 +93,6 @@ export const textWrap = (canvas: Canvas, text: string, wrapWidth: number): strin
 
 	return result.join('\n');
 };
-
-/**
- * Resolves an Image or Buffer
- * @param src An Image instance or a buffer
- * @param cb The callback
- */
-export const resolveImage = (() => {
-	if (mod.type === CanvasType.Browser) {
-		return (src: string, options?: Partial<HTMLImageElement>): Promise<HTMLImageElement> => {
-			return new Promise<HTMLImageElement>((resolve, reject) => {
-				// eslint-disable-next-line no-undef
-				const image = Object.assign(document.createElement('img'), options) as HTMLImageElement;
-
-				function cleanup() {
-					image.onload = null;
-					image.onerror = null;
-				}
-
-				image.onload = () => {
-					cleanup();
-					resolve(image);
-				};
-				image.onerror = () => {
-					cleanup();
-					reject(new Error(`Failed to load the image "${src}"`));
-				};
-
-				image.src = src;
-			});
-		};
-	}
-
-	if (mod.type === CanvasType.SkiaCanvas) {
-		return (src: string | Buffer) => mod.module.loadImage(src);
-	}
-
-	return (src: LoadableImage, options?: any) => mod.module.loadImage(src, options);
-})();
-
-export const registerFont = (() => {
-	if (mod.type === CanvasType.Browser) {
-		return (() => {
-			throw new Error('Unsupported, please use `@font-face` from CSS to load custom fonts.');
-		}) as BrowserCanvas.registerFont;
-	}
-
-	if (mod.type === CanvasType.SkiaCanvas) {
-		return mod.module.FontLibrary.use.bind(mod.module.FontLibrary) as SkiaCanvas.registerFont;
-	}
-
-	return mod.module.registerFont.bind(mod.module) as NodeCanvas.registerFont;
-})();
 
 /**
  * The names of the filters that take a string argument.
@@ -242,8 +183,12 @@ export const rgb = <R extends number, G extends number, B extends number>(red: R
 /**
  * Represents a formatted RGBA value.
  */
-export type ColorRGBA<R extends number = number, G extends number = number, B extends number = number, A extends number = number> =
-	`rgba(${R}, ${G}, ${B}, ${A})`;
+export type ColorRGBA<
+	R extends number = number,
+	G extends number = number,
+	B extends number = number,
+	A extends number = number
+> = `rgba(${R}, ${G}, ${B}, ${A})`;
 
 /**
  * Utility to format a RGBA set of values into a string.
@@ -282,8 +227,12 @@ export const hsl = <H extends number, S extends number, L extends number>(hue: H
 /**
  * Represents a formatted HSL value.
  */
-export type ColorHSLA<H extends number = number, S extends number = number, L extends number = number, A extends number = number> =
-	`hsla(${H}, ${S}%, ${L}%, ${A})`;
+export type ColorHSLA<
+	H extends number = number,
+	S extends number = number,
+	L extends number = number,
+	A extends number = number
+> = `hsla(${H}, ${S}%, ${L}%, ${A})`;
 
 /**
  * Utility to format a HSLA set of values into a string.
@@ -466,45 +415,3 @@ export type ColorKeywordLevel3 =
 	| 'yellowgreen';
 
 export type ColorKeywordLevel4 = 'rebeccapurple';
-
-export const enum CanvasType {
-	Browser,
-	SkiaCanvas,
-	NodeCanvas
-}
-
-export interface BrowserCanvas {
-	type: CanvasType.Browser;
-	module: typeof HTMLCanvasElement;
-}
-
-export namespace BrowserCanvas {
-	export type Canvas = HTMLCanvasElement;
-	export type Image = HTMLImageElement;
-	export type Context2D = CanvasRenderingContext2D;
-	export type registerFont = () => never;
-}
-
-export interface SkiaCanvas {
-	type: CanvasType.SkiaCanvas;
-	module: typeof import('skia-canvas');
-}
-
-export namespace SkiaCanvas {
-	export type Canvas = import('skia-canvas').Canvas;
-	export type Image = import('skia-canvas').Image;
-	export type Context2D = import('skia-canvas').CanvasRenderingContext2D;
-	export type registerFont = import('skia-canvas').FontLibrary['use'];
-}
-
-export interface NodeCanvas {
-	type: CanvasType.NodeCanvas;
-	module: typeof import('canvas');
-}
-
-export namespace NodeCanvas {
-	export type Canvas = import('canvas').Canvas;
-	export type Image = import('canvas').Image;
-	export type Context2D = import('canvas').CanvasRenderingContext2D;
-	export type registerFont = typeof import('canvas')['registerFont'];
-}

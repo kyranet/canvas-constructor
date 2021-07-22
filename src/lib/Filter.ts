@@ -1,17 +1,17 @@
-import type { Canvas } from './Canvas';
+import type { BaseCanvas } from './BaseCanvas';
 
 /**
  * Invert an image
  * @param canvas The Canvas instance
  */
-export const invert = (canvas: Canvas) =>
+export const invert = (canvas: BaseCanvas) =>
 	canvas.save().setGlobalCompositeOperation('difference').setColor('white').printRectangle(0, 0, canvas.width, canvas.height).restore();
 
 /**
  * Greyscale an image
  * @param canvas The Canvas instance
  */
-export const greyscale = (canvas: Canvas) => {
+export const greyscale = (canvas: BaseCanvas) => {
 	const imageData = canvas.getImageData();
 	const { data } = imageData;
 	for (let i = 0; i < data.length; i += 4) {
@@ -29,7 +29,7 @@ export const grayscale = greyscale;
  * Invert then greyscale an image
  * @param canvas The Canvas instance
  */
-export const invertGrayscale = (canvas: Canvas): Canvas => {
+export const invertGrayscale = (canvas: BaseCanvas) => {
 	const imageData = canvas.getImageData();
 	const { data } = imageData;
 	for (let i = 0; i < data.length; i += 4) {
@@ -47,7 +47,7 @@ export const invertGreyscale = invertGrayscale;
  * Give an image a sepia tone
  * @param canvas The Canvas instance
  */
-export const sepia = (canvas: Canvas): Canvas => {
+export const sepia = (canvas: BaseCanvas): BaseCanvas => {
 	const imageData = canvas.getImageData();
 	const { data } = imageData;
 	for (let i = 0; i < data.length; i += 4) {
@@ -65,7 +65,7 @@ export const sepia = (canvas: Canvas): Canvas => {
  * Turn an image into a silhouette
  * @param canvas The Canvas instance
  */
-export const silhouette = (canvas: Canvas): Canvas => {
+export const silhouette = (canvas: BaseCanvas): BaseCanvas => {
 	const imageData = canvas.getImageData();
 	const { data } = imageData;
 	for (let i = 0; i < data.length; i += 4) {
@@ -82,7 +82,7 @@ export const silhouette = (canvas: Canvas): Canvas => {
  * @param canvas The Canvas instance
  * @param threshold The threshold to apply in a range of 0 to 255
  */
-export const threshold = (canvas: Canvas, threshold: number): Canvas => {
+export const threshold = (canvas: BaseCanvas, threshold: number): BaseCanvas => {
 	const imageData = canvas.getImageData();
 	const { data } = imageData;
 	for (let i = 0; i < data.length; i += 4) {
@@ -100,7 +100,7 @@ export const threshold = (canvas: Canvas, threshold: number): Canvas => {
  * @param canvas The Canvas instance
  * @param threshold The threshold to apply in a range of 0 to 255
  */
-export const invertedThreshold = (canvas: Canvas, threshold: number): Canvas => {
+export const invertedThreshold = (canvas: BaseCanvas, threshold: number): BaseCanvas => {
 	const imageData = canvas.getImageData();
 	const { data } = imageData;
 	for (let i = 0; i < data.length; i += 4) {
@@ -118,7 +118,7 @@ export const invertedThreshold = (canvas: Canvas, threshold: number): Canvas => 
  * @param canvas The Canvas instance
  * @param brightness The brightness to apply in a range of 0 to 255
  */
-export const brightness = (canvas: Canvas, brightness: number): Canvas => {
+export const brightness = (canvas: BaseCanvas, brightness: number): BaseCanvas => {
 	const imageData = canvas.getImageData();
 	const { data } = imageData;
 	for (let i = 0; i < data.length; i += 4) {
@@ -135,7 +135,7 @@ export const brightness = (canvas: Canvas, brightness: number): Canvas => {
  * @param canvas The Canvas instance
  * @param darkness The darkness to apply in a range of 0 to 255
  */
-export const darkness = (canvas: Canvas, darkness: number): Canvas => {
+export const darkness = (canvas: BaseCanvas, darkness: number): BaseCanvas => {
 	const imageData = canvas.getImageData();
 	const { data } = imageData;
 	for (let i = 0; i < data.length; i += 4) {
@@ -155,7 +155,7 @@ export const myOldFriend = darkness;
  * @param opaque Whether or not pixels should try to be opaque
  * @see https://www.html5rocks.com/en/tutorials/canvas/imagefilters/
  */
-export const convolute = (canvas: Canvas, weights: readonly number[], opaque = true): Canvas => {
+export const convolute = (canvas: BaseCanvas, weights: readonly number[], opaque = true): BaseCanvas => {
 	const side = Math.round(Math.sqrt(weights.length));
 	const halfSide = Math.floor(side / 2);
 
@@ -217,7 +217,7 @@ const edgeLaPlaceMatrix = [0, -1, 0, -1, 4, -1, 0, -1, 0];
  * Display an image's edges
  * @param canvas The Canvas instance
  */
-export const edge = (canvas: Canvas): Canvas => convolute(canvas, edgeLaPlaceMatrix, true);
+export const edge = (canvas: BaseCanvas): BaseCanvas => convolute(canvas, edgeLaPlaceMatrix, true);
 
 /**
  * The LaPlace matrix for sharpen
@@ -230,7 +230,7 @@ const sharpenLaPlaceMatrix = [0, -1, 0, -1, 5, -1, 0, -1, 0];
  * @param canvas The Canvas instance
  * @param passes The amount of iterations to do
  */
-export const sharpen = (canvas: Canvas, passes = 1): Canvas => {
+export const sharpen = (canvas: BaseCanvas, passes = 1): BaseCanvas => {
 	for (let i = 0; i < passes; ++i) {
 		convolute(canvas, sharpenLaPlaceMatrix, true);
 	}
@@ -249,7 +249,7 @@ const blurLaPlaceMatrix = [1 / 9, 1 / 9, 1 / 9, 1 / 9, 1 / 9, 1 / 9, 1 / 9, 1 / 
  * @param canvas The Canvas instance
  * @param passes The amount of iterations to do
  */
-export const blur = (canvas: Canvas, passes = 1): Canvas => {
+export const blur = (canvas: BaseCanvas, passes = 1): BaseCanvas => {
 	for (let i = 0; i < passes; ++i) {
 		convolute(canvas, blurLaPlaceMatrix, true);
 	}

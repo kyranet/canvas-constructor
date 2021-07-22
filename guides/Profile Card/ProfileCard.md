@@ -1,10 +1,10 @@
 # Profile Card
 
-> **NOTE:** _This tutorial was originally written for [An Idiot's Guide][AnIdiotsGuide], as it is using
-[GuideBot][GuideBot] as a base. Future tutorials will have no bias towards any Discord bot libraries, the only reason
-it was not rewritten with no Discord library in mind, is due to how far the tutorial progressed._
+> **NOTE:** _This tutorial was originally written for [An Idiot's Guide][anidiotsguide], as it is using
+> [GuideBot][guidebot] as a base. Future tutorials will have no bias towards any Discord bot libraries, the only reason
+> it was not rewritten with no Discord library in mind, is due to how far the tutorial progressed._
 
-This tutorial follows uses Evie's [Enmap-Based Points System][EnmapBasedPointsSystem] for `discord.js`, so if you
+This tutorial follows uses Evie's [Enmap-Based Points System][enmapbasedpointssystem] for `discord.js`, so if you
 already have a score / currency system in your Discord bot, you will need to pass those details when you get to
 populating the image with text.
 
@@ -28,21 +28,21 @@ Once you have both canvas and canvas-constructor installed, you will create the 
 ```javascript
 // eslint-disable-next-line no-unused-vars
 exports.run = async (client, message, args, level) => {
-  // Your code here.
+	// Your code here.
 };
 
 exports.conf = {
-  enabled: true,
-  guildOnly: false,
-  aliases: [],
-  permLevel: "User"
+	enabled: true,
+	guildOnly: false,
+	aliases: [],
+	permLevel: 'User'
 };
 
 exports.help = {
-  name: "profile",
-  category: "economy",
-  description: "Display user profile.",
-  usage: "profile"
+	name: 'profile',
+	category: 'economy',
+	description: 'Display user profile.',
+	usage: 'profile'
 };
 ```
 
@@ -52,13 +52,13 @@ Now, at the very top of the file, you need to require a few things such as `canv
 `discord.js` to name a few, so throw the following at the top.
 
 ```javascript
-const { Canvas } = require("canvas-constructor"); // You can't make images without this.
-const { resolve, join } = require("path"); // This is to get a font file.
-const { Attachment } = require("discord.js"); // This is to send the image via discord.
-const fetch = require("node-fetch"); // This is to fetch the user avatar and convert it to a buffer.
+const { Canvas } = require('canvas-constructor'); // You can't make images without this.
+const { resolve, join } = require('path'); // This is to get a font file.
+const { Attachment } = require('discord.js'); // This is to send the image via discord.
+const fetch = require('node-fetch'); // This is to fetch the user avatar and convert it to a buffer.
 ```
 
-> _**NOTE:**_ We're doing some fancy [Destructuring assignment][DestructuringAssignment], click the link to read more.
+> _**NOTE:**_ We're doing some fancy [Destructuring assignment][destructuringassignment], click the link to read more.
 
 Alright, I'll quickly cover some of the things you've required, instead of doing
 `const canvas = require("canvas-constructor")` then `canvas.Canvas` you've deconstructed the require and pulled out
@@ -69,7 +69,7 @@ Next up you should create an async function below those requires you have just a
 
 ```javascript
 async function profile(member, score) {
-  // Canvas code will go here.
+	// Canvas code will go here.
 }
 ```
 
@@ -88,27 +88,30 @@ rock with the meat and potatoes of the tutorial.
 Inside the `exports.run` method of the command, add the following code, I'll explain as you write it what each line does.
 
 ```javascript
-  // This will check to see if the command was ran in a guild instead of a DM.
-  if (message.guild) {
-    // This creates a "key" for enmaps Key/Value system.
-    // We've declared it as a variable as we'll be using it in multiple places.
-    const key = `${message.guild.id}-${message.author.id}`;
-    // If the points database does not have the message author in the database...
-    if (!client.points.has(key)) {
-      // Create an entry for them...
-      client.points.set(key, {
-        // Using the predefined information below.
-        user: message.author.id, guild: message.guild.id, points: 0, level: 1
-      });
-    }
-    // We await both the message.channel.send, and the profile function.
-    // Also remember, we wanted to pass the member object, and the points object.
-    // Since we're creating a user profile, we should give it a unique file name.
-    const buffer = await profile(message.member, client.points.get(key));
-    const filename = `profile-${message.author.id}.jpg`;
-    const attachment = new Attachment(buffer, filename);
-    await message.channel.send(attachment);
-  }
+// This will check to see if the command was ran in a guild instead of a DM.
+if (message.guild) {
+	// This creates a "key" for enmaps Key/Value system.
+	// We've declared it as a variable as we'll be using it in multiple places.
+	const key = `${message.guild.id}-${message.author.id}`;
+	// If the points database does not have the message author in the database...
+	if (!client.points.has(key)) {
+		// Create an entry for them...
+		client.points.set(key, {
+			// Using the predefined information below.
+			user: message.author.id,
+			guild: message.guild.id,
+			points: 0,
+			level: 1
+		});
+	}
+	// We await both the message.channel.send, and the profile function.
+	// Also remember, we wanted to pass the member object, and the points object.
+	// Since we're creating a user profile, we should give it a unique file name.
+	const buffer = await profile(message.member, client.points.get(key));
+	const filename = `profile-${message.author.id}.jpg`;
+	const attachment = new Attachment(buffer, filename);
+	await message.channel.send(attachment);
+}
 ```
 
 ## Creating the profile
@@ -117,7 +120,7 @@ Alright, now we've got the actual command sorted, all we have left is the `profi
 
 > _You should go get a drink, this may take a while lol._
 
-Inside your profile function you need to define a few variables, we're going do to some more fancy [Destructuring assignment][DestructuringAssignment], we are passing the entire object, but we actually only need a few things, so here we go.
+Inside your profile function you need to define a few variables, we're going do to some more fancy [Destructuring assignment][destructuringassignment], we are passing the entire object, but we actually only need a few things, so here we go.
 
 ```javascript
 // We only need the level, and points values, we don't need the user or guild id.
@@ -127,37 +130,39 @@ const { level, points } = client.points.get(key);
 // Remember when I mentioned the regex before? Now we get to use it, we want to set the size to 128 pixels,
 // instead of 2048 pixels.
 try {
-  const result = await fetch(member.user.displayAvatarURL.replace(imageUrlRegex, "?size=128"));
-  if (!result.ok) throw new Error("Failed to get the avatar.");
-  const avatar = await result.buffer();
+	const result = await fetch(member.user.displayAvatarURL.replace(imageUrlRegex, '?size=128'));
+	if (!result.ok) throw new Error('Failed to get the avatar.');
+	const avatar = await result.buffer();
 
-  // The reason for the displayName length check, is we don't want the name of the user going outside
-  // the box we're going to be making later, so we grab all the characters from the 0 index through
-  // to the 17th index and cut the rest off, then append `...`.
-  const name = member.displayName.length > 20 ? member.displayName.substring(0, 17) + "..." : member.displayName;
+	// The reason for the displayName length check, is we don't want the name of the user going outside
+	// the box we're going to be making later, so we grab all the characters from the 0 index through
+	// to the 17th index and cut the rest off, then append `...`.
+	const name = member.displayName.length > 20 ? member.displayName.substring(0, 17) + '...' : member.displayName;
 
-  // ...
+	// ...
 } catch (error) {
-  await message.channel.send(`Something happened: ${error.message}`);
+	await message.channel.send(`Something happened: ${error.message}`);
 }
 ```
 
 Okay, from this point on, it's all canvas baby, we're going to do it chunk by chunk for ease, we'll be using the Discord
-colour scheme, it can be found on their [branding][DiscordBranding] page.
+colour scheme, it can be found on their [branding][discordbranding] page.
 
 Since this is a function, we should `return` the canvas we create so let's do just that.
 
 ```javascript
-return new Canvas(400, 180)
+return new Canvas(400, 180);
 ```
 
-Now, here comes the beauty of canvas-constructor's [`chainable` methods][ChainingJavascript].
+Now, here comes the beauty of canvas-constructor's [`chainable` methods][chainingjavascript].
 
 ```javascript
-return new Canvas(400, 180)
-  // Create the Blurple rectangle on the right side of the image.
-  .setColor("#7289DA")
-  .printRectangle(84, 0, 316, 180)
+return (
+	new Canvas(400, 180)
+		// Create the Blurple rectangle on the right side of the image.
+		.setColor('#7289DA')
+		.printRectangle(84, 0, 316, 180)
+);
 ```
 
 That's the beauty of chainable methods, you don't need to constantly call the same thing over and over, so from this
@@ -245,7 +250,7 @@ OS installed font\), this should really be done inside your initialization file,
 this under the requires at the very top of your file.
 
 ```javascript
-Canvas.registerFont(resolve(join(__dirname, "./path/to/font/Discord.ttf")), "Discord");
+Canvas.registerFont(resolve(join(__dirname, './path/to/font/Discord.ttf')), 'Discord');
 ```
 
 And lastly, back inside the `profile()` function, throw `.toBuffer()` on the very end.
@@ -256,9 +261,9 @@ In part two, I will take this guide page and show you how to use a pre-made imag
 
 Now go create!
 
-[AnIdiotsGuide]: https://anidiots.guide
-[GuideBot]: https://github.com/AnIdiotsGuide/guidebot
-[EnmapBasedPointsSystem]: https://enmap.evie.codes/examples/points
-[DestructuringAssignment]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment
-[DiscordBranding]: https://discordapp.com/branding
-[ChainingJavascript]: https://schier.co/blog/2013/11/14/method-chaining-in-javascript.html
+[anidiotsguide]: https://anidiots.guide
+[guidebot]: https://github.com/AnIdiotsGuide/guidebot
+[enmapbasedpointssystem]: https://enmap.evie.codes/examples/points
+[destructuringassignment]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment
+[discordbranding]: https://discordapp.com/branding
+[chainingjavascript]: https://schier.co/blog/2013/11/14/method-chaining-in-javascript.html

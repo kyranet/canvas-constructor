@@ -1,8 +1,8 @@
 # Installing Canvas
 
 > **NOTE**: This guide is for installing `canvas` for node.js, if you want to use `canvas-constructor` for web browsers,
-use the package link from unpkg or get the bundle from the
-[webpack branch](https://github.com/kyranet/canvas-constructor/tree/webpack)
+> use the package link from unpkg or get the bundle from the
+> [webpack branch](https://github.com/kyranet/canvas-constructor/tree/webpack)
 
 Let's start off by introducing what canvas is. In HTML, the `<canvas>` element can be used to draw images via scripting
 with JavaScript. The canvas that we're talking about is a Cairo backed canvas implementation for **Node.js**. An example
@@ -43,9 +43,9 @@ $ yarn global add windows-build-tools
 
 **>Notes:**
 
-- While the npm page tells you to install `GTK` and `libjpeg-turbo`, those aren't needed! Both `canvas` and
-`canvas-constructor` function perfectly fine without them, so they're really just taking up space that could be used for
-something else.
+-   While the npm page tells you to install `GTK` and `libjpeg-turbo`, those aren't needed! Both `canvas` and
+    `canvas-constructor` function perfectly fine without them, so they're really just taking up space that could be used for
+    something else.
 
 ### Step 2
 
@@ -60,8 +60,8 @@ $ yarn add canvas canvas-constructor
 ```
 
 > **Note**: You can install a development version of `canvas` by replacing `canvas` with `Automattic/node-canvas`,
-or `canvas-constructor` with `kyranet/canvas-constructor` for that matter. However, we do not guarantee stability in
-development branches.
+> or `canvas-constructor` with `kyranet/canvas-constructor` for that matter. However, we do not guarantee stability in
+> development branches.
 
 If you followed the guide completely, your console should look something like this, and you're good to go!
 

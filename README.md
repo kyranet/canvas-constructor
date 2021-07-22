@@ -1,12 +1,21 @@
+<div align="center">
+
+![CanvasConstructor Logo](https://cdn.discordapp.com/emojis/451438332375728128.png?v=1)
+
 # canvas-constructor
 
-[![Discord](https://discordapp.com/api/guilds/437335547711848458/embed.png)](https://discord.gg/taNgb9d)
+**An ES6 chainable class for node-canvas with built-in utilities.**
+
 [![npm](https://img.shields.io/npm/v/canvas-constructor.svg?maxAge=3600)](https://www.npmjs.com/package/canvas-constructor)
 [![npm](https://img.shields.io/npm/dt/canvas-constructor.svg?maxAge=3600)](https://www.npmjs.com/package/canvas-constructor)
 [![Total alerts](https://img.shields.io/lgtm/alerts/g/kyranet/canvas-constructor.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/kyranet/canvas-constructor/alerts/)
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/kyranet/canvas-constructor/master/LICENSE)
 
-An ES6 chainable class for node-canvas with built-in utilities.
+[![Support Server](https://discord.com/api/guilds/437335547711848458/embed.png?style=banner2)](https://discord.gg/taNgb9d)
+
+</div>
+
+---
 
 ## Installation
 
@@ -24,7 +33,8 @@ How to use it:
 **Node.js**:
 
 ```js
-const { Canvas } = require('canvas-constructor');
+const { Canvas } = require('canvas-constructor/skia');
+// or `canvas-constructor/cairo` if you are using `canvas`
 
 new Canvas(300, 300)
 	.setColor('#AEFD54')
@@ -38,7 +48,7 @@ new Canvas(300, 300)
 **Browser**:
 
 ```html
-<script type="text/javascript" src="canvas-constructor/dist/index.umd.js"></script>
+<script type="text/javascript" src="https://unpkg.com/canvas-constructor"></script>
 <script type="text/javascript">
 	const canvasElement = document.getElementById('canvas');
 	new CanvasConstructor.Canvas(canvasElement)
@@ -61,7 +71,7 @@ new Canvas(300, 300)
 Now, let's suppose we want to add images, we'll use `Canvas.resolveImage`, which works in both Node.js and browser:
 
 ```js
-const { Canvas, resolveImage } = require('canvas-constructor');
+const { Canvas, resolveImage } = require('canvas-constructor/skia');
 
 async function createCanvas() {
 	const image = await resolveImage('./images/kitten.png');
@@ -84,7 +94,7 @@ async function createCanvas() {
 -   Write the text 'Kitten!' in the position (150, 370)
 -   Return a buffer.
 
-And now, you have created an image with a kitten in the background and some centered text in the bottom of it.
+And now, you have created an image with a kitten in the background and some centred text in the bottom of it.
 
 If you experience issues with `skia-canvas` or `canvas`, please refer to their respective package repositories, this
 package is just a convenient wrapper for the two.

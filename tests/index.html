@@ -17,12 +17,12 @@
 			background-color: #eee;
 		}
 
-		th[scope="col"] {
+		th[scope='col'] {
 			background-color: #696969;
 			color: #fff;
 		}
 
-		th[scope="row"] {
+		th[scope='row'] {
 			background-color: #d7d9f2;
 		}
 
@@ -36,7 +36,7 @@
 			border: 2px solid rgb(200, 200, 200);
 			letter-spacing: 1px;
 			font-family: sans-serif;
-			font-size: .8rem;
+			font-size: 0.8rem;
 		}
 	</style>
 </head>
@@ -78,7 +78,7 @@
 		</tbody>
 	</table>
 
-	<script type="text/javascript" src="../dist/index.umd.js"></script>
+	<script type="text/javascript" src="../dist/browser.umd.js"></script>
 	<script type="text/javascript">
 		const canvasElement = document.getElementById('basic');
 		new CanvasConstructor.Canvas(canvasElement)
@@ -105,7 +105,7 @@
 
 	<script type="text/javascript">
 		(async () => {
-			const image = await CanvasConstructor.resolveImage('https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png')
+			const image = await CanvasConstructor.resolveImage('https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png');
 			for (const fit of ['fill', 'contain', 'cover', 'none']) {
 				const canvasElement = document.getElementById(`circular-image-${fit}`);
 				new CanvasConstructor.Canvas(canvasElement)

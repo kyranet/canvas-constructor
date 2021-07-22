@@ -17,6 +17,9 @@ dist/
 !src/**/*.d.ts
 **/*.tsbuildinfo
 !jest.config.js
+!browser.d.ts
+!cairo.d.ts
+!skia.d.ts
 
 # Ignore heapsnapshot and log files
 *.heapsnapshot
