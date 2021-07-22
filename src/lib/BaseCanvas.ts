@@ -1,21 +1,5 @@
 /* eslint-disable @typescript-eslint/unified-signatures */
-import { BrowserCanvas, CanvasType, getFontHeight, mod, NodeCanvas, SkiaCanvas, textWrap } from './Util';
-
-export interface ImageDataCallback {
-	(this: Canvas, data: ImageData, canvas: Canvas): unknown;
-}
-
-export interface MeasureTextCallback {
-	(this: Canvas, measurement: TextMetrics, canvas: Canvas): unknown;
-}
-
-export interface WrapTextCallback {
-	(this: Canvas, text: string, canvas: Canvas): unknown;
-}
-
-export interface PatternCallback {
-	(this: Canvas, pattern: CanvasPattern, canvas: Canvas): unknown;
-}
+import { fontRegExp, getFontHeight, textWrap } from './Util';
 
 export interface BeveledRadiusOptions {
 	/**
@@ -52,34 +36,42 @@ export interface PrintCircularOptions {
 	fit?: 'fill' | 'contain' | 'cover' | 'none';
 }
 
-export type ModuleCanvas = BrowserCanvas.Canvas | SkiaCanvas.Canvas | NodeCanvas.Canvas;
-export type ModuleImage = BrowserCanvas.Image | SkiaCanvas.Image | NodeCanvas.Image;
-
 export type GlobalCompositeOperation = CanvasRenderingContext2D['globalCompositeOperation'];
-export type AntiAlias = import('canvas').CanvasRenderingContext2D['antialias'];
-export type TextDrawingMode = import('canvas').CanvasRenderingContext2D['textDrawingMode'];
-export type PatternQuality = import('canvas').CanvasRenderingContext2D['patternQuality'];
 export type PatternRepeat = 'repeat' | 'repeat-x' | 'repeat-y' | 'no-repeat' | '' | null;
-export type LoadableImage = string | Buffer;
-export type ImageResolvable = ModuleCanvas | ModuleImage | CanvasImageSource;
 
-export class Canvas {
+export interface BaseCanvasElement {
+	width: number;
+	height: number;
+	getContext(type: '2d'): unknown;
+}
+
+export interface BaseImageElement {
+	width: number | SVGAnimatedLength;
+	height: number | SVGAnimatedLength;
+}
+
+export abstract class BaseCanvas<
+	CanvasType extends BaseCanvasElement = HTMLCanvasElement,
+	ContextType extends CanvasRenderingContext2D = CanvasRenderingContext2D,
+	ImageType extends Parameters<ContextType['drawImage']>[0] = Parameters<ContextType['drawImage']>[0],
+	TextMetricsType extends ReturnType<ContextType['measureText']> = ReturnType<ContextType['measureText']>
+> {
 	/**
 	 * The constructed Canvas
 	 * @since 0.0.1
 	 */
-	private canvas: ModuleCanvas;
+	public canvas: CanvasType;
 
 	/**
 	 * The 2D context for the Canvas.
 	 * @since 0.0.1
 	 */
-	private context: CanvasRenderingContext2D;
+	public context: ContextType;
 
 	/**
 	 * Initialize canvas-constructor in a browser.
 	 * @param canvas An HTMLCanvasElement.
-	 * <script type="text/javascript" src="canvasconstructor.master.min.js"></script>
+	 * <script type="text/javascript" src="canvasconstructor.main.min.js"></script>
 	 * <script type="text/javascript">
 	 * const canvasElement = document.getElementById('canvas');
 	 * new CanvasConstructor.Canvas(canvasElement)
@@ -87,28 +79,9 @@ export class Canvas {
 	 *     .printRectangle(10, 10, 100, 100);
 	 * </script>
 	 */
-	public constructor(canvas: HTMLCanvasElement);
-	/**
-	 * Initialize canvas-constructor
-	 * @param width The canvas' width in pixels.
-	 * @param height The canvas' height in pixels.
-	 * @param type The canvas type.
-	 */
-	public constructor(width: number, height: number, type?: 'pdf' | 'svg');
-	public constructor(width: number | HTMLCanvasElement, height?: number, type?: 'pdf' | 'svg') {
-		if (typeof width === 'number') {
-			if (mod.type === CanvasType.NodeCanvas) this.canvas = mod.module.createCanvas(width, height!, type);
-			else if (mod.type === CanvasType.SkiaCanvas) this.canvas = new mod.module.Canvas(width, height!);
-			else throw new TypeError('Expected a HTMLCanvasElement, but received a number instead.');
-		} else {
-			this.canvas = width;
-		}
-
-		this.context = this.canvas.getContext('2d') as CanvasRenderingContext2D;
-	}
-
-	private get windowCanvas(): HTMLCanvasElement {
-		return this.canvas as unknown as HTMLCanvasElement;
+	public constructor(canvas: CanvasType, context?: ContextType) {
+		this.canvas = canvas;
+		this.context = context ?? (this.canvas.getContext('2d') as ContextType);
 	}
 
 	/**
@@ -120,7 +93,6 @@ export class Canvas {
 	}
 
 	public set width(value: number) {
-		// @ts-expect-error: skia-canvas complains about 'width' being read-only.
 		this.canvas.width = value;
 	}
 
@@ -133,7 +105,6 @@ export class Canvas {
 	}
 
 	public set height(value: number) {
-		// @ts-expect-error: skia-canvas complains about 'height' being read-only.
 		this.canvas.height = value;
 	}
 
@@ -275,7 +246,6 @@ export class Canvas {
 	/**
 	 * Returns an ImageData object representing the underlying pixel data for the area of the canvas
 	 * denoted by the entire Canvas. This method is not affected by the canvas transformation matrix.
-	 * @param callback The callback to be called.
 	 * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/getImageData
 	 */
 	public getImageData(): ImageData;
@@ -285,7 +255,7 @@ export class Canvas {
 	 * @param callback The callback to be called.
 	 * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/getImageData
 	 */
-	public getImageData(callback: ImageDataCallback): this;
+	public getImageData(callback: (this: this, data: ImageData, canvas: this) => unknown): this;
 	/**
 	 * Returns an ImageData object representing the underlying pixel data for the area of the canvas denoted by the rectangle which starts at (sx, sy)
 	 * and has an sw width and sh height. This method is not affected by the canvas transformation matrix.
@@ -307,8 +277,15 @@ export class Canvas {
 	 * @param callback The callback to be called.
 	 * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/getImageData
 	 */
-	public getImageData(x: number, y: number, width: number, height: number, callback: ImageDataCallback): this;
-	public getImageData(x?: number | ImageDataCallback, y?: number, width?: number, height?: number, callback?: ImageDataCallback): this | ImageData {
+	public getImageData(x: number, y: number, width: number, height: number, callback: (this: this, data: ImageData, canvas: this) => unknown): this;
+
+	public getImageData(
+		x?: number | ((this: this, data: ImageData, canvas: this) => unknown),
+		y?: number,
+		width?: number,
+		height?: number,
+		callback?: (this: this, data: ImageData, canvas: this) => unknown
+	): this | ImageData {
 		if (typeof x === 'function') {
 			callback = x;
 			x = 0;
@@ -390,11 +367,12 @@ export class Canvas {
 	 *     .toBuffer();
 	 */
 	public printResponsiveText(text: string, x: number, y: number, maxWidth: number): this {
-		const [, style = '', size, font] = /(\w+ )?(\d+)(.+)/.exec(this.context.font) ?? [];
-		const currentSize = parseInt(size, 10);
+		const [tail, height, lead] = this.parseFont(this.context.font);
+		if (typeof height !== 'number') return this.printText(text, x, y);
+
 		const { width } = this.measureText(text);
-		const newLength = maxWidth > width ? currentSize : (maxWidth / width) * currentSize;
-		return this.setTextFont(`${style}${newLength}${font}`).printText(text, x, y);
+		const newHeight = maxWidth > width ? height : (maxWidth / width) * height;
+		return this.setTextFont(`${tail}${newHeight}${lead}`).printText(text, x, y);
 	}
 
 	/**
@@ -495,7 +473,7 @@ export class Canvas {
 	 *     .printText('Hello World!', 30, 50)
 	 *     .toBuffer(); // Returns a Buffer
 	 */
-	public measureText(text: string): TextMetrics;
+	public measureText(text: string): TextMetricsType;
 	/**
 	 * Measure a text's width given a string.
 	 * @param text The text to measure.
@@ -522,14 +500,14 @@ export class Canvas {
 	 *     .printText('Hello World!', 30, 50)
 	 *     .toBuffer(); // Returns a Buffer
 	 */
-	public measureText(text: string, callback: MeasureTextCallback): this;
-	public measureText(text: string, callback?: MeasureTextCallback): this | TextMetrics {
+	public measureText(text: string, callback: (this: this, measurement: TextMetricsType, canvas: this) => unknown): this;
+	public measureText(text: string, callback?: (this: this, measurement: TextMetricsType, canvas: this) => unknown): this | TextMetricsType {
 		if (callback) {
 			if (typeof callback !== 'function') throw new TypeError('Callback must be a function.');
-			callback.call(this, this.context.measureText(text), this);
+			callback.call(this, this.context.measureText(text) as TextMetricsType, this);
 			return this;
 		}
-		return this.context.measureText(text);
+		return this.context.measureText(text) as TextMetricsType;
 	}
 
 	/**
@@ -537,8 +515,8 @@ export class Canvas {
 	 * @param size The new size to set
 	 */
 	public setTextSize(size: number): this {
-		const [, style = '', font] = /(\w+ )?(?:\d+)(.+)/.exec(this.context.font) ?? [];
-		return this.setTextFont(`${style}${size}${font}`);
+		const result = this.parseFont(this.context.font);
+		return result.length === 1 ? this : this.setTextFont(`${result[0]}${size}${result[2]}`);
 	}
 
 	/**
@@ -619,7 +597,7 @@ export class Canvas {
 	 * @param dy The y-axis coordinate in the destination canvas at which to place the top-left corner of the source `image`.
 	 * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/drawImage
 	 */
-	public printImage(image: ImageResolvable, dx: number, dy: number): this;
+	public printImage(image: ImageType, dx: number, dy: number): this;
 	/**
 	 * Add an image at a position (x, y) with a given width and height.
 	 * @param image The image.
@@ -629,7 +607,7 @@ export class Canvas {
 	 * @param dh The height to draw the `image` in the destination canvas. This allows scaling of the drawn image.
 	 * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/drawImage
 	 */
-	public printImage(image: ImageResolvable, dx: number, dy: number, dw: number, dh: number): this;
+	public printImage(image: ImageType, dx: number, dy: number, dw: number, dh: number): this;
 	/**
 	 * Add an image at a position (x, y) with a given width and height, from a specific source rectangle.
 	 * @param image The image.
@@ -643,11 +621,10 @@ export class Canvas {
 	 * @param dh The height to draw the `image` in the destination canvas. This allows scaling of the drawn image.
 	 * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/drawImage
 	 */
-	public printImage(image: ImageResolvable, sx: number, sy: number, sw: number, sh: number, dx: number, dy: number, dw: number, dh: number): this;
-
-	public printImage(image: ImageResolvable, ...args: readonly number[]) {
+	public printImage(image: ImageType, sx: number, sy: number, sw: number, sh: number, dx: number, dy: number, dw: number, dh: number): this;
+	public printImage(...args: readonly unknown[]) {
 		// @ts-expect-error: Mismatching overloads
-		this.context.drawImage(image, ...args);
+		this.context.drawImage(...args);
 		return this;
 	}
 
@@ -660,14 +637,9 @@ export class Canvas {
 	 * @param height The height to draw the image in the destination canvas. This allows scaling of the drawn image. If not specified, the image is not scaled in height when drawn.
 	 * @param radius The radius for the circle
 	 */
-	public printCircularImage(
-		imageOrBuffer: ImageResolvable,
-		x: number,
-		y: number,
-		radius: number,
-		{ fit = 'fill' }: PrintCircularOptions = {}
-	): this {
-		const { positionX, positionY, sizeX, sizeY } = Canvas.resolveCircularCoordinates(imageOrBuffer, x, y, radius, fit);
+	public printCircularImage(imageOrBuffer: ImageType, x: number, y: number, radius: number, options?: PrintCircularOptions): this;
+	public printCircularImage(imageOrBuffer: any, x: number, y: number, radius: number, { fit = 'fill' }: PrintCircularOptions = {}): this {
+		const { positionX, positionY, sizeX, sizeY } = this.resolveCircularCoordinates(imageOrBuffer, x, y, radius, fit);
 		return this.save()
 			.createCircularClip(x, y, radius, 0, Math.PI * 2, false)
 			.printImage(imageOrBuffer, positionX, positionY, sizeX, sizeY)
@@ -684,13 +656,15 @@ export class Canvas {
 	 * @param radius The radius for the new image.
 	 */
 	public printRoundedImage(
-		imageOrBuffer: ImageResolvable,
+		imageOrBuffer: ImageType,
 		x: number,
 		y: number,
 		width: number,
 		height: number,
 		radius: BeveledRadiusOptions | number
-	): this {
+	): this;
+
+	public printRoundedImage(imageOrBuffer: any, x: number, y: number, width: number, height: number, radius: BeveledRadiusOptions | number): this {
 		return this.save().createRoundedClip(x, y, width, height, radius).printImage(imageOrBuffer, x, y, width, height).restore();
 	}
 
@@ -960,7 +934,7 @@ export class Canvas {
 	 * @param repetition The repeat mode.
 	 * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/createPattern
 	 */
-	public createPattern(image: ImageResolvable, repetition: PatternRepeat): CanvasPattern;
+	public createPattern(image: ImageType, repetition: PatternRepeat): CanvasPattern;
 	/**
 	 * Creates a pattern using the specified image. It repeats the source in the directions specified by the repetition
 	 * argument, and calls the callback.
@@ -969,9 +943,13 @@ export class Canvas {
 	 * @param callback The callback to take the createPattern.
 	 * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/createPattern
 	 */
-	public createPattern(image: ImageResolvable, repetition: PatternRepeat, callback: PatternCallback): this;
-	public createPattern(image: ImageResolvable, repetition: PatternRepeat, callback?: PatternCallback): CanvasPattern | this {
-		// @ts-expect-error: Mismatching overloads between different modules:
+	public createPattern(image: ImageType, repetition: PatternRepeat, callback: (this: this, pattern: CanvasPattern, canvas: this) => unknown): this;
+
+	public createPattern(
+		image: ImageType,
+		repetition: PatternRepeat,
+		callback?: (this: this, pattern: CanvasPattern, canvas: this) => unknown
+	): CanvasPattern | this {
 		const pattern = this.context.createPattern(image, repetition)!;
 		if (callback) {
 			callback.call(this, pattern, this);
@@ -988,7 +966,7 @@ export class Canvas {
 	 * @param repetition The repeat mode.
 	 * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/createPattern
 	 */
-	public printPattern(image: ImageResolvable, repetition: PatternRepeat): this {
+	public printPattern(image: ImageType, repetition: PatternRepeat): this {
 		return this.createPattern(image, repetition, (pattern) => this.setColor(pattern));
 	}
 
@@ -1311,42 +1289,6 @@ export class Canvas {
 	}
 
 	/**
-	 * Change the pattern quality
-	 * @param pattern The pattern quality.
-	 * @note This is only available when using the `canvas` module.
-	 */
-	public setPatternQuality(pattern: PatternQuality): this {
-		if (mod.type === CanvasType.NodeCanvas) (this.context as NodeCanvas.Context2D).patternQuality = pattern;
-		else throw new Error('`patternQuality` is only available with the `canvas` module.');
-		return this;
-	}
-
-	/**
-	 * Set the text drawing mode. Using glyph is much faster than path for drawing, and when using a PDF context will
-	 * embed the text natively, so will be selectable and lower file size. The downside is that cairo does not have any
-	 * subpixel precision for glyph, so this will be noticeably lower quality for text positioning in cases such as
-	 * rotated text. Also, strokeText in glyph will act the same as fillText, except using the stroke style for the fill.
-	 * @param mode The drawing mode.
-	 * @note This is only available when using the `canvas` module.
-	 */
-	public setTextDrawingMode(mode: TextDrawingMode): this {
-		if (mod.type === CanvasType.NodeCanvas) (this.context as NodeCanvas.Context2D).textDrawingMode = mode;
-		else throw new Error('`textDrawingMode` is only available with the `canvas` module.');
-		return this;
-	}
-
-	/**
-	 * Set anti-aliasing mode.
-	 * @param antialias The antialias mode.
-	 * @note This is only available when using the `canvas` module.
-	 */
-	public setAntiAliasing(antialias: AntiAlias): this {
-		if (mod.type === CanvasType.NodeCanvas) (this.context as NodeCanvas.Context2D).antialias = antialias;
-		else throw new Error('`antialias` is only available with the `canvas` module.');
-		return this;
-	}
-
-	/**
 	 * Sets the type of compositing operation to apply when drawing new shapes, where type is a string identifying which
 	 * of the compositing or blending mode operations to use.
 	 * @param type The global composite operation mode.
@@ -1459,245 +1401,14 @@ export class Canvas {
 		return this.context.isPointInStroke(x, y);
 	}
 
-	public process(fn: (this: Canvas, canvas: Canvas) => unknown): this;
-	public process<P1>(fn: (this: Canvas, canvas: Canvas, arg1: P1) => unknown, arg1: P1): this;
-	public process<P1, P2>(fn: (this: Canvas, canvas: Canvas, arg1: P1, arg2: P2) => unknown, arg1: P1, arg2: P2): this;
-	public process<P1, P2, P3>(fn: (this: Canvas, canvas: Canvas, arg1: P1, arg2: P2, arg3: P3) => unknown, arg1: P1, arg2: P2, arg3: P3): this;
-	public process<P1, P2, P3, P4>(
-		fn: (this: Canvas, canvas: Canvas, arg1: P1, arg2: P2, arg3: P3, arg4: P4) => unknown,
-		arg1: P1,
-		arg2: P2,
-		arg3: P3,
-		arg4: P4
-	): this;
-
-	public process<P1, P2, P3, P4, P5>(
-		fn: (this: Canvas, canvas: Canvas, arg1: P1, arg2: P2, arg3: P3, arg4: P4, arg5: P5) => unknown,
-		arg1: P1,
-		arg2: P2,
-		arg3: P3,
-		arg4: P4,
-		arg5: P5
-	): this;
-
-	public process<P1, P2, P3, P4, P5, P6>(
-		fn: (this: Canvas, canvas: Canvas, arg1: P1, arg2: P2, arg3: P3, arg4: P4, arg5: P5, arg6: P6) => unknown,
-		arg1: P1,
-		arg2: P2,
-		arg3: P3,
-		arg4: P4,
-		arg5: P5,
-		arg6: P6
-	): this;
-
-	public process<P1, P2, P3, P4, P5, P6, P7>(
-		fn: (this: Canvas, canvas: Canvas, arg1: P1, arg2: P2, arg3: P3, arg4: P4, arg5: P5, arg6: P6, arg7: P7) => unknown,
-		arg1: P1,
-		arg2: P2,
-		arg3: P3,
-		arg4: P4,
-		arg5: P5,
-		arg6: P6,
-		arg7: P7
-	): this;
-
-	public process<P1, P2, P3, P4, P5, P6, P7, P8>(
-		fn: (this: Canvas, canvas: Canvas, arg1: P1, arg2: P2, arg3: P3, arg4: P4, arg5: P5, arg6: P6, arg7: P7, arg8: P8) => unknown,
-		arg1: P1,
-		arg2: P2,
-		arg3: P3,
-		arg4: P4,
-		arg5: P5,
-		arg6: P6,
-		arg7: P7,
-		arg8: P8
-	): this;
-
-	public process<P1, P2, P3, P4, P5, P6, P7, P8, P9>(
-		fn: (this: Canvas, canvas: Canvas, arg1: P1, arg2: P2, arg3: P3, arg4: P4, arg5: P5, arg6: P6, arg7: P7, arg8: P8, arg9: P9) => unknown,
-		arg1: P1,
-		arg2: P2,
-		arg3: P3,
-		arg4: P4,
-		arg5: P5,
-		arg6: P6,
-		arg7: P7,
-		arg8: P8,
-		arg9: P9
-	): this;
-
-	public process<T>(fn: (this: Canvas, canvas: Canvas, ...args: readonly T[]) => unknown, ...args: readonly T[]): this;
 	/**
 	 * Process data with this as the context
 	 * @param fn A callback function
 	 * @param args Extra arguments to pass to the function
 	 */
-	public process(fn: (this: Canvas, canvas: Canvas, ...args: readonly any[]) => unknown, ...args: readonly any[]): this {
+	public process<Args extends readonly any[]>(fn: (this: this, canvas: this, ...args: Args) => unknown, ...args: Args): this {
 		fn.call(this, this, ...args);
 		return this;
-	}
-
-	/**
-	 * <warn>This is for Node.js usage only, HTMLCanvasElement does not support this</warn>
-	 * For image canvases, encodes the canvas as a PNG. For PDF canvases, encodes the canvas as a PDF. For SVG canvases,
-	 * encodes the canvas as an SVG.
-	 */
-	public toBuffer(): Buffer;
-	/**
-	 * <warn>This is for Node.js usage only, HTMLCanvasElement does not support this</warn>
-	 * Encodes the canvas as a PNG.
-	 * @param mimeType the standard MIME type for the image format to return.
-	 * @param config The render configuration.
-	 */
-	public toBuffer(mimeType: 'image/png', config?: import('canvas').PngConfig): Buffer;
-	/**
-	 * <warn>This is for Node.js usage only, HTMLCanvasElement does not support this</warn>
-	 * Encodes the canvas as a JPG.
-	 * @param mimeType the standard MIME type for the image format to return.
-	 * @param config The render configuration.
-	 */
-	public toBuffer(mimeType: 'image/jpeg', config?: import('canvas').JpegConfig): Buffer;
-	/**
-	 * <warn>This is for Node.js usage only, HTMLCanvasElement does not support this</warn>
-	 * Encodes the canvas as a PDF.
-	 * @param mimeType the standard MIME type for the image format to return.
-	 * @param config The render configuration.
-	 */
-	public toBuffer(mimeType: 'application/pdf', config?: import('canvas').PdfConfig): Buffer;
-	/**
-	 * <warn>This is for Node.js usage only, HTMLCanvasElement does not support this</warn>
-	 * Returns the unencoded pixel data, top-to-bottom. On little-endian (most) systems, the array will be ordered BGRA;
-	 * on big-endian systems, it will be ARGB.
-	 * @param mimeType the standard MIME type for the image format to return.
-	 */
-	public toBuffer(mimeType: 'raw'): Buffer;
-	public toBuffer(...args: readonly any[]): Buffer {
-		// @ts-expect-error: Complains about invalid overload (expects more than 0 overloads).
-		return this.canvas.toBuffer(...args);
-	}
-
-	/**
-	 * <warn>This is for Node.js usage only, HTMLCanvasElement does not support this</warn>
-	 * For image canvases, encodes the canvas as a PNG. For PDF canvases, encodes the canvas as a PDF. For SVG canvases,
-	 * encodes the canvas as an SVG.
-	 */
-	public toBufferAsync(): Promise<Buffer>;
-	/**
-	 * <warn>This is for Node.js usage only, HTMLCanvasElement does not support this</warn>
-	 * Encodes the canvas as a PNG.
-	 * @param mimeType the standard MIME type for the image format to return.
-	 * @param config The render configuration.
-	 */
-	public toBufferAsync(mimeType: 'image/png', config?: import('canvas').PngConfig): Promise<Buffer>;
-	/**
-	 * <warn>This is for Node.js usage only, HTMLCanvasElement does not support this</warn>
-	 * Encodes the canvas as a JPG.
-	 * @param mimeType the standard MIME type for the image format to return.
-	 * @param config The render configuration.
-	 */
-	public toBufferAsync(mimeType: 'image/jpeg', config?: import('canvas').JpegConfig): Promise<Buffer>;
-	/**
-	 * <warn>This is for Node.js usage only, HTMLCanvasElement does not support this</warn>
-	 * Encodes the canvas as a PDF.
-	 * @param mimeType the standard MIME type for the image format to return.
-	 * @param config The render configuration.
-	 */
-	public toBufferAsync(mimeType: 'application/pdf', config?: import('canvas').PdfConfig): Promise<Buffer>;
-	public toBufferAsync(...args: readonly any[]): Promise<Buffer> {
-		return new Promise<Buffer>((resolve, reject) =>
-			// @ts-expect-error: Complains about invalid overload (expects more than 0 overloads).
-			this.canvas.toBuffer((error: Error | null, buffer: Buffer | null): void => {
-				if (error) reject(error);
-				else resolve(buffer!);
-			}, ...args)
-		);
-	}
-
-	/**
-	 * Render the canvas into a PNG Data URL.
-	 * @see https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/toDataURL
-	 */
-	public toDataURL(): string;
-	/**
-	 * Render the canvas into a PNG Data URL.
-	 * @param type the standard MIME type for the image format to return.
-	 * @see https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/toDataURL
-	 */
-	public toDataURL(mimeType: 'image/png'): string;
-	/**
-	 * Render the canvas into a JPEG Data URL.
-	 * @param type the standard MIME type for the image format to return.
-	 * @param quality The quality for the JPEG.
-	 * @see https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/toDataURL
-	 */
-	public toDataURL(mimeType: 'image/jpeg', quality?: number): string;
-	public toDataURL(...args: readonly any[]): string {
-		// @ts-expect-error: Required number of options.
-		return this.canvas.toDataURL(...args);
-	}
-
-	/**
-	 * Render the canvas into a PNG Data URL.
-	 * @see https://github.com/Automattic/node-canvas#canvastodataurl-sync-and-async
-	 */
-	public toDataURLAsync(): Promise<string>;
-	/**
-	 * Render the canvas into a PNG Data URL.
-	 * @param type the standard MIME type for the image format to return.
-	 * @see https://github.com/Automattic/node-canvas#canvastodataurl-sync-and-async
-	 */
-	public toDataURLAsync(mimeType: 'image/png'): Promise<string>;
-	/**
-	 * Render the canvas into a JPEG Data URL.
-	 * @param type the standard MIME type for the image format to return.
-	 * @param quality The quality for the JPEG.
-	 * @see https://github.com/Automattic/node-canvas#canvastodataurl-sync-and-async
-	 */
-	public toDataURLAsync(mimeType: 'image/jpeg'): Promise<string>;
-	/**
-	 * Render the canvas into a JPEG Data URL.
-	 * @param type the standard MIME type for the image format to return.
-	 * @param config The render configuration.
-	 * @see https://github.com/Automattic/node-canvas#canvastodataurl-sync-and-async
-	 */
-	public toDataURLAsync(mimeType: 'image/jpeg', config: import('canvas').JpegConfig): Promise<string>;
-	/**
-	 * Render the canvas into a JPEG Data URL.
-	 * @param type the standard MIME type for the image format to return.
-	 * @param quality The quality for the JPEG.
-	 * @see https://github.com/Automattic/node-canvas#canvastodataurl-sync-and-async
-	 */
-	public toDataURLAsync(mimeType: 'image/jpeg', quality: number): Promise<string>;
-	public toDataURLAsync(...args: readonly any[]): Promise<string> {
-		return new Promise<string>((resolve, reject) =>
-			// @ts-expect-error: Complains about invalid overload (expects more than 0 overloads).
-			this.canvas.toDataURL(...args, (error, url) => {
-				if (error) reject(error);
-				else resolve(url);
-			})
-		);
-	}
-
-	/**
-	 * <warn>This is for web usage only, node-canvas does not support this</warn>
-	 * Render the canvas into a Blob object representing the image contained in the canvas
-	 * @param callback A callback function with the resulting `Blob` object as a single argument.
-	 * @param type A string indicating the image format. The default type is `image/png`.
-	 * @param quality A number between 0 and 1 indicating image quality if the requested type is `image/jpeg` or `image/webp`.
-	 * @see https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/toBlob
-	 */
-	public toBlob(callback: BlobCallback, type?: string, quality?: any): void {
-		return this.windowCanvas.toBlob(callback, type, quality);
-	}
-
-	/**
-	 * <warn>This is for web usage only, node-canvas does not support this</warn>
-	 * Render the canvas into a Blob object representing the image contained in the canvas
-	 * @param type A string indicating the image format. The default type is `image/png`.
-	 * @param quality A number between 0 and 1 indicating image quality if the requested type is `image/jpeg` or `image/webp`.
-	 */
-	public toBlobAsync(type?: string, quality?: any): Promise<Blob | null> {
-		return new Promise<Blob | null>((resolve) => this.windowCanvas.toBlob(resolve, type, quality));
 	}
 
 	/**
@@ -1727,8 +1438,8 @@ export class Canvas {
 	 *         .addMultilineText(wrappedText, 250, 50))
 	 *     .toBuffer(); // Returns a Buffer
 	 */
-	public wrapText(text: string, wrapWidth: number, callback: WrapTextCallback): this;
-	public wrapText(text: string, wrapWidth: number, callback?: WrapTextCallback): string | this {
+	public wrapText(text: string, wrapWidth: number, callback: (this: this, text: string, canvas: this) => unknown): this;
+	public wrapText(text: string, wrapWidth: number, callback?: (this: this, text: string, canvas: this) => unknown): string | this {
 		const wrappedText = textWrap(this, text, wrapWidth);
 		if (callback) {
 			if (typeof callback !== 'function') throw new TypeError('Callback must be a function');
@@ -1738,8 +1449,15 @@ export class Canvas {
 		return wrappedText;
 	}
 
-	private static resolveCircularCoordinates(
-		imageOrBuffer: ImageResolvable,
+	protected parseFont(font: string) {
+		const result = fontRegExp.exec(font);
+		if (result === null) return [font] as const;
+
+		return [font.slice(0, result.index), Number(result[1]), font.slice(result.index + result[1].length)] as const;
+	}
+
+	protected resolveCircularCoordinates(
+		imageOrBuffer: ImageType,
 		x: number,
 		y: number,
 		radius: number,

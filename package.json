@@ -2,21 +2,36 @@
 	"name": "canvas-constructor",
 	"version": "4.1.0",
 	"description": "A ES6 class for node-canvas with built-in functions and chained methods.",
-	"main": "dist/index.js",
-	"module": "dist/index.mjs",
-	"browser": "dist/index.umd.js",
-	"unpkg": "dist/index.umd.js",
-	"types": "dist/index.d.ts",
+	"author": "kyranet",
+	"license": "MIT",
+	"contributors": [
+		"Antonio Román <kyradiscord@gmail.com>",
+		"yorkaargh",
+		"favna <support@favware.tech>"
+	],
+	"browser": "dist/browser.umd.js",
+	"unpkg": "dist/browser.umd.js",
 	"exports": {
-		"import": "./dist/index.mjs",
-		"require": "./dist/index.js"
+		"./browser": {
+			"import": "./dist/browser.mjs",
+			"require": "./dist/browser.js",
+			"types": "./dist/browser.d.ts"
+		},
+		"./cairo": {
+			"import": "./dist/cairo.mjs",
+			"require": "./dist/cairo.js",
+			"types": "./dist/cairo.d.ts"
+		},
+		"./skia": {
+			"import": "./dist/skia.mjs",
+			"require": "./dist/skia.js",
+			"types": "./dist/skia.d.ts"
+		}
 	},
 	"sideEffects": false,
 	"scripts": {
 		"prepublishOnly": "yarn build",
 		"lint": "eslint src --ext ts --fix",
-		"format": "prettier --write src/**/*.ts",
-		"format:check": "prettier --check src/**/*.ts",
 		"docs": "typedoc",
 		"update": "yarn upgrade-interactive --latest",
 		"build": "rollup -c rollup.config.ts",
@@ -26,40 +41,46 @@
 		"cz": "git-cz",
 		"prepare": "husky install .github/husky"
 	},
-	"files": [
-		"dist"
-	],
+	"devDependencies": {
+		"@commitlint/cli": "^12.1.4",
+		"@commitlint/config-conventional": "^12.1.4",
+		"@sapphire/eslint-config": "^3.2.3",
+		"@sapphire/prettier-config": "1.1.6",
+		"@sapphire/ts-config": "3.0.0",
+		"@types/skia-canvas": "^0.9.1",
+		"@typescript-eslint/eslint-plugin": "^4.28.4",
+		"@typescript-eslint/parser": "^4.28.4",
+		"canvas": "^2.8.0",
+		"cz-conventional-changelog": "^3.3.0",
+		"eslint": "^7.31.0",
+		"eslint-config-prettier": "^8.3.0",
+		"eslint-plugin-prettier": "^3.4.0",
+		"husky": "^7.0.1",
+		"lint-staged": "^11.1.0",
+		"prettier": "^2.3.2",
+		"pretty-quick": "^3.1.1",
+		"rollup": "^2.53.3",
+		"rollup-plugin-cleaner": "^1.0.0",
+		"rollup-plugin-terser": "^7.0.2",
+		"rollup-plugin-typescript2": "^0.30.0",
+		"skia-canvas": "^0.9.23",
+		"standard-version": "^9.3.1",
+		"ts-node": "^10.1.0",
+		"typedoc": "^0.21.4",
+		"typescript": "^4.3.5"
+	},
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/kyranet/canvas-constructor.git"
 	},
-	"devDependencies": {
-		"@commitlint/cli": "^12.1.4",
-		"@commitlint/config-conventional": "^12.1.4",
-		"@sapphire/eslint-config": "^3.1.3",
-		"@sapphire/prettier-config": "1.1.2",
-		"@sapphire/ts-config": "2.2.2",
-		"@types/skia-canvas": "^0.9.0",
-		"@typescript-eslint/eslint-plugin": "^4.24.0",
-		"@typescript-eslint/parser": "^4.24.0",
-		"canvas": "^2.8.0",
-		"cz-conventional-changelog": "^3.3.0",
-		"eslint": "^7.27.0",
-		"eslint-config-prettier": "^8.3.0",
-		"eslint-plugin-prettier": "^3.4.0",
-		"husky": "^6.0.0",
-		"lint-staged": "^11.0.0",
-		"prettier": "^2.3.0",
-		"pretty-quick": "^3.1.0",
-		"rollup": "^2.49.0",
-		"rollup-plugin-cleaner": "^1.0.0",
-		"rollup-plugin-terser": "^7.0.2",
-		"rollup-plugin-typescript2": "^0.30.0",
-		"skia-canvas": "^0.9.21",
-		"standard-version": "^9.3.0",
-		"ts-node": "^9.1.1",
-		"typedoc": "^0.20.36",
-		"typescript": "^4.2.4"
+	"files": [
+		"dist",
+		"browser.d.ts",
+		"cairo.d.ts",
+		"skia.d.ts"
+	],
+	"engines": {
+		"node": ">=14"
 	},
 	"keywords": [
 		"canvas",
@@ -79,19 +100,11 @@
 		"cjs",
 		"commonjs",
 		"esm",
-		"umd"
+		"umd",
+		"skia"
 	],
-	"contributors": [
-		"Antonio Román <kyradiscord@gmail.com>",
-		"yorkaargh"
-	],
-	"author": "kyranet",
-	"license": "MIT",
 	"bugs": {
 		"url": "https://github.com/kyranet/canvas-constructor/issues"
-	},
-	"engines": {
-		"node": ">=8.6.0"
 	},
 	"homepage": "https://github.com/kyranet/canvas-constructor#readme",
 	"commitlint": {
@@ -111,9 +124,12 @@
 		"access": "public"
 	},
 	"resolutions": {
-		"acorn": "^8.2.4",
+		"acorn": "^8.4.1",
 		"minimist": "^1.2.5",
 		"kind-of": "^6.0.3"
+	},
+	"eslintConfig": {
+		"extends": "@sapphire"
 	},
 	"prettier": "@sapphire/prettier-config"
 }

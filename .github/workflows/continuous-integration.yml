@@ -1,71 +1,56 @@
 name: Continuous Integration
 
 on:
-    push:
-        branches:
-            - main
-    pull_request:
+  push:
+    branches:
+      - main
+  pull_request:
 
 jobs:
-    Linting:
-        name: Linting
-        runs-on: ubuntu-latest
-        if: "!contains(github.event.head_commit.message, '[skip ci]')"
-        steps:
-            - name: Checkout Project
-              uses: actions/checkout@v2
-            - name: Use Node.js 12
-              uses: actions/setup-node@v1
-              with:
-                  node-version: 12
-            - name: Restore CI Cache
-              uses: actions/cache@v1
-              with:
-                  path: node_modules
-                  key: ${{ runner.os }}-12-${{ hashFiles('**/yarn.lock') }}
-            - name: Install Dependencies
-              run: yarn --ignore-scripts --frozen-lockfile
-            - name: Run ESLint
-              uses: icrawl/action-eslint@v1
+  Linting:
+    name: Linting
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Project
+        uses: actions/checkout@v2
+      - name: Add problem matcher
+        run: echo "::add-matcher::.github/problemMatchers/eslint.json"
+      - name: Use Node.js v14
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14
+      - name: Restore CI Cache
+        uses: actions/cache@v2.1.6
+        id: cache-restore
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-14-${{ hashFiles('**/yarn.lock') }}
+      - name: Install Dependencies if Cache Miss
+        if: ${{ !steps.cache-restore.outputs.cache-hit }}
+        run: yarn --frozen-lockfile
+      - name: Run ESLint
+        run: yarn lint --fix=false
 
-    Formatting:
-        name: Prettier Formatting
-        runs-on: ubuntu-latest
-        if: "!contains(github.event.head_commit.message, '[skip ci]')"
-        steps:
-            - name: Checkout Project
-              uses: actions/checkout@v2
-            - name: Use Node.js 12
-              uses: actions/setup-node@v1
-              with:
-                  node-version: 12
-            - name: Restore CI Cache
-              uses: actions/cache@v1
-              with:
-                  path: node_modules
-                  key: ${{ runner.os }}-12-${{ hashFiles('**/yarn.lock') }}
-            - name: Install Dependencies
-              run: yarn --ignore-scripts --frozen-lockfile
-            - name: Run Prettier check
-              run: yarn format:check
-
-    Building:
-        name: Compile source code
-        runs-on: ubuntu-latest
-        if: "!contains(github.event.head_commit.message, '[skip ci]')"
-        steps:
-            - name: Checkout Project
-              uses: actions/checkout@v2
-            - name: Use Node.js 12
-              uses: actions/setup-node@v1
-              with:
-                  node-version: 12
-            - name: Restore CI Cache
-              uses: actions/cache@v1
-              with:
-                  path: node_modules
-                  key: ${{ runner.os }}-12-${{ hashFiles('**/yarn.lock') }}
-            - name: Install Dependencies
-              run: yarn --ignore-scripts --frozen-lockfile
-            - name: Build Code
-              run: yarn build
+  Building:
+    name: Compile source code
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Project
+        uses: actions/checkout@v2
+      - name: Add problem matcher
+        run: echo "::add-matcher::.github/problemMatchers/tsc.json"
+      - name: Use Node.js v14
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14
+      - name: Restore CI Cache
+        uses: actions/cache@v2.1.6
+        id: cache-restore
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-14-${{ hashFiles('**/yarn.lock') }}
+      - name: Install Dependencies if Cache Miss
+        if: ${{ !steps.cache-restore.outputs.cache-hit }}
+        run: yarn --frozen-lockfile
+      - name: Build Code
+        run: yarn build
