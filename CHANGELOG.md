@@ -1,9 +1,15 @@
-# Change Log
+# Changelog
 
-All notable changes to this project will be documented in this file.
+All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-The format is based on [Keep a Changelog](http://keepachangelog.com/)
-and this project adheres to [Semantic Versioning](http://semver.org/).
+## [5.0.0](https://github.com/kyranet/canvas-constructor/compare/v4.1.0...v5.0.0) (2021-07-27)
+
+### ⚠ BREAKING CHANGES
+
+-   Removed main export at `canvas-constructor`.
+-   Dropped Node 8, 10, and 12 support
+
+-   specify breaking changes ([3a2aece](https://github.com/kyranet/canvas-constructor/commit/3a2aece1a1e844b7edfd316da00a0162f88a1b35))
 
 ## 4.1.0
 
