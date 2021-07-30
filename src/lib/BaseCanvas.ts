@@ -1,3 +1,6 @@
+// eslint-disable-next-line spaced-comment
+/// <reference lib="dom" />
+
 /* eslint-disable @typescript-eslint/unified-signatures */
 import { fontRegExp, getFontHeight, textWrap } from './Util';
 

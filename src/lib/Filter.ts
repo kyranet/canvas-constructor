@@ -1,3 +1,6 @@
+// eslint-disable-next-line spaced-comment
+/// <reference lib="dom" />
+
 import type { BaseCanvas } from './BaseCanvas';
 
 /**
