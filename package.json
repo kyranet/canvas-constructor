@@ -1,6 +1,6 @@
 {
 	"name": "canvas-constructor",
-	"version": "5.0.0",
+	"version": "5.0.1",
 	"description": "A ES6 class for node-canvas with built-in functions and chained methods.",
 	"author": "kyranet",
 	"license": "MIT",

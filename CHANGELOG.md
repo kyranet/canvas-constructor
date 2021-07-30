@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [5.0.1](https://github.com/kyranet/canvas-constructor/compare/v5.0.0...v5.0.1) (2021-07-30)
+
+### Bug Fixes
+
+-   include DOM types ([#378](https://github.com/kyranet/canvas-constructor/issues/378)) ([3414108](https://github.com/kyranet/canvas-constructor/commit/341410863d0c35af5dc9c288775e546cda670bcb))
+-   write export files for custom loaders ([#377](https://github.com/kyranet/canvas-constructor/issues/377)) ([be298b2](https://github.com/kyranet/canvas-constructor/commit/be298b22075316ca61bef6d3cadcc5df6c0eda06))
+
 ## [5.0.0](https://github.com/kyranet/canvas-constructor/compare/v4.1.0...v5.0.0) (2021-07-27)
 
 ### ⚠ BREAKING CHANGES
