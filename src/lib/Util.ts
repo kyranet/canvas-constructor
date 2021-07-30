@@ -1,3 +1,6 @@
+// eslint-disable-next-line spaced-comment
+/// <reference lib="dom" />
+
 /* eslint-disable @typescript-eslint/no-namespace */
 import type { BaseCanvas, BaseCanvasElement } from './BaseCanvas';
 

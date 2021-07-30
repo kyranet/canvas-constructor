@@ -1,3 +1,6 @@
+// eslint-disable-next-line spaced-comment
+/// <reference lib="dom" />
+
 import {
 	Canvas as SkiaCanvas,
 	CanvasRenderingContext2D as SkiaCanvasRenderingContext2D,
