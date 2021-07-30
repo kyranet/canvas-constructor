@@ -76,8 +76,14 @@
 	"files": [
 		"dist",
 		"browser.d.ts",
+		"browser.js",
+		"browser.mjs",
 		"cairo.d.ts",
-		"skia.d.ts"
+		"cairo.js",
+		"cairo.mjs",
+		"skia.d.ts",
+		"skia.js",
+		"skia.mjs"
 	],
 	"engines": {
 		"node": ">=14"
@@ -131,5 +137,8 @@
 	"eslintConfig": {
 		"extends": "@sapphire"
 	},
-	"prettier": "@sapphire/prettier-config"
+	"prettier": "@sapphire/prettier-config",
+	"dependencies": {
+		"tslib": "^2.3.0"
+	}
 }
