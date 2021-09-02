@@ -375,7 +375,7 @@ export abstract class BaseCanvas<
 
 		const { width } = this.measureText(text);
 		const newHeight = maxWidth > width ? height : (maxWidth / width) * height;
-		return this.setTextFont(`${tail}${newHeight}${lead}`).printText(text, x, y);
+		return this.save().setTextFont(`${tail}${newHeight}${lead}`).printText(text, x, y).restore();
 	}
 
 	/**
