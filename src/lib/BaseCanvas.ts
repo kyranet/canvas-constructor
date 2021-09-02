@@ -373,8 +373,12 @@ export abstract class BaseCanvas<
 		const [tail, height, lead] = this.parseFont(this.context.font);
 		if (typeof height !== 'number') return this.printText(text, x, y);
 
+		// Measure the width of the text. If it fits `maxWidth`, draw the text directly:
 		const { width } = this.measureText(text);
-		const newHeight = maxWidth > width ? height : (maxWidth / width) * height;
+		if (width <= maxWidth) return this.printText(text, x, y);
+
+		// Otherwise save state, set the font with a size that fits, draw the text, and restore:
+		const newHeight = (maxWidth / width) * height;
 		return this.save().setTextFont(`${tail}${newHeight}${lead}`).printText(text, x, y).restore();
 	}
 
