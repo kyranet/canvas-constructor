@@ -130,7 +130,7 @@
 		"access": "public"
 	},
 	"resolutions": {
-		"acorn": "^8.4.1",
+		"acorn": "^8.5.0",
 		"minimist": "^1.2.5",
 		"kind-of": "^6.0.3"
 	},
