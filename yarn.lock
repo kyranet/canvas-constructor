@@ -371,10 +371,10 @@
   resolved "https://registry.yarnpkg.com/@types/parse-json/-/parse-json-4.0.0.tgz#2f8bb441434d163b35fb8ffdccd7138927ffb8c0"
   integrity sha512-//oorEZjL6sbPcKUaCdIGlIUeH26mgzimjBB77G6XRgnDl/L5wOnpyBGRe/Mmf5CVW3PwEBE1NjiMZ/ssFh4wA==
 
-"@types/skia-canvas@^0.9.1":
-  version "0.9.1"
-  resolved "https://registry.yarnpkg.com/@types/skia-canvas/-/skia-canvas-0.9.1.tgz#5ff1d6d7c2f6360d3066a8264487734022b452a5"
-  integrity sha512-qzJRUJmqiP78jnRE1o5zt9hrDwuqFrT8D+7KcQoR58EgyGunadGtyjDn97SACvsHcHtkbliWLWCcSjCjhMJKKQ==
+"@types/skia-canvas@^0.9.2":
+  version "0.9.2"
+  resolved "https://registry.yarnpkg.com/@types/skia-canvas/-/skia-canvas-0.9.2.tgz#81a57827a957d4bfdce57cac92881ddeaaa3622f"
+  integrity sha512-0iWGqp6ZdLsOOR6UwWTXPf4Kdrgj+NTUZ9MYVTbh1fP14uuWRhjKXCZyg5/qXIWE05IESh2p1uwjqlWWI0l/Fg==
   dependencies:
     "@types/node" "*"
 
