@@ -86,7 +86,7 @@
 		"skia.mjs"
 	],
 	"engines": {
-		"node": ">=14"
+		"node": ">=v14.17.6"
 	},
 	"keywords": [
 		"canvas",
