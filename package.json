@@ -44,9 +44,9 @@
 	"devDependencies": {
 		"@commitlint/cli": "^13.2.1",
 		"@commitlint/config-conventional": "^13.2.0",
-		"@sapphire/eslint-config": "^4.0.0",
-		"@sapphire/prettier-config": "1.2.2",
-		"@sapphire/ts-config": "3.1.1",
+		"@sapphire/eslint-config": "^4.0.1",
+		"@sapphire/prettier-config": "1.2.3",
+		"@sapphire/ts-config": "3.1.2",
 		"@types/skia-canvas": "^0.9.2",
 		"@typescript-eslint/eslint-plugin": "^5.0.0",
 		"@typescript-eslint/parser": "^5.0.0",
