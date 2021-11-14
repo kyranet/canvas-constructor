@@ -315,10 +315,10 @@
     estree-walker "^2.0.1"
     picomatch "^2.2.2"
 
-"@sapphire/eslint-config@^4.0.3":
-  version "4.0.3"
-  resolved "https://registry.yarnpkg.com/@sapphire/eslint-config/-/eslint-config-4.0.3.tgz#76b0c78b4420fd8d0a65b2a684c6ee06cc2d99e3"
-  integrity sha512-XFw0s2mozrR/0GfXajCEg4TzGHywrIXtOMeJtOApl/0MIJ+pb6vCn8GEOmmpkE0msvOcfGExiWqPfOffn+ChtQ==
+"@sapphire/eslint-config@^4.0.4":
+  version "4.0.4"
+  resolved "https://registry.yarnpkg.com/@sapphire/eslint-config/-/eslint-config-4.0.4.tgz#eb07581768dca9e7f3a37ffee125aba3ceda24fd"
+  integrity sha512-H8TcGUpwdo0jd9b2J+vV2vI/BgjdOlfV+xqK1eaCx6XBRNx7DoOLY6oXfPjoc+F87gvnOD4xichAP9FNa69gPw==
   dependencies:
     "@typescript-eslint/eslint-plugin" "^5.3.0"
     "@typescript-eslint/parser" "^5.3.0"
