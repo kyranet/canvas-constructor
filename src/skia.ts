@@ -4,8 +4,8 @@
 import {
 	Canvas as SkiaCanvas,
 	CanvasRenderingContext2D as SkiaCanvasRenderingContext2D,
+	Font,
 	FontLibrary,
-	FontVariant,
 	Image as SkiaImage,
 	loadImage,
 	Path2D
@@ -130,7 +130,7 @@ export class Canvas extends BaseCanvas<SkiaCanvas, SkiaCanvasRenderingContext2D>
 	/**
 	 * Returns the pages created with {@link SkiaCanvas.newPage}.
 	 */
-	public getPages(): readonly SkiaCanvasRenderingContext2D[];
+	public getPages(): SkiaCanvasRenderingContext2D[];
 	/**
 	 * Calls the callback with the pages created with {@link SkiaCanvas.newPage}, and returns itself.
 	 * @param cb The callback to be called.
@@ -255,18 +255,6 @@ export class Canvas extends BaseCanvas<SkiaCanvas, SkiaCanvasRenderingContext2D>
 	}
 
 	/**
-	 * Render the canvas into a data URL with the specified format.
-	 * @param format The image format the data URL must have.
-	 * @param options The render options.
-	 * @see https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/toDataURL
-	 */
-	public toDataURL(format: RenderImageFormat, options?: RenderOptions): Promise<string>;
-	public toDataURL(...args: readonly any[]): Promise<string> {
-		// @ts-expect-error: Complains about invalid overload (expects more than 0 overloads).
-		return this.canvas.toDataURL(...args);
-	}
-
-	/**
 	 * Shorthand for {@link SkiaCanvas.toBuffer} with `application/pdf` as `format` and default options.
 	 * @returns A PDF document.
 	 */
@@ -311,6 +299,18 @@ export class Canvas extends BaseCanvas<SkiaCanvas, SkiaCanvasRenderingContext2D>
 	}
 
 	/**
+	 * Render the canvas into a data URL with the specified format.
+	 * @param format The image format the data URL must have.
+	 * @param options The render options.
+	 * @see https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/toDataURL
+	 */
+	public toDataURL(format: RenderImageFormat, options?: RenderOptions): Promise<string>;
+	public toDataURL(...args: readonly any[]): Promise<string> {
+		// @ts-expect-error: Complains about invalid overload (expects more than 0 overloads).
+		return this.canvas.toDataURL(...args);
+	}
+
+	/**
 	 * Takes a file path and writes the canvas's current contents to disk. If the filename ends with an extension that
 	 * makes its format clear, the second argument is optional. If the filename is ambiguous, you can pass an options
 	 * object with a format string using names like "png" and "jpeg" or a full mime type like "application/pdf".
@@ -327,7 +327,28 @@ export class Canvas extends BaseCanvas<SkiaCanvas, SkiaCanvasRenderingContext2D>
 	public saveAs(filename: string, options?: SaveAsOptions): this;
 	public saveAs(...args: readonly any[]): this {
 		// @ts-expect-error: Complains about invalid overload (expects more than 0 overloads).
-		this.canvas.saveAs(...args);
+		this.canvas.saveAsSync(...args);
+		return this;
+	}
+
+	/**
+	 * Takes a file path and writes the canvas's current contents to disk. If the filename ends with an extension that
+	 * makes its format clear, the second argument is optional. If the filename is ambiguous, you can pass an options
+	 * object with a format string using names like "png" and "jpeg" or a full mime type like "application/pdf".
+	 * @param filename The way multi-page documents are handled depends on the filename argument. If the filename
+	 * contains the string "{}", it will be used as template for generating a numbered sequence of files—one per page.
+	 * If no curly braces are found in the filename, only a single file will be saved. That single file will be
+	 * multi-page in the case of PDF output but for other formats it will contain only the most recently added page.
+	 *
+	 * An integer can optionally be placed between the braces to indicate the number of padding characters to use for
+	 * numbering. For instance "page-{}.svg" will generate files of the form page-1.svg whereas "frame-{4}.png" will
+	 * generate files like frame-0001.png.
+	 * @param options The options for the image render.
+	 */
+	public saveAsAsync(filename: string, options?: SaveAsOptions): Promise<this>;
+	public async saveAsAsync(...args: readonly any[]): Promise<this> {
+		// @ts-expect-error: Complains about invalid overload (expects more than 0 overloads).
+		await this.canvas.saveAs(...args);
 		return this;
 	}
 }
@@ -338,9 +359,9 @@ export * from './lib/Util';
 export { Path2D, FontLibrary, SkiaImage as Image };
 export const resolveImage = loadImage;
 
-export function registerFont(familyName: string, fontPaths: ReadonlyArray<string>): FontVariant[];
-export function registerFont(fontPaths: ReadonlyArray<string>): FontVariant[];
-export function registerFont(families: Record<string, ReadonlyArray<string> | string>): Record<string, FontVariant[] | FontVariant>;
+export function registerFont(familyName: string, fontPaths?: string | readonly string[]): Font[];
+export function registerFont(fontPaths: readonly string[]): Font[];
+export function registerFont(families: Record<string, readonly string[] | string>): Record<string, Font[] | Font>;
 export function registerFont(...args: readonly any[]) {
 	// @ts-expect-error: Complains about invalid overload (expects more than 0 overloads).
 	return FontLibrary.use(...args);

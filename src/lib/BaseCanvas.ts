@@ -41,6 +41,15 @@ export interface PrintCircularOptions {
 
 export type GlobalCompositeOperation = CanvasRenderingContext2D['globalCompositeOperation'];
 export type PatternRepeat = 'repeat' | 'repeat-x' | 'repeat-y' | 'no-repeat' | '' | null;
+export type BaseCanvasRenderingContext2D = Omit<
+	CanvasRenderingContext2D,
+	'canvas' | 'getContextAttributes' | 'drawImage' | 'fillStyle' | 'strokeStyle' | 'createPattern'
+> & {
+	drawImage(...args: any[]): void;
+	fillStyle: any;
+	strokeStyle: any;
+	createPattern(...args: any[]): void;
+};
 
 export interface BaseCanvasElement {
 	width: number;
@@ -55,7 +64,7 @@ export interface BaseImageElement {
 
 export abstract class BaseCanvas<
 	CanvasType extends BaseCanvasElement = HTMLCanvasElement,
-	ContextType extends CanvasRenderingContext2D = CanvasRenderingContext2D,
+	ContextType extends BaseCanvasRenderingContext2D = CanvasRenderingContext2D,
 	ImageType extends Parameters<ContextType['drawImage']>[0] = Parameters<ContextType['drawImage']>[0],
 	TextMetricsType extends ReturnType<ContextType['measureText']> = ReturnType<ContextType['measureText']>
 > {
@@ -630,7 +639,6 @@ export abstract class BaseCanvas<
 	 */
 	public printImage(image: ImageType, sx: number, sy: number, sw: number, sh: number, dx: number, dy: number, dw: number, dh: number): this;
 	public printImage(...args: readonly unknown[]) {
-		// @ts-expect-error: Mismatching overloads
 		this.context.drawImage(...args);
 		return this;
 	}
