@@ -4,8 +4,8 @@
 import {
 	Canvas as SkiaCanvas,
 	CanvasRenderingContext2D as SkiaCanvasRenderingContext2D,
+	Font,
 	FontLibrary,
-	FontVariant,
 	Image as SkiaImage,
 	loadImage,
 	Path2D
@@ -130,7 +130,7 @@ export class Canvas extends BaseCanvas<SkiaCanvas, SkiaCanvasRenderingContext2D>
 	/**
 	 * Returns the pages created with {@link SkiaCanvas.newPage}.
 	 */
-	public getPages(): readonly SkiaCanvasRenderingContext2D[];
+	public getPages(): SkiaCanvasRenderingContext2D[];
 	/**
 	 * Calls the callback with the pages created with {@link SkiaCanvas.newPage}, and returns itself.
 	 * @param cb The callback to be called.
@@ -338,9 +338,9 @@ export * from './lib/Util';
 export { Path2D, FontLibrary, SkiaImage as Image };
 export const resolveImage = loadImage;
 
-export function registerFont(familyName: string, fontPaths: ReadonlyArray<string>): FontVariant[];
-export function registerFont(fontPaths: ReadonlyArray<string>): FontVariant[];
-export function registerFont(families: Record<string, ReadonlyArray<string> | string>): Record<string, FontVariant[] | FontVariant>;
+export function registerFont(familyName: string, fontPaths?: string | readonly string[]): Font[];
+export function registerFont(fontPaths: readonly string[]): Font[];
+export function registerFont(families: Record<string, readonly string[] | string>): Record<string, Font[] | Font>;
 export function registerFont(...args: readonly any[]) {
 	// @ts-expect-error: Complains about invalid overload (expects more than 0 overloads).
 	return FontLibrary.use(...args);

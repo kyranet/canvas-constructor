@@ -417,13 +417,6 @@
   resolved "https://registry.yarnpkg.com/@types/semver/-/semver-7.3.9.tgz#152c6c20a7688c30b967ec1841d31ace569863fc"
   integrity sha512-L/TMpyURfBkf+o/526Zb6kd/tchUP3iBDEPjqjb+U2MAJhVRxxrmr2fwpe08E7QsV7YLcpq0tUaQ9O9x97ZIxQ==
 
-"@types/skia-canvas@^0.9.2":
-  version "0.9.2"
-  resolved "https://registry.yarnpkg.com/@types/skia-canvas/-/skia-canvas-0.9.2.tgz#81a57827a957d4bfdce57cac92881ddeaaa3622f"
-  integrity sha512-0iWGqp6ZdLsOOR6UwWTXPf4Kdrgj+NTUZ9MYVTbh1fP14uuWRhjKXCZyg5/qXIWE05IESh2p1uwjqlWWI0l/Fg==
-  dependencies:
-    "@types/node" "*"
-
 "@typescript-eslint/eslint-plugin@^5.9.0":
   version "5.9.0"
   resolved "https://registry.yarnpkg.com/@typescript-eslint/eslint-plugin/-/eslint-plugin-5.9.0.tgz#382182d5cb062f52aac54434cfc47c28898c8006"

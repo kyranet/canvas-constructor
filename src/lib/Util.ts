@@ -1,8 +1,7 @@
 // eslint-disable-next-line spaced-comment
 /// <reference lib="dom" />
 
-/* eslint-disable @typescript-eslint/no-namespace */
-import type { BaseCanvas, BaseCanvasElement } from './BaseCanvas';
+import type { BaseCanvas, BaseCanvasElement, BaseCanvasRenderingContext2D } from './BaseCanvas';
 
 export const fontRegExp = /([\d.]+)(px|pt|pc|in|cm|mm|%|em|ex|ch|rem|q)/i;
 export const getFontHeight = (() => {
@@ -52,7 +51,7 @@ export const getFontHeight = (() => {
 
 export const textWrap = <
 	CanvasType extends BaseCanvasElement,
-	ContextType extends CanvasRenderingContext2D,
+	ContextType extends BaseCanvasRenderingContext2D,
 	ImageType extends Parameters<ContextType['drawImage']>[0],
 	TextMetricsType extends ReturnType<ContextType['measureText']>
 >(
