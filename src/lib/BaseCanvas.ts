@@ -41,12 +41,15 @@ export interface PrintCircularOptions {
 
 export type GlobalCompositeOperation = CanvasRenderingContext2D['globalCompositeOperation'];
 export type PatternRepeat = 'repeat' | 'repeat-x' | 'repeat-y' | 'no-repeat' | '' | null;
-export type BaseCanvasRenderingContext2D = Omit<CanvasRenderingContext2D, 'canvas' | 'getContextAttributes' | 'drawImage' | 'fillStyle' | 'strokeStyle' | 'createPattern'> & {
+export type BaseCanvasRenderingContext2D = Omit<
+	CanvasRenderingContext2D,
+	'canvas' | 'getContextAttributes' | 'drawImage' | 'fillStyle' | 'strokeStyle' | 'createPattern'
+> & {
 	drawImage(...args: any[]): void;
 	fillStyle: any;
 	strokeStyle: any;
 	createPattern(...args: any[]): void;
-}
+};
 
 export interface BaseCanvasElement {
 	width: number;
