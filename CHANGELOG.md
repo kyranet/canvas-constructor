@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [5.0.2](https://github.com/kyranet/canvas-constructor/compare/v5.0.1...v5.0.2) (2022-01-22)
+
+### Bug Fixes
+
+-   **deps:** ensure compatibility with latest skia-canvas ([#439](https://github.com/kyranet/canvas-constructor/issues/439)) ([481ba6f](https://github.com/kyranet/canvas-constructor/commit/481ba6fbd843d8fe270219a81ed4691d5af867ce))
+-   restore state in `printResponsiveText` ([#388](https://github.com/kyranet/canvas-constructor/issues/388)) ([08c3418](https://github.com/kyranet/canvas-constructor/commit/08c341826eb420edd4d1c84459d827f7b30abeab))
+
 ### [5.0.1](https://github.com/kyranet/canvas-constructor/compare/v5.0.0...v5.0.1) (2021-07-30)
 
 ### Bug Fixes
