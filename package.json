@@ -37,8 +37,6 @@
 		"build": "rollup -c rollup.config.ts",
 		"watch": "yarn build -w",
 		"sversion": "standard-version",
-		"commit": "git-cz",
-		"cz": "git-cz",
 		"prepare": "husky install .github/husky"
 	},
 	"dependencies": {
@@ -131,13 +129,9 @@
 	"publishConfig": {
 		"access": "public"
 	},
-	"resolutions": {
-		"acorn": "^8.7.0",
-		"minimist": "^1.2.5",
-		"kind-of": "^6.0.3"
-	},
 	"eslintConfig": {
 		"extends": "@sapphire"
 	},
-	"prettier": "@sapphire/prettier-config"
+	"prettier": "@sapphire/prettier-config",
+	"packageManager": "yarn@3.2.0"
 }
