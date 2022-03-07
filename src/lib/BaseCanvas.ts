@@ -43,11 +43,12 @@ export type GlobalCompositeOperation = CanvasRenderingContext2D['globalComposite
 export type PatternRepeat = 'repeat' | 'repeat-x' | 'repeat-y' | 'no-repeat' | '' | null;
 export type BaseCanvasRenderingContext2D = Omit<
 	CanvasRenderingContext2D,
-	'canvas' | 'getContextAttributes' | 'drawImage' | 'fillStyle' | 'strokeStyle' | 'createPattern'
+	'canvas' | 'getContextAttributes' | 'drawImage' | 'fillStyle' | 'strokeStyle' | 'createPattern' | 'globalCompositeOperation'
 > & {
 	drawImage(...args: any[]): void;
 	fillStyle: any;
 	strokeStyle: any;
+	globalCompositeOperation: string;
 	createPattern(...args: any[]): void;
 };
 
