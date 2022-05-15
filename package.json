@@ -43,13 +43,13 @@
 		"tslib": "^2.4.0"
 	},
 	"devDependencies": {
-		"@commitlint/cli": "^16.2.4",
+		"@commitlint/cli": "^16.3.0",
 		"@commitlint/config-conventional": "^16.2.4",
 		"@sapphire/eslint-config": "^4.3.4",
 		"@sapphire/prettier-config": "1.4.3",
 		"@sapphire/ts-config": "3.3.4",
-		"@typescript-eslint/eslint-plugin": "^5.22.0",
-		"@typescript-eslint/parser": "^5.22.0",
+		"@typescript-eslint/eslint-plugin": "^5.23.0",
+		"@typescript-eslint/parser": "^5.23.0",
 		"canvas": "^2.9.1",
 		"cz-conventional-changelog": "^3.3.0",
 		"eslint": "^8.15.0",
@@ -59,7 +59,7 @@
 		"lint-staged": "^12.4.1",
 		"prettier": "^2.6.2",
 		"pretty-quick": "^3.1.3",
-		"rollup": "^2.72.1",
+		"rollup": "^2.73.0",
 		"rollup-plugin-cleaner": "^1.0.0",
 		"rollup-plugin-terser": "^7.0.2",
 		"rollup-plugin-typescript2": "^0.31.2",
@@ -137,5 +137,5 @@
 		"extends": "@sapphire"
 	},
 	"prettier": "@sapphire/prettier-config",
-	"packageManager": "yarn@3.2.0"
+	"packageManager": "yarn@3.2.1"
 }
