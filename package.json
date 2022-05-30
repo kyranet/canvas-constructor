@@ -45,6 +45,7 @@
 	"devDependencies": {
 		"@commitlint/cli": "^17.0.1",
 		"@commitlint/config-conventional": "^17.0.0",
+		"@napi-rs/canvas": "0.1.21",
 		"@sapphire/eslint-config": "^4.3.5",
 		"@sapphire/prettier-config": "1.4.3",
 		"@sapphire/ts-config": "3.3.4",
