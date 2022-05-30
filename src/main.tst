@@ -716,41 +716,18 @@ export class Canvas {
 	 *     .setTextFont(`${newSize}px Tahoma`)
 	 *     .printText('Hello World!', 30, 50)
 	 *     .png(); // Returns a Buffer
-	 */
-	public measureText(text: string): TextMetrics;
-	/**
-	 * Measure a text's width given a string.
-	 * @param text The text to measure.
-	 * @param callback The callback, if not specified, this method won't be chainable as it will return a
-	 * number. If you use an arrow function, you might want to use the second argument which is the instance of the
-	 * class. Otherwise, the keyword this is bound to the class instance itself, so you can use it safely.
-	 * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/measureText
 	 * @example
 	 * new Canvas(500, 400)
 	 *     .setTextFont('40px Tahoma')
-	 *     .measureText('Hello World!', function(size) {
+	 *     .process((canvas) => {
+	 *         const size = canvas.measureText('Hello World!');
 	 *         const newSize = size.width < 500 ? 40 : (500 / size.width) * 40;
 	 *         this.setTextFont(`${newSize}px Tahoma`);
 	 *     })
 	 *     .printText('Hello World!', 30, 50)
 	 *     .png(); // Returns a Buffer
-	 * @example
-	 * new Canvas(500, 400)
-	 *     .setTextFont('40px Tahoma')
-	 *     .measureText('Hello World!', (size, inst) => {
-	 *         const newSize = size.width < 500 ? 40 : (500 / size.width) * 40;
-	 *         inst.setTextFont(`${newSize}px`);
-	 *     })
-	 *     .printText('Hello World!', 30, 50)
-	 *     .png(); // Returns a Buffer
 	 */
-	public measureText(text: string, callback: (this: this, measurement: TextMetrics, canvas: this) => unknown): this;
-	public measureText(text: string, callback?: (this: this, measurement: TextMetrics, canvas: this) => unknown): this | TextMetrics {
-		if (callback) {
-			if (typeof callback !== 'function') throw new TypeError('Callback must be a function.');
-			callback.call(this, this.context.measureText(text), this);
-			return this;
-		}
+	public measureText(text: string): TextMetrics {
 		return this.context.measureText(text);
 	}
 
@@ -1190,33 +1167,8 @@ export class Canvas {
 	 * @param repetition The repeat mode.
 	 * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/createPattern
 	 */
-	public createPattern(image: PatternResolvable, repetition: PatternRepeat): CanvasPattern;
-	/**
-	 * Creates a pattern using the specified image. It repeats the source in the directions specified by the repetition
-	 * argument, and calls the callback.
-	 * @param image A Canvas Image to be used as the image to repeat.
-	 * @param repetition The repeat mode.
-	 * @param callback The callback to take the createPattern.
-	 * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/createPattern
-	 */
-	public createPattern(
-		image: PatternResolvable,
-		repetition: PatternRepeat,
-		callback: (this: this, pattern: CanvasPattern, canvas: this) => unknown
-	): this;
-
-	public createPattern(
-		image: PatternResolvable,
-		repetition: PatternRepeat,
-		callback?: (this: this, pattern: CanvasPattern, canvas: this) => unknown
-	): CanvasPattern | this {
-		const pattern = this.context.createPattern(_resolvePattern(image), repetition)!;
-		if (callback) {
-			callback.call(this, pattern, this);
-			return this;
-		}
-
-		return pattern;
+	public createPattern(image: PatternResolvable, repetition: PatternRepeat): CanvasPattern {
+		return this.context.createPattern(_resolvePattern(image), repetition)!;
 	}
 
 	/**
@@ -1227,7 +1179,7 @@ export class Canvas {
 	 * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/createPattern
 	 */
 	public printPattern(image: PatternResolvable, repetition: PatternRepeat): this {
-		return this.createPattern(image, repetition, (pattern) => this.setColor(pattern));
+		return this.setColor(this.createPattern(image, repetition));
 	}
 
 	/**
@@ -1824,31 +1776,20 @@ export class Canvas {
 	 * const wrappedText = new Canvas(500, 300)
 	 *     .setTextFont('48px Verdana')
 	 *     .wrapText('Hello World, this is a quite\nlong text.', 300);
-	 */
-	public wrapText(text: string, wrapWidth: number): string;
-	/**
-	 * Wraps a text into a width-limited multi-line text.
-	 * @param text The text to wrap
-	 * @param wrapWidth The wrap width
-	 * @param callback The callback receiving the wrapped text.
 	 * @example
 	 * // Wrap the text and add it
 	 * const buffer = new Canvas(500, 300)
 	 *     .setTextFont('48px Verdana')
-	 *     .wrapText('Hello World, this is a quite\nlong text.', 300, (wrappedText, canvas) => canvas
-	 *         .setTextAlign('center')
-	 *         .addMultilineText(wrappedText, 250, 50))
+	 *     .process((canvas) => {
+	 *         const wrappedText = canvas.wrapText('Hello World, this is a quite\nlong text.');
+	 *         return canvas
+	 *             .setTextAlign('center')
+	 *             .addMultilineText(wrappedText, 250, 50)
+	 *     })
 	 *     .png(); // Returns a Buffer
 	 */
-	public wrapText(text: string, wrapWidth: number, callback: (this: this, text: string, canvas: this) => unknown): this;
-	public wrapText(text: string, wrapWidth: number, callback?: (this: this, text: string, canvas: this) => unknown): string | this {
-		const wrappedText = textWrap(this, text, wrapWidth);
-		if (callback) {
-			if (typeof callback !== 'function') throw new TypeError('Callback must be a function');
-			callback.call(this, wrappedText, this);
-			return this;
-		}
-		return wrappedText;
+	public wrapText(text: string, wrapWidth: number): string {
+		return textWrap(this, text, wrapWidth);
 	}
 
 	/**
@@ -2869,7 +2810,7 @@ export const getFontHeight = (() => {
 	};
 })();
 
-export const textWrap = (canvas: { measureText(text: string): { width: number } }, text: string, wrapWidth: number): string => {
+export const textWrap = (canvas: Canvas, text: string, wrapWidth: number): string => {
 	const result = [];
 	const buffer = [];
 
