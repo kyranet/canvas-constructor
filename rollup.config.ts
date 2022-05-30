@@ -21,6 +21,7 @@ export default defineConfig([
 				file: './dist/browser.umd.js',
 				format: 'umd',
 				name: 'CanvasConstructor',
+				strict: true,
 				sourcemap: true
 			}
 		],
@@ -30,6 +31,7 @@ export default defineConfig([
 		input: {
 			browser: 'src/browser.ts',
 			cairo: 'src/cairo.ts',
+			'napi-rs': 'src/napi-rs.ts',
 			skia: 'src/skia.ts'
 		},
 		output: [
@@ -39,6 +41,7 @@ export default defineConfig([
 				format: 'cjs',
 				exports: 'named',
 				sourcemap: true,
+				strict: true,
 				compact: false
 			},
 			{
@@ -47,10 +50,11 @@ export default defineConfig([
 				format: 'es',
 				exports: 'named',
 				sourcemap: true,
+				strict: true,
 				compact: false
 			}
 		],
 		plugins: [pluginsTypeScript, pluginsTerser],
-		external: ['canvas', 'skia-canvas']
+		external: ['node:util', 'canvas', 'skia-canvas', '@napi-rs/canvas']
 	}
 ]);

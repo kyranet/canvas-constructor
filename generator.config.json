@@ -1,0 +1,22 @@
+{
+	"main": "./src/main.tst",
+	"output": "./src/[name].ts",
+	"entries": [
+		{
+			"name": "browser",
+			"defines": ["BROWSER"]
+		},
+		{
+			"name": "cairo",
+			"defines": ["CAIRO"]
+		},
+		{
+			"name": "napi-rs",
+			"defines": ["NAPI_RS"]
+		},
+		{
+			"name": "skia",
+			"defines": ["SKIA"]
+		}
+	]
+}
