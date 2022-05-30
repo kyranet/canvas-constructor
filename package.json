@@ -36,7 +36,7 @@
 	"sideEffects": false,
 	"scripts": {
 		"prepublishOnly": "yarn build",
-		"lint": "eslint scripts --fix",
+		"lint": "eslint scripts --ext .mjs --fix",
 		"docs": "typedoc",
 		"update": "yarn upgrade-interactive --latest",
 		"build": "yarn build:gen && yarn build:ts",

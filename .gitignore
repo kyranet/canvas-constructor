@@ -9,7 +9,7 @@ docs/
 # Ignore tsc dist folder
 dist/
 
-# Ignore generated files files
+# Ignore generated files
 src/browser.ts
 src/cairo.ts
 src/napi-rs.ts
