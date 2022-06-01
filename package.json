@@ -36,7 +36,7 @@
 	"sideEffects": false,
 	"scripts": {
 		"lint": "eslint scripts --ext mjs --fix",
-		"docs": "rn build:gen && typedoc",
+		"docs": "yarn build:gen && typedoc",
 		"update": "yarn upgrade-interactive --latest",
 		"build": "yarn build:gen && yarn build:ts",
 		"build:gen": "node ./scripts/generate.mjs",
