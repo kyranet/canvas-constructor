@@ -89,16 +89,7 @@
 		"url": "git+https://github.com/kyranet/canvas-constructor.git"
 	},
 	"files": [
-		"dist",
-		"browser.d.ts",
-		"browser.js",
-		"browser.mjs",
-		"cairo.d.ts",
-		"cairo.js",
-		"cairo.mjs",
-		"skia.d.ts",
-		"skia.js",
-		"skia.mjs"
+		"dist"
 	],
 	"engines": {
 		"node": ">=v14.18.0"
@@ -109,10 +100,15 @@
 		"graphics",
 		"image",
 		"images",
+		"jpeg",
+		"jpg",
 		"pdf",
+		"png",
 		"svg",
+		"webp",
 		"node-canvas",
 		"skia-canvas",
+		"napi-rs",
 		"constructor",
 		"chainable",
 		"browser",
