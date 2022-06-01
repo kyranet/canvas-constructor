@@ -2,6 +2,56 @@
 
 All notable changes to this project will be documented in this file.
 
+# [6.0.0](https://github.com/kyranet/canvas-constructor/compare/v5.0.2...v6.0.0) - (2022-06-01)
+
+## 🏠 Refactor
+
+- Renamed `registerFont` to `loadFont` ([0019ee7](https://github.com/kyranet/canvas-constructor/commit/0019ee791ea0b3b3367cc770a93d6b3773a70339))
+- Renamed `resolveImage` to `loadImage` ([a0db7bb](https://github.com/kyranet/canvas-constructor/commit/a0db7bba65d3c04329f977848619f17f1d31b2aa))
+
+## 📝 Documentation
+
+- Add `@note`s defining which methods are engine-specific ([54dcb08](https://github.com/kyranet/canvas-constructor/commit/54dcb08ca39850f2a52238ec1352133a0e2812e9))
+
+## 🚀 Features
+
+- **skia:** Added `svgAsync()` ([ff40a27](https://github.com/kyranet/canvas-constructor/commit/ff40a27bad5ec5fd5a30870d7561e074fc93ac94))
+- **skia:** Added `pngAsync()` ([7b78a77](https://github.com/kyranet/canvas-constructor/commit/7b78a774ec270922e0e2f17cfce634167d84ddc7))
+- **skia:** Added `pdfAsync()` ([dbe42de](https://github.com/kyranet/canvas-constructor/commit/dbe42dea167a691c88dd8a513c42dc43edcfc8d2))
+- **skia:** Added `jpegAsync()` ([8eed23c](https://github.com/kyranet/canvas-constructor/commit/8eed23c90abd73f039dadf2d72ffef190cca7d29))
+- **cairo:** Added `pngAsync()` ([1b83681](https://github.com/kyranet/canvas-constructor/commit/1b836816f92a208323c7e1c6cbf5bba8ab703b64))
+- **cairo:** Added `png()` ([1f6d30f](https://github.com/kyranet/canvas-constructor/commit/1f6d30f9cf85f231a2931415c7dda4b585c2987f))
+- **cairo:** Added `pdfAsync()` ([d799c0e](https://github.com/kyranet/canvas-constructor/commit/d799c0e5c6b2f858b17f5fcbe46dfdc7ed2307e8))
+- **cairo:** Added `pdf()` ([f6759c4](https://github.com/kyranet/canvas-constructor/commit/f6759c4a16229c5d4a37d2dc9b0fe21bd0da108d))
+- **cairo:** Added `jpegAsync()` ([0073dce](https://github.com/kyranet/canvas-constructor/commit/0073dce190615edc42c11af1a8b66e4748ea4632))
+- **cairo:** Added `jpeg()` ([6f023f9](https://github.com/kyranet/canvas-constructor/commit/6f023f9bb9fd5484ebd6c14f9a2e156582fed5e5))
+- Added `printConicStrokeGradient()` ([955f8ba](https://github.com/kyranet/canvas-constructor/commit/955f8baaf0877b1cb2ac08357d1bcc7594d06e3e))
+- Added `printConicColorGradient()` ([e50a13e](https://github.com/kyranet/canvas-constructor/commit/e50a13e65943514f4139d9e1266a43b9948a87ba))
+- Added `createConicGradient()` ([90ccf01](https://github.com/kyranet/canvas-constructor/commit/90ccf014a45b2762ff86aa32f6b12ec4e75a1b76))
+- Added `createImageData()` ([1783a3a](https://github.com/kyranet/canvas-constructor/commit/1783a3aaf9c9a01e45e9fd401aa705ba8782dca8))
+- Added `/napi-rs` engine (#480) ([22047df](https://github.com/kyranet/canvas-constructor/commit/22047df59ffc116c317c433c27c59eb91e1f39c3))
+
+   ### 💥 Breaking Changes:
+   - removed `cb` parameter in `getImageData()`
+   - removed `cb` parameter in `measureText()`
+   - removed `cb` parameter in `createPattern()`
+   - removed `cb` parameter in `wrapText()`
+   - renamed `createJPEGStream()` to `jpegStream()`
+   - renamed `createPDFStream()` to `pdfStream()`
+   - renamed `createPNGStream()` to `pngStream()`
+   - renamed `setAntiAliasing()` to `setAntialiasMode()`
+   - `jpg()` now returns a synchronous response
+   - `pdf()` now returns a synchronous response
+   - `png()` now returns a synchronous response
+   - `svg()` now returns a synchronous response
+   - removed `cb` parameter in `getFontVariant()`
+   - removed `cb` parameter in `getTextTracking()`
+   - removed `cb` parameter in `getTextWrap()`
+   - renamed `getPages()` to `get pages`
+   - renamed `jpg()` to `jpeg()`
+   - renamed `newPages()` to `addPage()`
+
+
 ### [5.0.2](https://github.com/kyranet/canvas-constructor/compare/v5.0.1...v5.0.2) (2022-01-22)
 
 ### Bug Fixes
