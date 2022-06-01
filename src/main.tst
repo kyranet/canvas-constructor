@@ -2361,7 +2361,7 @@ interface ResolvedCircularCoordinates {
 
 // IF(BROWSER):                                                                                                        \
 export const Image = HTMLImageElement;                                                                                 \
-export function resolveImage(src: string, options?: Partial<HTMLImageElement>): Promise<HTMLImageElement> {            \
+export function loadImage(src: string, options?: Partial<HTMLImageElement>): Promise<HTMLImageElement> {               \
 	return new Promise<HTMLImageElement>((resolve, reject) => {                                                        \
 		// eslint-disable-next-line no-undef                                                                           \
 		const image = Object.assign(document.createElement('img'), options) as HTMLImageElement;                       \
