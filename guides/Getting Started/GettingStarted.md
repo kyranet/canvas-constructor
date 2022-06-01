@@ -44,13 +44,13 @@ new Canvas(300, 300)
 -   Write the text 'Hello World!' in the position (130, 150)
 -   Return a buffer.
 
-Now, let's suppose we want to add images, we'll use `Canvas.resolveImage`, which works in both Node.js and browser:
+Now, let's suppose we want to add images, we'll use `Canvas.loadImage`, which works in both Node.js and browser:
 
 ```js
 const { Canvas } = require('canvas-constructor');
 
 async function createCanvas() {
-	const image = await Canvas.resolveImage('./images/kitten.png');
+	const image = await Canvas.loadImage('./images/kitten.png');
 
 	return new Canvas(300, 400)
 		.printImage(image, 0, 0, 300, 400)

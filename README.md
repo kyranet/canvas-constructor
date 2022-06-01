@@ -21,6 +21,7 @@
 
 This module requires one of the following packages to be installed for Node.js:
 
+-   [`@napi-rs/canvas`](https://www.npmjs.com/package/@napi-rs/canvas)
 -   [`skia-canvas`](https://www.npmjs.com/package/skia-canvas)
 -   [`canvas`](https://www.npmjs.com/package/canvas)
 
@@ -33,7 +34,7 @@ How to use it:
 **Node.js**:
 
 ```js
-const { Canvas } = require('canvas-constructor/skia');
+const { Canvas } = require('canvas-constructor/napi-rs');
 // or `canvas-constructor/cairo` if you are using `canvas`
 
 new Canvas(300, 300)
@@ -42,7 +43,7 @@ new Canvas(300, 300)
 	.setColor('#FFAE23')
 	.setTextFont('28px Impact')
 	.printText('Hello World!', 130, 150)
-	.toBuffer();
+	.png();
 ```
 
 **Browser**:
@@ -68,13 +69,13 @@ new Canvas(300, 300)
 -   Write the text 'Hello World!' in the position (130, 150)
 -   Return a buffer.
 
-Now, let's suppose we want to add images, we'll use `Canvas.resolveImage`, which works in both Node.js and browser:
+Now, let's suppose we want to add images, we'll use `Canvas.loadImage`, which works in both Node.js and browser:
 
 ```js
-const { Canvas, resolveImage } = require('canvas-constructor/skia');
+const { Canvas, loadImage } = require('canvas-constructor/napi-rs');
 
 async function createCanvas() {
-	const image = await resolveImage('./images/kitten.png');
+	const image = await loadImage('./images/kitten.png');
 
 	return new Canvas(300, 400)
 		.printImage(image, 0, 0, 300, 400)
@@ -82,7 +83,7 @@ async function createCanvas() {
 		.setTextFont('28px Impact')
 		.setTextAlign('center')
 		.printText('Kitten!', 150, 370)
-		.toBufferAsync();
+		.pngAsync();
 }
 ```
 
@@ -96,5 +97,5 @@ async function createCanvas() {
 
 And now, you have created an image with a kitten in the background and some centred text in the bottom of it.
 
-If you experience issues with `skia-canvas` or `canvas`, please refer to their respective package repositories, this
+If you experience issues with `@napi-rs/canvas`, `skia-canvas`, or `canvas`, please refer to their respective package repositories, this
 package is just a convenient wrapper for the two.
