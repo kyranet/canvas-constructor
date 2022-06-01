@@ -95,7 +95,7 @@
 			new CanvasConstructor.Canvas(canvasElement)
 				.setColor('#AEFD54')
 				.printRectangle(5, 5, 290, 290)
-				.printImage(await CanvasConstructor.resolveImage('https://github.com/NM-EEA-Y.png'), 0, 0, 300, 300)
+				.printImage(await CanvasConstructor.loadImage('https://github.com/NM-EEA-Y.png'), 0, 0, 300, 300)
 				.setTextAlign('center')
 				.setColor('#000000')
 				.setTextFont('28px Impact')
@@ -105,7 +105,7 @@
 
 	<script type="text/javascript">
 		(async () => {
-			const image = await CanvasConstructor.resolveImage('https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png');
+			const image = await CanvasConstructor.loadImage('https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png');
 			for (const fit of ['fill', 'contain', 'cover', 'none']) {
 				const canvasElement = document.getElementById(`circular-image-${fit}`);
 				new CanvasConstructor.Canvas(canvasElement)
