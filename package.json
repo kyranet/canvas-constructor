@@ -22,6 +22,11 @@
 			"require": "./dist/cairo.js",
 			"types": "./dist/cairo.d.ts"
 		},
+		"./napi-rs": {
+			"import": "./dist/napi-rs.mjs",
+			"require": "./dist/napi-rs.js",
+			"types": "./dist/napi-rs.d.ts"
+		},
 		"./skia": {
 			"import": "./dist/skia.mjs",
 			"require": "./dist/skia.js",
@@ -31,10 +36,12 @@
 	"sideEffects": false,
 	"scripts": {
 		"prepublishOnly": "yarn build",
-		"lint": "eslint src --ext ts --fix",
-		"docs": "typedoc",
+		"lint": "eslint scripts --ext mjs --fix",
+		"docs": "rn build:gen && typedoc",
 		"update": "yarn upgrade-interactive --latest",
-		"build": "rollup -c rollup.config.ts",
+		"build": "yarn build:gen && yarn build:ts",
+		"build:gen": "node ./scripts/generate.mjs",
+		"build:ts": "rollup -c rollup.config.ts",
 		"watch": "yarn build -w",
 		"sversion": "standard-version",
 		"prepare": "husky install .github/husky"
@@ -45,6 +52,7 @@
 	"devDependencies": {
 		"@commitlint/cli": "^17.0.1",
 		"@commitlint/config-conventional": "^17.0.0",
+		"@napi-rs/canvas": "0.1.21",
 		"@sapphire/eslint-config": "^4.3.5",
 		"@sapphire/prettier-config": "1.4.3",
 		"@sapphire/ts-config": "3.3.4",
