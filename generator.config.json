@@ -1,5 +1,5 @@
 {
-	"main": "./src/main.tst",
+	"main": "./src/main.ts.template",
 	"output": "./src/[name].ts",
 	"entries": [
 		{
