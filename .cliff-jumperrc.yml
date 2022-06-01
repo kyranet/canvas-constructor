@@ -1,0 +1,4 @@
+name: canvas-constructor
+packagePath: .
+commitMessageTemplate: 'chore(release): release {{new-version}}'
+tagTemplate: v{{new-version}}
