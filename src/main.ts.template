@@ -502,7 +502,8 @@ export class Canvas {
 	 * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/resetTransform
 	 */
 	public resetTransform(): this {
-		return this.resetTransform();
+		this.context.resetTransform();
+		return this;
 	}
 
 	/**
