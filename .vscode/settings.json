@@ -6,6 +6,9 @@
 	"editor.detectIndentation": false,
 	"files.eol": "\n",
 	"deno.enable": false,
+	"files.associations": {
+		"main.ts.template": "typescript"
+	},
 	"editor.tokenColorCustomizations": {
 		"[Monokai Night]": {
 			"textMateRules": [
