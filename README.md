@@ -98,4 +98,4 @@ async function createCanvas() {
 And now, you have created an image with a kitten in the background and some centred text in the bottom of it.
 
 If you experience issues with `@napi-rs/canvas`, `skia-canvas`, or `canvas`, please refer to their respective package repositories, this
-package is just a convenient wrapper for the two.
+package is just a convenient wrapper for the three.
