@@ -63,7 +63,7 @@
 		"@typescript-eslint/parser": "^5.27.0",
 		"canvas": "^2.9.1",
 		"cz-conventional-changelog": "^3.3.0",
-		"eslint": "^8.16.0",
+		"eslint": "^8.17.0",
 		"eslint-config-prettier": "^8.5.0",
 		"eslint-plugin-prettier": "^4.0.0",
 		"husky": "^8.0.1",
@@ -76,9 +76,9 @@
 		"rollup-plugin-terser": "^7.0.2",
 		"rollup-plugin-typescript2": "^0.32.0",
 		"skia-canvas": "^0.9.29",
-		"ts-node": "^10.8.0",
+		"ts-node": "^10.8.1",
 		"typedoc": "^0.22.17",
-		"typescript": "^4.7.2"
+		"typescript": "^4.7.3"
 	},
 	"resolutions": {
 		"ansi-regex": "^5.0.1",
