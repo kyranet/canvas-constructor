@@ -1,2 +1,7 @@
 node_modules/
 dist/
+
+# Generated export files
+/*.js
+/*.mjs
+/*.d.ts
