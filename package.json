@@ -13,24 +13,24 @@
 	"unpkg": "dist/browser.umd.js",
 	"exports": {
 		"./browser": {
+			"types": "./dist/browser.d.ts",
 			"import": "./dist/browser.mjs",
-			"require": "./dist/browser.js",
-			"types": "./dist/browser.d.ts"
+			"require": "./dist/browser.js"
 		},
 		"./cairo": {
+			"types": "./dist/cairo.d.ts",
 			"import": "./dist/cairo.mjs",
-			"require": "./dist/cairo.js",
-			"types": "./dist/cairo.d.ts"
+			"require": "./dist/cairo.js"
 		},
 		"./napi-rs": {
+			"types": "./dist/napi-rs.d.ts",
 			"import": "./dist/napi-rs.mjs",
-			"require": "./dist/napi-rs.js",
-			"types": "./dist/napi-rs.d.ts"
+			"require": "./dist/napi-rs.js"
 		},
 		"./skia": {
+			"types": "./dist/skia.d.ts",
 			"import": "./dist/skia.mjs",
-			"require": "./dist/skia.js",
-			"types": "./dist/skia.d.ts"
+			"require": "./dist/skia.js"
 		}
 	},
 	"sideEffects": false,
@@ -89,7 +89,19 @@
 		"url": "git+https://github.com/kyranet/canvas-constructor.git"
 	},
 	"files": [
-		"dist"
+		"dist",
+		"browser.js",
+		"browser.mjs",
+		"browser.d.ts",
+		"cairo.js",
+		"cairo.mjs",
+		"cairo.d.ts",
+		"napi-rs.js",
+		"napi-rs.mjs",
+		"napi-rs.d.ts",
+		"skia.js",
+		"skia.mjs",
+		"skia.d.ts"
 	],
 	"engines": {
 		"node": ">=v14.18.0"

@@ -9,12 +9,17 @@ docs/
 # Ignore tsc dist folder
 dist/
 
-# Ignore generated files
+# Ignore generated source files
 src/browser.ts
 src/cairo.ts
 src/napi-rs.ts
 src/skia.ts
 **/*.tsbuildinfo
+
+# Ignore generated export files
+/*.js
+/*.mjs
+/*.d.ts
 
 # Ignore heapsnapshot and log files
 *.heapsnapshot
