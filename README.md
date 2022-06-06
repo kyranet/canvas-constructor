@@ -73,9 +73,11 @@ Now, let's suppose we want to add images, we'll use `Canvas.loadImage`, which wo
 
 ```js
 const { Canvas, loadImage } = require('canvas-constructor/napi-rs');
+import { readFile } from 'node:fs';
+
 
 async function createCanvas() {
-	const image = await loadImage('./images/kitten.png');
+	const image = await loadImage(await readFile('./images/kitten.png'));
 
 	return new Canvas(300, 400)
 		.printImage(image, 0, 0, 300, 400)
