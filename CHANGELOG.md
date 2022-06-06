@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file.
 
+# [6.0.1](https://github.com/kyranet/canvas-constructor/compare/v6.0.0...v6.0.1) - (2022-06-06)
+
+## 🐛 Bug Fixes
+
+- Re-add export files (#486) ([d27a04a](https://github.com/kyranet/canvas-constructor/commit/d27a04ae3f19fac8ed9e364f8dbcc28b16368ead))
+- Resolved infinite recursion in `resetTransform` ([352a24e](https://github.com/kyranet/canvas-constructor/commit/352a24e203c028e13e8186623526d83b81de4191))
+- **browser:** Export `loadImage` rather than `resolveImage` ([ef0be31](https://github.com/kyranet/canvas-constructor/commit/ef0be313bf9e69fe99c5b1c882f6f145963a2354))
+
+## 📝 Documentation
+
+- Include napi-rs to typedoc entry points ([fad3d6e](https://github.com/kyranet/canvas-constructor/commit/fad3d6e56328f478dad963beb214d20b859a8c3a))
+- Mention `@napi-rs/canvas` ([3ddf9f6](https://github.com/kyranet/canvas-constructor/commit/3ddf9f64464430f42e3af10c026f4c45d0fd6a44))
+
 # [6.0.0](https://github.com/kyranet/canvas-constructor/compare/v5.0.2...v6.0.0) - (2022-06-01)
 
 ## 🏠 Refactor
