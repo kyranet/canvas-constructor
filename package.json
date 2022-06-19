@@ -56,7 +56,7 @@
 		"@commitlint/config-conventional": "^17.0.2",
 		"@favware/cliff-jumper": "^1.8.3",
 		"@napi-rs/canvas": "0.1.22",
-		"@sapphire/eslint-config": "^4.3.6",
+		"@sapphire/eslint-config": "^4.3.7",
 		"@sapphire/prettier-config": "1.4.3",
 		"@sapphire/ts-config": "3.3.4",
 		"@typescript-eslint/eslint-plugin": "^5.27.1",
