@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+# [6.0.2](https://github.com/kyranet/canvas-constructor/compare/v6.0.1...v6.0.2) - (2022-07-12)
+
+## 🐛 Bug Fixes
+
+- Export loadFont for /cairo (#497) ([74d3e81](https://github.com/kyranet/canvas-constructor/commit/74d3e8112e0b2aab55ea086975879bb3b968c73c))
+
 # [6.0.1](https://github.com/kyranet/canvas-constructor/compare/v6.0.0...v6.0.1) - (2022-06-06)
 
 ## 🐛 Bug Fixes
