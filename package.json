@@ -157,5 +157,8 @@
 		"extends": "@sapphire"
 	},
 	"prettier": "@sapphire/prettier-config",
-	"packageManager": "yarn@3.2.1"
+	"packageManager": "yarn@3.2.1",
+	"volta": {
+		"node": "16.16.0"
+	}
 }
