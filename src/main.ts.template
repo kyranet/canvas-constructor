@@ -1845,7 +1845,7 @@ export class Canvas {
 	 * Gets a JPEG buffer.                                                     \
 	 * @param config The render configuration.                                 \
 	 * @returns A JPEG buffer.                                                 \
-	 * @see {@link jpegAsync} for the async version.                           \
+	 * @see {@link jpeg} for the sync version.                                 \
 	 */                                                                        \
 	public jpegAsync(config?: JpegConfig): Promise<Buffer> {                   \
 		return this.toBufferAsync('image/jpeg', config);                       \
@@ -1855,7 +1855,7 @@ export class Canvas {
 	 * Gets a JPEG buffer.                                                     \
 	 * @param quality The quality to use, defaults to `92`.                    \
 	 * @returns A JPEG buffer.                                                 \
-	 * @see {@link jpegAsync} for the async version.                           \
+	 * @see {@link jpeg} for the sync version.                                 \
 	 */                                                                        \
 	public jpegAsync(quality?: number): Promise<Buffer> {                      \
 		return this.canvas.encode('jpeg', quality);                            \
@@ -1896,7 +1896,7 @@ export class Canvas {
 	 * Gets a WebP buffer.                                                     \
 	 * @param quality The quality to use, defaults to `80`.                    \
 	 * @returns A WebP buffer.                                                 \
-	 * @see {@link webpAsync} for the async version.                           \
+	 * @see {@link webp} for the sync version.                                 \
 	 */                                                                        \
 	public webpAsync(quality?: number): Promise<Buffer> {                      \
 		return this.canvas.encode('webp', quality);                            \
@@ -1937,7 +1937,7 @@ export class Canvas {
 	 * Gets a PNG buffer.                                                      \
 	 * @param config The render configuration.                                 \
 	 * @returns A PNG buffer.                                                  \
-	 * @see {@link pngAsync} for the async version.                            \
+	 * @see {@link png} for the sync version.                                  \
 	 */                                                                        \
 	public pngAsync(config?: PngConfig): Promise<Buffer> {                     \
 		return this.toBufferAsync('image/png', config);                        \
@@ -1946,7 +1946,7 @@ export class Canvas {
 	/**                                                                        \
 	 * Gets a PNG buffer.                                                      \
 	 * @returns A PNG buffer.                                                  \
-	 * @see {@link pngAsync} for the async version.                            \
+	 * @see {@link png} for the sync version.                                  \
 	 */                                                                        \
 	public pngAsync(): Promise<Buffer> {                                       \
 		return this.canvas.encode('png');                                      \
@@ -1956,6 +1956,7 @@ export class Canvas {
 	 * Gets a PNG buffer.                                                      \
 	 * @param options The render options.                                      \
 	 * @returns A PNG buffer.                                                  \
+	 * @see {@link png} for the sync version.                                  \
 	 */                                                                        \
 	public pngAsync(options?: RenderOptions): Promise<Buffer> {                \
 		return this.canvas.toBuffer('png', options);                           \
@@ -1997,7 +1998,7 @@ export class Canvas {
 	 * Gets a PDF buffer.                                                      \
 	 * @param config The render configuration.                                 \
 	 * @returns A PDF buffer.                                                  \
-	 * @see {@link pngAsync} for the async version.                            \
+	 * @see {@link pdf} for the sync version.                                  \
 	 */                                                                        \
 	public pdfAsync(config?: PdfConfig): Promise<Buffer> {                     \
 		return this.toBufferAsync('application/pdf', config);                  \
@@ -2057,7 +2058,7 @@ export class Canvas {
 	/**                                                                                                                \
 	 * Gets an AVIF buffer.                                                                                            \
 	 * @returns A AVIF buffer.                                                                                         \
-	 * @see {@link avifAsync} for the async version.                                                                   \
+	 * @see {@link avif} for the sync version.                                                                         \
 	 */                                                                                                                \
 	public avifAsync(cfg?: AvifConfig): Promise<Buffer> {                                                              \
 		return this.canvas.encode('avif', cfg);                                                                        \
@@ -2356,7 +2357,7 @@ interface ResolvedCircularCoordinates {
 	sizeY: number;
 }
 
-// IF(CAIRO): export { loadImage, NativeImage as Image };
+// IF(CAIRO): export { loadImage, loadFont, NativeImage as Image };
 // IF(NAPI_RS): export { Path2D, GlobalFonts, NativeImage as Image };
 // IF(SKIA): export { Path2D, FontLibrary, NativeImage as Image, loadImage };
 
