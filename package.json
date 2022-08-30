@@ -75,7 +75,7 @@
 		"rollup-plugin-cleaner": "^1.0.0",
 		"rollup-plugin-terser": "^7.0.2",
 		"rollup-plugin-typescript2": "^0.33.0",
-		"skia-canvas": "^0.9.30",
+		"skia-canvas": "^1.0.0",
 		"ts-node": "^10.9.1",
 		"typedoc": "^0.23.11",
 		"typescript": "^4.8.2"
