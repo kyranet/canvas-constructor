@@ -28,6 +28,7 @@ import {                                                                       \
 	GlobalFonts,                                                               \
 	Image as NativeImage,                                                      \
 	Path2D,                                                                    \
+	loadImage,                                                                 \
 	type AvifConfig,                                                           \
 	type SKRSContext2D as NativeCanvasRenderingContext2D                       \
 } from '@napi-rs/canvas';
@@ -2358,7 +2359,7 @@ interface ResolvedCircularCoordinates {
 }
 
 // IF(CAIRO): export { loadImage, loadFont, NativeImage as Image };
-// IF(NAPI_RS): export { Path2D, GlobalFonts, NativeImage as Image };
+// IF(NAPI_RS): export { loadImage, Path2D, GlobalFonts, NativeImage as Image };
 // IF(SKIA): export { Path2D, FontLibrary, NativeImage as Image, loadImage };
 
 // IF(BROWSER):                                                                                                        \
@@ -2384,12 +2385,6 @@ export function loadImage(src: string, options?: Partial<HTMLImageElement>): Pro
 }
 
 // IF(!BROWSER): export const resolveImage = deprecate(loadImage, 'resolveImage() is deprecated. Use loadImage() instead.');
-// IF(NAPI_RS):                                                                                                        \
-export function loadImage(data: Buffer) {                                                                              \
-	const image = new NativeImage();                                                                                   \
-	image.src = data;                                                                                                  \
-	return image;                                                                                                      \
-}
 
 // IF(NAPI_RS):                                                                                                                            \
 export function loadFont(font: Buffer, alias?: string): boolean;                                                                           \
