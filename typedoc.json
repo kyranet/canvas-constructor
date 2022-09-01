@@ -4,5 +4,8 @@
 	"name": "canvas-constructor",
 	"entryPoints": ["src/browser.ts", "src/cairo.ts", "src/napi-rs.ts", "src/skia.ts"],
 	"excludeExternals": true,
-	"tsconfig": "./src/tsconfig.json"
+	"tsconfig": "./src/tsconfig.json",
+	"compilerOptions": {
+		"skipLibCheck": true
+	}
 }
