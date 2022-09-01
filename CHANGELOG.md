@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+# [7.0.0](https://github.com/kyranet/canvas-constructor/compare/v6.0.2...v7.0.0) - (2022-09-01)
+
+## 🏠 Refactor
+
+- Re-export async `loadImage` from `@napi-rs/canvas` (#516) ([c5ad068](https://github.com/kyranet/canvas-constructor/commit/c5ad0689a37a0b5920b14d0c579dd88844444051))
+  - 💥 **BREAKING CHANGE:** When using @napi/rs loader the `loadImage` function is now an async function returning a `Promise`
+
 # [6.0.2](https://github.com/kyranet/canvas-constructor/compare/v6.0.1...v6.0.2) - (2022-07-12)
 
 ## 🐛 Bug Fixes
