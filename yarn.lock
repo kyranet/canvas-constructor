@@ -1323,7 +1323,7 @@ __metadata:
     "@sapphire/ts-config": 3.3.4
     "@typescript-eslint/eslint-plugin": ^5.36.1
     "@typescript-eslint/parser": ^5.36.1
-    canvas: ^2.9.3
+    canvas: ^2.10.0
     cz-conventional-changelog: ^3.3.0
     eslint: ^8.23.0
     eslint-config-prettier: ^8.5.0
@@ -1340,20 +1340,20 @@ __metadata:
     skia-canvas: ^1.0.0
     ts-node: ^10.9.1
     tslib: ^2.4.0
-    typedoc: ^0.23.13
+    typedoc: ^0.23.14
     typescript: ^4.8.2
   languageName: unknown
   linkType: soft
 
-"canvas@npm:^2.9.3":
-  version: 2.9.3
-  resolution: "canvas@npm:2.9.3"
+"canvas@npm:^2.10.0":
+  version: 2.10.0
+  resolution: "canvas@npm:2.10.0"
   dependencies:
     "@mapbox/node-pre-gyp": ^1.0.0
     nan: ^2.15.0
     node-gyp: latest
     simple-get: ^3.0.3
-  checksum: 368112ba4b16f54ce6dfac1ccbc45ddd1eb0b76dc09509c2601c2a26459bb4449d259a7aa8664fd94153aad13b48557535f3b9eb7fad9a97929b9eb962e50f09
+  checksum: bed0f61d51a6f5d721742776e2dd1203ad6ca2475e1177cfb7a6f9ed1d313372ab8b4aa5a6780c85d35e533e2400cb5f291be1a1d35a84fc71d6372cd4cdbc61
   languageName: node
   linkType: hard
 
@@ -5153,9 +5153,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typedoc@npm:^0.23.13":
-  version: 0.23.13
-  resolution: "typedoc@npm:0.23.13"
+"typedoc@npm:^0.23.14":
+  version: 0.23.14
+  resolution: "typedoc@npm:0.23.14"
   dependencies:
     lunr: ^2.3.9
     marked: ^4.0.19
@@ -5165,7 +5165,7 @@ __metadata:
     typescript: 4.6.x || 4.7.x || 4.8.x
   bin:
     typedoc: bin/typedoc
-  checksum: 720b5fa9846fcb2d0e3a763bc01b8f856d7e1c80ac50d2efd85dd850f61b98c4f52b7519a86ff2c59cebc7ab1e19e92cab31a25082d4574ab9a6f93e660e5369
+  checksum: 4037dc0db4aa8b205ac505bdc191de404ea2da3eb8dabbf8172851c239b85a96fbfd81503dc2d4789066d6901d76c552abc73ee04a239763b69b90587d44527b
   languageName: node
   linkType: hard
 
