@@ -59,9 +59,9 @@
 		"@sapphire/eslint-config": "^4.3.8",
 		"@sapphire/prettier-config": "1.4.4",
 		"@sapphire/ts-config": "3.3.4",
-		"@typescript-eslint/eslint-plugin": "^5.36.1",
-		"@typescript-eslint/parser": "^5.36.1",
-		"canvas": "^2.10.0",
+		"@typescript-eslint/eslint-plugin": "^5.36.2",
+		"@typescript-eslint/parser": "^5.36.2",
+		"canvas": "^2.10.1",
 		"cz-conventional-changelog": "^3.3.0",
 		"eslint": "^8.23.0",
 		"eslint-config-prettier": "^8.5.0",
@@ -78,7 +78,7 @@
 		"skia-canvas": "^1.0.0",
 		"ts-node": "^10.9.1",
 		"typedoc": "^0.23.14",
-		"typescript": "^4.8.2"
+		"typescript": "^4.8.3"
 	},
 	"resolutions": {
 		"ansi-regex": "^5.0.1",
