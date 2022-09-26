@@ -35,6 +35,7 @@ How to use it:
 
 ```js
 const { Canvas } = require('canvas-constructor/napi-rs');
+// or `canvas-constructor/skia` if you are using `skia-canvas`
 // or `canvas-constructor/cairo` if you are using `canvas`
 
 new Canvas(300, 300)
@@ -61,6 +62,8 @@ new Canvas(300, 300)
 </script>
 ```
 
+Alternatively, you can import `canvas-constructor/browser`.
+
 -   That will create a canvas with size of 300 pixels width, 300 pixels height.
 -   Set the color to #AEFD54
 -   Draw a rectangle with the previous color, covering all the pixels from (5, 5) to (290 + 5, 290 + 5)
@@ -72,11 +75,10 @@ new Canvas(300, 300)
 Now, let's suppose we want to add images, we'll use `Canvas.loadImage`, which works in both Node.js and browser:
 
 ```js
-const { readFile } = require('node:fs');
 const { Canvas, loadImage } = require('canvas-constructor/napi-rs');
 
 async function createCanvas() {
-	const image = loadImage(await readFile('./images/kitten.png'));
+	const image = await loadImage('./images/kitten.png');
 
 	return new Canvas(300, 400)
 		.printImage(image, 0, 0, 300, 400)
