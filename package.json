@@ -59,8 +59,8 @@
 		"@sapphire/eslint-config": "^4.3.8",
 		"@sapphire/prettier-config": "1.4.4",
 		"@sapphire/ts-config": "3.3.4",
-		"@typescript-eslint/eslint-plugin": "^5.39.0",
-		"@typescript-eslint/parser": "^5.39.0",
+		"@typescript-eslint/eslint-plugin": "^5.40.0",
+		"@typescript-eslint/parser": "^5.40.0",
 		"canvas": "^2.10.1",
 		"cz-conventional-changelog": "^3.3.0",
 		"eslint": "^8.25.0",
@@ -77,12 +77,12 @@
 		"rollup-plugin-typescript2": "^0.34.1",
 		"skia-canvas": "^1.0.0",
 		"ts-node": "^10.9.1",
-		"typedoc": "^0.23.15",
+		"typedoc": "^0.23.16",
 		"typescript": "^4.8.4"
 	},
 	"resolutions": {
 		"ansi-regex": "^5.0.1",
-		"minimist": "^1.2.6"
+		"minimist": "^1.2.7"
 	},
 	"repository": {
 		"type": "git",
@@ -159,6 +159,6 @@
 	"prettier": "@sapphire/prettier-config",
 	"packageManager": "yarn@3.2.4",
 	"volta": {
-		"node": "16.17.1"
+		"node": "16.18.0"
 	}
 }
