@@ -1,11 +1,11 @@
-import { resolve as resolveDir } from 'path';
+import { fileURLToPath } from 'node:url';
 import { defineConfig } from 'rollup';
 import cleaner from 'rollup-plugin-cleaner';
 import { terser } from 'rollup-plugin-terser';
 import typescript from 'rollup-plugin-typescript2';
 
 const pluginsCleaner = cleaner({ targets: ['./dist/'] });
-const pluginsTypeScript = typescript({ tsconfig: resolveDir(__dirname, 'src', 'tsconfig.json') });
+const pluginsTypeScript = typescript({ tsconfig: fileURLToPath(new URL('src/tsconfig.json', import.meta.url)) });
 const pluginsTerser = terser({
 	ecma: 2019,
 	// This will ensure that whenever Rollup is in watch (dev) mode, console logs will not be removed

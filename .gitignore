@@ -19,6 +19,7 @@ src/skia.ts
 # Ignore generated export files
 /*.js
 /*.mjs
+!rollup.config.mjs
 /*.d.ts
 
 # Ignore heapsnapshot and log files
