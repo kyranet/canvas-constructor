@@ -43,7 +43,7 @@
 		"build:ts": "rollup -c rollup.config.mjs",
 		"watch": "yarn build -w",
 		"bump": "cliff-jumper",
-		"clean": "rimraf browser.{d.ts,js,mjs} cairo.{d.ts,js,mjs} napi-rs.{d.ts,js,mjs} skia.{d.ts,js,mjs} dist",
+		"clean": "rimraf {browser,cairo,napi-rs,skia}.{d.ts,js,mjs} dist",
 		"check-update": "cliff-jumper --dry-run",
 		"prepack": "yarn build && pinst --disable",
 		"postinstall": "husky install .github/husky",
