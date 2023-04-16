@@ -8,38 +8,39 @@ export type NativeImage = HTMLImageElement;
 // IF(!BROWSER): import { deprecate } from 'node:util';
 // IF(CAIRO):                                                                  \
 import {                                                                       \
-	Canvas as NativeCanvas,                                                    \
-	CanvasRenderingContext2D as NativeCanvasRenderingContext2D,                \
 	createCanvas,                                                              \
 	Image as NativeImage,                                                      \
-	JpegConfig,                                                                \
-	JPEGStream,                                                                \
 	loadImage,                                                                 \
-	PdfConfig,                                                                 \
-	PDFStream,                                                                 \
-	PngConfig,                                                                 \
-	PNGStream,                                                                 \
-	registerFont as loadFont                                                   \
+	registerFont as loadFont,                                                  \
+	type Canvas as NativeCanvas,                                               \
+	type CanvasRenderingContext2D as NativeCanvasRenderingContext2D,           \
+	type ImageData,                                                            \
+	type JpegConfig,                                                           \
+	type JPEGStream,                                                           \
+	type PdfConfig,                                                            \
+	type PDFStream,                                                            \
+	type PngConfig,                                                            \
+	type PNGStream                                                             \
 } from 'canvas';
 // IF(NAPI_RS):                                                                \
 import {                                                                       \
-	Canvas as NativeCanvas,                                                    \
 	createCanvas,                                                              \
 	GlobalFonts,                                                               \
 	Image as NativeImage,                                                      \
-	Path2D,                                                                    \
 	loadImage,                                                                 \
+	Path2D,                                                                    \
 	type AvifConfig,                                                           \
+	type Canvas as NativeCanvas,                                               \
 	type SKRSContext2D as NativeCanvasRenderingContext2D                       \
 } from '@napi-rs/canvas';
 // IF(SKIA):                                                                   \
 import {                                                                       \
 	Canvas as NativeCanvas,                                                    \
-	CanvasRenderingContext2D as NativeCanvasRenderingContext2D,                \
 	FontLibrary,                                                               \
 	Image as NativeImage,                                                      \
 	loadImage,                                                                 \
 	Path2D,                                                                    \
+	type CanvasRenderingContext2D as NativeCanvasRenderingContext2D,           \
 	type Font,                                                                 \
 	type RenderOptions                                                         \
 } from 'skia-canvas';
@@ -117,7 +118,7 @@ export interface SaveAsOptions extends RenderOptions {                          
 	 */                                                                                                                                                        \
 	format?: RenderImageFormat;                                                                                                                                \
 }
-// IF(!SKIA): export type ContextAttributes = ReturnType<NativeCanvasRenderingContext2D['getContextAttributes']>;
+// IF(BROWSER,NAPI_RS): export type ContextAttributes = ReturnType<NativeCanvasRenderingContext2D['getContextAttributes']>;
 
 export class Canvas {
 	/**
@@ -227,12 +228,13 @@ export class Canvas {
 		this.canvas.height = value;
 	}
 
-	/**
-	 * The current text direction used to draw text.
-	 * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/direction
-	 */
-	public get direction(): CanvasDirection {
-		return this.context.direction;
+// IF(!CAIRO):                                                                                                         \
+	/**                                                                                                                \
+	 * The current text direction used to draw text.                                                                   \
+	 * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/direction                        \
+	 */                                                                                                                \
+	public get direction(): CanvasDirection {                                                                          \
+		return this.context.direction;                                                                                 \
 	}
 
 	/**
@@ -252,23 +254,25 @@ export class Canvas {
 		return this.context.globalAlpha;
 	}
 
-	/**
-	 * Whether scaled images are smoothed (true, default) or not (false).
-	 * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/imageSmoothingEnabled
-	 */
-	public get imageSmoothingEnabled(): boolean {
-		return this.context.imageSmoothingEnabled;
+// IF(!CAIRO):                                                                                                         \
+	/**                                                                                                                \
+	 * Whether scaled images are smoothed (true, default) or not (false).                                              \
+	 * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/imageSmoothingEnabled            \
+	 */                                                                                                                \
+	public get imageSmoothingEnabled(): boolean {                                                                      \
+		return this.context.imageSmoothingEnabled;                                                                     \
 	}
 
-	/**
-	 * The quality of image smoothing.
-	 * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/imageSmoothingQuality
-	 */
-	public get imageSmoothingQuality(): ImageSmoothingQuality {
-		return this.context.imageSmoothingQuality;
+// IF(!CAIRO):                                                                                                         \
+	/**                                                                                                                \
+	 * The quality of image smoothing.                                                                                 \
+	 * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/imageSmoothingQuality            \
+	 */                                                                                                                \
+	public get imageSmoothingQuality(): ImageSmoothingQuality {                                                        \
+		return this.context.imageSmoothingQuality;                                                                     \
 	}
 
-// IF(!SKIA):                                                                                                          \
+// IF(BROWSER,NAPI_RS):                                                                                                \
 	/**                                                                                                                \
 	 * Returns an object that contains the actual context parameters. Context attributes can be requested with this    \
 	 * class instantiation.                                                                                            \
@@ -507,11 +511,12 @@ export class Canvas {
 		return this;
 	}
 
-	/**
-	 * Resets the filters.
-	 */
-	public resetFilters(): this {
-		return this.setFilter('none');
+// IF(!CAIRO):                                                                 \
+	/**                                                                        \
+	 * Resets the filters.                                                     \
+	 */                                                                        \
+	public resetFilters(): this {                                              \
+		return this.setFilter('none');                                         \
 	}
 
 	/**
@@ -1133,14 +1138,15 @@ export class Canvas {
 		return this;
 	}
 
-	/**
-	 * Change the canvas's filters.
-	 * @param filter The filter to set.
-	 * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/filter
-	 */
-	public setFilter(filter: string): this {
-		this.context.filter = filter;
-		return this;
+// IF(!CAIRO):                                                                                                         \
+	/**                                                                                                                \
+	 * Change the canvas's filters.                                                                                    \
+	 * @param filter The filter to set.                                                                                \
+	 * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/filter                           \
+	 */                                                                                                                \
+	public setFilter(filter: string): this {                                                                           \
+		this.context.filter = filter;                                                                                  \
+		return this;                                                                                                   \
 	}
 
 	/**
@@ -1313,48 +1319,55 @@ export class Canvas {
 		return this.setStroke(gradient);
 	}
 
-	/**
-	 * Creates a radial gradient around a point with given coordinates.
-	 * @param startAngle The angle at which to begin the gradient, in radians. Angle measurements start vertically above the centre and move around clockwise.
-	 * @param x The x-axis coordinate of the centre of the gradient.
-	 * @param y The y-axis coordinate of the centre of the gradient.
-	 * @param steps The gradient steps.
-	 * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/createConicGradient
-	 */
-	public createConicGradient(startAngle: number, x: number, y: number, steps: readonly GradientStop[] = []): CanvasGradient {
-		const gradient = this.context.createConicGradient(startAngle, x, y);
-		for (const step of steps) {
-			gradient.addColorStop(step.position, step.color);
-		}
-
-		return gradient;
+// IF(!CAIRO):                                                                                                                  \
+	/**                                                                                                                         \
+	 * Creates a radial gradient around a point with given coordinates.                                                         \
+	 * @param startAngle The angle at which to begin the gradient, in radians. Angle measurements start vertically              \
+	 * above the centre and move around clockwise.                                                                              \
+	 * @param x The x-axis coordinate of the centre of the gradient.                                                            \
+	 * @param y The y-axis coordinate of the centre of the gradient.                                                            \
+	 * @param steps The gradient steps.                                                                                         \
+	 * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/createConicGradient                       \
+	 */                                                                                                                         \
+	public createConicGradient(startAngle: number, x: number, y: number, steps: readonly GradientStop[] = []): CanvasGradient { \
+		const gradient = this.context.createConicGradient(startAngle, x, y);                                                    \
+		for (const step of steps) {                                                                                             \
+			gradient.addColorStop(step.position, step.color);                                                                   \
+		}                                                                                                                       \
+                                                                                                                                \
+		return gradient;                                                                                                        \
 	}
 
-	/**
-	 * Creates a radial gradient given by the coordinates of the two circles represented by the parameters. This
-	 * method is chainable and calls setColor after creating the gradient.
-	 * @param startAngle The angle at which to begin the gradient, in radians. Angle measurements start vertically above the centre and move around clockwise.
-	 * @param x The x-axis coordinate of the centre of the gradient.
-	 * @param y The y-axis coordinate of the centre of the gradient.
-	 * @param steps The gradient steps.
-	 * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/createConicGradient
-	 */
-	public printConicColorGradient(startAngle: number, x: number, y: number, steps?: readonly GradientStop[]): this {
-		const gradient = this.createConicGradient(startAngle, x, y, steps);
-		return this.setColor(gradient);
+// IF(!CAIRO):                                                                                                         \
+	/**                                                                                                                \
+	 * Creates a radial gradient given by the coordinates of the two circles represented by the parameters. This       \
+	 * method is chainable and calls setColor after creating the gradient.                                             \
+	 * @param startAngle The angle at which to begin the gradient, in radians. Angle measurements start vertically     \
+	 * above the centre and move around clockwise.                                                                     \
+	 * @param x The x-axis coordinate of the centre of the gradient.                                                   \
+	 * @param y The y-axis coordinate of the centre of the gradient.                                                   \
+	 * @param steps The gradient steps.                                                                                \
+	 * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/createConicGradient              \
+	 */                                                                                                                \
+	public printConicColorGradient(startAngle: number, x: number, y: number, steps?: readonly GradientStop[]): this {  \
+		const gradient = this.createConicGradient(startAngle, x, y, steps);                                            \
+		return this.setColor(gradient);                                                                                \
 	}
 
-	/**
-	 * Creates a radial gradient around a point with given coordinates. This method is chainable and calls setStroke after creating the gradient.
-	 * @param startAngle The angle at which to begin the gradient, in radians. Angle measurements start vertically above the centre and move around clockwise.
-	 * @param x The x-axis coordinate of the centre of the gradient.
-	 * @param y The y-axis coordinate of the centre of the gradient.
-	 * @param steps The gradient steps.
-	 * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/createConicGradient
-	 */
-	public printConicStrokeGradient(startAngle: number, x: number, y: number, steps?: readonly GradientStop[]): this {
-		const gradient = this.createConicGradient(startAngle, x, y, steps);
-		return this.setStroke(gradient);
+// IF(!CAIRO):                                                                                                         \
+	/**                                                                                                                \
+	 * Creates a radial gradient around a point with given coordinates. This method is chainable and calls setStroke   \
+	 * after creating the gradient.                                                                                    \
+	 * @param startAngle The angle at which to begin the gradient, in radians. Angle measurements start vertically     \
+	 * above the centre and move around clockwise.                                                                     \
+	 * @param x The x-axis coordinate of the centre of the gradient.                                                   \
+	 * @param y The y-axis coordinate of the centre of the gradient.                                                   \
+	 * @param steps The gradient steps.                                                                                \
+	 * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/createConicGradient              \
+	 */                                                                                                                \
+	public printConicStrokeGradient(startAngle: number, x: number, y: number, steps?: readonly GradientStop[]): this { \
+		const gradient = this.createConicGradient(startAngle, x, y, steps);                                            \
+		return this.setStroke(gradient);                                                                               \
 	}
 
 	/**
@@ -1577,14 +1590,15 @@ export class Canvas {
 		return this;
 	}
 
-	/**
-	 * Modify the smoothing quality value.
-	 * @param value The smoothing quality value.
-	 * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/imageSmoothingEnabled
-	 */
-	public setImageSmoothingQuality(value: ImageSmoothingQuality): this {
-		this.context.imageSmoothingQuality = value;
-		return this;
+// IF(!CAIRO):                                                                                                         \
+	/**                                                                                                                \
+	 * Modify the smoothing quality value.                                                                             \
+	 * @param value The smoothing quality value.                                                                       \
+	 * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/imageSmoothingEnabled            \
+	 */                                                                                                                \
+	public setImageSmoothingQuality(value: ImageSmoothingQuality): this {                                              \
+		this.context.imageSmoothingQuality = value;                                                                    \
+		return this;                                                                                                   \
 	}
 
 // IF(CAIRO):                                                                                                          \
@@ -1738,23 +1752,24 @@ export class Canvas {
 		return this.context.isPointInPath(...args);
 	}
 
-	/**
-	 * Reports whether or not the specified point is inside the area contained by the stroking of the current path.
-	 * @param x The X coordinate of the point to check.
-	 * @param y The Y coordinate of the point to check.
-	 * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/isPointInStroke
-	 */
-	public isPointInStroke(x: number, y: number): boolean;
-	/**
-	 * Reports whether or not the specified point is inside the area contained by the stroking of the given path.
-	 * @param path The {@link Path2D} to check against.
-	 * @param x The X coordinate of the point to check.
-	 * @param y The Y coordinate of the point to check.
-	 * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/isPointInStroke
-	 */
-	public isPointInStroke(path: Path2D, x: number, y: number): boolean;
-	public isPointInStroke(...args: [any, any]): boolean {
-		return this.context.isPointInStroke(...args);
+// IF(!CAIRO):                                                                                                         \
+	/**                                                                                                                \
+	 * Reports whether or not the specified point is inside the area contained by the stroking of the current path.    \
+	 * @param x The X coordinate of the point to check.                                                                \
+	 * @param y The Y coordinate of the point to check.                                                                \
+	 * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/isPointInStroke                  \
+	 */                                                                                                                \
+	public isPointInStroke(x: number, y: number): boolean;                                                             \
+	/**                                                                                                                \
+	 * Reports whether or not the specified point is inside the area contained by the stroking of the given path.      \
+	 * @param path The {@link Path2D} to check against.                                                                \
+	 * @param x The X coordinate of the point to check.                                                                \
+	 * @param y The Y coordinate of the point to check.                                                                \
+	 * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/isPointInStroke                  \
+	 */                                                                                                                \
+	public isPointInStroke(path: Path2D, x: number, y: number): boolean;                                               \
+	public isPointInStroke(...args: [any, any]): boolean {                                                             \
+		return this.context.isPointInStroke(...args);                                                                  \
 	}
 
 	/**
