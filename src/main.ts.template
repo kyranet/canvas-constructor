@@ -12,12 +12,12 @@ import {                                                                       \
 	CanvasRenderingContext2D as NativeCanvasRenderingContext2D,                \
 	createCanvas,                                                              \
 	Image as NativeImage,                                                      \
-	JpegConfig,                                                                \
+	type JpegConfig,                                                                \
 	JPEGStream,                                                                \
 	loadImage,                                                                 \
-	PdfConfig,                                                                 \
+	type PdfConfig,                                                                 \
 	PDFStream,                                                                 \
-	PngConfig,                                                                 \
+	type PngConfig,                                                                 \
 	PNGStream,                                                                 \
 	registerFont as loadFont                                                   \
 } from 'canvas';
