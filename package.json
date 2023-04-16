@@ -58,7 +58,7 @@
 		"@napi-rs/canvas": "0.1.30",
 		"@sapphire/eslint-config": "^4.3.8",
 		"@sapphire/prettier-config": "1.4.5",
-		"@sapphire/ts-config": "3.3.4",
+		"@sapphire/ts-config": "4.0.0",
 		"@typescript-eslint/eslint-plugin": "^5.46.1",
 		"@typescript-eslint/parser": "^5.46.1",
 		"canvas": "^2.10.2",
