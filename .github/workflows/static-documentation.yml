@@ -39,6 +39,7 @@ jobs:
       - name: Add static files
         run: |
           printf "User-agent: *\nDisallow:" > docs/robots.txt
+          printf "canvasconstructor.js.org" >> docs/CNAME
           cp .gitignore docs/
           cp LICENSE.md docs/
           cp README.md docs/
