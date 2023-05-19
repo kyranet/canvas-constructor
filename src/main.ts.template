@@ -2378,7 +2378,7 @@ interface ResolvedCircularCoordinates {
 // IF(SKIA): export { Path2D, FontLibrary, NativeImage as Image, loadImage };
 
 // IF(BROWSER):                                                                                                        \
-export const Image = HTMLImageElement;                                                                                 \
+export const Image = globalThis.HTMLImageElement;                                                                      \
 export function loadImage(src: string, options?: Partial<HTMLImageElement>): Promise<HTMLImageElement> {               \
 	return new Promise<HTMLImageElement>((resolve, reject) => {                                                        \
 		// eslint-disable-next-line no-undef                                                                           \
