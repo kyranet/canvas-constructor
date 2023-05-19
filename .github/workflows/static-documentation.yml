@@ -32,7 +32,9 @@ jobs:
           node-version: 18
           cache: yarn
           registry-url: https://registry.yarnpkg.com/
-      - name: Generate Magidoc
+      - name: Install Dependencies
+        run: yarn --immutable
+      - name: Generate documentation
         run: yarn docs
       - name: Add static files
         run: |
