@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file.
 
+# [7.0.1](https://github.com/kyranet/canvas-constructor/compare/v7.0.0...v7.0.1) - (2023-05-19)
+
+## 🐛 Bug Fixes
+
+- Update tslib dependency ([0ad6c4c](https://github.com/kyranet/canvas-constructor/commit/0ad6c4ce9e176ebc2113fe2f5bee4280300af479))
+- **browser:** Access from `globalThis` (#560) ([a83af48](https://github.com/kyranet/canvas-constructor/commit/a83af481b5222ab1a1f155a1bfb71d8e971f56e3))
+- Update dependencies (#553) ([f043125](https://github.com/kyranet/canvas-constructor/commit/f04312550bee4be1b43b0ff4ee1b969293dc590c))
+
+## 📝 Documentation
+
+- Fix some issues in the README (#524) ([505658d](https://github.com/kyranet/canvas-constructor/commit/505658d1203a05a4af2100fdb4c479e8f92e31ed))
+- Change name ([02c7910](https://github.com/kyranet/canvas-constructor/commit/02c7910a6117b7fdb2f0e67c979c10af7e5d3ee0))
+
 # [7.0.0](https://github.com/kyranet/canvas-constructor/compare/v6.0.2...v7.0.0) - (2022-09-01)
 
 ## 🏠 Refactor
