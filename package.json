@@ -54,18 +54,18 @@
 		"tslib": "^2.6.1"
 	},
 	"devDependencies": {
-		"@commitlint/cli": "^17.6.7",
-		"@commitlint/config-conventional": "^17.6.7",
+		"@commitlint/cli": "^17.7.1",
+		"@commitlint/config-conventional": "^17.7.0",
 		"@favware/cliff-jumper": "^2.1.1",
-		"@napi-rs/canvas": "0.1.41",
-		"@sapphire/eslint-config": "^5.0.0",
+		"@napi-rs/canvas": "0.1.43",
+		"@sapphire/eslint-config": "^5.0.1",
 		"@sapphire/prettier-config": "2.0.0",
 		"@sapphire/ts-config": "4.0.1",
-		"@typescript-eslint/eslint-plugin": "^6.2.1",
-		"@typescript-eslint/parser": "^6.2.1",
+		"@typescript-eslint/eslint-plugin": "^6.3.0",
+		"@typescript-eslint/parser": "^6.3.0",
 		"canvas": "^2.11.2",
 		"cz-conventional-changelog": "^3.3.0",
-		"eslint": "^8.46.0",
+		"eslint": "^8.47.0",
 		"eslint-config-prettier": "^9.0.0",
 		"eslint-plugin-prettier": "^5.0.0",
 		"husky": "^8.0.3",
@@ -73,7 +73,7 @@
 		"pinst": "^3.0.0",
 		"prettier": "^3.0.1",
 		"rimraf": "^5.0.1",
-		"rollup": "^3.27.2",
+		"rollup": "^3.28.0",
 		"rollup-plugin-cleaner": "^1.0.0",
 		"rollup-plugin-terser": "^7.0.2",
 		"rollup-plugin-typescript2": "^0.35.0",
@@ -162,6 +162,6 @@
 	"prettier": "@sapphire/prettier-config",
 	"packageManager": "yarn@3.6.1",
 	"volta": {
-		"node": "18.17.0"
+		"node": "18.17.1"
 	}
 }
