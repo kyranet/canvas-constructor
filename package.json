@@ -51,7 +51,7 @@
 		"postpack": "pinst --enable"
 	},
 	"dependencies": {
-		"tslib": "^2.6.1"
+		"tslib": "^2.6.2"
 	},
 	"devDependencies": {
 		"@commitlint/cli": "^17.7.1",
@@ -61,17 +61,17 @@
 		"@sapphire/eslint-config": "^5.0.1",
 		"@sapphire/prettier-config": "2.0.0",
 		"@sapphire/ts-config": "4.0.1",
-		"@typescript-eslint/eslint-plugin": "^6.3.0",
-		"@typescript-eslint/parser": "^6.3.0",
+		"@typescript-eslint/eslint-plugin": "^6.4.0",
+		"@typescript-eslint/parser": "^6.4.0",
 		"canvas": "^2.11.2",
 		"cz-conventional-changelog": "^3.3.0",
 		"eslint": "^8.47.0",
 		"eslint-config-prettier": "^9.0.0",
 		"eslint-plugin-prettier": "^5.0.0",
 		"husky": "^8.0.3",
-		"lint-staged": "^13.2.3",
+		"lint-staged": "^13.3.0",
 		"pinst": "^3.0.0",
-		"prettier": "^3.0.1",
+		"prettier": "^3.0.2",
 		"rimraf": "^5.0.1",
 		"rollup": "^3.28.0",
 		"rollup-plugin-cleaner": "^1.0.0",
@@ -160,7 +160,7 @@
 		"extends": "@sapphire"
 	},
 	"prettier": "@sapphire/prettier-config",
-	"packageManager": "yarn@3.6.1",
+	"packageManager": "yarn@3.6.2",
 	"volta": {
 		"node": "18.17.1"
 	}
