@@ -642,13 +642,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sapphire/ts-config@npm:4.0.1":
-  version: 4.0.1
-  resolution: "@sapphire/ts-config@npm:4.0.1"
+"@sapphire/ts-config@npm:5.0.0":
+  version: 5.0.0
+  resolution: "@sapphire/ts-config@npm:5.0.0"
   dependencies:
-    tslib: ^2.6.0
-    typescript: ^5.1.6
-  checksum: f8fae2d8c7cd85c254898cb9007681e35c8b093e1538f8ee7d1e2c22a5e2235b8e0f6e17fd37366dccc77a14762ad61e06382605347d4a49f8cf9a3f0a99b7d0
+    tslib: ^2.6.2
+    typescript: ^5.2.2
+  checksum: 5295e70762ec4e710c44d62c0706debb3d651d994b40c55586bfa93e7fae34c4f4f63d047b4fe3e66c4f545ad696485c904e79d2ed4e9ea45c89a0bf305ca945
   languageName: node
   linkType: hard
 
@@ -1238,7 +1238,7 @@ __metadata:
     "@napi-rs/canvas": 0.1.44
     "@sapphire/eslint-config": ^5.0.2
     "@sapphire/prettier-config": 2.0.0
-    "@sapphire/ts-config": 4.0.1
+    "@sapphire/ts-config": 5.0.0
     "@typescript-eslint/eslint-plugin": ^6.5.0
     "@typescript-eslint/parser": ^6.5.0
     canvas: ^2.11.2
@@ -5127,7 +5127,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:^4.6.4 || ^5.0.0, typescript@npm:^5.1.6, typescript@npm:^5.2.2":
+"typescript@npm:^4.6.4 || ^5.0.0, typescript@npm:^5.2.2":
   version: 5.2.2
   resolution: "typescript@npm:5.2.2"
   bin:
@@ -5137,7 +5137,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@^4.6.4 || ^5.0.0#~builtin<compat/typescript>, typescript@patch:typescript@^5.1.6#~builtin<compat/typescript>, typescript@patch:typescript@^5.2.2#~builtin<compat/typescript>":
+"typescript@patch:typescript@^4.6.4 || ^5.0.0#~builtin<compat/typescript>, typescript@patch:typescript@^5.2.2#~builtin<compat/typescript>":
   version: 5.2.2
   resolution: "typescript@patch:typescript@npm%3A5.2.2#~builtin<compat/typescript>::version=5.2.2&hash=f3b441"
   bin:

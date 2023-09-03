@@ -60,7 +60,7 @@
 		"@napi-rs/canvas": "0.1.44",
 		"@sapphire/eslint-config": "^5.0.2",
 		"@sapphire/prettier-config": "2.0.0",
-		"@sapphire/ts-config": "4.0.1",
+		"@sapphire/ts-config": "5.0.0",
 		"@typescript-eslint/eslint-plugin": "^6.5.0",
 		"@typescript-eslint/parser": "^6.5.0",
 		"canvas": "^2.11.2",
