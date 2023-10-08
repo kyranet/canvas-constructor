@@ -1,7 +1,6 @@
 {
-	"extends": ["@sapphire/ts-config", "@sapphire/ts-config/extra-strict", "@sapphire/ts-config/verbatim"],
+	"extends": ["@sapphire/ts-config", "@sapphire/ts-config/extra-strict", "@sapphire/ts-config/verbatim", "@sapphire/ts-config/bundler"],
 	"compilerOptions": {
-		"target": "ES2019",
-		"module": "ESNext"
+		"target": "ES2019"
 	}
 }
