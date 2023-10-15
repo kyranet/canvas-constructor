@@ -46,9 +46,7 @@
 		"bump": "cliff-jumper",
 		"clean": "rimraf {browser,cairo,napi-rs,skia}.{d.ts,js,mjs} dist",
 		"check-update": "cliff-jumper --dry-run",
-		"prepack": "yarn build && pinst --disable",
-		"postinstall": "husky install .github/husky",
-		"postpack": "pinst --enable"
+		"prepack": "yarn build"
 	},
 	"dependencies": {
 		"tslib": "^2.6.2"
@@ -68,9 +66,7 @@
 		"eslint": "^8.51.0",
 		"eslint-config-prettier": "^9.0.0",
 		"eslint-plugin-prettier": "^5.0.1",
-		"husky": "^8.0.3",
 		"lint-staged": "^15.0.1",
-		"pinst": "^3.0.0",
 		"prettier": "^3.0.3",
 		"rimraf": "^5.0.5",
 		"rollup": "^3.29.4",
