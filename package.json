@@ -158,6 +158,6 @@
 	"prettier": "@sapphire/prettier-config",
 	"packageManager": "yarn@4.0.1",
 	"volta": {
-		"node": "18.18.2"
+		"node": "20.9.0"
 	}
 }
