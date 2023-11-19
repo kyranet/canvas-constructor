@@ -52,22 +52,22 @@
 		"tslib": "^2.6.2"
 	},
 	"devDependencies": {
-		"@commitlint/cli": "^18.4.1",
-		"@commitlint/config-conventional": "^18.4.0",
-		"@favware/cliff-jumper": "^2.2.1",
+		"@commitlint/cli": "^18.4.2",
+		"@commitlint/config-conventional": "^18.4.2",
+		"@favware/cliff-jumper": "^2.2.3",
 		"@napi-rs/canvas": "0.1.44",
 		"@sapphire/eslint-config": "^5.0.2",
 		"@sapphire/prettier-config": "2.0.0",
 		"@sapphire/ts-config": "5.0.0",
-		"@typescript-eslint/eslint-plugin": "^6.10.0",
-		"@typescript-eslint/parser": "^6.10.0",
+		"@typescript-eslint/eslint-plugin": "^6.11.0",
+		"@typescript-eslint/parser": "^6.11.0",
 		"canvas": "^2.11.2",
 		"cz-conventional-changelog": "^3.3.0",
-		"eslint": "^8.53.0",
+		"eslint": "^8.54.0",
 		"eslint-config-prettier": "^9.0.0",
 		"eslint-plugin-prettier": "^5.0.1",
 		"lint-staged": "^15.1.0",
-		"prettier": "^3.0.3",
+		"prettier": "^3.1.0",
 		"rimraf": "^5.0.5",
 		"rollup": "^3.29.4",
 		"rollup-plugin-cleaner": "^1.0.0",
@@ -156,7 +156,7 @@
 		"extends": "@sapphire"
 	},
 	"prettier": "@sapphire/prettier-config",
-	"packageManager": "yarn@4.0.1",
+	"packageManager": "yarn@4.0.2",
 	"volta": {
 		"node": "20.9.0"
 	}
