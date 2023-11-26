@@ -52,15 +52,15 @@
 		"tslib": "^2.6.2"
 	},
 	"devDependencies": {
-		"@commitlint/cli": "^18.4.2",
-		"@commitlint/config-conventional": "^18.4.2",
+		"@commitlint/cli": "^18.4.3",
+		"@commitlint/config-conventional": "^18.4.3",
 		"@favware/cliff-jumper": "^2.2.3",
 		"@napi-rs/canvas": "0.1.44",
 		"@sapphire/eslint-config": "^5.0.2",
 		"@sapphire/prettier-config": "2.0.0",
 		"@sapphire/ts-config": "5.0.0",
-		"@typescript-eslint/eslint-plugin": "^6.11.0",
-		"@typescript-eslint/parser": "^6.11.0",
+		"@typescript-eslint/eslint-plugin": "^6.12.0",
+		"@typescript-eslint/parser": "^6.12.0",
 		"canvas": "^2.11.2",
 		"cz-conventional-changelog": "^3.3.0",
 		"eslint": "^8.54.0",
@@ -76,7 +76,7 @@
 		"skia-canvas": "^1.0.1",
 		"ts-node": "^10.9.1",
 		"typedoc": "^0.25.3",
-		"typescript": "^5.2.2"
+		"typescript": "^5.3.2"
 	},
 	"resolutions": {
 		"ansi-regex": "^5.0.1",
@@ -158,6 +158,6 @@
 	"prettier": "@sapphire/prettier-config",
 	"packageManager": "yarn@4.0.2",
 	"volta": {
-		"node": "20.9.0"
+		"node": "20.10.0"
 	}
 }
