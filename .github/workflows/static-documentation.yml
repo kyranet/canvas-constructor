@@ -44,7 +44,7 @@ jobs:
           cp LICENSE.md docs/
           cp README.md docs/
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v1
+        uses: actions/upload-pages-artifact@v2
         with:
           path: docs/
       - name: Deploy to GitHub Pages
