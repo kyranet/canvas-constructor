@@ -52,15 +52,15 @@
 		"tslib": "^2.6.2"
 	},
 	"devDependencies": {
-		"@commitlint/cli": "^18.4.3",
-		"@commitlint/config-conventional": "^18.4.3",
+		"@commitlint/cli": "^18.4.4",
+		"@commitlint/config-conventional": "^18.4.4",
 		"@favware/cliff-jumper": "^2.2.3",
 		"@napi-rs/canvas": "0.1.44",
 		"@sapphire/eslint-config": "^5.0.3",
 		"@sapphire/prettier-config": "2.0.0",
 		"@sapphire/ts-config": "5.0.0",
-		"@typescript-eslint/eslint-plugin": "^6.16.0",
-		"@typescript-eslint/parser": "^6.16.0",
+		"@typescript-eslint/eslint-plugin": "^6.18.0",
+		"@typescript-eslint/parser": "^6.18.0",
 		"canvas": "^2.11.2",
 		"cz-conventional-changelog": "^3.3.0",
 		"eslint": "^8.56.0",
@@ -75,7 +75,7 @@
 		"rollup-plugin-typescript2": "^0.36.0",
 		"skia-canvas": "^1.0.1",
 		"ts-node": "^10.9.2",
-		"typedoc": "^0.25.4",
+		"typedoc": "^0.25.6",
 		"typescript": "^5.3.3"
 	},
 	"resolutions": {
