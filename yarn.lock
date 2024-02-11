@@ -430,82 +430,82 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@napi-rs/canvas-android-arm64@npm:0.1.44":
-  version: 0.1.44
-  resolution: "@napi-rs/canvas-android-arm64@npm:0.1.44"
+"@napi-rs/canvas-android-arm64@npm:0.1.45":
+  version: 0.1.45
+  resolution: "@napi-rs/canvas-android-arm64@npm:0.1.45"
   conditions: os=android & cpu=arm64
   languageName: node
   linkType: hard
 
-"@napi-rs/canvas-darwin-arm64@npm:0.1.44":
-  version: 0.1.44
-  resolution: "@napi-rs/canvas-darwin-arm64@npm:0.1.44"
+"@napi-rs/canvas-darwin-arm64@npm:0.1.45":
+  version: 0.1.45
+  resolution: "@napi-rs/canvas-darwin-arm64@npm:0.1.45"
   conditions: os=darwin & cpu=arm64
   languageName: node
   linkType: hard
 
-"@napi-rs/canvas-darwin-x64@npm:0.1.44":
-  version: 0.1.44
-  resolution: "@napi-rs/canvas-darwin-x64@npm:0.1.44"
+"@napi-rs/canvas-darwin-x64@npm:0.1.45":
+  version: 0.1.45
+  resolution: "@napi-rs/canvas-darwin-x64@npm:0.1.45"
   conditions: os=darwin & cpu=x64
   languageName: node
   linkType: hard
 
-"@napi-rs/canvas-linux-arm-gnueabihf@npm:0.1.44":
-  version: 0.1.44
-  resolution: "@napi-rs/canvas-linux-arm-gnueabihf@npm:0.1.44"
+"@napi-rs/canvas-linux-arm-gnueabihf@npm:0.1.45":
+  version: 0.1.45
+  resolution: "@napi-rs/canvas-linux-arm-gnueabihf@npm:0.1.45"
   conditions: os=linux & cpu=arm
   languageName: node
   linkType: hard
 
-"@napi-rs/canvas-linux-arm64-gnu@npm:0.1.44":
-  version: 0.1.44
-  resolution: "@napi-rs/canvas-linux-arm64-gnu@npm:0.1.44"
+"@napi-rs/canvas-linux-arm64-gnu@npm:0.1.45":
+  version: 0.1.45
+  resolution: "@napi-rs/canvas-linux-arm64-gnu@npm:0.1.45"
   conditions: os=linux & cpu=arm64 & libc=glibc
   languageName: node
   linkType: hard
 
-"@napi-rs/canvas-linux-arm64-musl@npm:0.1.44":
-  version: 0.1.44
-  resolution: "@napi-rs/canvas-linux-arm64-musl@npm:0.1.44"
+"@napi-rs/canvas-linux-arm64-musl@npm:0.1.45":
+  version: 0.1.45
+  resolution: "@napi-rs/canvas-linux-arm64-musl@npm:0.1.45"
   conditions: os=linux & cpu=arm64 & libc=musl
   languageName: node
   linkType: hard
 
-"@napi-rs/canvas-linux-x64-gnu@npm:0.1.44":
-  version: 0.1.44
-  resolution: "@napi-rs/canvas-linux-x64-gnu@npm:0.1.44"
+"@napi-rs/canvas-linux-x64-gnu@npm:0.1.45":
+  version: 0.1.45
+  resolution: "@napi-rs/canvas-linux-x64-gnu@npm:0.1.45"
   conditions: os=linux & cpu=x64 & libc=glibc
   languageName: node
   linkType: hard
 
-"@napi-rs/canvas-linux-x64-musl@npm:0.1.44":
-  version: 0.1.44
-  resolution: "@napi-rs/canvas-linux-x64-musl@npm:0.1.44"
+"@napi-rs/canvas-linux-x64-musl@npm:0.1.45":
+  version: 0.1.45
+  resolution: "@napi-rs/canvas-linux-x64-musl@npm:0.1.45"
   conditions: os=linux & cpu=x64 & libc=musl
   languageName: node
   linkType: hard
 
-"@napi-rs/canvas-win32-x64-msvc@npm:0.1.44":
-  version: 0.1.44
-  resolution: "@napi-rs/canvas-win32-x64-msvc@npm:0.1.44"
+"@napi-rs/canvas-win32-x64-msvc@npm:0.1.45":
+  version: 0.1.45
+  resolution: "@napi-rs/canvas-win32-x64-msvc@npm:0.1.45"
   conditions: os=win32 & cpu=x64
   languageName: node
   linkType: hard
 
-"@napi-rs/canvas@npm:0.1.44":
-  version: 0.1.44
-  resolution: "@napi-rs/canvas@npm:0.1.44"
+"@napi-rs/canvas@npm:0.1.45":
+  version: 0.1.45
+  resolution: "@napi-rs/canvas@npm:0.1.45"
   dependencies:
-    "@napi-rs/canvas-android-arm64": "npm:0.1.44"
-    "@napi-rs/canvas-darwin-arm64": "npm:0.1.44"
-    "@napi-rs/canvas-darwin-x64": "npm:0.1.44"
-    "@napi-rs/canvas-linux-arm-gnueabihf": "npm:0.1.44"
-    "@napi-rs/canvas-linux-arm64-gnu": "npm:0.1.44"
-    "@napi-rs/canvas-linux-arm64-musl": "npm:0.1.44"
-    "@napi-rs/canvas-linux-x64-gnu": "npm:0.1.44"
-    "@napi-rs/canvas-linux-x64-musl": "npm:0.1.44"
-    "@napi-rs/canvas-win32-x64-msvc": "npm:0.1.44"
+    "@napi-rs/canvas-android-arm64": "npm:0.1.45"
+    "@napi-rs/canvas-darwin-arm64": "npm:0.1.45"
+    "@napi-rs/canvas-darwin-x64": "npm:0.1.45"
+    "@napi-rs/canvas-linux-arm-gnueabihf": "npm:0.1.45"
+    "@napi-rs/canvas-linux-arm64-gnu": "npm:0.1.45"
+    "@napi-rs/canvas-linux-arm64-musl": "npm:0.1.45"
+    "@napi-rs/canvas-linux-x64-gnu": "npm:0.1.45"
+    "@napi-rs/canvas-linux-x64-musl": "npm:0.1.45"
+    "@napi-rs/canvas-win32-x64-msvc": "npm:0.1.45"
   dependenciesMeta:
     "@napi-rs/canvas-android-arm64":
       optional: true
@@ -525,7 +525,7 @@ __metadata:
       optional: true
     "@napi-rs/canvas-win32-x64-msvc":
       optional: true
-  checksum: 10/536b5aefd234d18ac8c849e9cf579b654a1726d01c837b56568437c54f55f42417b2db6dffa43ed67a01af40386fed66731cca8291ae6d46e46dc043c4442e97
+  checksum: 10/7f15bee29a30dae617ebcb7f76a8dfe0f44ebce01bc61c7931a3a6095a7f60555e369e5be31f0790feeddcfb1d16e9035780198734512bb539deaa17d3477b39
   languageName: node
   linkType: hard
 
@@ -725,15 +725,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/eslint-plugin@npm:^6.13.2, @typescript-eslint/eslint-plugin@npm:^6.20.0":
-  version: 6.20.0
-  resolution: "@typescript-eslint/eslint-plugin@npm:6.20.0"
+"@typescript-eslint/eslint-plugin@npm:^6.13.2, @typescript-eslint/eslint-plugin@npm:^6.21.0":
+  version: 6.21.0
+  resolution: "@typescript-eslint/eslint-plugin@npm:6.21.0"
   dependencies:
     "@eslint-community/regexpp": "npm:^4.5.1"
-    "@typescript-eslint/scope-manager": "npm:6.20.0"
-    "@typescript-eslint/type-utils": "npm:6.20.0"
-    "@typescript-eslint/utils": "npm:6.20.0"
-    "@typescript-eslint/visitor-keys": "npm:6.20.0"
+    "@typescript-eslint/scope-manager": "npm:6.21.0"
+    "@typescript-eslint/type-utils": "npm:6.21.0"
+    "@typescript-eslint/utils": "npm:6.21.0"
+    "@typescript-eslint/visitor-keys": "npm:6.21.0"
     debug: "npm:^4.3.4"
     graphemer: "npm:^1.4.0"
     ignore: "npm:^5.2.4"
@@ -746,44 +746,44 @@ __metadata:
   peerDependenciesMeta:
     typescript:
       optional: true
-  checksum: 10/dee6a2392c831e6ae69611ecc4de06e66a7b16f6bf6d8e3bfd25091eb14d88c9d0bb9c9cd634efcfa318902341f7a459cf48f713d55cb1d610145ca1f52af4d3
+  checksum: 10/a57de0f630789330204cc1531f86cfc68b391cafb1ba67c8992133f1baa2a09d629df66e71260b040de4c9a3ff1252952037093c4128b0d56c4dbb37720b4c1d
   languageName: node
   linkType: hard
 
-"@typescript-eslint/parser@npm:^6.13.2, @typescript-eslint/parser@npm:^6.20.0":
-  version: 6.20.0
-  resolution: "@typescript-eslint/parser@npm:6.20.0"
+"@typescript-eslint/parser@npm:^6.13.2, @typescript-eslint/parser@npm:^6.21.0":
+  version: 6.21.0
+  resolution: "@typescript-eslint/parser@npm:6.21.0"
   dependencies:
-    "@typescript-eslint/scope-manager": "npm:6.20.0"
-    "@typescript-eslint/types": "npm:6.20.0"
-    "@typescript-eslint/typescript-estree": "npm:6.20.0"
-    "@typescript-eslint/visitor-keys": "npm:6.20.0"
+    "@typescript-eslint/scope-manager": "npm:6.21.0"
+    "@typescript-eslint/types": "npm:6.21.0"
+    "@typescript-eslint/typescript-estree": "npm:6.21.0"
+    "@typescript-eslint/visitor-keys": "npm:6.21.0"
     debug: "npm:^4.3.4"
   peerDependencies:
     eslint: ^7.0.0 || ^8.0.0
   peerDependenciesMeta:
     typescript:
       optional: true
-  checksum: 10/691062d47cae7977604ede848ffff3689162428a53577f298989f585954aa3a3450e7fd5c2b363d024cd5f16022c163cecf0f1f1d138234bbd78048050b4b8bf
+  checksum: 10/4d51cdbc170e72275efc5ef5fce48a81ec431e4edde8374f4d0213d8d370a06823e1a61ae31d502a5f1b0d1f48fc4d29a1b1b5c2dcf809d66d3872ccf6e46ac7
   languageName: node
   linkType: hard
 
-"@typescript-eslint/scope-manager@npm:6.20.0":
-  version: 6.20.0
-  resolution: "@typescript-eslint/scope-manager@npm:6.20.0"
+"@typescript-eslint/scope-manager@npm:6.21.0":
+  version: 6.21.0
+  resolution: "@typescript-eslint/scope-manager@npm:6.21.0"
   dependencies:
-    "@typescript-eslint/types": "npm:6.20.0"
-    "@typescript-eslint/visitor-keys": "npm:6.20.0"
-  checksum: 10/2c1a644f2931454b34875f2e6dffad52a1fc7b6ac508d7d1ad3cd9da028a7dff9c6191feeea2c9ca691deba199ac9e83cbd0036914be4cd45b6954437f03c09a
+    "@typescript-eslint/types": "npm:6.21.0"
+    "@typescript-eslint/visitor-keys": "npm:6.21.0"
+  checksum: 10/fe91ac52ca8e09356a71dc1a2f2c326480f3cccfec6b2b6d9154c1a90651ab8ea270b07c67df5678956c3bbf0bbe7113ab68f68f21b20912ea528b1214197395
   languageName: node
   linkType: hard
 
-"@typescript-eslint/type-utils@npm:6.20.0":
-  version: 6.20.0
-  resolution: "@typescript-eslint/type-utils@npm:6.20.0"
+"@typescript-eslint/type-utils@npm:6.21.0":
+  version: 6.21.0
+  resolution: "@typescript-eslint/type-utils@npm:6.21.0"
   dependencies:
-    "@typescript-eslint/typescript-estree": "npm:6.20.0"
-    "@typescript-eslint/utils": "npm:6.20.0"
+    "@typescript-eslint/typescript-estree": "npm:6.21.0"
+    "@typescript-eslint/utils": "npm:6.21.0"
     debug: "npm:^4.3.4"
     ts-api-utils: "npm:^1.0.1"
   peerDependencies:
@@ -791,23 +791,23 @@ __metadata:
   peerDependenciesMeta:
     typescript:
       optional: true
-  checksum: 10/bc2f2793cfec3463164b5f5ded31b4e169e21c3a1990c1ce4effe70a359c486d92fbbc4cd92758bbf1c30a468ad0839e0fa890bd452c707d0c294cb3a7b14021
+  checksum: 10/d03fb3ee1caa71f3ce053505f1866268d7ed79ffb7fed18623f4a1253f5b8f2ffc92636d6fd08fcbaf5bd265a6de77bf192c53105131e4724643dfc910d705fc
   languageName: node
   linkType: hard
 
-"@typescript-eslint/types@npm:6.20.0":
-  version: 6.20.0
-  resolution: "@typescript-eslint/types@npm:6.20.0"
-  checksum: 10/74ed1761e27c3c1a29fd260fe51096f42cfb1472b20390d6df6ec41de0420208f379e809de416e81cd7c00fdc3d5550b2391872be56bf4a1b0c595f71db0b1ea
+"@typescript-eslint/types@npm:6.21.0":
+  version: 6.21.0
+  resolution: "@typescript-eslint/types@npm:6.21.0"
+  checksum: 10/e26da86d6f36ca5b6ef6322619f8ec55aabcd7d43c840c977ae13ae2c964c3091fc92eb33730d8be08927c9de38466c5323e78bfb270a9ff1d3611fe821046c5
   languageName: node
   linkType: hard
 
-"@typescript-eslint/typescript-estree@npm:6.20.0":
-  version: 6.20.0
-  resolution: "@typescript-eslint/typescript-estree@npm:6.20.0"
+"@typescript-eslint/typescript-estree@npm:6.21.0":
+  version: 6.21.0
+  resolution: "@typescript-eslint/typescript-estree@npm:6.21.0"
   dependencies:
-    "@typescript-eslint/types": "npm:6.20.0"
-    "@typescript-eslint/visitor-keys": "npm:6.20.0"
+    "@typescript-eslint/types": "npm:6.21.0"
+    "@typescript-eslint/visitor-keys": "npm:6.21.0"
     debug: "npm:^4.3.4"
     globby: "npm:^11.1.0"
     is-glob: "npm:^4.0.3"
@@ -817,34 +817,34 @@ __metadata:
   peerDependenciesMeta:
     typescript:
       optional: true
-  checksum: 10/55b280c6e71c79cb009ac80189a7f0e1aa9011bc7206c810bbb52d9703a894aa2817dfd44d947edf64d62f3aa0962e01f3423fcb21d2f39964a4840287d9e196
+  checksum: 10/b32fa35fca2a229e0f5f06793e5359ff9269f63e9705e858df95d55ca2cd7fdb5b3e75b284095a992c48c5fc46a1431a1a4b6747ede2dd08929dc1cbacc589b8
   languageName: node
   linkType: hard
 
-"@typescript-eslint/utils@npm:6.20.0":
-  version: 6.20.0
-  resolution: "@typescript-eslint/utils@npm:6.20.0"
+"@typescript-eslint/utils@npm:6.21.0":
+  version: 6.21.0
+  resolution: "@typescript-eslint/utils@npm:6.21.0"
   dependencies:
     "@eslint-community/eslint-utils": "npm:^4.4.0"
     "@types/json-schema": "npm:^7.0.12"
     "@types/semver": "npm:^7.5.0"
-    "@typescript-eslint/scope-manager": "npm:6.20.0"
-    "@typescript-eslint/types": "npm:6.20.0"
-    "@typescript-eslint/typescript-estree": "npm:6.20.0"
+    "@typescript-eslint/scope-manager": "npm:6.21.0"
+    "@typescript-eslint/types": "npm:6.21.0"
+    "@typescript-eslint/typescript-estree": "npm:6.21.0"
     semver: "npm:^7.5.4"
   peerDependencies:
     eslint: ^7.0.0 || ^8.0.0
-  checksum: 10/6d4604be6123e0073dd5e7dd357c95b370c678572d2e982478d0d6937d4d65f0cad0ac207b8b724f3bce239e64ba1ddd6bece11e1592734d8bf691177e6971e6
+  checksum: 10/b404a2c55a425a79d054346ae123087d30c7ecf7ed7abcf680c47bf70c1de4fabadc63434f3f460b2fa63df76bc9e4a0b9fa2383bb8a9fcd62733fb5c4e4f3e3
   languageName: node
   linkType: hard
 
-"@typescript-eslint/visitor-keys@npm:6.20.0":
-  version: 6.20.0
-  resolution: "@typescript-eslint/visitor-keys@npm:6.20.0"
+"@typescript-eslint/visitor-keys@npm:6.21.0":
+  version: 6.21.0
+  resolution: "@typescript-eslint/visitor-keys@npm:6.21.0"
   dependencies:
-    "@typescript-eslint/types": "npm:6.20.0"
+    "@typescript-eslint/types": "npm:6.21.0"
     eslint-visitor-keys: "npm:^3.4.1"
-  checksum: 10/df066c73f3880ad78880c442f307e58f026e6047d9caab9d7c356d13276f4fe466fab3e8d19cdb1e6749e87639cb7c4babcfe118f554fcd2d3929ce9f4983216
+  checksum: 10/30422cdc1e2ffad203df40351a031254b272f9c6f2b7e02e9bfa39e3fc2c7b1c6130333b0057412968deda17a3a68a578a78929a8139c6acef44d9d841dc72e1
   languageName: node
   linkType: hard
 
@@ -1239,18 +1239,18 @@ __metadata:
     "@commitlint/cli": "npm:^18.6.0"
     "@commitlint/config-conventional": "npm:^18.6.0"
     "@favware/cliff-jumper": "npm:^2.2.3"
-    "@napi-rs/canvas": "npm:0.1.44"
+    "@napi-rs/canvas": "npm:0.1.45"
     "@sapphire/eslint-config": "npm:^5.0.3"
     "@sapphire/prettier-config": "npm:2.0.0"
     "@sapphire/ts-config": "npm:5.0.0"
-    "@typescript-eslint/eslint-plugin": "npm:^6.20.0"
-    "@typescript-eslint/parser": "npm:^6.20.0"
+    "@typescript-eslint/eslint-plugin": "npm:^6.21.0"
+    "@typescript-eslint/parser": "npm:^6.21.0"
     canvas: "npm:^2.11.2"
     cz-conventional-changelog: "npm:^3.3.0"
     eslint: "npm:^8.56.0"
     eslint-config-prettier: "npm:^9.1.0"
     eslint-plugin-prettier: "npm:^5.1.3"
-    lint-staged: "npm:^15.2.1"
+    lint-staged: "npm:^15.2.2"
     prettier: "npm:^3.2.5"
     rimraf: "npm:^5.0.5"
     rollup: "npm:^3.29.4"
@@ -1260,7 +1260,7 @@ __metadata:
     skia-canvas: "npm:^1.0.1"
     ts-node: "npm:^10.9.2"
     tslib: "npm:^2.6.2"
-    typedoc: "npm:^0.25.7"
+    typedoc: "npm:^0.25.8"
     typescript: "npm:^5.3.3"
   languageName: unknown
   linkType: soft
@@ -3227,9 +3227,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lint-staged@npm:^15.2.1":
-  version: 15.2.1
-  resolution: "lint-staged@npm:15.2.1"
+"lint-staged@npm:^15.2.2":
+  version: 15.2.2
+  resolution: "lint-staged@npm:15.2.2"
   dependencies:
     chalk: "npm:5.3.0"
     commander: "npm:11.1.0"
@@ -3243,7 +3243,7 @@ __metadata:
     yaml: "npm:2.3.4"
   bin:
     lint-staged: bin/lint-staged.js
-  checksum: 10/ee2e858b9afea01378ff3a3ff5fbed000f856c553f0ac570d9be6390e27299e586ae047d1efa77fdf17f15aeef0c53f6c658eeb24432748b9203698d929d0c76
+  checksum: 10/5855ae7abf3ffdc2d66e8ad20759915e76544e7c4bcdfef78c82b5c126502284320d9fb0ecde554a6d07747311ab751d0bccbe3468aa5d5a7661774317cd7437
   languageName: node
   linkType: hard
 
@@ -5114,9 +5114,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typedoc@npm:^0.25.7":
-  version: 0.25.7
-  resolution: "typedoc@npm:0.25.7"
+"typedoc@npm:^0.25.8":
+  version: 0.25.8
+  resolution: "typedoc@npm:0.25.8"
   dependencies:
     lunr: "npm:^2.3.9"
     marked: "npm:^4.3.0"
@@ -5126,7 +5126,7 @@ __metadata:
     typescript: 4.6.x || 4.7.x || 4.8.x || 4.9.x || 5.0.x || 5.1.x || 5.2.x || 5.3.x
   bin:
     typedoc: bin/typedoc
-  checksum: 10/fa88c808e9912ef248cc45b4defea49522e93b97b4bb67423670257a4507ccabdc25c1518a39f6058a728d08675ee0947de55944419fa4bb9f870d84ba4db764
+  checksum: 10/68749aa3fc90843dbb68b9e486405056ddadb23682bb11000d8077f758101814fbb8aa27e1bca17c6a062fb54e6f4ee9474e9fe2fdb44bc7ed27f67afd9953b1
   languageName: node
   linkType: hard
 
