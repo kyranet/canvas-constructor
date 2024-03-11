@@ -54,13 +54,13 @@
 	"devDependencies": {
 		"@commitlint/cli": "^19.0.3",
 		"@commitlint/config-conventional": "^19.0.3",
-		"@favware/cliff-jumper": "^3.0.0",
-		"@napi-rs/canvas": "0.1.50",
+		"@favware/cliff-jumper": "^3.0.1",
+		"@napi-rs/canvas": "0.1.51",
 		"@sapphire/eslint-config": "^5.0.3",
 		"@sapphire/prettier-config": "2.0.0",
 		"@sapphire/ts-config": "5.0.0",
-		"@typescript-eslint/eslint-plugin": "^7.1.0",
-		"@typescript-eslint/parser": "^7.1.0",
+		"@typescript-eslint/eslint-plugin": "^7.1.1",
+		"@typescript-eslint/parser": "^7.1.1",
 		"canvas": "^2.11.2",
 		"cz-conventional-changelog": "^3.3.0",
 		"eslint": "^8.57.0",
@@ -75,8 +75,8 @@
 		"rollup-plugin-typescript2": "^0.36.0",
 		"skia-canvas": "^1.0.1",
 		"ts-node": "^10.9.2",
-		"typedoc": "^0.25.9",
-		"typescript": "^5.3.3"
+		"typedoc": "^0.25.12",
+		"typescript": "^5.4.2"
 	},
 	"resolutions": {
 		"ansi-regex": "^5.0.1",
@@ -156,7 +156,7 @@
 		"extends": "@sapphire"
 	},
 	"prettier": "@sapphire/prettier-config",
-	"packageManager": "yarn@4.1.0",
+	"packageManager": "yarn@4.1.1",
 	"volta": {
 		"node": "20.11.1"
 	}
