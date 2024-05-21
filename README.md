@@ -17,6 +17,10 @@
 
 ---
 
+## Live Demo
+
+[![Edit on Stackblitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/edit/canvas-constructor-vite?file=main.js)
+
 ## Installation
 
 This module requires one of the following packages to be installed for Node.js:
@@ -35,8 +39,8 @@ How to use it:
 
 ```js
 const { Canvas } = require('canvas-constructor/napi-rs');
-// or `canvas-constructor/skia` if you are using `skia-canvas`
-// or `canvas-constructor/cairo` if you are using `canvas`
+// or 'canvas-constructor/skia' if you are using `skia-canvas`
+// or 'canvas-constructor/cairo' if you are using `canvas`
 
 new Canvas(300, 300)
 	.setColor('#AEFD54')
@@ -50,6 +54,7 @@ new Canvas(300, 300)
 **Browser**:
 
 ```html
+<canvas id="canvas" width="300" height="400"></canvas>
 <script type="text/javascript" src="https://unpkg.com/canvas-constructor"></script>
 <script type="text/javascript">
 	const canvasElement = document.getElementById('canvas');
@@ -62,17 +67,13 @@ new Canvas(300, 300)
 </script>
 ```
 
-Alternatively, you can import `canvas-constructor/browser`.
+Alternatively, you can import `canvas-constructor/browser` if you are using a bundler such as Vite, Webpack, or Rollup:
 
--   That will create a canvas with size of 300 pixels width, 300 pixels height.
--   Set the color to #AEFD54
--   Draw a rectangle with the previous color, covering all the pixels from (5, 5) to (290 + 5, 290 + 5)
--   Set the color to #FFAE23
--   Set the font size to 28 pixels with font Impact.
--   Write the text 'Hello World!' in the position (130, 150)
--   Return a buffer.
+```js
+import { Canvas } from 'canvas-constructor/browser';
+```
 
-Now, let's suppose we want to add images, we'll use `Canvas.loadImage`, which works in both Node.js and browser:
+Now, let's suppose we want to add images, we can use the `loadImage` function, which works in all supported environments:
 
 ```js
 const { Canvas, loadImage } = require('canvas-constructor/napi-rs');
@@ -90,15 +91,8 @@ async function createCanvas() {
 }
 ```
 
--   That will create a canvas with size of 300 pixels width, 400 pixels height.
--   Draw an image, given a Buffer (the image from the images folder).
--   Set the color to #FFAE23
--   Set the font size to 28 pixels with font Impact.
--   Set the text alignment to center.
--   Write the text 'Kitten!' in the position (150, 370)
--   Return a buffer.
-
-And now, you have created an image with a kitten in the background and some centred text in the bottom of it.
+And now, you have created an image with a kitten in the background and some centered text at the bottom of it.
 
 If you experience issues with `@napi-rs/canvas`, `skia-canvas`, or `canvas`, please refer to their respective package repositories, this
-package is just a convenient wrapper for the three.
+package is just a convenient wrapper that makes it easier to use the canvas in both Node.js and the browser. And does not modify the
+behavior of the underlying canvas implementation.
