@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+# [7.0.2](https://github.com/kyranet/canvas-constructor/compare/v7.0.1...v7.0.2) - (2024-05-22)
+
+## 🐛 Bug Fixes
+
+- Resolve cairo issues ([34129f4](https://github.com/kyranet/canvas-constructor/commit/34129f4a12d60d2d2557e8c13a9b2a16fe699514))
+
+## 📝 Documentation
+
+- Improve readme and add Stackblitz ([cf3fc9b](https://github.com/kyranet/canvas-constructor/commit/cf3fc9b6d5d8e39d5e4b2351bcfc3a3229cc21d5))
+
 # [7.0.1](https://github.com/kyranet/canvas-constructor/compare/v7.0.0...v7.0.1) - (2023-05-19)
 
 ## 🐛 Bug Fixes
