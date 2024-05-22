@@ -1,6 +1,7 @@
 {
-	"extends": ["@sapphire/ts-config", "@sapphire/ts-config/extra-strict", "@sapphire/ts-config/verbatim", "@sapphire/ts-config/bundler"],
+	"extends": ["@sapphire/ts-config", "@sapphire/ts-config/extra-strict", "@sapphire/ts-config/bundler", "@sapphire/ts-config/verbatim"],
 	"compilerOptions": {
-		"target": "ES2019"
+		"target": "ES2019",
+		"useDefineForClassFields": false
 	}
 }

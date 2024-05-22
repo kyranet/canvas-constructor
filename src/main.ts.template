@@ -2153,7 +2153,7 @@ export class Canvas {
 	public toBufferAsync(mimeType: 'application/pdf', config?: PdfConfig): Promise<Buffer>;                            \
 	public toBufferAsync(...args: readonly any[]): Promise<Buffer> {                                                   \
 		return new Promise<Buffer>((resolve, reject) =>                                                                \
-		this.canvas.toBuffer(                                                                                          \
+			this.canvas.toBuffer(                                                                                      \
 				// @ts-expect-error: Complains about invalid overload (expects more than 0 overloads).                 \
 				(error: Error | null, buffer: Buffer | null): void => {                                                \
 					if (error) reject(error);                                                                          \
@@ -2339,13 +2339,13 @@ export class Canvas {
 						positionY: y - radius / ratio,
 						sizeX: diameter,
 						sizeY: diameter / ratio
-				  }
+					}
 				: {
 						positionX: x - radius * ratio,
 						positionY: y - radius,
 						sizeX: diameter * ratio,
 						sizeY: diameter
-				  };
+					};
 		}
 
 		if (ratio > 1) {
@@ -2490,12 +2490,12 @@ export type FontVariants = FontVariantLigatures | FontVariantAlternates | FontVa
 type GetFontVariant<K extends FontVariants> = K extends FontVariantLigatures
 	? FontVariantLigatures
 	: K extends FontVariantAlternates
-	? FontVariantAlternates
-	: K extends FontVariantCaps
-	? FontVariantCaps
-	: K extends FontVariantNumeric
-	? FontVariantNumeric
-	: FontVariantEastAsian;
+		? FontVariantAlternates
+		: K extends FontVariantCaps
+			? FontVariantCaps
+			: K extends FontVariantNumeric
+				? FontVariantNumeric
+				: FontVariantEastAsian;
 
 export function fontVariant<K1 extends FontVariantString>(k1: K1): K1;
 export function fontVariant<K1 extends FontVariants, K2 extends Exclude<FontVariants, GetFontVariant<K1>>>(k1: K1, k2: K2): `${K1} ${K2}`;
