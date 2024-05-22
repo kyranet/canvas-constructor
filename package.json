@@ -1,39 +1,63 @@
 {
 	"name": "canvas-constructor",
 	"version": "7.0.2",
-	"description": "A ES6 class for node-canvas with built-in functions and chained methods.",
+	"description": "A utility for Canvas with chainable methods and consistent interface for all environments",
 	"author": "kyranet",
 	"license": "MIT",
+	"type": "module",
 	"contributors": [
 		"Aura Román <kyradiscord@gmail.com>",
 		"yorkaargh",
 		"favna <support@favware.tech>"
 	],
-	"browser": "dist/browser.umd.js",
-	"unpkg": "dist/browser.umd.js",
+	"browser": "dist/iife/browser.global.js",
+	"unpkg": "dist/iife/browser.global.js",
 	"exports": {
 		"./browser": {
-			"types": "./dist/browser.d.ts",
-			"import": "./dist/browser.mjs",
-			"require": "./dist/browser.js"
+			"import": {
+				"types": "./dist/esm/browser.d.mts",
+				"default": "./dist/esm/browser.mjs"
+			},
+			"require": {
+				"types": "./dist/cjs/browser.d.cts",
+				"default": "./dist/cjs/browser.cjs"
+			}
 		},
 		"./cairo": {
-			"types": "./dist/cairo.d.ts",
-			"import": "./dist/cairo.mjs",
-			"require": "./dist/cairo.js"
+			"import": {
+				"types": "./dist/esm/cairo.d.mts",
+				"default": "./dist/esm/cairo.mjs"
+			},
+			"require": {
+				"types": "./dist/cjs/cairo.d.cts",
+				"default": "./dist/cjs/cairo.cjs"
+			}
 		},
 		"./napi-rs": {
-			"types": "./dist/napi-rs.d.ts",
-			"import": "./dist/napi-rs.mjs",
-			"require": "./dist/napi-rs.js"
+			"import": {
+				"types": "./dist/esm/napi-rs.d.mts",
+				"default": "./dist/esm/napi-rs.mjs"
+			},
+			"require": {
+				"types": "./dist/cjs/napi-rs.d.cts",
+				"default": "./dist/cjs/napi-rs.cjs"
+			}
 		},
 		"./skia": {
-			"types": "./dist/skia.d.ts",
-			"import": "./dist/skia.mjs",
-			"require": "./dist/skia.js"
+			"import": {
+				"types": "./dist/esm/skia.d.mts",
+				"default": "./dist/esm/skia.mjs"
+			},
+			"require": {
+				"types": "./dist/cjs/skia.d.cts",
+				"default": "./dist/cjs/skia.cjs"
+			}
 		}
 	},
-	"sideEffects": false,
+	"sideEffects": [
+		"./dist/esm/chunk-G5GHKT7C.mjs",
+		"./dist/iife/browser.global.js"
+	],
 	"scripts": {
 		"lint": "eslint scripts --ext mjs --fix",
 		"format": "prettier --write scripts",
@@ -41,15 +65,13 @@
 		"update": "yarn upgrade-interactive --latest",
 		"build": "yarn build:gen && yarn build:ts",
 		"build:gen": "node ./scripts/generate.mjs",
-		"build:ts": "rollup -c rollup.config.mjs",
+		"build:ts": "tsup && yarn build:rename-esm-indexes",
+		"build:rename-esm-indexes": "node scripts/rename-esm-indexes.mjs",
 		"watch": "yarn build -w",
 		"bump": "cliff-jumper",
-		"clean": "rimraf {browser,cairo,napi-rs,skia}.{d.ts,js,mjs} dist",
+		"clean": "rimraf dist",
 		"check-update": "cliff-jumper --dry-run",
 		"prepack": "yarn build"
-	},
-	"dependencies": {
-		"tslib": "^2.6.2"
 	},
 	"devDependencies": {
 		"@commitlint/cli": "^19.3.0",
@@ -69,12 +91,9 @@
 		"lint-staged": "^15.2.4",
 		"prettier": "^3.2.5",
 		"rimraf": "^5.0.7",
-		"rollup": "^3.29.4",
-		"rollup-plugin-cleaner": "^1.0.0",
-		"rollup-plugin-terser": "^7.0.2",
-		"rollup-plugin-typescript2": "^0.36.0",
 		"skia-canvas": "^1.0.1",
-		"ts-node": "^10.9.2",
+		"terser": "^5.31.0",
+		"tsup": "^8.0.2",
 		"typedoc": "^0.25.13",
 		"typescript": "^5.4.5"
 	},
@@ -87,19 +106,7 @@
 		"url": "git+https://github.com/kyranet/canvas-constructor.git"
 	},
 	"files": [
-		"dist",
-		"browser.js",
-		"browser.mjs",
-		"browser.d.ts",
-		"cairo.js",
-		"cairo.mjs",
-		"cairo.d.ts",
-		"napi-rs.js",
-		"napi-rs.mjs",
-		"napi-rs.d.ts",
-		"skia.js",
-		"skia.mjs",
-		"skia.d.ts"
+		"dist"
 	],
 	"engines": {
 		"node": ">=v14.18.0"

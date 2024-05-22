@@ -4,7 +4,7 @@
 
 # canvas-constructor
 
-**An ES6 chainable class for node-canvas with built-in utilities.**
+**A utility for Canvas with chainable methods and consistent interface for all environments**
 
 [![npm](https://img.shields.io/npm/v/canvas-constructor.svg?maxAge=3600)](https://www.npmjs.com/package/canvas-constructor)
 [![npm](https://img.shields.io/npm/dt/canvas-constructor.svg?maxAge=3600)](https://www.npmjs.com/package/canvas-constructor)

@@ -11,23 +11,7 @@ await Promise.all(configuration.entries.map((entry) => generateAll(entry)));
 
 /** @param {import('../generator.config.json')['entries'][number]} entry */
 function generateAll(entry) {
-	return Promise.all([generateCode(entry), generateExport(entry.name)]);
-}
-
-/** @param {string} name */
-async function generateExport(name) {
-	const entries = [
-		{ name: `${name}.js`, content: `require('tslib').__exportStar(require('./dist/${name}.js'), exports);\n` },
-		{ name: `${name}.mjs`, content: `export * from './dist/${name}.mjs';\n` },
-		{ name: `${name}.d.ts`, content: `export * from './dist/${name}';\n` }
-	];
-
-	await Promise.all(
-		entries.map((entry) => {
-			const output = new URL(entry.name, root);
-			return writeFile(output, entry.content, 'utf8');
-		})
-	);
+	return Promise.all([generateCode(entry)]);
 }
 
 /** @param {import('../generator.config.json')['entries'][number]} entry */
