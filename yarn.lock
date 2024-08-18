@@ -577,82 +577,82 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@napi-rs/canvas-android-arm64@npm:0.1.53":
-  version: 0.1.53
-  resolution: "@napi-rs/canvas-android-arm64@npm:0.1.53"
+"@napi-rs/canvas-android-arm64@npm:0.1.54":
+  version: 0.1.54
+  resolution: "@napi-rs/canvas-android-arm64@npm:0.1.54"
   conditions: os=android & cpu=arm64
   languageName: node
   linkType: hard
 
-"@napi-rs/canvas-darwin-arm64@npm:0.1.53":
-  version: 0.1.53
-  resolution: "@napi-rs/canvas-darwin-arm64@npm:0.1.53"
+"@napi-rs/canvas-darwin-arm64@npm:0.1.54":
+  version: 0.1.54
+  resolution: "@napi-rs/canvas-darwin-arm64@npm:0.1.54"
   conditions: os=darwin & cpu=arm64
   languageName: node
   linkType: hard
 
-"@napi-rs/canvas-darwin-x64@npm:0.1.53":
-  version: 0.1.53
-  resolution: "@napi-rs/canvas-darwin-x64@npm:0.1.53"
+"@napi-rs/canvas-darwin-x64@npm:0.1.54":
+  version: 0.1.54
+  resolution: "@napi-rs/canvas-darwin-x64@npm:0.1.54"
   conditions: os=darwin & cpu=x64
   languageName: node
   linkType: hard
 
-"@napi-rs/canvas-linux-arm-gnueabihf@npm:0.1.53":
-  version: 0.1.53
-  resolution: "@napi-rs/canvas-linux-arm-gnueabihf@npm:0.1.53"
+"@napi-rs/canvas-linux-arm-gnueabihf@npm:0.1.54":
+  version: 0.1.54
+  resolution: "@napi-rs/canvas-linux-arm-gnueabihf@npm:0.1.54"
   conditions: os=linux & cpu=arm
   languageName: node
   linkType: hard
 
-"@napi-rs/canvas-linux-arm64-gnu@npm:0.1.53":
-  version: 0.1.53
-  resolution: "@napi-rs/canvas-linux-arm64-gnu@npm:0.1.53"
+"@napi-rs/canvas-linux-arm64-gnu@npm:0.1.54":
+  version: 0.1.54
+  resolution: "@napi-rs/canvas-linux-arm64-gnu@npm:0.1.54"
   conditions: os=linux & cpu=arm64 & libc=glibc
   languageName: node
   linkType: hard
 
-"@napi-rs/canvas-linux-arm64-musl@npm:0.1.53":
-  version: 0.1.53
-  resolution: "@napi-rs/canvas-linux-arm64-musl@npm:0.1.53"
+"@napi-rs/canvas-linux-arm64-musl@npm:0.1.54":
+  version: 0.1.54
+  resolution: "@napi-rs/canvas-linux-arm64-musl@npm:0.1.54"
   conditions: os=linux & cpu=arm64 & libc=musl
   languageName: node
   linkType: hard
 
-"@napi-rs/canvas-linux-x64-gnu@npm:0.1.53":
-  version: 0.1.53
-  resolution: "@napi-rs/canvas-linux-x64-gnu@npm:0.1.53"
+"@napi-rs/canvas-linux-x64-gnu@npm:0.1.54":
+  version: 0.1.54
+  resolution: "@napi-rs/canvas-linux-x64-gnu@npm:0.1.54"
   conditions: os=linux & cpu=x64 & libc=glibc
   languageName: node
   linkType: hard
 
-"@napi-rs/canvas-linux-x64-musl@npm:0.1.53":
-  version: 0.1.53
-  resolution: "@napi-rs/canvas-linux-x64-musl@npm:0.1.53"
+"@napi-rs/canvas-linux-x64-musl@npm:0.1.54":
+  version: 0.1.54
+  resolution: "@napi-rs/canvas-linux-x64-musl@npm:0.1.54"
   conditions: os=linux & cpu=x64 & libc=musl
   languageName: node
   linkType: hard
 
-"@napi-rs/canvas-win32-x64-msvc@npm:0.1.53":
-  version: 0.1.53
-  resolution: "@napi-rs/canvas-win32-x64-msvc@npm:0.1.53"
+"@napi-rs/canvas-win32-x64-msvc@npm:0.1.54":
+  version: 0.1.54
+  resolution: "@napi-rs/canvas-win32-x64-msvc@npm:0.1.54"
   conditions: os=win32 & cpu=x64
   languageName: node
   linkType: hard
 
-"@napi-rs/canvas@npm:0.1.53":
-  version: 0.1.53
-  resolution: "@napi-rs/canvas@npm:0.1.53"
+"@napi-rs/canvas@npm:0.1.54":
+  version: 0.1.54
+  resolution: "@napi-rs/canvas@npm:0.1.54"
   dependencies:
-    "@napi-rs/canvas-android-arm64": "npm:0.1.53"
-    "@napi-rs/canvas-darwin-arm64": "npm:0.1.53"
-    "@napi-rs/canvas-darwin-x64": "npm:0.1.53"
-    "@napi-rs/canvas-linux-arm-gnueabihf": "npm:0.1.53"
-    "@napi-rs/canvas-linux-arm64-gnu": "npm:0.1.53"
-    "@napi-rs/canvas-linux-arm64-musl": "npm:0.1.53"
-    "@napi-rs/canvas-linux-x64-gnu": "npm:0.1.53"
-    "@napi-rs/canvas-linux-x64-musl": "npm:0.1.53"
-    "@napi-rs/canvas-win32-x64-msvc": "npm:0.1.53"
+    "@napi-rs/canvas-android-arm64": "npm:0.1.54"
+    "@napi-rs/canvas-darwin-arm64": "npm:0.1.54"
+    "@napi-rs/canvas-darwin-x64": "npm:0.1.54"
+    "@napi-rs/canvas-linux-arm-gnueabihf": "npm:0.1.54"
+    "@napi-rs/canvas-linux-arm64-gnu": "npm:0.1.54"
+    "@napi-rs/canvas-linux-arm64-musl": "npm:0.1.54"
+    "@napi-rs/canvas-linux-x64-gnu": "npm:0.1.54"
+    "@napi-rs/canvas-linux-x64-musl": "npm:0.1.54"
+    "@napi-rs/canvas-win32-x64-msvc": "npm:0.1.54"
   dependenciesMeta:
     "@napi-rs/canvas-android-arm64":
       optional: true
@@ -672,7 +672,7 @@ __metadata:
       optional: true
     "@napi-rs/canvas-win32-x64-msvc":
       optional: true
-  checksum: 10/08125ed2664182e5737efe5095613b3e70f4caf61e38910b2fca2bd53eec8f6a1da728359845763233535f7451c68680913abc57c460f7782d4e44d960a3d971
+  checksum: 10/01c17469caaab16fcf2fa419abfb485060b5ed32e20d1351060425880f842d07362cc849b3af013f3f6e4dbd3a835d67ec491356f8ac6639f017a924e11fa31e
   languageName: node
   linkType: hard
 
@@ -1400,7 +1400,7 @@ __metadata:
     "@commitlint/cli": "npm:^19.4.0"
     "@commitlint/config-conventional": "npm:^19.2.2"
     "@favware/cliff-jumper": "npm:^3.0.3"
-    "@napi-rs/canvas": "npm:0.1.53"
+    "@napi-rs/canvas": "npm:0.1.54"
     "@sapphire/eslint-config": "npm:^5.0.5"
     "@sapphire/prettier-config": "npm:2.0.0"
     "@sapphire/ts-config": "npm:5.0.1"
@@ -1411,11 +1411,11 @@ __metadata:
     eslint: "npm:^8.57.0"
     eslint-config-prettier: "npm:^9.1.0"
     eslint-plugin-prettier: "npm:^5.2.1"
-    lint-staged: "npm:^15.2.8"
+    lint-staged: "npm:^15.2.9"
     prettier: "npm:^3.3.3"
     rimraf: "npm:^5.0.10"
     skia-canvas: "npm:^1.0.1"
-    terser: "npm:^5.31.5"
+    terser: "npm:^5.31.6"
     tsup: "npm:^8.2.4"
     typedoc: "npm:^0.26.1"
     typescript: "npm:^5.5.2"
@@ -3315,9 +3315,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lint-staged@npm:^15.2.8":
-  version: 15.2.8
-  resolution: "lint-staged@npm:15.2.8"
+"lint-staged@npm:^15.2.9":
+  version: 15.2.9
+  resolution: "lint-staged@npm:15.2.9"
   dependencies:
     chalk: "npm:~5.3.0"
     commander: "npm:~12.1.0"
@@ -3331,7 +3331,7 @@ __metadata:
     yaml: "npm:~2.5.0"
   bin:
     lint-staged: bin/lint-staged.js
-  checksum: 10/cabeb0540775cafa71d8d55be74b6854f65f083efa43886a5b47bfad36d23bc302c70c67dc952303ffa646e5563cfb92005a5d5ea3944c71f7ee3ff5b7bdcd71
+  checksum: 10/2f7342ca3fc7e2a8a0cc3db79ca8d2ad0269b98b13220f3a6745a514aacf1f83487a23a550569081ea962f9a576af7df8d687a8330a9c3c2c27348d5a4d5440e
   languageName: node
   linkType: hard
 
@@ -4836,9 +4836,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"terser@npm:^5.31.5":
-  version: 5.31.5
-  resolution: "terser@npm:5.31.5"
+"terser@npm:^5.31.6":
+  version: 5.31.6
+  resolution: "terser@npm:5.31.6"
   dependencies:
     "@jridgewell/source-map": "npm:^0.3.3"
     acorn: "npm:^8.8.2"
@@ -4846,7 +4846,7 @@ __metadata:
     source-map-support: "npm:~0.5.20"
   bin:
     terser: bin/terser
-  checksum: 10/afc72093af3a84d0f93110444f8f5318dad412032ac71dc132351a71b9faef475ac45000bd8c8e23ffc571e0d3937a2047a48fd17e36c4714be520868a934bb4
+  checksum: 10/78057c58025151c9bdad82a050f0b51175f9fe3117d8ee369ca7effe038cdd540da2fd5985a4f8ee08dba5616e7911e1392d40670698ff42a49fec338d369e80
   languageName: node
   linkType: hard
 
