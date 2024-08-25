@@ -1414,7 +1414,7 @@ __metadata:
     lint-staged: "npm:^15.2.9"
     prettier: "npm:^3.3.3"
     rimraf: "npm:^5.0.10"
-    skia-canvas: "npm:^1.0.1"
+    skia-canvas: "npm:^1.0.2"
     terser: "npm:^5.31.6"
     tsup: "npm:^8.2.4"
     typedoc: "npm:^0.26.1"
@@ -4554,9 +4554,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"skia-canvas@npm:^1.0.1":
-  version: 1.0.1
-  resolution: "skia-canvas@npm:1.0.1"
+"skia-canvas@npm:^1.0.2":
+  version: 1.0.2
+  resolution: "skia-canvas@npm:1.0.2"
   dependencies:
     "@mapbox/node-pre-gyp": "npm:^1.0.9"
     cargo-cp-artifact: "npm:^0.1"
@@ -4564,7 +4564,7 @@ __metadata:
     path-browserify: "npm:^1.0.1"
     simple-get: "npm:^4.0.1"
     string-split-by: "npm:^1.0.0"
-  checksum: 10/e5934c3f54e5b5012d9b245538bfa207288b6df1f0cd97198e0e82544964410e39b6d0991233dcdc682bd3e0a2692bf39278b90f38a0c529e2f29f52aae386b0
+  checksum: 10/9b67669c37a98995ff9359a22f6315ab6d4a7fcca4b48a2ce45a812923070fbcd1cf4cce387a0edf2587c5f77e4c6fb0e472553a2baaa2f8dd49cdb949e7a908
   languageName: node
   linkType: hard
 

@@ -91,7 +91,7 @@
 		"lint-staged": "^15.2.9",
 		"prettier": "^3.3.3",
 		"rimraf": "^5.0.10",
-		"skia-canvas": "^1.0.1",
+		"skia-canvas": "^1.0.2",
 		"terser": "^5.31.6",
 		"tsup": "^8.2.4",
 		"typedoc": "^0.26.1",
@@ -163,8 +163,8 @@
 		"extends": "@sapphire"
 	},
 	"prettier": "@sapphire/prettier-config",
-	"packageManager": "yarn@4.4.0",
+	"packageManager": "yarn@4.4.1",
 	"volta": {
-		"node": "20.16.0"
+		"node": "20.17.0"
 	}
 }
