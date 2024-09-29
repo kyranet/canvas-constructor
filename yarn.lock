@@ -1414,7 +1414,7 @@ __metadata:
     prettier: "npm:^3.3.3"
     rimraf: "npm:^5.0.10"
     skia-canvas: "npm:^1.0.2"
-    terser: "npm:^5.33.0"
+    terser: "npm:^5.34.1"
     tsup: "npm:^8.3.0"
     typedoc: "npm:^0.26.1"
     typescript: "npm:^5.5.2"
@@ -4854,9 +4854,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"terser@npm:^5.33.0":
-  version: 5.33.0
-  resolution: "terser@npm:5.33.0"
+"terser@npm:^5.34.1":
+  version: 5.34.1
+  resolution: "terser@npm:5.34.1"
   dependencies:
     "@jridgewell/source-map": "npm:^0.3.3"
     acorn: "npm:^8.8.2"
@@ -4864,7 +4864,7 @@ __metadata:
     source-map-support: "npm:~0.5.20"
   bin:
     terser: bin/terser
-  checksum: 10/01423825474969c81c3f063e5c7ce12f82bbd9448b565220e7418174b3b5cac47d563bf6983fcd5c7e1bac20df6d8f9e94f7cf15383714e1576fcb1cf8a3a71b
+  checksum: 10/4389f39b5b841e2a7795ee733b54bf8fc44f8784a78c213dae32c7e6adc66c3bb258ebdcbacb8e7f1fa08fceb20bfc4ce4f7666d42bbfc29ab71126e89614c34
   languageName: node
   linkType: hard
 

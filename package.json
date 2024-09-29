@@ -92,7 +92,7 @@
 		"prettier": "^3.3.3",
 		"rimraf": "^5.0.10",
 		"skia-canvas": "^1.0.2",
-		"terser": "^5.33.0",
+		"terser": "^5.34.1",
 		"tsup": "^8.3.0",
 		"typedoc": "^0.26.1",
 		"typescript": "^5.5.2"
