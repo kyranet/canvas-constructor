@@ -74,10 +74,10 @@
 		"prepack": "yarn build"
 	},
 	"devDependencies": {
-		"@commitlint/cli": "^19.5.0",
-		"@commitlint/config-conventional": "^19.5.0",
+		"@commitlint/cli": "^19.6.0",
+		"@commitlint/config-conventional": "^19.6.0",
 		"@favware/cliff-jumper": "^3.0.3",
-		"@napi-rs/canvas": "0.1.62",
+		"@napi-rs/canvas": "0.1.63",
 		"@sapphire/eslint-config": "^5.0.5",
 		"@sapphire/prettier-config": "2.0.0",
 		"@sapphire/ts-config": "5.0.1",
@@ -163,7 +163,7 @@
 		"extends": "@sapphire"
 	},
 	"prettier": "@sapphire/prettier-config",
-	"packageManager": "yarn@4.5.1",
+	"packageManager": "yarn@4.5.2",
 	"volta": {
 		"node": "22.11.0"
 	}
