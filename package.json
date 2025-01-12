@@ -74,10 +74,10 @@
 		"prepack": "yarn build"
 	},
 	"devDependencies": {
-		"@commitlint/cli": "^19.6.0",
+		"@commitlint/cli": "^19.6.1",
 		"@commitlint/config-conventional": "^19.6.0",
 		"@favware/cliff-jumper": "^3.0.3",
-		"@napi-rs/canvas": "0.1.64",
+		"@napi-rs/canvas": "0.1.65",
 		"@sapphire/eslint-config": "^5.0.5",
 		"@sapphire/prettier-config": "2.0.0",
 		"@sapphire/ts-config": "5.0.1",
@@ -88,11 +88,11 @@
 		"eslint": "^8.57.1",
 		"eslint-config-prettier": "^9.1.0",
 		"eslint-plugin-prettier": "^5.2.1",
-		"lint-staged": "^15.2.10",
-		"prettier": "^3.4.1",
+		"lint-staged": "^15.3.0",
+		"prettier": "^3.4.2",
 		"rimraf": "^5.0.10",
 		"skia-canvas": "^1.0.2",
-		"terser": "^5.36.0",
+		"terser": "^5.37.0",
 		"tsup": "^8.3.5",
 		"typedoc": "^0.26.1",
 		"typescript": "^5.5.2"
@@ -163,8 +163,8 @@
 		"extends": "@sapphire"
 	},
 	"prettier": "@sapphire/prettier-config",
-	"packageManager": "yarn@4.5.3",
+	"packageManager": "yarn@4.6.0",
 	"volta": {
-		"node": "22.11.0"
+		"node": "22.13.0"
 	}
 }
