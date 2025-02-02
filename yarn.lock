@@ -34,12 +34,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@commitlint/cli@npm:^19.6.1":
-  version: 19.6.1
-  resolution: "@commitlint/cli@npm:19.6.1"
+"@commitlint/cli@npm:^19.7.1":
+  version: 19.7.1
+  resolution: "@commitlint/cli@npm:19.7.1"
   dependencies:
     "@commitlint/format": "npm:^19.5.0"
-    "@commitlint/lint": "npm:^19.6.0"
+    "@commitlint/lint": "npm:^19.7.1"
     "@commitlint/load": "npm:^19.6.1"
     "@commitlint/read": "npm:^19.5.0"
     "@commitlint/types": "npm:^19.5.0"
@@ -47,17 +47,17 @@ __metadata:
     yargs: "npm:^17.0.0"
   bin:
     commitlint: cli.js
-  checksum: 10/b63b8a716d943419a0bb0542e752d380d62f2715266ae0bb53911f3fe749ae9c3bf0fd591abd87be6b863e522ca183c7bac6a82ef73255a5c5bbeceb620ecbb1
+  checksum: 10/d6bc2c2d036bb3e83cc24aeba17f8bff1dd8a16474f8857775ba8a483aa7a3bf41a9dfd6dadd5ee12b08f7d4d47746ab53cccd3ecfb20d0ebf2826c2f31a2e98
   languageName: node
   linkType: hard
 
-"@commitlint/config-conventional@npm:^19.6.0":
-  version: 19.6.0
-  resolution: "@commitlint/config-conventional@npm:19.6.0"
+"@commitlint/config-conventional@npm:^19.7.1":
+  version: 19.7.1
+  resolution: "@commitlint/config-conventional@npm:19.7.1"
   dependencies:
     "@commitlint/types": "npm:^19.5.0"
     conventional-changelog-conventionalcommits: "npm:^7.0.2"
-  checksum: 10/f96f6706502edad60d275f62a4aac06993a5fd47c343ad6286d48f173941e4e0848dab6642559099cc6714b513197338ac24da4b07debead5371326eef87bcb8
+  checksum: 10/fce984d36e1a721bbbb466f67b5ec6634fbbf7626fbb9c53bdf3cca8810c4350c7cbce8c93627d1107398b61b14373dea34cd344fc9244c2834133b93569081a
   languageName: node
   linkType: hard
 
@@ -102,25 +102,25 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@commitlint/is-ignored@npm:^19.6.0":
-  version: 19.6.0
-  resolution: "@commitlint/is-ignored@npm:19.6.0"
+"@commitlint/is-ignored@npm:^19.7.1":
+  version: 19.7.1
+  resolution: "@commitlint/is-ignored@npm:19.7.1"
   dependencies:
     "@commitlint/types": "npm:^19.5.0"
     semver: "npm:^7.6.0"
-  checksum: 10/07b41573c9247522eb96af118be97ae015f5d0a141ecf5e3c0f67372b0fb7ba57c98adc462c722b7a7f0dd18ddcbacd92b42228e0e62370d3db110b0a35f6120
+  checksum: 10/489624ca405b4dc7c210db92a85d1860793fa534bb1460b913e4610eab1953fafc0d77f8a84dcdc7abcb79e8db7486799c4092063acbccafdc2772f6647215e5
   languageName: node
   linkType: hard
 
-"@commitlint/lint@npm:^19.6.0":
-  version: 19.6.0
-  resolution: "@commitlint/lint@npm:19.6.0"
+"@commitlint/lint@npm:^19.7.1":
+  version: 19.7.1
+  resolution: "@commitlint/lint@npm:19.7.1"
   dependencies:
-    "@commitlint/is-ignored": "npm:^19.6.0"
+    "@commitlint/is-ignored": "npm:^19.7.1"
     "@commitlint/parse": "npm:^19.5.0"
     "@commitlint/rules": "npm:^19.6.0"
     "@commitlint/types": "npm:^19.5.0"
-  checksum: 10/f50721d8b02cea8cda9e67a57fb2c03377ae94ab708d47395a4e86f6f327d11db9dc84a1ecbcc3fae086f1e100400356826497a69a9d0caee6859238b32260dc
+  checksum: 10/1feac1d2aa1ad3c7864af2563622c21bbedac342b02030c877f87f9d5eb8acc0e0d10b67105aece64f6b94dfe906ec6c7d1e72a27cdde197606b88c8a8c66a9a
   languageName: node
   linkType: hard
 
@@ -576,90 +576,90 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@napi-rs/canvas-android-arm64@npm:0.1.65":
-  version: 0.1.65
-  resolution: "@napi-rs/canvas-android-arm64@npm:0.1.65"
+"@napi-rs/canvas-android-arm64@npm:0.1.66":
+  version: 0.1.66
+  resolution: "@napi-rs/canvas-android-arm64@npm:0.1.66"
   conditions: os=android & cpu=arm64
   languageName: node
   linkType: hard
 
-"@napi-rs/canvas-darwin-arm64@npm:0.1.65":
-  version: 0.1.65
-  resolution: "@napi-rs/canvas-darwin-arm64@npm:0.1.65"
+"@napi-rs/canvas-darwin-arm64@npm:0.1.66":
+  version: 0.1.66
+  resolution: "@napi-rs/canvas-darwin-arm64@npm:0.1.66"
   conditions: os=darwin & cpu=arm64
   languageName: node
   linkType: hard
 
-"@napi-rs/canvas-darwin-x64@npm:0.1.65":
-  version: 0.1.65
-  resolution: "@napi-rs/canvas-darwin-x64@npm:0.1.65"
+"@napi-rs/canvas-darwin-x64@npm:0.1.66":
+  version: 0.1.66
+  resolution: "@napi-rs/canvas-darwin-x64@npm:0.1.66"
   conditions: os=darwin & cpu=x64
   languageName: node
   linkType: hard
 
-"@napi-rs/canvas-linux-arm-gnueabihf@npm:0.1.65":
-  version: 0.1.65
-  resolution: "@napi-rs/canvas-linux-arm-gnueabihf@npm:0.1.65"
+"@napi-rs/canvas-linux-arm-gnueabihf@npm:0.1.66":
+  version: 0.1.66
+  resolution: "@napi-rs/canvas-linux-arm-gnueabihf@npm:0.1.66"
   conditions: os=linux & cpu=arm
   languageName: node
   linkType: hard
 
-"@napi-rs/canvas-linux-arm64-gnu@npm:0.1.65":
-  version: 0.1.65
-  resolution: "@napi-rs/canvas-linux-arm64-gnu@npm:0.1.65"
+"@napi-rs/canvas-linux-arm64-gnu@npm:0.1.66":
+  version: 0.1.66
+  resolution: "@napi-rs/canvas-linux-arm64-gnu@npm:0.1.66"
   conditions: os=linux & cpu=arm64 & libc=glibc
   languageName: node
   linkType: hard
 
-"@napi-rs/canvas-linux-arm64-musl@npm:0.1.65":
-  version: 0.1.65
-  resolution: "@napi-rs/canvas-linux-arm64-musl@npm:0.1.65"
+"@napi-rs/canvas-linux-arm64-musl@npm:0.1.66":
+  version: 0.1.66
+  resolution: "@napi-rs/canvas-linux-arm64-musl@npm:0.1.66"
   conditions: os=linux & cpu=arm64 & libc=musl
   languageName: node
   linkType: hard
 
-"@napi-rs/canvas-linux-riscv64-gnu@npm:0.1.65":
-  version: 0.1.65
-  resolution: "@napi-rs/canvas-linux-riscv64-gnu@npm:0.1.65"
+"@napi-rs/canvas-linux-riscv64-gnu@npm:0.1.66":
+  version: 0.1.66
+  resolution: "@napi-rs/canvas-linux-riscv64-gnu@npm:0.1.66"
   conditions: os=linux & cpu=riscv64 & libc=glibc
   languageName: node
   linkType: hard
 
-"@napi-rs/canvas-linux-x64-gnu@npm:0.1.65":
-  version: 0.1.65
-  resolution: "@napi-rs/canvas-linux-x64-gnu@npm:0.1.65"
+"@napi-rs/canvas-linux-x64-gnu@npm:0.1.66":
+  version: 0.1.66
+  resolution: "@napi-rs/canvas-linux-x64-gnu@npm:0.1.66"
   conditions: os=linux & cpu=x64 & libc=glibc
   languageName: node
   linkType: hard
 
-"@napi-rs/canvas-linux-x64-musl@npm:0.1.65":
-  version: 0.1.65
-  resolution: "@napi-rs/canvas-linux-x64-musl@npm:0.1.65"
+"@napi-rs/canvas-linux-x64-musl@npm:0.1.66":
+  version: 0.1.66
+  resolution: "@napi-rs/canvas-linux-x64-musl@npm:0.1.66"
   conditions: os=linux & cpu=x64 & libc=musl
   languageName: node
   linkType: hard
 
-"@napi-rs/canvas-win32-x64-msvc@npm:0.1.65":
-  version: 0.1.65
-  resolution: "@napi-rs/canvas-win32-x64-msvc@npm:0.1.65"
+"@napi-rs/canvas-win32-x64-msvc@npm:0.1.66":
+  version: 0.1.66
+  resolution: "@napi-rs/canvas-win32-x64-msvc@npm:0.1.66"
   conditions: os=win32 & cpu=x64
   languageName: node
   linkType: hard
 
-"@napi-rs/canvas@npm:0.1.65":
-  version: 0.1.65
-  resolution: "@napi-rs/canvas@npm:0.1.65"
+"@napi-rs/canvas@npm:0.1.66":
+  version: 0.1.66
+  resolution: "@napi-rs/canvas@npm:0.1.66"
   dependencies:
-    "@napi-rs/canvas-android-arm64": "npm:0.1.65"
-    "@napi-rs/canvas-darwin-arm64": "npm:0.1.65"
-    "@napi-rs/canvas-darwin-x64": "npm:0.1.65"
-    "@napi-rs/canvas-linux-arm-gnueabihf": "npm:0.1.65"
-    "@napi-rs/canvas-linux-arm64-gnu": "npm:0.1.65"
-    "@napi-rs/canvas-linux-arm64-musl": "npm:0.1.65"
-    "@napi-rs/canvas-linux-riscv64-gnu": "npm:0.1.65"
-    "@napi-rs/canvas-linux-x64-gnu": "npm:0.1.65"
-    "@napi-rs/canvas-linux-x64-musl": "npm:0.1.65"
-    "@napi-rs/canvas-win32-x64-msvc": "npm:0.1.65"
+    "@napi-rs/canvas-android-arm64": "npm:0.1.66"
+    "@napi-rs/canvas-darwin-arm64": "npm:0.1.66"
+    "@napi-rs/canvas-darwin-x64": "npm:0.1.66"
+    "@napi-rs/canvas-linux-arm-gnueabihf": "npm:0.1.66"
+    "@napi-rs/canvas-linux-arm64-gnu": "npm:0.1.66"
+    "@napi-rs/canvas-linux-arm64-musl": "npm:0.1.66"
+    "@napi-rs/canvas-linux-riscv64-gnu": "npm:0.1.66"
+    "@napi-rs/canvas-linux-x64-gnu": "npm:0.1.66"
+    "@napi-rs/canvas-linux-x64-musl": "npm:0.1.66"
+    "@napi-rs/canvas-win32-x64-msvc": "npm:0.1.66"
   dependenciesMeta:
     "@napi-rs/canvas-android-arm64":
       optional: true
@@ -681,7 +681,7 @@ __metadata:
       optional: true
     "@napi-rs/canvas-win32-x64-msvc":
       optional: true
-  checksum: 10/71ab1c29a9f15bd5ca0406dced5e3e939b6645b1eb79e3c26cd17695b41db61d6b3640cd54460b667abf234dab0b0217eb792900459a75d9f95f9d76e4f83b54
+  checksum: 10/91a789ef0d86f9e99be8d80dfda02957d4b0f237f30d60200c5dae7c79b43dde446d1fbd8a82cbb26b86b2bcca1de53a4e7ec14ea61f8cbb84a5f7524d42cff8
   languageName: node
   linkType: hard
 
@@ -1389,10 +1389,10 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "canvas-constructor@workspace:."
   dependencies:
-    "@commitlint/cli": "npm:^19.6.1"
-    "@commitlint/config-conventional": "npm:^19.6.0"
+    "@commitlint/cli": "npm:^19.7.1"
+    "@commitlint/config-conventional": "npm:^19.7.1"
     "@favware/cliff-jumper": "npm:^3.0.3"
-    "@napi-rs/canvas": "npm:0.1.65"
+    "@napi-rs/canvas": "npm:0.1.66"
     "@sapphire/eslint-config": "npm:^5.0.5"
     "@sapphire/prettier-config": "npm:2.0.0"
     "@sapphire/ts-config": "npm:5.0.1"
