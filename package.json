@@ -88,7 +88,7 @@
 		"eslint": "^8.57.1",
 		"eslint-config-prettier": "^9.1.0",
 		"eslint-plugin-prettier": "^5.2.3",
-		"lint-staged": "^15.4.2",
+		"lint-staged": "^15.4.3",
 		"prettier": "^3.4.2",
 		"rimraf": "^5.0.10",
 		"skia-canvas": "^1.0.2",
