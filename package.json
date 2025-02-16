@@ -89,10 +89,10 @@
 		"eslint-config-prettier": "^9.1.0",
 		"eslint-plugin-prettier": "^5.2.3",
 		"lint-staged": "^15.4.3",
-		"prettier": "^3.5.0",
+		"prettier": "^3.5.1",
 		"rimraf": "^5.0.10",
 		"skia-canvas": "^1.0.2",
-		"terser": "^5.38.1",
+		"terser": "^5.39.0",
 		"tsup": "^8.3.6",
 		"typedoc": "^0.26.1",
 		"typescript": "^5.5.2"
@@ -165,6 +165,6 @@
 	"prettier": "@sapphire/prettier-config",
 	"packageManager": "yarn@4.6.0",
 	"volta": {
-		"node": "22.13.1"
+		"node": "22.14.0"
 	}
 }
