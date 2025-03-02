@@ -93,7 +93,7 @@
 		"rimraf": "^5.0.10",
 		"skia-canvas": "^1.0.2",
 		"terser": "^5.39.0",
-		"tsup": "^8.3.6",
+		"tsup": "^8.4.0",
 		"typedoc": "^0.26.1",
 		"typescript": "^5.5.2"
 	},
@@ -163,7 +163,7 @@
 		"extends": "@sapphire"
 	},
 	"prettier": "@sapphire/prettier-config",
-	"packageManager": "yarn@4.6.0",
+	"packageManager": "yarn@4.7.0",
 	"volta": {
 		"node": "22.14.0"
 	}
