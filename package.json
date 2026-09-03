@@ -74,26 +74,26 @@
 		"prepack": "yarn build"
 	},
 	"devDependencies": {
-		"@commitlint/cli": "^19.7.1",
-		"@commitlint/config-conventional": "^19.7.1",
+		"@commitlint/cli": "^19.8.1",
+		"@commitlint/config-conventional": "^19.8.1",
 		"@favware/cliff-jumper": "^3.0.3",
-		"@napi-rs/canvas": "0.1.67",
-		"@sapphire/eslint-config": "^5.0.5",
+		"@napi-rs/canvas": "0.1.100",
+		"@sapphire/eslint-config": "^5.0.6",
 		"@sapphire/prettier-config": "2.0.0",
-		"@sapphire/ts-config": "5.0.1",
+		"@sapphire/ts-config": "5.0.3",
 		"@typescript-eslint/eslint-plugin": "^7.13.1",
 		"@typescript-eslint/parser": "^7.13.1",
 		"canvas": "^2.11.2",
 		"cz-conventional-changelog": "^3.3.0",
 		"eslint": "^8.57.1",
-		"eslint-config-prettier": "^9.1.0",
-		"eslint-plugin-prettier": "^5.2.3",
-		"lint-staged": "^15.4.3",
-		"prettier": "^3.5.2",
+		"eslint-config-prettier": "^9.1.2",
+		"eslint-plugin-prettier": "^5.5.6",
+		"lint-staged": "^15.5.2",
+		"prettier": "^3.9.6",
 		"rimraf": "^5.0.10",
 		"skia-canvas": "^1.0.2",
-		"terser": "^5.39.0",
-		"tsup": "^8.4.0",
+		"terser": "^5.51.2",
+		"tsup": "^8.5.1",
 		"typedoc": "^0.26.1",
 		"typescript": "^5.5.2"
 	},
@@ -163,8 +163,8 @@
 		"extends": "@sapphire"
 	},
 	"prettier": "@sapphire/prettier-config",
-	"packageManager": "yarn@4.7.0",
+	"packageManager": "yarn@4.18.0",
 	"volta": {
-		"node": "22.14.0"
+		"node": "22.23.2"
 	}
 }
